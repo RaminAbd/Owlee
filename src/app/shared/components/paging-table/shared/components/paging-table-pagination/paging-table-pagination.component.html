@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div class="count">
+    <p>{{ "Total count" | translate }}: {{ Response.totalCount }}</p>
+  </div>
+  <div class="pagination">
+    <div
+      class="toFirst"
+      [ngClass]="{ disable: Response.hasPrevious === false }"
+      (click)="Response.hasPrevious ? Paginate.emit(1) : ''"
+    >
+      <img src="table/toFirst.svg" alt="" />
+    </div>
+    <div
+      class="prevIcon"
+      [ngClass]="{ disable: Response.hasPrevious === false }"
+      (click)="
+        Response.hasPrevious ? Paginate.emit(Response.currentPage - 1) : ''
+      "
+    >
+      <img src="table/prev.svg" alt="" />
+    </div>
+    <div
+      class="prev"
+      *ngIf="Response.hasPrevious"
+      (click)="Paginate.emit(Response.currentPage - 1)"
+    >
+      <p>{{ Response.currentPage - 1 }}</p>
+    </div>
+    <div class="current">
+      <p>{{ Response.currentPage }}</p>
+    </div>
+    <div
+      class="next"
+      *ngIf="Response.hasNext"
+      (click)="Paginate.emit(Response.currentPage + 1)"
+    >
+      <p>{{ Response.currentPage + 1 }}</p>
+    </div>
+    <div
+      class="nextIcon"
+      [ngClass]="{ disable: Response.hasNext === false }"
+      (click)="Response.hasNext ? Paginate.emit(Response.currentPage + 1) : ''"
+    >
+      <img src="table/next.svg" alt="" />
+    </div>
+    <div
+      class="toLast"
+      [ngClass]="{ disable: Response.hasNext === false }"
+      (click)="Response.hasNext ? Paginate.emit(Response.totalPages) : ''"
+    >
+      <img src="table/toLast.svg" alt="" />
+    </div>
+  </div>
+</div>

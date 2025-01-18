@@ -1,0 +1,92 @@
+<div class="table-wrapper">
+  <p-table
+    [value]="response.items"
+    [columns]="cols"
+    [sortOrder]="0"
+    [styleClass]="'p-datatable-sm'"
+    [loading]="loading"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex my-table-header">
+        <div class="back-name-create">
+          <div class="name">
+            <h3>{{ TableName | translate }}</h3>
+          </div>
+        </div>
+        <div class="search">
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="pagingRequest.SearchText"
+              (keyup.enter)="FilterCustomers()"
+              placeholder="{{ 'Search' | translate }}"
+            />
+          </span>
+          <button style="width: 48px;" (click)="FilterCustomers()" class="search-btn">
+            <i class="pi pi-search"></i>
+          </button>
+          <button (click)="clear()" class="search-btn">
+            {{'Clear' | translate}}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-column>
+      <tr style="border-top: none">
+        <th *ngFor="let col of cols" (click)="sortByField(col)">
+          <div
+            [ngStyle]="{
+              cursor: col.sorting ? 'pointer' : 'auto',
+              display: 'flex',
+              gap: '6px',
+              'align-items': 'center'
+            }"
+          >
+            {{ col.header | translate }}
+            <div class="sorting" *ngIf="col.sorting">
+              <i class="pi pi-sort-alt" *ngIf="col.sortValue === null"></i>
+              <i class="pi pi-sort-amount-up" *ngIf="col.sortValue"></i>
+              <i
+                class="pi pi-sort-amount-down"
+                *ngIf="col.sortValue === false"
+              ></i>
+            </div>
+
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns" [ngStyle]="{ width: col.width }">
+          <p class="col-field">
+            {{ rowData[col.field] }}
+          </p>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          <div class="empty-image">
+            <img src="assets/images/empty-table.svg" alt="" />
+          </div>
+        </td>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="loadingbody" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          <p-skeleton height="1.5rem"></p-skeleton>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <app-paging-table-pagination [Response]="response" (Paginate)="Paginate($event)"></app-paging-table-pagination>
+</div>
+<p-confirmPopup></p-confirmPopup>

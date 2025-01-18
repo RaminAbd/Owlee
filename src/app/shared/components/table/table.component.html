@@ -1,0 +1,106 @@
+<div class="table-wrapper">
+  <p-table
+    [value]="array"
+    #dt1
+    id="excel-table"
+    dataKey="id"
+    [showCurrentPageReport]="true"
+    styleClass="p-datatable-customers"
+    [columns]="cols"
+    [rows]="10"
+    [paginator]="true"
+    selectionMode="single"
+    currentPageReportTemplate="{first} - {last} of {totalRecords}"
+    [loading]="loading"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex my-table-header">
+        <div class="back-name-create" *ngIf="!showCreate">
+          <div class="name">
+            <h3>{{ TableName }}</h3>
+          </div>
+        </div>
+        <div class="back-name-create" *ngIf="showCreate">
+          <i class="pi pi-chevron-left" (click)="goBack()"></i>
+          <div
+            class="name"
+            *ngIf="TableName"
+            (click)="goBack()"
+            style="cursor: pointer"
+          >
+            <h3>{{ TableName }}</h3>
+          </div>
+          <button (click)="tableAction(null, 1)">
+            <i class="pi pi-plus"></i>
+          </button>
+        </div>
+        <div class="search">
+          <span class="p-input-icon-left ml-auto" *ngIf="FilterFields">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt1.filterGlobal(getEventValue($event), 'contains')"
+              placeholder="{{ 'Search' }}"
+            />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-column>
+      <tr style="border-top: none">
+        <th *ngFor="let col of cols" style="font-size: 12px">
+          <div class="ui-table-sort-th">
+            <span>{{ col.header }}</span>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns" [ngStyle]="{ width: col.width }">
+          <p
+            class="col-field"
+            *ngIf="col.field !== 'actions' || col.field !== 'myShowAction'"
+          >
+            {{ rowData[col.field] }}
+          </p>
+
+          <div class="d-flex crud-actions" *ngIf="col.field === 'showActions'">
+            <button class="edit" (click)="tableAction(rowData, 4, $event)">
+              <img src="table/eye.svg" alt="" />
+            </button>
+          </div>
+          <div class="d-flex crud-actions" *ngIf="col.field === 'EditActions'">
+            <button class="edit" (click)="tableAction(rowData, 2, $event)">
+              <img src="table/edit.svg" alt="" />
+            </button>
+          </div>
+
+          <div class="d-flex crud-actions" *ngIf="col.field === 'crudActions'">
+            <button class="edit" (click)="tableAction(rowData, 2, $event)">
+              <img src="table/edit.svg" alt="" />
+            </button>
+            <button class="delete" (click)="confirm(rowData, 3, $event)">
+              <img src="table/delete.svg" alt="" />
+            </button>
+          </div>
+
+          <div class="d-flex crud-actions" *ngIf="col.field === 'delActions'">
+            <button class="delete" (click)="confirm(rowData, 3, $event)">
+              <img src="table/delete.svg" alt="" />
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          <p-skeleton></p-skeleton>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-confirmPopup></p-confirmPopup>
