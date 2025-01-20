@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {Toast} from 'primeng/toast';
+import {AppTranslateService} from './core/services/app-translate.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,8 @@ import {Toast} from 'primeng/toast';
 })
 export class AppComponent {
   title = 'Owlee';
+  private appTranslate:AppTranslateService = inject(AppTranslateService)
+  constructor() {
+    this.appTranslate.registerLanguages();
+  }
 }

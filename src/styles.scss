@@ -33,6 +33,7 @@
   --grey: #f9f9f9;
   --text-color: #13170C;
   --border-color:#90928D38;
+  --nav-bar:#F6F6F6;
 }
 body {
   margin: 0;
@@ -415,7 +416,7 @@ button.search-button {
   background: var(--sidebar) !important;
 }
 .table-wrapper .p-datatable .p-datatable-thead tr th {
-  background: var(--background) !important;
+  background: var(--grey) !important;
   color: var(--text-color) !important;
 }
 p-calendar {

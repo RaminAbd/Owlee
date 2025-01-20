@@ -1,0 +1,32 @@
+<div class="header-wrapper">
+    <div class="title">
+      <h3>{{pageTitle}}</h3>
+    </div>
+    <div class="lang-info">
+      <span class="link lang-s" (click)="langOpen = !langOpen">
+      <span style="cursor: pointer;">{{ selectedLang | translate }}</span>
+        <i class="pi pi-angle-down"></i>
+      <span class="dropdown-block" *ngIf="langOpen">
+        <span class="items">
+          <span class="link item" (click)="selectLang('en-Us')">{{
+              "English" | translate
+            }}</span>
+          <span class="link item" (click)="selectLang('ka-Geo')">{{
+              "Georgian" | translate
+            }}</span>
+          <span class="link item" (click)="selectLang('az-Aze')">{{
+              "Azerbaijani" | translate
+            }}</span>
+        </span>
+      </span>
+    </span>
+      <div class="info">
+        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect y="0.907" width="40" height="40" rx="20" fill="#F6F6F6"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 15.907C16 14.8461 16.4214 13.8287 17.1716 13.0786C17.9217 12.3284 18.9391 11.907 20 11.907C21.0609 11.907 22.0783 12.3284 22.8284 13.0786C23.5786 13.8287 24 14.8461 24 15.907C24 16.9679 23.5786 17.9853 22.8284 18.7354C22.0783 19.4856 21.0609 19.907 20 19.907C18.9391 19.907 17.9217 19.4856 17.1716 18.7354C16.4214 17.9853 16 16.9679 16 15.907ZM16 21.907C14.6739 21.907 13.4021 22.4338 12.4645 23.3715C11.5268 24.3091 11 25.5809 11 26.907C11 27.7026 11.3161 28.4657 11.8787 29.0283C12.4413 29.5909 13.2044 29.907 14 29.907H26C26.7956 29.907 27.5587 29.5909 28.1213 29.0283C28.6839 28.4657 29 27.7026 29 26.907C29 25.5809 28.4732 24.3091 27.5355 23.3715C26.5979 22.4338 25.3261 21.907 24 21.907H16Z" fill="#3B3199"/>
+        </svg>
+
+      </div>
+    </div>
+</div>
+<div class="back" *ngIf="langOpen" (click)="langOpen = false;"></div>

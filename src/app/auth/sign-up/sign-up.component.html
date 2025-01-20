@@ -1,0 +1,236 @@
+<div class="sign-up-wrapper">
+  <div class="form-side">
+    <div class="logo">
+      <img src="text-logo.svg" alt="" />
+    </div>
+    <div class="txt">
+      <h4>Join Our Teaching Community: Inspire, Educate, Empower!</h4>
+      <p>Sign Up and Share Your Knowledge!</p>
+    </div>
+    <form [formGroup]="myForm">
+      <div class="expanders">
+        <div class="item expander-container">
+          <div class="heading" (click)="toggleExpander(0)">
+            <img
+              [src]="firstStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Account Setup" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[0]">
+            <div class="row">
+              <div class="input-item">
+                <label for="firstName">{{ "First name" | translate }}</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  [(ngModel)]="request.firstName"
+                  [class.invalid]="
+                    myForm.get('firstName')?.hasError('pattern') ||
+                    (!request.firstName && firstStepSubmitted)
+                  "
+                />
+              </div>
+              <div class="input-item">
+                <label for="lastName">{{ "Last name" | translate }}</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  [(ngModel)]="request.lastName"
+                  [class.invalid]="
+                    myForm.get('lastName')?.hasError('pattern') ||
+                    (!request.lastName && firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="email">{{ "Email" | translate }}</label>
+                <input
+                  type="text"
+                  id="email"
+                  formControlName="email"
+                  [(ngModel)]="request.email"
+                  [class.invalid]="
+                    myForm.get('email')?.hasError('pattern') ||
+                    (!myForm.get('email')?.value && firstStepSubmitted) ||
+                    myForm.get('email')?.hasError('incorrect')
+                  "
+                />
+              </div>
+              <div class="input-item">
+                <label for="phoneNumber"
+                  >{{ "Phone number" | translate }}
+                </label>
+                <div class="mask">
+                  <p>+995</p>
+                  <input
+                    type="number"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                    [(ngModel)]="request.phoneNumber"
+                    [class.invalid]="
+                      myForm.get('phoneNumber')?.hasError('pattern') ||
+                      (!myForm.get('phoneNumber')?.value && firstStepSubmitted)
+                    "
+                    (keydown)="onKeyDown($event)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="password">{{ "Password" | translate }}</label>
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  [(ngModel)]="request.password"
+                  [class.invalid]="
+                    myForm.get('password')?.hasError('pattern') ||
+                    (!myForm.get('password')?.value && firstStepSubmitted)
+                  "
+                />
+              </div>
+              <div class="input-item">
+                <label for="repeat">{{ "Repeat Password" | translate }}</label>
+                <input
+                  type="password"
+                  id="repeat"
+                  formControlName="confirmPassword"
+                  [(ngModel)]="request.confirmPassword"
+                  [class.invalid]="
+                    myForm.get('confirmPassword')?.hasError('pattern') ||
+                    (!myForm.get('confirmPassword')?.value &&
+                      firstStepSubmitted) ||
+                    (myForm.get('password')?.value !==
+                      myForm.get('confirmPassword')?.value &&
+                      firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+            <button type="button" (click)="validateFirstStep()">Next</button>
+          </div>
+        </div>
+<!--        <div class="item expander-container">-->
+<!--          <div class="heading" (click)="toggleExpander(0)">-->
+<!--            <img-->
+<!--              [src]="firstStepPassed ? 'green-check.svg' : 'grey-check.svg'"-->
+<!--              alt=""-->
+<!--            />-->
+<!--            <p>{{ "Account Setup" | translate }}</p>-->
+<!--          </div>-->
+<!--          <div class="inputs" [@expanderAnimation]="expanderStates[0]">-->
+<!--            <div class="row">-->
+<!--              <div class="input-item">-->
+<!--                <label for="firstName">{{ "First name" | translate }}</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  id="firstName"-->
+<!--                  formControlName="firstName"-->
+<!--                  [(ngModel)]="request.firstName"-->
+<!--                  [class.invalid]="-->
+<!--                    myForm.get('firstName')?.hasError('pattern') ||-->
+<!--                    (!request.firstName && firstStepSubmitted)-->
+<!--                  "-->
+<!--                />-->
+<!--              </div>-->
+<!--              <div class="input-item">-->
+<!--                <label for="lastName">{{ "Last name" | translate }}</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  id="lastName"-->
+<!--                  formControlName="lastName"-->
+<!--                  [(ngModel)]="request.lastName"-->
+<!--                  [class.invalid]="-->
+<!--                    myForm.get('lastName')?.hasError('pattern') ||-->
+<!--                    (!request.lastName && firstStepSubmitted)-->
+<!--                  "-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="input-item">-->
+<!--                <label for="email">{{ "Email" | translate }}</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  id="email"-->
+<!--                  formControlName="email"-->
+<!--                  [(ngModel)]="request.email"-->
+<!--                  [class.invalid]="-->
+<!--                    myForm.get('email')?.hasError('pattern') ||-->
+<!--                    (!myForm.get('email')?.value && firstStepSubmitted) ||-->
+<!--                    myForm.get('email')?.hasError('incorrect')-->
+<!--                  "-->
+<!--                />-->
+<!--              </div>-->
+<!--              <div class="input-item">-->
+<!--                <label for="phoneNumber"-->
+<!--                >{{ "Phone number" | translate }}-->
+<!--                </label>-->
+<!--                <div class="mask">-->
+<!--                  <p>+995</p>-->
+<!--                  <input-->
+<!--                    type="number"-->
+<!--                    id="phoneNumber"-->
+<!--                    formControlName="phoneNumber"-->
+<!--                    [(ngModel)]="request.phoneNumber"-->
+<!--                    [class.invalid]="-->
+<!--                      myForm.get('phoneNumber')?.hasError('pattern') ||-->
+<!--                      (!myForm.get('phoneNumber')?.value && firstStepSubmitted)-->
+<!--                    "-->
+<!--                    (keydown)="onKeyDown($event)"-->
+<!--                  />-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="input-item">-->
+<!--                <label for="password">{{ "Password" | translate }}</label>-->
+<!--                <input-->
+<!--                  type="password"-->
+<!--                  id="password"-->
+<!--                  formControlName="password"-->
+<!--                  [(ngModel)]="request.password"-->
+<!--                  [class.invalid]="-->
+<!--                    myForm.get('password')?.hasError('pattern') ||-->
+<!--                    (!myForm.get('password')?.value && firstStepSubmitted)-->
+<!--                  "-->
+<!--                />-->
+<!--              </div>-->
+<!--              <div class="input-item">-->
+<!--                <label for="repeat">{{ "Repeat Password" | translate }}</label>-->
+<!--                <input-->
+<!--                  type="password"-->
+<!--                  id="repeat"-->
+<!--                  formControlName="confirmPassword"-->
+<!--                  [(ngModel)]="request.confirmPassword"-->
+<!--                  [class.invalid]="-->
+<!--                    myForm.get('confirmPassword')?.hasError('pattern') ||-->
+<!--                    (!myForm.get('confirmPassword')?.value &&-->
+<!--                      firstStepSubmitted) ||-->
+<!--                    (myForm.get('password')?.value !==-->
+<!--                      myForm.get('confirmPassword')?.value &&-->
+<!--                      firstStepSubmitted)-->
+<!--                  "-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <button type="button" (click)="validateFirstStep()">Next</button>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </form>
+  </div>
+  <div class="image-side">
+    <img
+      src="https://metagroupblob.blob.core.windows.net/delivery-container/22a02b8f-cbfb-43cc-b76e-b81b51c7e224-image%209.png"
+      alt=""
+    />
+  </div>
+</div>
+<!--https://metagroupblob.blob.core.windows.net/delivery-container/22a02b8f-cbfb-43cc-b76e-b81b51c7e224-image%209.png-->

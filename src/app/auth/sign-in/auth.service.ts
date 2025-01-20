@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthComponent } from './auth.component';
-import { AuthApiService } from './shared/services/auth.api.service';
-import { ApplicationMessageCenterService } from '../core/services/ApplicationMessageCenter.service';
-import { StorageService } from '../core/services/storage.service';
+import { AuthApiService } from '../shared/services/auth.api.service';
+import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
+import { StorageService } from '../../core/services/storage.service';
 import { Router } from '@angular/router';
-import { CryptoService } from './shared/services/crypto.service';
-import { AuthRequestModel } from './shared/models/auth-request.model';
-import { AuthResponseModel } from './shared/models/auth-response.model';
-import { RoleNameByCode } from '../core/role-handlers/RoleNameByCode';
+import { CryptoService } from '../shared/services/crypto.service';
+import { AuthRequestModel } from '../shared/models/auth-request.model';
+import { AuthResponseModel } from '../shared/models/auth-response.model';
+import { RoleNameByCode } from '../../core/role-handlers/RoleNameByCode';
 
 @Injectable({
   providedIn: 'root',

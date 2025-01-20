@@ -1,0 +1,109 @@
+.sign-up-wrapper {
+  display: flex;
+  height: 100svh;
+  .form-side {
+    width: 55%;
+    padding: 48px 80px;
+    .logo {
+      img {
+        width: 150px;
+      }
+    }
+    .txt {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      h4 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 14px;
+        color: #90928d;
+      }
+    }
+
+    .expanders {
+      margin-top: 35px;
+      .item {
+        border: 1px solid #e3e3e2;
+        border-radius: 12px;
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+
+        .heading {
+          display: flex;
+          gap: 7px;
+          align-items: center;
+        }
+        .inputs {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding-top: 18px;
+          .row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            .input-item {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+              flex: 1;
+              label {
+                color: #90928d;
+                font-size: 14px;
+                font-weight: 500;
+              }
+              input {
+                width: 100%;
+                border-radius: 12px;
+                color: var(--text-color) !important;
+                font-weight: 600;
+                font-size: 14px;
+              }
+              p {
+                color: var(--text-color) !important;
+                font-weight: 600;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        button {
+          background: var(--primary-color);
+          border-radius: 12px !important;
+          font-weight: 600;
+          font-size: 14px;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .image-side {
+    width: 45%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.mask {
+  position: relative;
+  display: flex;
+  align-items: center;
+  p {
+    position: absolute;
+    left: 15px;
+    font-size: 14px;
+  }
+  input {
+    padding-left: 55px !important;
+  }
+}
+.expander-content{
+  overflow: hidden;
+}

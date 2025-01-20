@@ -28,7 +28,7 @@ export class BaseCrudApiService extends BaseApiService {
   }
 
   Update(serviceUrl: string, form: any) {
-    return this.post(serviceUrl + 'Update', form);
+    return this.post(serviceUrl + 'Edit', form);
   }
 
   GetById(serviceUrl: string, id: string) {

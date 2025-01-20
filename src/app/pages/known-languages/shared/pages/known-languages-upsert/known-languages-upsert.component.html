@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <app-upsert-heading
+    [name]="'System Languages'"
+    (save)="save()"
+  ></app-upsert-heading>
+  <div class="content">
+    <div class="row">
+      <div class="input-item" *ngFor="let item of request.name.items">
+        <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
+        <input
+          type="text"
+          [ngClass]="{ invalid: !item.isValid }"
+          [(ngModel)]="item.value"
+          placeholder="{{ item.languageName | translate }}"
+        />
+      </div>
+    </div>
+  </div>
+</div>

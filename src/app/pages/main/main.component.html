@@ -1,21 +1,13 @@
 <div class="main-wrapper">
   <div class="navigation-section">
-    <ng-container
-      *ngComponentOutlet="navigationBarComponent;"
-    ></ng-container>
+    <ng-container *ngComponentOutlet="navigationBarComponent"></ng-container>
   </div>
-  <div class="header-content" [ngClass]="{'hasNavBar':navigationBarComponent}">
+  <div class="header-content" [ngClass]="{ hasNavBar: navigationBarComponent }">
     <div class="header">
-<!--      <ng-container-->
-<!--        *ngComponentOutlet="headerComponent;"-->
-<!--      ></ng-container>-->
+      <app-header [pageTitle]="pageTitle"></app-header>
     </div>
-    <div class="content-section" >
+    <div class="content-section">
       <router-outlet></router-outlet>
     </div>
   </div>
-
 </div>
-
-
-

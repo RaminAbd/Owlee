@@ -13,7 +13,7 @@ import {
 } from '@angular/common/http';
 import {Router} from '@angular/router';
 import {StorageService} from '../services/storage.service';
-import {AuthService} from '../../auth/auth.service';
+import {AuthService} from '../../auth/sign-in/auth.service';
 import {AuthApiService} from '../../auth/shared/services/auth.api.service';
 import {AuthRequestModel} from '../../auth/shared/models/auth-request.model';
 

@@ -1,5 +1,6 @@
-import {AdminNavigationBarComponent} from '../../shared/components/admin-navigation-bar/admin-navigation-bar.component';
+import {AdminNavigationBarComponent} from '../../shared/components/navigation-bars/admin-navigation-bar/admin-navigation-bar.component';
 
 export const SideBarComponentByRole = {
   'Admin':AdminNavigationBarComponent,
+  'Educator':AdminNavigationBarComponent,
 };

@@ -39,10 +39,10 @@ export class SubscriptionPackageService {
   tableActionHandler(e: any) {
     switch (e.type) {
       case 1:
-        this.router.navigate(['/main/subscription-packages', 'create']);
+        this.router.navigate(['/main/admin/subscription-packages', 'create']);
         break;
       case 2:
-        this.router.navigate(['/main/subscription-packages', e.data.id]);
+        this.router.navigate(['/main/admin/subscription-packages', e.data.id]);
         break;
       case 3:
         this.delete(e.data.id);
