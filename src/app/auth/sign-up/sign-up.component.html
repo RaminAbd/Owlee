@@ -7,9 +7,9 @@
       <h4>Join Our Teaching Community: Inspire, Educate, Empower!</h4>
       <p>Sign Up and Share Your Knowledge!</p>
     </div>
-    <form [formGroup]="myForm">
+    <div>
       <div class="expanders">
-        <div class="item expander-container">
+        <form [formGroup]="firstStepForm" class="item expander-container">
           <div class="heading" (click)="toggleExpander(0)">
             <img
               [src]="firstStepPassed ? 'green-check.svg' : 'grey-check.svg'"
@@ -27,7 +27,7 @@
                   formControlName="firstName"
                   [(ngModel)]="request.firstName"
                   [class.invalid]="
-                    myForm.get('firstName')?.hasError('pattern') ||
+                    firstStepForm.get('firstName')?.hasError('pattern') ||
                     (!request.firstName && firstStepSubmitted)
                   "
                 />
@@ -40,7 +40,7 @@
                   formControlName="lastName"
                   [(ngModel)]="request.lastName"
                   [class.invalid]="
-                    myForm.get('lastName')?.hasError('pattern') ||
+                    firstStepForm.get('lastName')?.hasError('pattern') ||
                     (!request.lastName && firstStepSubmitted)
                   "
                 />
@@ -48,19 +48,19 @@
             </div>
             <div class="row">
               <div class="input-item">
-                <label for="email">{{ "Email" | translate }}</label>
+                <label for="location">{{ "Location" | translate }}</label>
                 <input
                   type="text"
-                  id="email"
-                  formControlName="email"
-                  [(ngModel)]="request.email"
+                  id="location"
+                  formControlName="location"
+                  [(ngModel)]="request.location"
                   [class.invalid]="
-                    myForm.get('email')?.hasError('pattern') ||
-                    (!myForm.get('email')?.value && firstStepSubmitted) ||
-                    myForm.get('email')?.hasError('incorrect')
+                    firstStepForm.get('location')?.hasError('pattern') ||
+                    (!request.location && firstStepSubmitted)
                   "
                 />
               </div>
+
               <div class="input-item">
                 <label for="phoneNumber"
                   >{{ "Phone number" | translate }}
@@ -73,158 +73,319 @@
                     formControlName="phoneNumber"
                     [(ngModel)]="request.phoneNumber"
                     [class.invalid]="
-                      myForm.get('phoneNumber')?.hasError('pattern') ||
-                      (!myForm.get('phoneNumber')?.value && firstStepSubmitted)
+                      firstStepForm.get('phoneNumber')?.hasError('pattern') ||
+                      (!firstStepForm.get('phoneNumber')?.value &&
+                        firstStepSubmitted)
                     "
                     (keydown)="onKeyDown($event)"
                   />
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="input-item">
-                <label for="password">{{ "Password" | translate }}</label>
+                <label for="email">{{ "Email" | translate }}</label>
                 <input
-                  type="password"
-                  id="password"
-                  formControlName="password"
-                  [(ngModel)]="request.password"
+                  type="text"
+                  id="email"
+                  formControlName="email"
+                  [(ngModel)]="request.email"
                   [class.invalid]="
-                    myForm.get('password')?.hasError('pattern') ||
-                    (!myForm.get('password')?.value && firstStepSubmitted)
+                    firstStepForm.get('email')?.hasError('pattern') ||
+                    (!firstStepForm.get('email')?.value &&
+                      firstStepSubmitted) ||
+                    firstStepForm.get('email')?.hasError('incorrect')
                   "
                 />
               </div>
               <div class="input-item">
-                <label for="repeat">{{ "Repeat Password" | translate }}</label>
+                <label for="password">{{ "Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="passVisible ? 'text' : 'password'"
+                    id="password"
+                    formControlName="password"
+                    [(ngModel)]="request.password"
+                    [class.invalid]="
+                      firstStepForm.get('password')?.hasError('pattern') ||
+                      (!firstStepForm.get('password')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+              <!--              <div class="input-item">-->
+              <!--                <label for="repeat">{{ "Repeat Password" | translate }}</label>-->
+              <!--                <input-->
+              <!--                  type="password"-->
+              <!--                  id="repeat"-->
+              <!--                  formControlName="confirmPassword"-->
+              <!--                  [(ngModel)]="request.confirmPassword"-->
+              <!--                  [class.invalid]="-->
+              <!--                    firstStepForm.get('confirmPassword')?.hasError('pattern') ||-->
+              <!--                    (!firstStepForm.get('confirmPassword')?.value &&-->
+              <!--                      firstStepSubmitted) ||-->
+              <!--                    (firstStepForm.get('password')?.value !==-->
+              <!--                      firstStepForm.get('confirmPassword')?.value &&-->
+              <!--                      firstStepSubmitted)-->
+              <!--                  "-->
+              <!--                />-->
+              <!--              </div>-->
+            </div>
+            <button type="button" (click)="validateFirstStep()">Next</button>
+          </div>
+        </form>
+        <form [formGroup]="secondStepForm" class="item expander-container">
+          <div class="heading" (click)="toggleExpander(1)">
+            <img
+              [src]="secondStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Personal Information" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[1]">
+            <div class="row">
+              <div class="input-item" style="width: 100%">
+                <label class="label">{{ "Date of birth" | translate }}</label>
+                <div class="date-inputs" style="display: flex; gap: 5px">
+                  <div class="input-block" style="flex: 1">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="days"
+                      [(ngModel)]="selectedDay"
+                      optionLabel="name"
+                      formControlName="day"
+                      [class.invalid]="
+                        (!selectedDay && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                  <div class="input-block" style="flex: 3">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="months"
+                      [(ngModel)]="selectedMonth"
+                      optionLabel="name"
+                      formControlName="month"
+                      [class.invalid]="
+                        (!selectedMonth && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                  <div class="input-block" style="flex: 2">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="years"
+                      [(ngModel)]="selectedYear"
+                      optionLabel="name"
+                      formControlName="year"
+                      [class.invalid]="
+                        (!selectedYear && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item file-input">
+                <label>{{ "Profile Image" }}</label>
+                <label
+                  class="file-label"
+                  for="file"
+                  [ngClass]="{
+                    invalid:
+                      !request.profileImage.isValid && secondStepSubmitted,
+                  }"
+                >
+                  <p
+                    *ngIf="
+                      !request.profileImage.fileUrl &&
+                      !request.profileImage.fileLoading
+                    "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="200"
+                      height="40"
+                      viewBox="0 0 200 40"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M97.778 29H102.222C105.343 29 106.904 29 108.025 28.265C108.509 27.948 108.925 27.5389 109.251 27.061C110 25.961 110 24.428 110 21.364C110 18.299 110 16.767 109.251 15.667C108.925 15.1892 108.509 14.78 108.025 14.463C107.305 13.99 106.403 13.821 105.022 13.761C104.363 13.761 103.796 13.271 103.667 12.636C103.568 12.1709 103.312 11.7541 102.942 11.456C102.571 11.1579 102.109 10.9969 101.634 11H98.366C97.378 11 96.527 11.685 96.333 12.636C96.204 13.271 95.637 13.761 94.978 13.761C93.598 13.821 92.696 13.991 91.975 14.463C91.4916 14.7801 91.0754 15.1892 90.75 15.667C90 16.767 90 18.299 90 21.364C90 24.428 90 25.96 90.749 27.061C91.073 27.537 91.489 27.946 91.975 28.265C93.096 29 94.657 29 97.778 29ZM100 17.273C97.699 17.273 95.833 19.104 95.833 21.363C95.833 23.623 97.699 25.454 100 25.454C102.301 25.454 104.167 23.623 104.167 21.364C104.167 19.104 102.301 17.273 100 17.273ZM100 18.909C98.62 18.909 97.5 20.008 97.5 21.364C97.5 22.719 98.62 23.818 100 23.818C101.38 23.818 102.5 22.719 102.5 21.364C102.5 20.008 101.38 18.909 100 18.909ZM104.722 18.091C104.722 17.639 105.095 17.273 105.556 17.273H106.666C107.126 17.273 107.5 17.639 107.5 18.091C107.498 18.3099 107.409 18.5191 107.253 18.6724C107.097 18.8258 106.886 18.9109 106.667 18.909H105.556C105.448 18.9101 105.34 18.8898 105.239 18.8492C105.139 18.8087 105.047 18.7487 104.97 18.6728C104.892 18.5968 104.83 18.5064 104.788 18.4065C104.745 18.3067 104.723 18.1995 104.722 18.091Z"
+                        fill="#4B4B5A"
+                      />
+                    </svg>
+                  </p>
+                  <i
+                    *ngIf="request.profileImage.fileLoading"
+                    class="pi pi-spin pi-spinner"
+                  ></i>
+                  <p
+                    *ngIf="
+                      request.profileImage.fileUrl &&
+                      !request.profileImage.fileLoading
+                    "
+                  >
+                    {{ getFileName(request.profileImage.fileName) }}
+                  </p>
+                </label>
                 <input
-                  type="password"
-                  id="repeat"
-                  formControlName="confirmPassword"
-                  [(ngModel)]="request.confirmPassword"
+                  id="file"
+                  type="file"
+                  formControlName="profileImage"
+                  [(ngModel)]="request.profileImage.fakeFile"
+                  (change)="getFile($event)"
+                  multiple="false"
+                  accept="image/*"
+                />
+              </div>
+              <div class="input-item">
+                <label for="courier">{{ "Known Languages" | translate }}</label>
+                <p-multiSelect
+                  id="courier"
+                  [style]="{ width: '100%', height: '40px' }"
+                  [options]="knownLangs"
+                  optionLabel="name"
+                  optionValue="id"
+                  formControlName="langs"
+                  [(ngModel)]="request.systemLanguages"
+                  [ngClass]="{
+                    invalid:
+                      request.systemLanguages.length === 0 &&
+                      secondStepSubmitted,
+                  }"
+                  [filter]="true"
+                ></p-multiSelect>
+              </div>
+            </div>
+            <button type="button" (click)="validateSecondStep()">Next</button>
+          </div>
+        </form>
+        <div class="item expander-container qualifs">
+          <div class="heading" (click)="toggleExpander(2)">
+            <img
+              [src]="thirdStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Knowledge and Qualification" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[2]">
+            <div class="heading" (click)="addQualification()">
+              <label>Add Qualification</label>
+              <i class="pi pi-plus-circle"></i>
+            </div>
+            <div
+              class="row"
+              style="align-items: flex-end"
+              *ngFor="let item of request.qualifications; let i = index"
+            >
+              <div class="input-item">
+                <label for="qualifName{{ i }}">{{
+                  "Qualification name"
+                }}</label>
+                <input
+                  type="text"
+                  id="qualifName{{ i }}"
+                  [(ngModel)]="item.title"
+                  [class.invalid]="!item.title && thirdStepSubmitted"
+                />
+              </div>
+              <div class="input-item file-input">
+                <label>{{ "Qualification file" }}</label>
+                <label
+                  class="file-label"
+                  for="fileq{{ i }}"
+                  [ngClass]="{
+                    invalid: !item.file.isValid && thirdStepSubmitted,
+                  }"
+                >
+                  <p *ngIf="!item.file.fileUrl && !item.file.fileLoading">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="200"
+                      height="40"
+                      viewBox="0 0 200 40"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M97.778 29H102.222C105.343 29 106.904 29 108.025 28.265C108.509 27.948 108.925 27.5389 109.251 27.061C110 25.961 110 24.428 110 21.364C110 18.299 110 16.767 109.251 15.667C108.925 15.1892 108.509 14.78 108.025 14.463C107.305 13.99 106.403 13.821 105.022 13.761C104.363 13.761 103.796 13.271 103.667 12.636C103.568 12.1709 103.312 11.7541 102.942 11.456C102.571 11.1579 102.109 10.9969 101.634 11H98.366C97.378 11 96.527 11.685 96.333 12.636C96.204 13.271 95.637 13.761 94.978 13.761C93.598 13.821 92.696 13.991 91.975 14.463C91.4916 14.7801 91.0754 15.1892 90.75 15.667C90 16.767 90 18.299 90 21.364C90 24.428 90 25.96 90.749 27.061C91.073 27.537 91.489 27.946 91.975 28.265C93.096 29 94.657 29 97.778 29ZM100 17.273C97.699 17.273 95.833 19.104 95.833 21.363C95.833 23.623 97.699 25.454 100 25.454C102.301 25.454 104.167 23.623 104.167 21.364C104.167 19.104 102.301 17.273 100 17.273ZM100 18.909C98.62 18.909 97.5 20.008 97.5 21.364C97.5 22.719 98.62 23.818 100 23.818C101.38 23.818 102.5 22.719 102.5 21.364C102.5 20.008 101.38 18.909 100 18.909ZM104.722 18.091C104.722 17.639 105.095 17.273 105.556 17.273H106.666C107.126 17.273 107.5 17.639 107.5 18.091C107.498 18.3099 107.409 18.5191 107.253 18.6724C107.097 18.8258 106.886 18.9109 106.667 18.909H105.556C105.448 18.9101 105.34 18.8898 105.239 18.8492C105.139 18.8087 105.047 18.7487 104.97 18.6728C104.892 18.5968 104.83 18.5064 104.788 18.4065C104.745 18.3067 104.723 18.1995 104.722 18.091Z"
+                        fill="#4B4B5A"
+                      />
+                    </svg>
+                  </p>
+                  <i
+                    *ngIf="item.file.fileLoading"
+                    class="pi pi-spin pi-spinner"
+                  ></i>
+                  <p *ngIf="item.file.fileUrl && !item.file.fileLoading">
+                    {{ getFileName(item.file.fileName) }}
+                  </p>
+                </label>
+                <input
+                  id="fileq{{ i }}"
+                  type="file"
+                  [(ngModel)]="item.file.fakeFile"
+                  (change)="getFiles($event, item)"
+                  multiple="false"
+                  accept="image/*"
+                />
+              </div>
+              <i
+                style="height: 40px"
+                class="pi pi-times-circle"
+                (click)="removeQualification(i)"
+              ></i>
+            </div>
+            <button type="button" (click)="validateThirdStep()">Next</button>
+          </div>
+        </div>
+        <div class="item expander-container">
+          <div class="heading" (click)="toggleExpander(3)">
+            <img
+              [src]="fourthStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Confirm email" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[3]">
+            <div class="row">
+              <div class="input-item">
+                <label for="code">{{ "Verification code" }}</label>
+                <input
+                  type="number"
+                  id="code"
+                  [(ngModel)]="request.verificationCode"
                   [class.invalid]="
-                    myForm.get('confirmPassword')?.hasError('pattern') ||
-                    (!myForm.get('confirmPassword')?.value &&
-                      firstStepSubmitted) ||
-                    (myForm.get('password')?.value !==
-                      myForm.get('confirmPassword')?.value &&
-                      firstStepSubmitted)
+                    (!request.verificationCode && fourthStepSubmitted) ||
+                    (request.verificationCode &&
+                      request.verificationCode.toString().length !== 4)
                   "
                 />
               </div>
             </div>
-            <button type="button" (click)="validateFirstStep()">Next</button>
+            <button type="button" (click)="validateFourthStep()">Next</button>
           </div>
         </div>
-<!--        <div class="item expander-container">-->
-<!--          <div class="heading" (click)="toggleExpander(0)">-->
-<!--            <img-->
-<!--              [src]="firstStepPassed ? 'green-check.svg' : 'grey-check.svg'"-->
-<!--              alt=""-->
-<!--            />-->
-<!--            <p>{{ "Account Setup" | translate }}</p>-->
-<!--          </div>-->
-<!--          <div class="inputs" [@expanderAnimation]="expanderStates[0]">-->
-<!--            <div class="row">-->
-<!--              <div class="input-item">-->
-<!--                <label for="firstName">{{ "First name" | translate }}</label>-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  id="firstName"-->
-<!--                  formControlName="firstName"-->
-<!--                  [(ngModel)]="request.firstName"-->
-<!--                  [class.invalid]="-->
-<!--                    myForm.get('firstName')?.hasError('pattern') ||-->
-<!--                    (!request.firstName && firstStepSubmitted)-->
-<!--                  "-->
-<!--                />-->
-<!--              </div>-->
-<!--              <div class="input-item">-->
-<!--                <label for="lastName">{{ "Last name" | translate }}</label>-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  id="lastName"-->
-<!--                  formControlName="lastName"-->
-<!--                  [(ngModel)]="request.lastName"-->
-<!--                  [class.invalid]="-->
-<!--                    myForm.get('lastName')?.hasError('pattern') ||-->
-<!--                    (!request.lastName && firstStepSubmitted)-->
-<!--                  "-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              <div class="input-item">-->
-<!--                <label for="email">{{ "Email" | translate }}</label>-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  id="email"-->
-<!--                  formControlName="email"-->
-<!--                  [(ngModel)]="request.email"-->
-<!--                  [class.invalid]="-->
-<!--                    myForm.get('email')?.hasError('pattern') ||-->
-<!--                    (!myForm.get('email')?.value && firstStepSubmitted) ||-->
-<!--                    myForm.get('email')?.hasError('incorrect')-->
-<!--                  "-->
-<!--                />-->
-<!--              </div>-->
-<!--              <div class="input-item">-->
-<!--                <label for="phoneNumber"-->
-<!--                >{{ "Phone number" | translate }}-->
-<!--                </label>-->
-<!--                <div class="mask">-->
-<!--                  <p>+995</p>-->
-<!--                  <input-->
-<!--                    type="number"-->
-<!--                    id="phoneNumber"-->
-<!--                    formControlName="phoneNumber"-->
-<!--                    [(ngModel)]="request.phoneNumber"-->
-<!--                    [class.invalid]="-->
-<!--                      myForm.get('phoneNumber')?.hasError('pattern') ||-->
-<!--                      (!myForm.get('phoneNumber')?.value && firstStepSubmitted)-->
-<!--                    "-->
-<!--                    (keydown)="onKeyDown($event)"-->
-<!--                  />-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              <div class="input-item">-->
-<!--                <label for="password">{{ "Password" | translate }}</label>-->
-<!--                <input-->
-<!--                  type="password"-->
-<!--                  id="password"-->
-<!--                  formControlName="password"-->
-<!--                  [(ngModel)]="request.password"-->
-<!--                  [class.invalid]="-->
-<!--                    myForm.get('password')?.hasError('pattern') ||-->
-<!--                    (!myForm.get('password')?.value && firstStepSubmitted)-->
-<!--                  "-->
-<!--                />-->
-<!--              </div>-->
-<!--              <div class="input-item">-->
-<!--                <label for="repeat">{{ "Repeat Password" | translate }}</label>-->
-<!--                <input-->
-<!--                  type="password"-->
-<!--                  id="repeat"-->
-<!--                  formControlName="confirmPassword"-->
-<!--                  [(ngModel)]="request.confirmPassword"-->
-<!--                  [class.invalid]="-->
-<!--                    myForm.get('confirmPassword')?.hasError('pattern') ||-->
-<!--                    (!myForm.get('confirmPassword')?.value &&-->
-<!--                      firstStepSubmitted) ||-->
-<!--                    (myForm.get('password')?.value !==-->
-<!--                      myForm.get('confirmPassword')?.value &&-->
-<!--                      firstStepSubmitted)-->
-<!--                  "-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <button type="button" (click)="validateFirstStep()">Next</button>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
-    </form>
+    </div>
   </div>
   <div class="image-side">
     <img
@@ -233,4 +394,13 @@
     />
   </div>
 </div>
-<!--https://metagroupblob.blob.core.windows.net/delivery-container/22a02b8f-cbfb-43cc-b76e-b81b51c7e224-image%209.png-->
+<div class="loading-back" *ngIf="mainLoading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

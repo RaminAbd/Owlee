@@ -11,4 +11,7 @@ export class EducatorsApiService extends BaseCrudApiService {
   constructor(http: HttpClient, handler: ApplicationMessageCenterService) {
     super(http, handler);
   }
+  SignUp(req:any){
+    return this.post(this.serviceUrl + 'SignUp', req)
+  }
 }

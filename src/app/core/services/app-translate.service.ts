@@ -5,11 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class AppTranslateService {
-  constructor(
-    private translate: TranslateService,
-  ) {}
+  constructor(private translate: TranslateService) {}
   registerLanguages() {
-    this.translate.addLangs([ 'ka-Geo', 'en-Us']);
+    this.translate.addLangs(['ka-Geo', 'en-Us', 'az-Aze', 'ru-Ru', 'tr-Tr']);
     const langExists: boolean = !!localStorage.getItem('systemLanguage');
     if (!langExists) {
       this.translate.setDefaultLang('en-Us');

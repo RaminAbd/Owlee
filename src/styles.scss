@@ -43,6 +43,25 @@ body {
     overflow: hidden !important;
   }
 }
+*::-webkit-scrollbar {
+  width: 2px;
+  border-radius: 15px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--grey);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 button {
   border: none;
   border-radius: 10px;
@@ -96,7 +115,7 @@ input {
   border-radius: 8px;
 }
 p-dropdown.invalid {
-  border: none !important;
+  //border: none !important;
   .p-dropdown {
     border: 1px solid #ffc9c9 !important;
   }
@@ -484,4 +503,8 @@ p-calendar {
 }
 .p-overlay{
   max-width: 100% !important;
+}
+.p-multiselect-label{
+  height: 100%;
+  align-items: center;
 }
