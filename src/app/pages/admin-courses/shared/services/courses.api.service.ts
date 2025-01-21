@@ -11,4 +11,7 @@ export class CoursesApiService extends BaseCrudApiService {
   constructor(http: HttpClient, handler: ApplicationMessageCenterService) {
     super(http, handler);
   }
+  GetByEducator(id:string){
+    return this.get(this.serviceUrl + 'GetByEducator/', id);
+  }
 }

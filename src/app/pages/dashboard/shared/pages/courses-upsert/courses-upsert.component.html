@@ -1,0 +1,79 @@
+<div class="wrapper">
+  <div class="form">
+    <div class="name">
+      <input
+        type="text"
+        [(ngModel)]="request.name"
+        autofocus
+        placeholder="Enter your course title here (no pressure, but make it epic)"
+      />
+    </div>
+    <div class="image">
+      <div class="file-input">
+        <label
+          class="file-label"
+          for="file"
+          style="cursor: pointer"
+          [ngClass]="{ invalid: !request.image.isValid && isSubmitted }"
+        >
+          <span class="unknown" *ngIf="!request.image.fileUrl">
+            <img src="unknown-image.svg" alt="" />
+            <img
+              class="plus"
+              src="plus.svg"
+              alt=""
+              *ngIf="!request.image.fileLoading"
+            />
+            <i
+              *ngIf="request.image.fileLoading"
+              class="pi pi-spin pi-spinner"
+            ></i>
+          </span>
+
+          <img
+            *ngIf="request.image.fileUrl && !request.image.fileLoading"
+            [src]="request.image.fileUrl"
+            alt=""
+          />
+        </label>
+        <input
+          id="file"
+          type="file"
+          [(ngModel)]="request.image.fakeFile"
+          (change)="getFile($event)"
+          multiple="false"
+          accept="image/*"
+        />
+      </div>
+    </div>
+    <div class="language">
+      <label>Language:</label>
+      <div class="items">
+        <div
+          class="item"
+          *ngFor="let lang of languages"
+          (click)="request.systemLanguageId = lang.id"
+          [ngClass]="{ selected: lang.id === request.systemLanguageId }"
+        >
+          <img
+            src="https://s3-alpha-sig.figma.com/img/b459/aab2/66cea63b2c3492604914589dcf80c063?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NQUYc5Xjtp7NAGrk~GLVR6kBJtq6IO97eG-al1V0qh5A~gS2KpDLljg9F150uU8b-lBaYJo5Xr8v9NzfmXD7Mm3AJLyj63LsTvIWXlyygorLNcj2PZGOKeUnSIMIJ4bMYtW5r9s3e935~KEWHO6nvu-KYR1wu2NM~oITKssGW09hTBD~mwWBsl7r6RcW70hloZeXLLzWxrzNmo~n1KrbxuZwghtPjYfkIMfloj2SpWD9wQmd~HJw17z-PG5P-Sgq~PWq5mVglzdkvFtVr8c~ofcPL9k5nFPzxuW-Fq9StDBZkjrHcGPghugZHQwzf0KKCeaPIj4oHF2fmzpUbigN2Q__"
+            alt=""
+          />
+          <p>{{ lang.name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="description">
+      <label for="descr">Tell us what this course is all about:</label>
+      <textarea
+        id="descr"
+        [(ngModel)]="request.description"
+        placeholder="keep it short, but make it unforgettable"
+      ></textarea>
+    </div>
+    <div class="btns">
+      <button (click)="location.back()">Cancel</button>
+      <button class="save" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>

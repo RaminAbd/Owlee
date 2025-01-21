@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .counts {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    gap: 16px;
+    .item {
+      flex: 1;
+      background: var(--primary-color);
+      border-radius: 12px;
+      height: 107px;
+      gap: 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      label {
+        font-weight: 400;
+        font-size: 16px;
+        color: #fff;
+      }
+      p {
+        font-weight: 700;
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+  }
+  .courses {
+    .heading {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      h4 {
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        p {
+          font-weight: 500;
+          font-size: 14px;
+        }
+        .search-block {
+          position: relative;
+          display: flex;
+          align-items: center;
+          i {
+            color: #90928d;
+            position: absolute;
+            left: 10px;
+            font-size: 13px;
+          }
+          input {
+            color: #90928d !important;
+            font-size: 14px;
+            font-weight: 400;
+            border: none;
+            background: transparent !important;
+            border-left: 1px solid #90928d;
+            border-radius: 0 !important;
+            height: 17px;
+            padding-left: 30px;
+            width: 400px;
+          }
+        }
+      }
+    }
+    .items{
+      margin-top: 30px  ;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      .add{
+        cursor: pointer;
+        width: 250px;
+        height: 292px;
+        border-radius: 16px;
+        gap: 32px;
+        background: #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        p{
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

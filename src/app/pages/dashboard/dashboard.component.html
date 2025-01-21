@@ -1,1 +1,38 @@
-<p>dashboard works!</p>
+<div class="wrapper">
+  <div class="counts">
+    <div class="item">
+      <p>{{ response.coursesCount }}</p>
+      <label>{{ "My courses" | translate }}</label>
+    </div>
+    <div class="item">
+      <p>{{ response.groupsCount }}</p>
+      <label>{{ "Groups" | translate }}</label>
+    </div>
+    <div class="item">
+      <p>{{ response.studentCount }}</p>
+      <label>{{ "Students" | translate }}</label>
+    </div>
+  </div>
+
+  <div class="courses">
+    <div class="heading">
+      <h4>{{ "My courses" | translate }}</h4>
+      <div class="search">
+        <p>{{ response.courses.length + (" contents" | translate) }}</p>
+        <div class="search-block">
+          <i class="pi pi-search"></i>
+          <input type="text" [(ngModel)]="searchText" placeholder="Search.." />
+        </div>
+      </div>
+    </div>
+    <div class="items">
+      <div class="add" (click)="create()">
+        <img src="plus.svg" alt="" />
+        <p>Add new</p>
+      </div>
+      <div class="item" *ngFor="let item of response.courses">
+
+      </div>
+    </div>
+  </div>
+</div>
