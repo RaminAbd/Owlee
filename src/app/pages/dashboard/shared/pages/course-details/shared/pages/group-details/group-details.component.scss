@@ -1,0 +1,52 @@
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 10px;
+  z-index: 1;
+
+  .back {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    width: 720px;
+    position: relative;
+
+    i {
+      color: #656668;
+      position: absolute;
+      left: -43px;
+      top: 5px;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+  .content {
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .item {
+        height: 33px;
+        border-radius: 37px;
+        padding: 8px 12px;
+        cursor: pointer;
+        p {
+          color: #90928d;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        &.selected {
+          background: var(--primary-color);
+          p {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

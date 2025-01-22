@@ -5,7 +5,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
-import {NgForOf} from '@angular/common';
+import { NgForOf } from '@angular/common';
+import { DashboardCourseModel } from './shared/models/dashboard-course.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +24,24 @@ export class DashboardComponent {
     this.service.getDashboard();
   }
   create() {
-    console.log('jdsv')
-    this.router.navigate(['/main/educator/course/upsert', 'create']);
+    this.service.checkSlots()
   }
-  getInfo(item: CoursesResponseModel) {
-    this.router.navigate(['/main/educator/course/upsert', item.id]);
+
+
+
+  getInfo(item: DashboardCourseModel) {
+    this.router.navigate([
+      '/main/educator/dashboard/course/info',
+      item.courseId,
+    ]);
+  }
+
+  filteredList: DashboardCourseModel[] = [];
+
+  searchByName() {
+    this.filteredList = this.response.courses.filter((obj) =>
+      obj.name.toLowerCase().includes(this.searchText.toLowerCase()),
+    );
+    console.log(this.filteredList);
   }
 }

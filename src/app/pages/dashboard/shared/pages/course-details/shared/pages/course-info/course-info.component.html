@@ -1,0 +1,43 @@
+<div class="course-info">
+  <div class="back" (click)="back()">
+    <i class="pi pi-chevron-left"></i>
+    <p>{{ request.name }}</p>
+  </div>
+  <div class="image">
+    <img class="main-image" [src]="request.image.fileUrl" alt="" />
+    <div class="actions">
+      <div class="item edit" (click)="edit()">
+        <div class="icon"><img src="pen.svg" alt="" /></div>
+        <p>{{ "Edit" | translate }}</p>
+      </div>
+      <div class="item copy" (click)="copy()">
+        <div class="icon">
+          <img *ngIf="!copyLoading" src="copy.svg" alt="" />
+          <i class="pi pi-spin pi-spinner" *ngIf="copyLoading"></i>
+        </div>
+        <p>{{ "Copy" | translate }}</p>
+      </div>
+      <div class="item delete" (click)="delete()">
+        <div class="icon"><img src="delete.svg" alt="" /></div>
+
+        <p>{{ "Delete" | translate }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="language">
+    <label>{{ "Language" | translate }}</label>
+    <p>{{ request.systemLanguageName }}</p>
+  </div>
+  <div class="description">
+    <p>{{ request.description }}</p>
+  </div>
+</div>
+
+<p-confirmdialog>
+  <ng-template #message let-message>
+    <div class="confirm-content">
+      <i [ngClass]="message.icon" class="!text-6xl text-primary-500"></i>
+      <p>{{ message.message | translate }}</p>
+    </div>
+  </ng-template>
+</p-confirmdialog>

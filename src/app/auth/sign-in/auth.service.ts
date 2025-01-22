@@ -58,6 +58,7 @@ export class AuthService {
   setToStorage(resp: AuthResponseModel, req: AuthRequestModel) {
     this.storage.saveObject('authResponse', resp);
     this.storage.saveObject('authRequest', req);
+    localStorage.setItem('userId', resp.id);
     this.storage.saveObject('role', this.cryptoService.encrypt(resp.role, 3));
   }
 

@@ -1,7 +1,7 @@
-import { CoursesResponseModel } from '../../../admin-courses/shared/models/courses-response.model';
+import { DashboardCourseModel } from './dashboard-course.model';
 
 export class DashboardResponseModel {
-  courses: CoursesResponseModel[] = [];
+  courses: DashboardCourseModel[] = [];
   coursesCount: number;
   groupsCount: number;
   studentCount: number;

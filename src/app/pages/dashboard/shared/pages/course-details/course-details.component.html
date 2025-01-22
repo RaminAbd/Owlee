@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="content">
+    <div class="tabs">
+      <a class="item" routerLink="about" [routerLinkActive]="['selected']">
+        <p>{{ "About" | translate }}</p>
+      </a>
+      <a class="item" routerLink="groups" [routerLinkActive]="['selected']">
+        <p>{{ "Groups" | translate }}</p>
+      </a>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -25,8 +25,12 @@ export class CoursesUpsertService {
   constructor() {}
 
   getCourse() {
+    const req = {
+      id: this.component.id,
+      lang: this.translate.currentLang,
+    };
     this.service
-      .GetById(this.service.serviceUrl, this.component.id)
+      .GetByIdByLang(this.service.serviceUrl, req)
       .subscribe((resp) => {
         this.component.request = resp.data;
       });
@@ -64,7 +68,7 @@ export class CoursesUpsertService {
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
     } else {
-      this.create();
+      this.component.id === 'create' ? this.create() : this.update();
     }
     console.log(this.component.request);
   }
@@ -75,6 +79,17 @@ export class CoursesUpsertService {
       .subscribe((resp) => {
         if (resp.succeeded) {
           this.message.showTranslatedSuccessMessage('Created successfully.');
+          this.component.location.back();
+        }
+      });
+  }
+
+  private update() {
+    this.service
+      .Update(this.service.serviceUrl, this.component.request)
+      .subscribe((resp) => {
+        if (resp.succeeded) {
+          this.message.showTranslatedSuccessMessage('Updated successfully.');
           this.component.location.back();
         }
       });

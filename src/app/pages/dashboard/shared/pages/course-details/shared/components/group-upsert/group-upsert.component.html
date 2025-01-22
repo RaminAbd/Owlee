@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="input-item">
+      <label for="name">{{ "Name" | translate }}</label>
+      <input type="text" id="name" [(ngModel)]="request.name" />
+    </div>
+    <div class="input-item">
+      <label for="enable">{{ "Type" | translate }}</label>
+      <p-dropdown
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="types"
+        optionLabel="name"
+        optionValue="value"
+        [(ngModel)]="request.type"
+        id="enable"
+      ></p-dropdown>
+    </div>
+    <div class="input-item">
+      <label for="implementationType">{{
+        "Implementation Type" | translate
+      }}</label>
+      <p-dropdown
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="implementationTypes"
+        optionLabel="name"
+        optionValue="value"
+        [(ngModel)]="request.implementationType"
+        id="implementationType"
+      ></p-dropdown>
+    </div>
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="save()">{{ "Save" | translate }}</button>
+  </div>
+</div>

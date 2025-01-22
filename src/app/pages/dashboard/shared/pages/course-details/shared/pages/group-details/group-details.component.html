@@ -1,0 +1,25 @@
+<div class="course-info">
+  <div class="back" (click)="back()">
+    <i class="pi pi-chevron-left"></i>
+    <p>{{ course.name }} - {{ group.name }}</p>
+  </div>
+  <div class="content">
+    <div class="tabs">
+      <div
+        class="item"
+        (click)="selectedTab = 1"
+        [ngClass]="{ selected: selectedTab === 1 }"
+      >
+        <p>{{ "Materials" | translate }}</p>
+      </div>
+
+      <div
+        class="item"
+        (click)="selectedTab = 2"
+        [ngClass]="{ selected: selectedTab === 2 }"
+      >
+        <p>{{ "Students" | translate }}</p>
+      </div>
+    </div>
+  </div>
+</div>

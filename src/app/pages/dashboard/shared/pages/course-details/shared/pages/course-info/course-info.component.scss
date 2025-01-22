@@ -1,0 +1,134 @@
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 10px;
+  .back {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    width: 720px;
+    position: relative;
+    i {
+      color: #656668;
+      position: absolute;
+      left: -43px;
+      top: 5px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+  .image {
+    display: flex;
+    gap: 20px;
+    .main-image {
+      width: 600px;
+      max-height: 185px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .item {
+        display: flex;
+        align-items: center;
+        width: 100px;
+        height: 32px;
+        border-radius: 8px;
+        gap: 11px;
+        background-color: #f6f6f6;
+        padding: 6px 8px;
+        cursor: pointer;
+        .icon{
+          width: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        p, i {
+          font-weight: 500;
+          font-size: 14px;
+          color: #656668;
+        }
+        &.edit {
+          background-color: #3b3199;
+          p {
+            color: #fff;
+          }
+        }
+        &.delete {
+          p {
+            color: #ef3838;
+          }
+        }
+      }
+    }
+  }
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 46px;
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #90928d;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+  }
+  .description {
+    width: 600px;
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      color: #90928d;
+      line-height: 16.94px;
+    }
+  }
+}
+::ng-deep {
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content {
+    background: transparent !important;
+  }
+  .confirm-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    i{
+      font-size: 60px;
+      color: orange;
+    }
+    p{
+      width: 70%;
+      text-align: center;
+      color: orange;
+      margin-bottom: 21px !important;
+    }
+  }
+  .p-dialog-footer{
+    .p-button{
+      padding: 0px 20px !important;
+      height: 40px;
+      background: #F6F6F6 !important;
+      border: none !important;
+      color: #656668 !important;
+      &.p-confirmdialog-accept-button{
+        background: var(--primary-color) !important;
+        border: none !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+}
