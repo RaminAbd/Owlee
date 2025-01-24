@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { Location, NgClass } from '@angular/common';
+import {Location, NgClass, NgForOf} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { GroupDetailsService } from './group-details.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import {GroupRequestModel} from '../../../../../models/group-request.model';
+import { GroupRequestModel } from '../../../../../models/group-request.model';
+import { TopicRequestModel } from '../../../../../models/topic-request.model';
+import {Popover} from 'primeng/popover';
 
 @Component({
   selector: 'app-group-details',
-  imports: [NgClass, TranslatePipe],
+  imports: [NgClass, TranslatePipe, NgForOf, Popover],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss',
 })
@@ -24,17 +26,20 @@ export class GroupDetailsComponent {
   courseId = this.route.parent?.snapshot.paramMap.get('id') as string;
   groupdId = this.route.snapshot.paramMap.get('groupId') as string;
   course: CourseRequestModel = new CourseRequestModel();
-  group:GroupRequestModel = new GroupRequestModel()
+  group: GroupRequestModel = new GroupRequestModel();
   selectedTab = 1;
+  topics: TopicRequestModel[] = [];
   constructor() {
     this.service.component = this;
     this.service.getCourse();
     this.service.getGroup();
+    this.service.getAllTopics();
   }
   back() {
     this.router.navigate([
       '/main/educator/dashboard/course/info',
-      this.courseId,'groups'
+      this.courseId,
+      'groups',
     ]);
   }
 }

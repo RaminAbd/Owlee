@@ -4,6 +4,7 @@ import { GroupDetailsComponent } from './group-details.component';
 import { CoursesApiService } from '../../../../../../../admin-courses/shared/services/courses.api.service';
 import { GroupsApiService } from '../../../../../services/groups.api.service';
 import { TranslateService } from '@ngx-translate/core';
+import {TopicApiService} from '../../../../../services/topic.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class GroupDetailsService {
   private coursesService: CoursesApiService = inject(CoursesApiService);
   private service: GroupsApiService = inject(GroupsApiService);
   private translate: TranslateService = inject(TranslateService);
+  private topicsService: TopicApiService = inject(TopicApiService);
 
   getCourse() {
     const req = {
@@ -32,5 +34,15 @@ export class GroupDetailsService {
       .subscribe((resp) => {
         this.component.group = resp.data;
       });
+  }
+
+  getAllTopics(){
+    const req ={
+      groupId: this.component.groupdId,
+      lang: this.translate.currentLang,
+    }
+    this.topicsService.GetAllByGroup(req).subscribe((resp) => {
+      this.component.topics = resp.data;
+    })
   }
 }
