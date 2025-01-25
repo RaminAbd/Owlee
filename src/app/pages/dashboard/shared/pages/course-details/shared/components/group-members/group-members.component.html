@@ -1,0 +1,41 @@
+<div class="course-info">
+  <div class="content">
+    <div class="heading">
+      <div class="search">
+        <p>{{ members.length + (" members" | translate) }}</p>
+        <div class="search-block">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="Search.."
+            (input)="searchByName()"
+          />
+        </div>
+      </div>
+      <div class="btn">
+        <button (click)="openInvitation()">{{ "Add new" | translate }}</button>
+      </div>
+    </div>
+    <div class="list">
+      <div class="item" *ngFor="let item of filteredList">
+        <div class="col">
+          <label>{{ "Name" | translate }}</label>
+          <p>{{ item.fullName }}</p>
+        </div>
+        <div class="col">
+          <label>{{ "Email" | translate }}</label>
+          <p>{{ item.email }}</p>
+        </div>
+        <div class="col">
+          <label>{{ "State" | translate }}</label>
+          <p>
+            {{
+              item.accepted ? ("Active" | translate) : ("Pending" | translate)
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

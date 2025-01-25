@@ -5,6 +5,7 @@ export class TopicRequestModel {
   courseId: string;
   groupId: string;
   name: string;
-  index: number;
+  index?: number;
+  subTopic:SubtopicModel = new SubtopicModel();
   subtopics: SubtopicModel[] = [];
 }

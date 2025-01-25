@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="input-item">
+      <label for="name">{{ "File title" | translate }}</label>
+      <input type="text" id="name" [(ngModel)]="request.name" />
+    </div>
+    <div class="input-item">
+      <label for="url">{{ "File URL" | translate }}</label>
+      <input type="text" id="url" [(ngModel)]="request.url" />
+    </div>
+    <div class="input-item">
+      <label for="enable">{{ "File Language" | translate }}</label>
+      <p-dropdown
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="languages"
+        optionLabel="name"
+        optionValue="id"
+        [(ngModel)]="request.systemLanguageId"
+        id="enable"
+      ></p-dropdown>
+    </div>
+
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="save()">{{ "Save" | translate }}</button>
+  </div>
+</div>

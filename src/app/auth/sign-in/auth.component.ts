@@ -2,7 +2,6 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from './auth.service';
 import {AuthRequestModel} from '../shared/models/auth-request.model';
-import {TranslatePipe} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 
@@ -10,7 +9,6 @@ import {RouterLink} from '@angular/router';
   selector: 'app-auth',
   imports: [
     ReactiveFormsModule,
-    TranslatePipe,
     NgIf,
     RouterLink
   ],

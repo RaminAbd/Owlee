@@ -4,6 +4,6 @@ export class SubtopicModel {
   id: string;
   topicId: string;
   name: string;
-  index: number;
+  index?: number;
   files: TopicMaterialModel[] = [];
 }

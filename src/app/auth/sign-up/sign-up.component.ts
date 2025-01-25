@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { EducatorSignupRequestModel } from './shared/models/educator-signup-request.model';
 import { SignUpService } from './sign-up.service';
@@ -31,7 +30,6 @@ import {AnimationItem} from 'lottie-web';
   imports: [
     NgIf,
     ReactiveFormsModule,
-    RouterLink,
     TranslatePipe,
     FormsModule,
     DropdownModule,

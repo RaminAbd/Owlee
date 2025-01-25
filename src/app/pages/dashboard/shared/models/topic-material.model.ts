@@ -2,7 +2,8 @@ export class TopicMaterialModel {
   id: string;
   subtopicId: string;
   systemLanguageId: string;
-  index: number;
+  index?: number;
   name: string;
   url: string;
+  language:string
 }
