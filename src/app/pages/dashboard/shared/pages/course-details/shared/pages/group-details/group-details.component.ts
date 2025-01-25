@@ -14,6 +14,7 @@ import { Dialog } from 'primeng/dialog';
 import { Button } from 'primeng/button';
 import { TopicMaterialModel } from '../../../../../models/topic-material.model';
 import {GroupMembersComponent} from '../../components/group-members/group-members.component';
+import {ConfirmDialog} from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-group-details',
@@ -27,6 +28,7 @@ import {GroupMembersComponent} from '../../components/group-members/group-member
     Dialog,
     Button,
     GroupMembersComponent,
+    ConfirmDialog
   ],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss',

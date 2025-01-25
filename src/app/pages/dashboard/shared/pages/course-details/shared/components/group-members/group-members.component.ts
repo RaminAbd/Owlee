@@ -1,8 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { GroupMembersService } from './group-members.service';
 import {GroupMembersResponseModel} from '../../../../../models/group-members.response.model';
-import {GroupsResponseModel} from '../../../../../models/groups-response.model';
-import {NgForOf, NgStyle} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
 
@@ -13,7 +12,6 @@ import {TranslatePipe} from '@ngx-translate/core';
     ReactiveFormsModule,
     TranslatePipe,
     FormsModule,
-    NgStyle
   ],
   templateUrl: './group-members.component.html',
   styleUrl: './group-members.component.scss',
