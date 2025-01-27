@@ -7,6 +7,13 @@ import { CourseGroupsComponent } from '../../../../pages/dashboard/shared/pages/
 import {
   GroupDetailsComponent
 } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/group-details.component';
+import {
+  GroupMaterialsComponent
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-materials/group-materials.component';
+import {
+  GroupMembersComponent
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/group-members.component';
+import {PersonalInfoComponent} from '../../../../pages/personal-info/personal-info.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -39,9 +46,28 @@ export class EducatorChildrenRoutes {
           path: 'groups/:groupId',
           component: GroupDetailsComponent,
           data: { title: 'Dashboard' },
+          children:[
+            {
+              path: 'materials',
+              component: GroupMaterialsComponent,
+              data: { title: 'Dashboard' },
+            },
+            {
+              path: 'members',
+              component: GroupMembersComponent,
+              data: { title: 'Dashboard' },
+            },
+            { path: '', redirectTo: 'materials', pathMatch: 'full' },
+          ]
         },
         { path: '', redirectTo: 'about', pathMatch: 'full' },
       ],
+    },
+
+    {
+      path: 'personal-info',
+      component: PersonalInfoComponent,
+      data: { title: 'Personal Information' },
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

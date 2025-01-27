@@ -1,12 +1,14 @@
 import {Component, inject, Input} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   imports: [
     TranslatePipe,
-    NgIf
+    NgIf,
+    RouterLink,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

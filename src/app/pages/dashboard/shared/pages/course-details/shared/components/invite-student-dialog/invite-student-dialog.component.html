@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <form class="inputs" [formGroup]="form">
+    <div class="input-item">
+      <label for="email">{{ "File title" | translate }}</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        [class.invalid]="
+          form.get('email')?.hasError('pattern') ||
+          (!form.get('email')?.value && isSubmitted) ||
+          form.get('email')?.hasError('incorrect')
+        "
+      />
+    </div>
+  </form>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="save()">{{ "Save" | translate }}</button>
+  </div>
+</div>

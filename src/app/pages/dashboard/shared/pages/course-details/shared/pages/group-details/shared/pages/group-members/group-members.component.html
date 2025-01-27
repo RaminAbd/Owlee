@@ -28,13 +28,14 @@
           <p>{{ item.email }}</p>
         </div>
         <div class="col">
-          <label>{{ "State" | translate }}</label>
-          <p>
+          <label>{{ "Status" | translate }}</label>
+          <p [ngStyle]="{ color: item.accepted ? '#19C51F' : '#DB3AA9' }">
             {{
               item.accepted ? ("Active" | translate) : ("Pending" | translate)
             }}
           </p>
         </div>
+        <button (click)="remove(item.id)"><img src="delete.svg" alt="" ></button>
       </div>
     </div>
   </div>

@@ -11,11 +11,15 @@
   --text-color: #13170C;
   --border-color:#90928D38;
   --nav-bar:#F6F6F6;
+
 }
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Inter", serif;
+  //background: #fff;
   &.blocked {
     overflow: hidden !important;
   }
@@ -526,4 +530,8 @@ p-calendar {
   background: #00000042;
   position: absolute !important;
   pointer-events: all !important;
+}
+.invalid {
+  border: 1px solid #ffc9c9 !important;
+  border-radius: 8px;
 }
