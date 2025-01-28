@@ -75,14 +75,17 @@ export class SignUpComponent {
   firstStepSubmitted = false;
   firstStepPassed: boolean = false;
   passVisible: boolean = false;
+  repeatVisible: boolean = false;
 
   firstStepForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+    personalId: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
     email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
     phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
     location: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
+    confirmPassword: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
   });
 
   secondStepSubmitted = false;

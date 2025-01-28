@@ -16,4 +16,7 @@ export class AuthApiService extends BaseApiService {
   SignIn(req: AuthRequestModel) {
     return this.http.post<AuthResponseModel>(this.BASE_URL+this.serviceUrl + 'SignIn', req);
   }
+  ChangePassword(req: any) {
+    return this.post(this.serviceUrl + 'ChangePassword', req)
+  }
 }

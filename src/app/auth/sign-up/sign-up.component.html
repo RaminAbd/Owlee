@@ -48,6 +48,20 @@
             </div>
             <div class="row">
               <div class="input-item">
+                <label for="personalId">{{ "Personal Id" | translate }}</label>
+                <input
+                  type="text"
+                  id="personalId"
+                  formControlName="personalId"
+                  [(ngModel)]="request.personalId"
+                  [class.invalid]="
+                    firstStepForm.get('personalId')?.hasError('pattern') ||
+                    (!request.personalId && firstStepSubmitted)
+                  "
+                />
+              </div>
+
+              <div class="input-item">
                 <label for="location">{{ "Location" | translate }}</label>
                 <input
                   type="text"
@@ -60,7 +74,9 @@
                   "
                 />
               </div>
+            </div>
 
+            <div class="row">
               <div class="input-item">
                 <label for="phoneNumber"
                   >{{ "Phone number" | translate }}
@@ -81,9 +97,6 @@
                   />
                 </div>
               </div>
-            </div>
-
-            <div class="row">
               <div class="input-item">
                 <label for="email">{{ "Email" | translate }}</label>
                 <input
@@ -99,6 +112,8 @@
                   "
                 />
               </div>
+            </div>
+            <div class="row">
               <div class="input-item">
                 <label for="password">{{ "Password" | translate }}</label>
                 <div class="block">
@@ -127,23 +142,39 @@
                   </span>
                 </div>
               </div>
-              <!--              <div class="input-item">-->
-              <!--                <label for="repeat">{{ "Repeat Password" | translate }}</label>-->
-              <!--                <input-->
-              <!--                  type="password"-->
-              <!--                  id="repeat"-->
-              <!--                  formControlName="confirmPassword"-->
-              <!--                  [(ngModel)]="request.confirmPassword"-->
-              <!--                  [class.invalid]="-->
-              <!--                    firstStepForm.get('confirmPassword')?.hasError('pattern') ||-->
-              <!--                    (!firstStepForm.get('confirmPassword')?.value &&-->
-              <!--                      firstStepSubmitted) ||-->
-              <!--                    (firstStepForm.get('password')?.value !==-->
-              <!--                      firstStepForm.get('confirmPassword')?.value &&-->
-              <!--                      firstStepSubmitted)-->
-              <!--                  "-->
-              <!--                />-->
-              <!--              </div>-->
+              <div class="input-item">
+                <label for="repeat">{{ "Repeat Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="repeatVisible ? 'text' : 'password'"
+                    id="repeat"
+                    formControlName="confirmPassword"
+                    [(ngModel)]="request.confirmPassword"
+                    [class.invalid]="
+                      firstStepForm
+                        .get('confirmPassword')
+                        ?.hasError('pattern') ||
+                      (!firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted) ||
+                      (firstStepForm.get('password')?.value !==
+                        firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
             </div>
             <button type="button" (click)="validateFirstStep()">Next</button>
           </div>

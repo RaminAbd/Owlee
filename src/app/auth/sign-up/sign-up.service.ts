@@ -10,7 +10,7 @@ import { EducatorsApiService } from '../../pages/educators/shared/services/educa
 import { AuthRequestModel } from '../shared/models/auth-request.model';
 import { AuthApiService } from '../shared/services/auth.api.service';
 import { AuthService } from '../sign-in/auth.service';
-import {AccountsApiService} from '../shared/services/accounts.api.service';
+import { AccountsApiService } from '../shared/services/accounts.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -51,12 +51,21 @@ export class SignUpService {
       !this.component.request.phoneNumber ||
       !this.component.request.email ||
       !this.component.request.password ||
-      !this.component.request.location
+      !this.component.request.location ||
+      !this.component.request.personalId ||
+      !this.component.request.confirmPassword
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
       this.component.firstStepPassed = false;
     } else {
-      this.checkMailExists();
+      if (
+        this.component.request.password !==
+        this.component.request.confirmPassword
+      ) {
+        this.message.showTranslatedWarningMessage('Password mismatch');
+      } else {
+        this.checkMailExists();
+      }
     }
   }
 
@@ -67,18 +76,19 @@ export class SignUpService {
     this.verificationService.SendVerification(req).subscribe((resp) => {});
   }
 
-  private checkMailExists(){
-    this.accountsService.Exists(this.component.request.email).subscribe(resp=>{
-      if(resp.data.exists){
-        this.message.showTranslatedWarningMessage('Email already exists');
-        this.component.firstStepPassed = false;
-      }
-      else{
-        this.component.firstStepPassed = true;
-        this.component.toggleExpander(1);
-        this.sendVerificationCode()
-      }
-    })
+  private checkMailExists() {
+    this.accountsService
+      .Exists(this.component.request.email)
+      .subscribe((resp) => {
+        if (resp.data.exists) {
+          this.message.showTranslatedWarningMessage('Email already exists');
+          this.component.firstStepPassed = false;
+        } else {
+          this.component.firstStepPassed = true;
+          this.component.toggleExpander(1);
+          this.sendVerificationCode();
+        }
+      });
   }
 
   initMonths() {
