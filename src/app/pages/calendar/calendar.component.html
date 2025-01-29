@@ -1,0 +1,85 @@
+<div class="schedule-wrapper">
+  <div class="schedule-content">
+    <div class="left">
+      <div class="paging-info">
+        <div class="paging">
+          <div class="icons">
+            <svg
+              (click)="handlePreviousMonth()"
+              xmlns="http://www.w3.org/2000/svg"
+              width="7"
+              height="11"
+              viewBox="0 0 7 11"
+              fill="none"
+            >
+              <path
+                d="M5.5 1.25L1 5.5L5.5 9.75"
+                stroke="#605F65"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <svg
+              (click)="handleNextMonth()"
+              xmlns="http://www.w3.org/2000/svg"
+              width="7"
+              height="11"
+              viewBox="0 0 7 11"
+              fill="none"
+            >
+              <path
+                d="M1.5 9.75L6 5.5L1.5 1.25"
+                stroke="#605F65"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <p>{{ monthData.monthName }} {{ currentDate.getFullYear() }}</p>
+        </div>
+        <div class="info">
+          <button class="add-meeting">{{ "Add new" | translate }}</button>
+        </div>
+      </div>
+      <div class="board">
+        <div class="row week-days">
+          <div class="week-day" *ngFor="let day of weekDays">
+            <p>{{ day.shortName }}</p>
+          </div>
+        </div>
+        <div class="weeks">
+          <div class="days" *ngFor="let week of monthData.weeks; let i = index">
+            <div
+              class="day"
+              *ngFor="let day of week.days"
+              [ngClass]="{ active: isActive(day), today: isToday(day.date) }"
+              (click)="handleSetDateInfo(day)"
+            >
+              <div class="day-num">
+                <p class="day-number">{{ day.dayNumber }}</p>
+              </div>
+              <div class="tasks">
+                <div class="task" *ngFor="let task of day.task.items">
+                  <p>{{ task.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="activities">
+      <div class="active-date">
+        <p>{{ activeDateInfo.dateString?.formattedDate }}</p>
+        <p class="w-day">{{ activeDateInfo.dateString?.dayOfWeek }}</p>
+      </div>
+      <div class="items">
+        <div class="wrap" *ngFor="let task of activeDateInfo.task.items">
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

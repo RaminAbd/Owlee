@@ -24,4 +24,9 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.post(this.serviceUrl + 'Copy', req);
   }
 
+  getDashboard(req: any) {
+    return this.get(this.serviceUrl + 'Dashboard/', null, req);
+  }
+
+
 }

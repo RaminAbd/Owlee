@@ -7,4 +7,7 @@ export class DashboardCourseModel {
   groupCount: number;
   materialsCount: number;
   studentCount: number;
+  topicCount: number;
+  groupMemberCount: number;
+  educatorFullName:string
 }

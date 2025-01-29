@@ -1,0 +1,203 @@
+<div class="sign-up-wrapper">
+  <div class="form-side">
+    <div class="logo">
+      <img src="text-logo.svg" alt="" />
+    </div>
+    <div class="txt">
+      <h4>Join Our Teaching Community: Inspire, Educate, Empower!</h4>
+      <p>Sign Up and Share Your Knowledge!</p>
+    </div>
+    <div>
+      <div class="expanders">
+        <form [formGroup]="firstStepForm" class="item expander-container">
+          <div class="heading">
+            <p>{{ "Account Setup" | translate }}</p>
+          </div>
+          <div class="inputs">
+            <div class="row">
+              <div class="input-item">
+                <label for="firstName">{{ "First name" | translate }}</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  [(ngModel)]="request.firstName"
+                  [class.invalid]="
+                    firstStepForm.get('firstName')?.hasError('pattern') ||
+                    (!request.firstName && firstStepSubmitted)
+                  "
+                />
+              </div>
+              <div class="input-item">
+                <label for="lastName">{{ "Last name" | translate }}</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  [(ngModel)]="request.lastName"
+                  [class.invalid]="
+                    firstStepForm.get('lastName')?.hasError('pattern') ||
+                    (!request.lastName && firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="courier">{{ "Known Languages" | translate }}</label>
+                <p-multiSelect
+                  id="courier"
+                  [style]="{ width: '100%', height: '40px' }"
+                  [options]="knownLangs"
+                  optionLabel="name"
+                  optionValue="id"
+                  formControlName="langs"
+                  [(ngModel)]="request.systemLanguages"
+                  [ngClass]="{
+                    invalid:
+                      request.systemLanguages.length === 0 &&
+                      firstStepSubmitted,
+                  }"
+                  [filter]="true"
+                ></p-multiSelect>
+              </div>
+
+              <div class="input-item">
+                <label for="location">{{ "Location" | translate }}</label>
+                <input
+                  type="text"
+                  id="location"
+                  formControlName="location"
+                  [(ngModel)]="request.location"
+                  [class.invalid]="
+                    firstStepForm.get('location')?.hasError('pattern') ||
+                    (!request.location && firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-item">
+                <label for="phoneNumber"
+                >{{ "Phone number" | translate }}
+                </label>
+                <div class="mask">
+                  <p>+995</p>
+                  <input
+                    type="number"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                    [(ngModel)]="request.phoneNumber"
+                    [class.invalid]="
+                      firstStepForm.get('phoneNumber')?.hasError('pattern') ||
+                      (!firstStepForm.get('phoneNumber')?.value &&
+                        firstStepSubmitted)
+                    "
+                    (keydown)="onKeyDown($event)"
+                  />
+                </div>
+              </div>
+              <div class="input-item">
+                <label for="userName">{{ "Username" | translate }}</label>
+                <input
+                  type="text"
+                  id="userName"
+                  formControlName="userName"
+                  [(ngModel)]="request.userName"
+                  [class.invalid]="
+                    firstStepForm.get('userName')?.hasError('pattern') ||
+                    (!firstStepForm.get('userName')?.value &&
+                      firstStepSubmitted) ||
+                    firstStepForm.get('userName')?.hasError('incorrect')
+                  "
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="password">{{ "Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="passVisible ? 'text' : 'password'"
+                    id="password"
+                    formControlName="password"
+                    [(ngModel)]="request.password"
+                    [class.invalid]="
+                      firstStepForm.get('password')?.hasError('pattern') ||
+                      (!firstStepForm.get('password')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-item">
+                <label for="repeat">{{ "Repeat Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="repeatVisible ? 'text' : 'password'"
+                    id="repeat"
+                    formControlName="confirmPassword"
+                    [(ngModel)]="request.confirmPassword"
+                    [class.invalid]="
+                      firstStepForm
+                        .get('confirmPassword')
+                        ?.hasError('pattern') ||
+                      (!firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted) ||
+                      (firstStepForm.get('password')?.value !==
+                        firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button type="button" (click)="validateFirstStep()">Next</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="image-side">
+    <img
+      src="https://metagroupblob.blob.core.windows.net/delivery-container/22a02b8f-cbfb-43cc-b76e-b81b51c7e224-image%209.png"
+      alt=""
+    />
+  </div>
+</div>
+<div class="loading-back" *ngIf="mainLoading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

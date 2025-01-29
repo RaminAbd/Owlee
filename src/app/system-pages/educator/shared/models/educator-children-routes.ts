@@ -14,6 +14,7 @@ import {
   GroupMembersComponent
 } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/group-members.component';
 import {PersonalInfoComponent} from '../../../../pages/personal-info/personal-info.component';
+import {CalendarComponent} from '../../../../pages/calendar/calendar.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -62,6 +63,12 @@ export class EducatorChildrenRoutes {
         },
         { path: '', redirectTo: 'about', pathMatch: 'full' },
       ],
+    },
+
+    {
+      path: 'calendar',
+      component: CalendarComponent,
+      data: { title: 'Calendar' },
     },
 
     {
