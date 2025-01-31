@@ -32,7 +32,7 @@
         align-items: center;
         gap: 16px;
         .item {
-          width: 113px;
+          min-width: 113px;
           height: 41px;
           border-radius: 45px;
           padding: 10px;

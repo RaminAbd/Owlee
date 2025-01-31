@@ -14,7 +14,7 @@ import {AdminCoursesComponent} from '../../../../pages/admin-courses/admin-cours
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
-    { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
+
 
     { path: 'subscription-packages', component: SubscriptionPackageComponent, data: { title: 'Subscription Packages' }  },
     { path: 'subscription-packages/:id', component: SubscriptionPackageUpsertComponent, data: { title: 'Subscription Packages' }  },
@@ -25,7 +25,7 @@ export class AdminChildrenRoutes {
     { path: 'students', component: StudentsComponent, data: { title: 'Students' }  },
     { path: 'educators', component: EducatorsComponent, data: { title: 'Educators' }  },
     { path: 'courses', component: AdminCoursesComponent, data: { title: 'Courses' }  },
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'courses', pathMatch: 'full' },
+    { path: '**', redirectTo: 'courses', pathMatch: 'full' },
   ];
 }

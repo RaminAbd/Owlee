@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import {
   FormBuilder,
@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { EducatorSignupRequestModel } from './shared/models/educator-signup-request.model';
 import { SignUpService } from './sign-up.service';
 import {
@@ -22,8 +22,8 @@ import { KnownLanguagesResponseModel } from '../../pages/known-languages/shared/
 import { MultiSelect } from 'primeng/multiselect';
 import { EducatorQualificationModel } from './shared/models/educator-qualification.model';
 import { FileModel } from '../../core/models/File.model';
-import {AnimationOptions, LottieComponent} from 'ngx-lottie';
-import {AnimationItem} from 'lottie-web';
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
 
 @Component({
   selector: 'app-sign-up',
@@ -63,7 +63,7 @@ import {AnimationItem} from 'lottie-web';
   ],
   styleUrl: './sign-up.component.scss',
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
   private service: SignUpService = inject(SignUpService);
   private fb: FormBuilder = inject(FormBuilder);
   mainLoading: boolean = false;
@@ -115,12 +115,19 @@ export class SignUpComponent {
 
   fourthStepSubmitted = false;
   fourthStepPassed: boolean = false;
+  langSubscribtion: any;
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
     this.expanderStates = Array.from({ length: 4 }, () => 'collapsed');
     this.toggleExpander(0);
     this.service.initMonths();
+
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => {
+        this.service.getLanguages();
+      },
+    );
   }
 
   toggleExpander(index: number) {
@@ -228,14 +235,12 @@ export class SignUpComponent {
     }
   }
 
-
-
   private animationItem: AnimationItem | undefined;
 
   options: AnimationOptions = {
     path: 'Animation.json',
     loop: true,
-    autoplay: false
+    autoplay: false,
   };
 
   animationCreated(animationItem: AnimationItem): void {
@@ -243,5 +248,9 @@ export class SignUpComponent {
     if (this.animationItem) {
       this.animationItem.play();
     }
+  }
+
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe();
   }
 }

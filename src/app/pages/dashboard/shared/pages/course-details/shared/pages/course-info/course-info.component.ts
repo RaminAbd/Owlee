@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import {Component, inject, OnDestroy} from '@angular/core';
+import {LangChangeEvent, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import { Location, NgClass, NgIf } from '@angular/common';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { CourseInfoService } from './course-info.service';
@@ -14,11 +14,12 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './course-info.component.html',
   styleUrl: './course-info.component.scss',
 })
-export class CourseInfoComponent {
+export class CourseInfoComponent  implements OnDestroy{
   public location: Location = inject(Location);
   private service: CourseInfoService = inject(CourseInfoService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
+  private translate: TranslateService = inject(TranslateService);
   private confirmationService: ConfirmationService =
     inject(ConfirmationService);
 
@@ -26,9 +27,13 @@ export class CourseInfoComponent {
   request: CourseRequestModel = new CourseRequestModel();
   languages: KnownLanguagesResponseModel[] = [];
   copyLoading: boolean = false;
+  langSubscribtion: any;
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.service.getKnownLangs();
+    });
   }
 
   back() {
@@ -55,17 +60,17 @@ export class CourseInfoComponent {
 
   confirm(message: string, success: any) {
     this.confirmationService.confirm({
-      header: 'Confirmation',
-      message: message,
+      header: this.translate.instant('Confirmation'),
+      message: this.translate.instant(message),
       icon: 'pi pi-exclamation-circle',
       rejectButtonProps: {
-        label: 'Cancel',
+        label: this.translate.instant('Cancel'),
         icon: 'pi pi-times',
         outlined: true,
         size: 'small',
       },
       acceptButtonProps: {
-        label: 'Confirm',
+        label: this.translate.instant('Confirm'),
         icon: 'pi pi-check',
         size: 'small',
       },
@@ -74,5 +79,8 @@ export class CourseInfoComponent {
       },
       reject: () => {},
     });
+  }
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe()
   }
 }

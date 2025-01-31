@@ -180,7 +180,7 @@
   </div>
 </p-popover>
 <p-dialog
-  header="Edit Topic"
+  header="{{'Edit Topic' | translate}}"
   [modal]="true"
   [(visible)]="visible"
   [style]="{ width: '350px' }"
@@ -189,8 +189,8 @@
     <input type="text" [(ngModel)]="selectedTopic.name" />
   </div>
   <div class="btns">
-    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
-    <p-button label="Save" (click)="updateTopic()" />
+    <p-button label="{{'Cancel' | translate}}" severity="secondary" (click)="visible = false" />
+    <p-button label="{{'Save' | translate}}" (click)="updateTopic()" />
   </div>
 </p-dialog>
 <p-confirmdialog>

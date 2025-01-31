@@ -6,23 +6,27 @@
   <div class="content">
     <div class="heading">
       <div class="search">
-        <p>{{ groups.length + (" groups" | translate) }}</p>
+        <p>{{ groups.length + " " + ("Groups" | translate) }}</p>
         <div class="search-block">
           <i class="pi pi-search"></i>
           <input
             type="text"
             [(ngModel)]="searchText"
-            placeholder="Search.."
+            placeholder="{{'Search' | translate}}..."
             (input)="searchByName()"
           />
         </div>
       </div>
       <div class="btn">
-        <button (click)="checkSlots()">{{'Add new' | translate}}</button>
+        <button (click)="checkSlots()">{{ "Add new" | translate }}</button>
       </div>
     </div>
     <div class="list">
-      <div class="item" *ngFor="let item of filteredList" (click)="getGroupItem(item)">
+      <div
+        class="item"
+        *ngFor="let item of filteredList"
+        (click)="getGroupItem(item)"
+      >
         <div class="col name">
           <p>{{ item.name }}</p>
           <p

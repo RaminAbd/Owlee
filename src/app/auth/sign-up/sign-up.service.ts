@@ -30,7 +30,7 @@ export class SignUpService {
   );
   private authApiService: AuthApiService = inject(AuthApiService);
   private authService: AuthService = inject(AuthService);
-  private translate = inject(TranslateService);
+  public translate = inject(TranslateService);
   constructor() {}
 
   getLanguages() {

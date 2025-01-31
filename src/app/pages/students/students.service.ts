@@ -26,7 +26,7 @@ export class StudentsService {
     this.component.cols = [
       { field: 'fullName', header: 'Name' },
       { field: 'username', header: 'Email' },
-      { field: 'phoneNumber', header: 'Phone Number' },
+      { field: 'phoneNumber', header: 'Phone number' },
       { field: 'location', header: 'Location' },
     ];
   }

@@ -5,13 +5,14 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { SkeletonModule } from 'primeng/skeleton';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   standalone: true,
-  imports: [TableModule, SharedModule, NgIf, InputTextModule, NgFor, NgStyle, SkeletonModule, ConfirmPopupModule],
+  imports: [TableModule, SharedModule, NgIf, InputTextModule, NgFor, NgStyle, SkeletonModule, ConfirmPopupModule, TranslatePipe],
 })
 export class TableComponent {
   @Input() showCreate: boolean = true;

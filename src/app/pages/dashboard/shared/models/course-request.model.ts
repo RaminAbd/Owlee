@@ -8,4 +8,5 @@ export class CourseRequestModel {
   image: FileModel = new FileModel();
   name: string;
   description: string;
+  educator:string
 }

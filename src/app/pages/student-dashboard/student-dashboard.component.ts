@@ -31,9 +31,10 @@ export class StudentDashboardComponent {
   }
 
   getInfo(item: DashboardCourseModel) {
+    console.log(item)
     this.router.navigate([
       '/main/student/dashboard/course/info',
-      item.courseId,
+      item.id,
     ]);
   }
 

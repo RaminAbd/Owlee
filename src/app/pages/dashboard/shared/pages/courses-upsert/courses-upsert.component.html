@@ -5,7 +5,7 @@
         type="text"
         [(ngModel)]="request.name"
         autofocus
-        placeholder="Enter your course title here (no pressure, but make it epic)"
+        placeholder="{{'Enter your course title here (no pressure, but make it epic)' | translate}}"
       />
     </div>
     <div class="image">
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="language">
-      <label>Language:</label>
+      <label>{{ 'Language' | translate }}:</label>
       <div class="items">
         <div
           class="item"
@@ -64,16 +64,16 @@
       </div>
     </div>
     <div class="description">
-      <label for="descr">Tell us what this course is all about:</label>
+      <label for="descr">{{ 'Tell us what this course is all about' | translate }}:</label>
       <textarea
         id="descr"
         [(ngModel)]="request.description"
-        placeholder="keep it short, but make it unforgettable"
+        placeholder="{{'Keep it short, but make it unforgettable' | translate}}"
       ></textarea>
     </div>
     <div class="btns">
-      <button (click)="location.back()">Cancel</button>
-      <button class="save" (click)="save()">Save</button>
+      <button (click)="location.back()">{{ 'Cancel' | translate }}</button>
+      <button class="save" (click)="save()">{{ 'Save' | translate }}</button>
     </div>
   </div>
 </div>

@@ -19,7 +19,7 @@ export class CoursesUpsertService {
     KnownLanguagesApiService,
   );
   private blob = inject(BlobService);
-  private translate: TranslateService = inject(TranslateService);
+  public translate: TranslateService = inject(TranslateService);
   private storage: StorageService = inject(StorageService);
   component: CoursesUpsertComponent;
   constructor() {}
@@ -41,6 +41,7 @@ export class CoursesUpsertService {
       .GetAllByLang(this.langService.serviceUrl, this.translate.currentLang)
       .subscribe((resp) => {
         this.component.languages = resp.data;
+        if (this.component.id !== 'create') this.getCourse();
       });
   }
 

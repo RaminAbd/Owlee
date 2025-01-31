@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
 import {
   FormBuilder,
   FormControl,
@@ -35,7 +35,7 @@ import {AnimationItem} from 'lottie-web';
   templateUrl: './personal-info.component.html',
   styleUrl: './personal-info.component.scss',
 })
-export class PersonalInfoComponent {
+export class PersonalInfoComponent  implements OnDestroy {
   private service: PersonalInfoService = inject(PersonalInfoService);
   private fb: FormBuilder = inject(FormBuilder);
   request: EducatorSignupRequestModel = new EducatorSignupRequestModel();
@@ -58,12 +58,16 @@ export class PersonalInfoComponent {
   repeatPassVisible: boolean = false;
 
   passSubmitted: boolean = false;
-
+  langSubscribtion:any
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
     this.service.getEducatorInfo();
     this.service.initMonths();
+
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.service.getLanguages();
+    });
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -150,5 +154,7 @@ export class PersonalInfoComponent {
       this.animationItem.play();
     }
   }
-
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe()
+  }
 }

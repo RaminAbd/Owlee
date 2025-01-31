@@ -20,7 +20,7 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.get(this.serviceUrl + 'GetAvailableCourseSlots/', educatorId);
   }
 
-  Copy(req:any){
+  Copy(req: any) {
     return this.post(this.serviceUrl + 'Copy', req);
   }
 
@@ -28,5 +28,7 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.get(this.serviceUrl + 'Dashboard/', null, req);
   }
 
-
+  GetDetailed(req: any) {
+    return this.get(this.serviceUrl + 'GetDetailed/', null, req);
+  }
 }

@@ -33,8 +33,8 @@ export class EducatorsService {
     this.component.cols = [
       { field: 'fullName', header: 'Name' },
       { field: 'userName', header: 'Email' },
-      { field: 'phoneNumber', header: 'Phone Number' },
-      { field: 'dateOfBirth', header: 'Date Of Birth' },
+      { field: 'phoneNumber', header: 'Phone number' },
+      { field: 'dateOfBirth', header: 'Date of birth' },
       { field: 'location', header: 'Location' },
     ];
   }

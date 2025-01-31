@@ -1,34 +1,59 @@
 <div class="sign-in-wrapper">
   <div class="form-block">
     <form [formGroup]="requestForm" (submit)="Action()">
-      <div class="logo"  routerLink="/" style="cursor:pointer;z-index:1000">
-                <img src="logo.svg" alt="">
-
+      <div class="logo" routerLink="/" style="cursor: pointer; z-index: 1000">
+        <img src="logo.svg" alt="" />
       </div>
       <div class="body">
         <div class="input-block">
-          <label for="username">{{ 'Username' }}</label>
-          <input type="text" formControlName="username" id="username" [class.invalid]="validateField('username')" />
+          <label for="username">{{ "Username" | translate }}</label>
+          <input
+            type="text"
+            formControlName="username"
+            id="username"
+            [class.invalid]="validateField('username')"
+          />
         </div>
         <div class="input-block">
-          <label for="password">{{ 'Password'  }}</label>
+          <label for="password">{{ "Password" | translate}}</label>
           <div class="block">
-            <input [type]="passVisible ? 'text' : 'password'" id="password" formControlName="password" [class.invalid]="validateField('password')" />
+            <input
+              [type]="passVisible ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              [class.invalid]="validateField('password')"
+            />
             <span>
-              <i *ngIf="!passVisible" (click)="passVisible = !passVisible" class="pi pi-eye"></i>
-              <i *ngIf="passVisible" (click)="passVisible = !passVisible" class="pi pi-eye-slash"></i>
+              <i
+                *ngIf="!passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye"
+              ></i>
+              <i
+                *ngIf="passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye-slash"
+              ></i>
             </span>
           </div>
         </div>
         <div class="remember">
-          <input type="checkbox" id="rememberMe" name="rememberMe" formControlName="remember" />
-          <label for="rememberMe">{{ 'Remember me'  }}</label>
+          <input
+            type="checkbox"
+            id="rememberMe"
+            name="rememberMe"
+            formControlName="remember"
+          />
+          <label for="rememberMe">{{ "Remember me" | translate }}</label>
         </div>
         <div class="button">
-          <button>{{ 'Login' }}<i class="pi pi-spin pi-spinner" *ngIf="signinLoading"></i></button>
+          <button>
+            {{ "Login" | translate
+            }}<i class="pi pi-spin pi-spinner" *ngIf="signinLoading"></i>
+          </button>
         </div>
         <div class="button signup">
-          <button routerLink="/sign-up">{{ 'Sign Up' }}</button>
+          <button routerLink="/sign-up">{{ "Registration" | translate }}</button>
         </div>
       </div>
     </form>

@@ -13,7 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class MaterialUpsertService {
   component: MaterialUpsertComponent;
   private service: TopicApiService = inject(TopicApiService);
-  private translate: TranslateService = inject(TranslateService);
+  public translate: TranslateService = inject(TranslateService);
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );

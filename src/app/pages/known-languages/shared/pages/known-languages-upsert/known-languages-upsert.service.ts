@@ -2,12 +2,16 @@ import { inject, Injectable } from '@angular/core';
 import { SubscriptionPackageApiService } from '../../../../subscription-package/shared/services/subscription-package.api.service';
 import { KnownLanguagesUpsertComponent } from './known-languages-upsert.component';
 import { KnownLanguagesApiService } from '../../services/known-languages.api.service';
+import {BlobService} from '../../../../../core/services/blob.service';
+import {FileModel} from '../../../../../core/models/File.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KnownLanguagesUpsertService {
   private service: KnownLanguagesApiService = inject(KnownLanguagesApiService);
+  private blob = inject(BlobService);
+
   component: KnownLanguagesUpsertComponent;
   constructor() {}
 
@@ -18,6 +22,8 @@ export class KnownLanguagesUpsertService {
   private getForm() {
     this.service.GetForm(this.service.serviceUrl).subscribe((resp) => {
       this.component.request = resp.data;
+      this.component.request.icon = new FileModel()
+      this.component.request.icon.isValid =true;
       this.component.request.name.items.map((x) => (x.isValid = true));
     });
   }
@@ -73,5 +79,16 @@ export class KnownLanguagesUpsertService {
       }
     });
     return result;
+  }
+
+  getFile(e: any, fileHandler: any) {
+    const files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const fd = new FormData();
+      fd.append('file', files[i]);
+      this.blob.UploadFile(fd).subscribe((resp: any) => {
+        fileHandler(resp);
+      });
+    }
   }
 }

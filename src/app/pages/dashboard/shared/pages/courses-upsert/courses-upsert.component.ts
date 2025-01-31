@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import { CoursesUpsertService } from './courses-upsert.service';
 import { ActivatedRoute } from '@angular/router';
 import {Location, NgClass, NgForOf, NgIf} from '@angular/common';
 import {KnownLanguagesResponseModel} from '../../../../known-languages/shared/models/known-languages-response.model';
 import {CourseRequestModel} from '../../models/course-request.model';
 import {FormsModule} from '@angular/forms';
+import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-courses-upsert',
@@ -12,12 +13,13 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     NgIf,
     NgClass,
-    NgForOf
+    NgForOf,
+    TranslatePipe
   ],
   templateUrl: './courses-upsert.component.html',
   styleUrl: './courses-upsert.component.scss',
 })
-export class CoursesUpsertComponent {
+export class CoursesUpsertComponent implements OnDestroy {
   private service: CoursesUpsertService = inject(CoursesUpsertService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   public location: Location = inject(Location);
@@ -25,10 +27,14 @@ export class CoursesUpsertComponent {
   languages: KnownLanguagesResponseModel[] = [];
   request:CourseRequestModel = new CourseRequestModel()
   isSubmitted = false;
+  langSubscribtion:any
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs()
-    if (this.id !== 'create') this.service.getCourse();
+
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.service.getKnownLangs()
+    });
   }
 
   getFile(e: any) {
@@ -59,5 +65,9 @@ export class CoursesUpsertComponent {
   save() {
     this.isSubmitted = true;
     this.service.save()
+  }
+
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe();
   }
 }

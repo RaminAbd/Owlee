@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Location, NgClass, NgForOf} from '@angular/common';
+import {Location, NgClass, NgForOf, NgIf} from '@angular/common';
 import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
 import { KnownLanguagesRequestModel } from '../../models/known-languages-request.model';
 import { KnownLanguagesUpsertService } from './known-languages-upsert.service';
@@ -16,7 +16,8 @@ import {UpsertHeadingComponent} from '../../../../../shared/components/upsert-he
     UpsertHeadingComponent,
     NgClass,
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './known-languages-upsert.component.html',
   styleUrl: './known-languages-upsert.component.scss',
@@ -40,5 +41,35 @@ export class KnownLanguagesUpsertComponent {
 
   save() {
     this.service.save();
+  }
+
+  getFile(e: any) {
+    this.request.icon.fileLoading = true;
+    this.service.getFile(e, (resp: any) => {
+      this.request.icon.fileLoading = false;
+      this.request.icon = resp.data;
+      this.request.icon.fakeFile = null;
+      this.request.icon.isValid = true;
+    });
+  }
+
+  getFileName(fileName: string): string {
+    if (fileName) {
+      if (fileName.length > 30) {
+        return this.changeFileName(fileName);
+      } else {
+        return fileName;
+      }
+    } else {
+      return '';
+    }
+  }
+
+  changeFileName(name: string) {
+    return (
+      name.substring(0, 10) +
+      '...' +
+      name.substring(name.length - 5, name.length)
+    );
   }
 }

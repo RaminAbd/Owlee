@@ -17,7 +17,7 @@
       <div class="flex my-table-header">
         <div class="back-name-create" *ngIf="!showCreate">
           <div class="name">
-            <h3>{{ TableName }}</h3>
+            <h3>{{ TableName | translate}} </h3>
           </div>
         </div>
         <div class="back-name-create" *ngIf="showCreate">
@@ -41,7 +41,7 @@
               pInputText
               type="text"
               (input)="dt1.filterGlobal(getEventValue($event), 'contains')"
-              placeholder="{{ 'Search' }}"
+              placeholder="{{'Search' | translate}}..."
             />
           </span>
         </div>
@@ -51,7 +51,7 @@
       <tr style="border-top: none">
         <th *ngFor="let col of cols" style="font-size: 12px">
           <div class="ui-table-sort-th">
-            <span>{{ col.header }}</span>
+            <span>{{ col.header | translate }}</span>
           </div>
         </th>
       </tr>

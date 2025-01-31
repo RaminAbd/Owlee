@@ -4,13 +4,15 @@ import {AuthService} from './auth.service';
 import {AuthRequestModel} from '../shared/models/auth-request.model';
 import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    RouterLink
+    RouterLink,
+    TranslatePipe
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'

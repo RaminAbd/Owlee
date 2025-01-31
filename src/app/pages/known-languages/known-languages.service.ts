@@ -15,7 +15,7 @@ export class KnownLanguagesService {
   private appMessageService: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
-  private translate:TranslateService = inject(TranslateService);
+  public translate:TranslateService = inject(TranslateService);
   component: KnownLanguagesComponent;
   constructor() {}
 

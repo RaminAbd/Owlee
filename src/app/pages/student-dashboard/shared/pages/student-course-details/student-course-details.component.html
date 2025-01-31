@@ -1,0 +1,222 @@
+<div class="course-info">
+  <div class="inner">
+    <div class="image">
+      <i class="pi pi-chevron-left" (click)="back()"></i>
+      <img class="main-image" [src]="response.image" alt="" />
+    </div>
+    <div class="back">
+      <p>{{ response.name }}</p>
+    </div>
+    <div class="tabs">
+      <div
+        class="item"
+        [ngClass]="{ selected: selectedTab === 1 }"
+        (click)="selectedTab = 1"
+      >
+        <p>{{ "About" | translate }}</p>
+      </div>
+      <div
+        class="item"
+        [ngClass]="{ selected: selectedTab === 2 }"
+        (click)="selectedTab = 2"
+      >
+        <p>{{ "Materials" | translate }}</p>
+      </div>
+    </div>
+    <div class="about-tabs-content" *ngIf="selectedTab === 1">
+      <div class="lang-ed">
+        <div class="language">
+          <label>{{ "Educator" | translate }}</label>
+          <p class="ed-link" (click)="showEducator = true">
+            {{ response.educator.firstName + " " + response.educator.lastName }}
+            <i class="pi pi-angle-right"></i>
+          </p>
+        </div>
+        <div class="language">
+          <label>{{ "Language" | translate }}</label>
+          <p>{{ response.language }}</p>
+        </div>
+      </div>
+      <div class="description">
+        <p>{{ response.description }}</p>
+      </div>
+    </div>
+    <div class="materials-tabs-content" *ngIf="selectedTab === 2">
+      <div class="topic" *ngFor="let topic of response.topics">
+        <p class="top-name">{{ topic.name }}</p>
+        <div class="sub-topics">
+          <div class="sub-item" *ngFor="let sub of topic.subtopics" #subTopic>
+            <p class="sub-name">{{ sub.name }}</p>
+            <div class="mats">
+              <div class="mat-item" *ngFor="let mat of sub.files">
+                <a href="{{ mat.url }}" target="_blank" class="mat-name">
+                  <img src="mat-link.svg" alt="" />
+                  {{ mat.name }}
+                </a>
+                <div class="mat-lang">
+                  <img [src]="mat.icon" alt="" />
+                  <p>{{ mat.language }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="educator-info" *ngIf="showEducator && selectedTab === 1">
+      <div class="item">
+        <div class="row">
+          <div class="image-name">
+            <div class="image">
+              <img
+                *ngIf="response.educator.profileImage"
+                [src]="response.educator.profileImage"
+                alt=""
+              />
+              <img
+                *ngIf="!response.educator.profileImage"
+                src="unknown-profile.svg"
+                alt=""
+              />
+            </div>
+            <p>
+              {{
+                response.educator.firstName + " " + response.educator.lastName
+              }}
+            </p>
+          </div>
+          <i
+            class="pi pi-times"
+            style="cursor: pointer"
+            (click)="showEducator = false"
+          ></i>
+        </div>
+        <div class="rows">
+          <a href="mailto:{{ response.educator.userName }}" class="row email">
+            <svg
+              width="15"
+              height="13"
+              viewBox="0 0 15 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 2C15 1.175 14.325 0.5 13.5 0.5H1.5C0.675 0.5 0 1.175 0 2V11C0 11.825 0.675 12.5 1.5 12.5H13.5C14.325 12.5 15 11.825 15 11V2ZM13.5 2L7.5 5.75L1.5 2H13.5ZM13.5 11H1.5V3.5L7.5 7.25L13.5 3.5V11Z"
+                fill="#90928D"
+              />
+            </svg>
+            <p>{{ response.educator.userName }}</p>
+          </a>
+          <a
+            href="tel:+995{{ response.educator.phoneNumber }}"
+            class="row email"
+          >
+            <svg
+              width="10"
+              height="13"
+              viewBox="0 0 10 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 2.83333H6M7.85733 1H2.14267C1.512 1 1 1.49256 1 2.1V10.9C1 11.5074 1.512 12 2.14267 12H7.85733C8.48867 12 9 11.5074 9 10.9V2.1C9 1.49256 8.48867 1 7.85733 1Z"
+                stroke="#90928D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <p>
+              {{ response.educator.phoneNumber }}
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="materials-info" *ngIf="selectedTab === 2">
+      <div class="tabs">
+        <div
+          class="item"
+          [ngClass]="{ selected: selectedMatTab === 1 }"
+          (click)="selectedMatTab = 1"
+        >
+          <p>{{ "Content" | translate }}</p>
+        </div>
+        <div
+          class="item"
+          [ngClass]="{ selected: selectedMatTab === 2 }"
+          (click)="selectedMatTab = 2"
+        >
+          <p>{{ "All files" | translate }}</p>
+        </div>
+      </div>
+
+      <div class="content-tab" *ngIf="selectedMatTab === 1">
+        <div class="search">
+          <div class="search-block">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              placeholder="{{'Search' | translate}}..."
+              (input)="filterTopics()"
+            />
+          </div>
+        </div>
+
+        <div class="materials-tabs-content menu">
+          <div class="topic" *ngFor="let topic of filteredTopics">
+            <div class="top-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+              >
+                <path
+                  d="M0.220114 5.77056C0.361097 5.91747 0.552284 6 0.751633 6C0.950982 6 1.14217 5.91747 1.28315 5.77056L5.00454 1.89154L8.72592 5.77056C8.86771 5.91331 9.05762 5.99229 9.25474 5.99051C9.45186 5.98872 9.64042 5.90631 9.7798 5.76102C9.91919 5.61572 9.99826 5.41918 9.99997 5.21371C10.0017 5.00824 9.92591 4.81029 9.78896 4.66249L5.53606 0.22944C5.39508 0.0825303 5.20389 9.09877e-07 5.00454 8.75021e-07C4.80519 8.40166e-07 4.614 0.0825301 4.47302 0.22944L0.220115 4.66249C0.0791748 4.80945 -8.75755e-07 5.00873 -9.12086e-07 5.21653C-9.48418e-07 5.42432 0.0791746 5.62361 0.220114 5.77056Z"
+                  fill="#13170C"
+                />
+              </svg>
+              <p>{{ topic.name }}</p>
+            </div>
+            <div class="sub-topics">
+              <div
+                class="sub-item"
+                *ngFor="let sub of topic.subtopics"
+                (click)="goToSubTopic(sub)"
+              >
+                <p class="sub-name">{{ sub.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-tab" *ngIf="selectedMatTab === 2">
+        <div class="search">
+          <div class="search-block">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              [(ngModel)]="fileText"
+              placeholder="{{'Search' | translate}}..."
+              (input)="filterFiles()"
+            />
+          </div>
+        </div>
+        <div class="files">
+          <div class="item" *ngFor="let file of filteredFiles">
+            <a href="{{ file.url }}" target="_blank" class="mat-name">
+              <img src="mat-link.svg" alt="" />
+              {{ file.name }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

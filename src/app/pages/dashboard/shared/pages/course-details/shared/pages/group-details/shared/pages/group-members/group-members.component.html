@@ -2,13 +2,13 @@
   <div class="content">
     <div class="heading">
       <div class="search">
-        <p>{{ members.length + (" members" | translate) }}</p>
+        <p>{{ members.length + " " + ("Members" | translate) }}</p>
         <div class="search-block">
           <i class="pi pi-search"></i>
           <input
             type="text"
             [(ngModel)]="searchText"
-            placeholder="Search.."
+            placeholder="{{'Search' | translate}}..."
             (input)="searchByName()"
           />
         </div>
@@ -35,7 +35,9 @@
             }}
           </p>
         </div>
-        <button (click)="remove(item.id)"><img src="delete.svg" alt="" ></button>
+        <button (click)="remove(item.id)">
+          <img src="delete.svg" alt="" />
+        </button>
       </div>
     </div>
   </div>

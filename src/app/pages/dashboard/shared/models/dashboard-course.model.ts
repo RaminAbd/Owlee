@@ -9,5 +9,6 @@ export class DashboardCourseModel {
   studentCount: number;
   topicCount: number;
   groupMemberCount: number;
-  educatorFullName:string
+  educatorFullName:string;
+  id:string;
 }

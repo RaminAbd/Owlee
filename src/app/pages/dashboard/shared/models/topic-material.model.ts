@@ -6,4 +6,5 @@ export class TopicMaterialModel {
   name: string;
   url: string;
   language:string
+  icon: string;
 }

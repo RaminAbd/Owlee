@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { MultiSelect } from 'primeng/multiselect';
@@ -10,7 +10,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
 import { KnownLanguagesResponseModel } from '../../pages/known-languages/shared/models/known-languages-response.model';
 import { EducatorSignupRequestModel } from '../sign-up/shared/models/educator-signup-request.model';
 import { AnimationItem } from 'lottie-web';
@@ -33,7 +33,7 @@ import { StudentSignupRequestModel } from './shared/models/student-signup-reques
   templateUrl: './student-sign-up.component.html',
   styleUrl: './student-sign-up.component.scss',
 })
-export class StudentSignUpComponent {
+export class StudentSignUpComponent implements OnDestroy {
   private service: StudentSignUpService = inject(StudentSignUpService);
   private fb: FormBuilder = inject(FormBuilder);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -58,11 +58,14 @@ export class StudentSignUpComponent {
     password: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
   });
-
+  langSubscribtion:any
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
     this.service.getGroupMember();
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.service.getLanguages();
+    });
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -95,5 +98,8 @@ export class StudentSignUpComponent {
     if (this.animationItem) {
       this.animationItem.play();
     }
+  }
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe()
   }
 }

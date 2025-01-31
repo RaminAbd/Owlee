@@ -49,8 +49,10 @@ export const routes: Routes = [
         data: { permissionTypes: CodeByRoleName['student'] },
         children: StudentChildrenRoutes.children,
       },
+      { path: '**', redirectTo: 'admin', pathMatch: 'full' },
       { path: '', redirectTo: 'admin', pathMatch: 'full' },
     ],
   },
+  { path: '**', redirectTo: 'main', pathMatch: 'full' },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
 ];

@@ -4,8 +4,12 @@
       <img src="text-logo.svg" alt="" />
     </div>
     <div class="txt">
-      <h4>Join Our Teaching Community: Inspire, Educate, Empower!</h4>
-      <p>Sign Up and Share Your Knowledge!</p>
+      <h4>
+        {{
+          "Join Our Teaching Community: Inspire, Educate, Empower!" | translate
+        }}
+      </h4>
+      <p>{{ "Sign Up and Share Your Knowledge!" | translate }}</p>
     </div>
     <div>
       <div class="expanders">
@@ -143,7 +147,7 @@
                 </div>
               </div>
               <div class="input-item">
-                <label for="repeat">{{ "Repeat Password" | translate }}</label>
+                <label for="repeat">{{ "Confirm password" | translate }}</label>
                 <div class="block">
                   <input
                     [type]="repeatVisible ? 'text' : 'password'"
@@ -176,7 +180,7 @@
                 </div>
               </div>
             </div>
-            <button type="button" (click)="validateFirstStep()">Next</button>
+            <button type="button" (click)="validateFirstStep()">{{ 'Next' | translate }}</button>
           </div>
         </form>
         <form [formGroup]="secondStepForm" class="item expander-container">
@@ -233,7 +237,7 @@
             </div>
             <div class="row">
               <div class="input-item file-input">
-                <label>{{ "Profile Image" }}</label>
+                <label>{{ "Profile image" | translate }}</label>
                 <label
                   class="file-label"
                   for="file"
@@ -287,7 +291,7 @@
                 />
               </div>
               <div class="input-item">
-                <label for="courier">{{ "Known Languages" | translate }}</label>
+                <label for="courier">{{ "Known languages" | translate }}</label>
                 <p-multiSelect
                   id="courier"
                   [style]="{ width: '100%', height: '40px' }"
@@ -305,7 +309,7 @@
                 ></p-multiSelect>
               </div>
             </div>
-            <button type="button" (click)="validateSecondStep()">Next</button>
+            <button type="button" (click)="validateSecondStep()">{{ 'Next' | translate }}</button>
           </div>
         </form>
         <div class="item expander-container qualifs">
@@ -318,7 +322,7 @@
           </div>
           <div class="inputs" [@expanderAnimation]="expanderStates[2]">
             <div class="heading" (click)="addQualification()">
-              <label>Add Qualification</label>
+              <label>{{ 'Add Qualification' | translate }}</label>
               <i class="pi pi-plus-circle"></i>
             </div>
             <div
@@ -328,7 +332,7 @@
             >
               <div class="input-item">
                 <label for="qualifName{{ i }}">{{
-                  "Qualification name"
+                  "Qualification name" | translate
                 }}</label>
                 <input
                   type="text"
@@ -385,7 +389,7 @@
                 (click)="removeQualification(i)"
               ></i>
             </div>
-            <button type="button" (click)="validateThirdStep()">Next</button>
+            <button type="button" (click)="validateThirdStep()">{{ 'Next' | translate }}</button>
           </div>
         </div>
         <div class="item expander-container">
@@ -399,7 +403,7 @@
           <div class="inputs" [@expanderAnimation]="expanderStates[3]">
             <div class="row">
               <div class="input-item">
-                <label for="code">{{ "Verification code" }}</label>
+                <label for="code">{{ "Verification code" | translate }}</label>
                 <input
                   type="number"
                   id="code"
@@ -412,7 +416,7 @@
                 />
               </div>
             </div>
-            <button type="button" (click)="validateFourthStep()">Next</button>
+            <button type="button" (click)="validateFourthStep()">{{ 'Next' | translate }}</button>
           </div>
         </div>
       </div>

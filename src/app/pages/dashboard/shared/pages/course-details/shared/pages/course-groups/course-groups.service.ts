@@ -14,7 +14,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class CourseGroupsService {
   private coursesService: CoursesApiService = inject(CoursesApiService);
   private service: GroupsApiService = inject(GroupsApiService);
-  private translate: TranslateService = inject(TranslateService);
+  public translate: TranslateService = inject(TranslateService);
   private router: Router = inject(Router);
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,

@@ -11,7 +11,7 @@ export class GroupDetailsService {
   component: GroupDetailsComponent;
   private coursesService: CoursesApiService = inject(CoursesApiService);
   private service: GroupsApiService = inject(GroupsApiService);
-  private translate: TranslateService = inject(TranslateService);
+  public translate: TranslateService = inject(TranslateService);
 
   getCourse() {
     const req = {

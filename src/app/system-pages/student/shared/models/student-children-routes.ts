@@ -1,15 +1,10 @@
 import { Route } from '@angular/router';
-import { DashboardComponent } from '../../../../pages/dashboard/dashboard.component';
-import { CoursesUpsertComponent } from '../../../../pages/dashboard/shared/pages/courses-upsert/courses-upsert.component';
-import { CourseDetailsComponent } from '../../../../pages/dashboard/shared/pages/course-details/course-details.component';
-import { CourseInfoComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-info/course-info.component';
-import { CourseGroupsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-groups/course-groups.component';
-import { GroupDetailsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/group-details.component';
-import { GroupMaterialsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-materials/group-materials.component';
-import { GroupMembersComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/group-members.component';
 import { CalendarComponent } from '../../../../pages/calendar/calendar.component';
 import { PersonalInfoComponent } from '../../../../pages/personal-info/personal-info.component';
 import {StudentDashboardComponent} from '../../../../pages/student-dashboard/student-dashboard.component';
+import {
+  StudentCourseDetailsComponent
+} from '../../../../pages/student-dashboard/shared/pages/student-course-details/student-course-details.component';
 
 export class StudentChildrenRoutes {
   static children: Route[] = [
@@ -19,10 +14,11 @@ export class StudentChildrenRoutes {
       data: { title: 'Dashboard' },
     },
 
-    // {
-    //   path: 'dashboard/course/info/:id',
-    //   component: CourseDetailsComponent,
-    //   data: { title: 'Dashboard' },
+    {
+      path: 'dashboard/course/info/:id',
+      component: StudentCourseDetailsComponent,
+      data: {title: 'Dashboard'},
+    },
     //   children: [
     //     {
     //       path: 'about',

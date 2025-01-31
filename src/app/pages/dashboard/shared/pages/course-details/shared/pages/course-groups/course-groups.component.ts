@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Location, NgForOf, NgStyle} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
@@ -6,7 +6,7 @@ import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { CourseGroupsService } from './course-groups.service';
 import {GroupsResponseModel} from '../../../../../models/groups-response.model';
 import {FormsModule} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
+import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
 import {DashboardCourseModel} from '../../../../../models/dashboard-course.model';
 
 @Component({
@@ -20,7 +20,7 @@ import {DashboardCourseModel} from '../../../../../models/dashboard-course.model
   templateUrl: './course-groups.component.html',
   styleUrl: './course-groups.component.scss',
 })
-export class CourseGroupsComponent {
+export class CourseGroupsComponent  implements OnDestroy{
   public location: Location = inject(Location);
   private service: CourseGroupsService = inject(CourseGroupsService);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -32,10 +32,14 @@ export class CourseGroupsComponent {
   request: CourseRequestModel = new CourseRequestModel();
   groups:GroupsResponseModel[]=[]
   searchText: string;
+  langSubscribtion: any;
   constructor() {
     this.service.component = this;
     this.service.getCourse();
     this.service.getGroups();
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.service.getCourse();
+    });
   }
 
   back() {
@@ -62,5 +66,9 @@ export class CourseGroupsComponent {
       'groups',
       item.id
     ]);
+  }
+
+  ngOnDestroy() {
+    this.langSubscribtion.unsubscribe()
   }
 }

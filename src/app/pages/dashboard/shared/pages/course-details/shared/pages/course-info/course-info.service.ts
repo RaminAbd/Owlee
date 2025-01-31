@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class CourseInfoService {
   component: CourseInfoComponent;
   private service: CoursesApiService = inject(CoursesApiService);
-  private translate: TranslateService = inject(TranslateService);
+  public translate: TranslateService = inject(TranslateService);
   private router: Router = inject(Router);
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
@@ -63,7 +63,7 @@ export class CourseInfoService {
     };
     this.service.Copy(req).subscribe((resp) => {
       if (resp.succeeded) {
-        this.message.showTranslatedSuccessMessage('Copied successfully.');
+        this.message.showTranslatedSuccessMessage('Copied successfully');
         this.router.navigate([
           '/main/educator/dashboard/course/upsert',
           resp.data.id,
@@ -97,7 +97,7 @@ export class CourseInfoService {
       .Delete(this.service.serviceUrl, this.component.request.id)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Deleted successfully.');
+          this.message.showTranslatedSuccessMessage('Deleted successfully');
           this.component.location.back();
         }
       });

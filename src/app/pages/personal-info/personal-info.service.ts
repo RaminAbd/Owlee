@@ -17,7 +17,7 @@ import { EducatorSignupRequestModel } from '../../auth/sign-up/shared/models/edu
 export class PersonalInfoService {
   component: PersonalInfoComponent;
   private service = inject(EducatorsApiService);
-  private translate = inject(TranslateService);
+  public translate = inject(TranslateService);
   private blob = inject(BlobService);
   private storage = inject(StorageService);
   private authService = inject(AuthApiService);

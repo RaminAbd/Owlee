@@ -4,7 +4,7 @@
   </div>
   <div class="header-content" [ngClass]="{ hasNavBar: navigationBarComponent }">
     <div class="header">
-      <app-header [pageTitle]="pageTitle"></app-header>
+      <ng-container *ngComponentOutlet="headerComponent"></ng-container>
     </div>
     <div class="content-section">
       <router-outlet></router-outlet>

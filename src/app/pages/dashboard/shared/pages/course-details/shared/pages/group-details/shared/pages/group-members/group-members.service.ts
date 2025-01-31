@@ -3,6 +3,7 @@ import { GroupMembersApiService } from '../../../../../../../../services/group-m
 import { GroupMembersComponent } from './group-members.component';
 import {DialogService} from 'primeng/dynamicdialog';
 import {InviteStudentDialogComponent} from '../../../../../components/invite-student-dialog/invite-student-dialog.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class GroupMembersService {
   private service: GroupMembersApiService = inject(GroupMembersApiService);
   component: GroupMembersComponent;
   public dialogService: DialogService = inject(DialogService);
+  public translate: TranslateService = inject(TranslateService);
 
   constructor() {}
 
@@ -23,7 +25,7 @@ export class GroupMembersService {
 
   open() {
     const ref = this.dialogService.open(InviteStudentDialogComponent, {
-      header: 'Add member',
+      header: this.translate.instant('Add member'),
       width: '460px',
       data: this.component.groupId,
     });

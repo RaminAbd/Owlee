@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Popover} from 'primeng/popover';
 import {FormsModule} from '@angular/forms';
 import {Dialog} from 'primeng/dialog';
@@ -32,6 +32,7 @@ export class GroupMaterialsComponent {
   private confirmationService: ConfirmationService =
     inject(ConfirmationService);
   private service: GroupMaterialsService = inject(GroupMaterialsService);
+  private translate: TranslateService = inject(TranslateService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   selectedTopic: TopicRequestModel = new TopicRequestModel();
   selectedSubTopic: SubtopicModel = new SubtopicModel();
@@ -130,17 +131,17 @@ export class GroupMaterialsComponent {
 
   confirm(message: string, success: any) {
     this.confirmationService.confirm({
-      header: 'Confirmation',
+      header: this.translate.instant('Confirmation'),
       message: message,
       icon: 'pi pi-exclamation-circle',
       rejectButtonProps: {
-        label: 'Cancel',
+        label: this.translate.instant('Cancel'),
         icon: 'pi pi-times',
         outlined: true,
         size: 'small',
       },
       acceptButtonProps: {
-        label: 'Confirm',
+        label: this.translate.instant('Confirm'),
         icon: 'pi pi-check',
         size: 'small',
       },

@@ -18,19 +18,28 @@
     <div class="heading">
       <h4>{{ "My courses" | translate }}</h4>
       <div class="search">
-        <p>{{ response.courses.length + (" contents" | translate) }}</p>
+        <p>{{ response.courses.length + " " + ("Contents" | translate) }}</p>
         <div class="search-block">
           <i class="pi pi-search"></i>
-          <input type="text" [(ngModel)]="searchText" placeholder="Search.."  (input)="searchByName()" />
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="{{ 'Search' | translate }}.."
+            (input)="searchByName()"
+          />
         </div>
       </div>
     </div>
     <div class="items">
       <div class="add item" (click)="create()">
         <img src="plus.svg" alt="" />
-        <p>Add new</p>
+        <p>{{ 'Add new' | translate }}</p>
       </div>
-      <div class="item" *ngFor="let item of filteredList" (click)="getInfo(item)">
+      <div
+        class="item"
+        *ngFor="let item of filteredList"
+        (click)="getInfo(item)"
+      >
         <div class="image">
           <img [src]="item.image" alt="" />
         </div>
