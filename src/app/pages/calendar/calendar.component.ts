@@ -9,7 +9,7 @@ import { ActiveDateInfoModel } from './shared/models/active-date-info.model';
 
 @Component({
   selector: 'app-calendar',
-  imports: [NgClass, NgForOf, NgIf, TranslatePipe],
+  imports: [NgClass, NgForOf, TranslatePipe],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })

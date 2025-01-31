@@ -1,4 +1,4 @@
-import {ScheduleTaskModel} from './quest/schedule-task.model';
+import { ScheduleTaskModel } from './quest/schedule-task.model';
 
 export class ActiveDateInfoModel {
   task: ScheduleTaskModel = new ScheduleTaskModel();
@@ -8,5 +8,8 @@ export class ActiveDateInfoModel {
   dateString: {
     formattedDate: string;
     dayOfWeek: string;
+  } = {
+    formattedDate: '',
+    dayOfWeek: '',
   };
 }
