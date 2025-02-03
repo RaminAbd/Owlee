@@ -1,15 +1,10 @@
-import { ScheduleTaskModel } from './quest/schedule-task.model';
+import { ScheduleTaskModel } from './schedule-task.model';
+import { DateStringModel } from './date-string.model';
 
 export class ActiveDateInfoModel {
-  task: ScheduleTaskModel = new ScheduleTaskModel();
+  tasks: ScheduleTaskModel[] = [];
   date: any;
   dayNumber: number;
   disabled: boolean;
-  dateString: {
-    formattedDate: string;
-    dayOfWeek: string;
-  } = {
-    formattedDate: '',
-    dayOfWeek: '',
-  };
+  dateString: DateStringModel = new DateStringModel();
 }

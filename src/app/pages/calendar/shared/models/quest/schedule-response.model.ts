@@ -1,4 +1,4 @@
-import { ScheduleTaskModel } from './schedule-task.model';
+import { ScheduleTaskModel } from '../schedule-task.model';
 
 export class ScheduleResponseModel {
   from: string;

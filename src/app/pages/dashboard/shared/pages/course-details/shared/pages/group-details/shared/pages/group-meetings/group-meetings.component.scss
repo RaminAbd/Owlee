@@ -1,0 +1,215 @@
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 10px;
+  z-index: 1;
+  .back {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    width: 720px;
+    position: relative;
+    i {
+      color: #656668;
+      position: absolute;
+      left: -43px;
+      top: 5px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+  .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      padding: 8px 16px;
+      height: 35px;
+      border-radius: 6px;
+      background-color: #c6e7ff;
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    p {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .search-block {
+      position: relative;
+      display: flex;
+      align-items: center;
+      i {
+        color: #90928d;
+        position: absolute;
+        left: 10px;
+        font-size: 13px;
+      }
+      input {
+        color: #90928d !important;
+        font-size: 14px;
+        font-weight: 400;
+        border: none;
+        background: transparent !important;
+        border-left: 1px solid #90928d;
+        border-radius: 0 !important;
+        height: 17px;
+        padding-left: 30px;
+        width: 400px;
+      }
+    }
+  }
+  .content {
+    margin-top: 20px;
+
+    .list {
+      margin-top: 24px;
+      width: 100%;
+      border: 1px solid #e3e3e2;
+      border-radius: 15px;
+      .item {
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        border-bottom: 1px solid #e3e3e2;
+        &:last-child {
+          border-bottom: none;
+        }
+        .col {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+        .name {
+          p {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 18.15px;
+          }
+          .type {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 16.94px;
+          }
+        }
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 16.94px;
+          color: #90928d;
+        }
+        .value {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 16.94px;
+          }
+        }
+        button {
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          //background: var(--primary-color);
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+::ng-deep {
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content {
+    background: transparent !important;
+  }
+  .confirm-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    i {
+      font-size: 60px;
+      color: orange;
+    }
+    p {
+      width: 70%;
+      text-align: center;
+      color: orange;
+      margin-bottom: 21px !important;
+    }
+  }
+  .p-dialog-footer {
+    .p-button {
+      padding: 0px 20px !important;
+      height: 40px;
+      background: #f6f6f6 !important;
+      border: none !important;
+      color: #656668 !important;
+      &.p-confirmdialog-accept-button {
+        background: var(--primary-color) !important;
+        border: none !important;
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+.menu-btn {
+  width: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .item {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 32px;
+    border-radius: 8px;
+    gap: 15px;
+    cursor: pointer;
+    .icon {
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p,
+    i {
+      font-weight: 500;
+      font-size: 14px;
+      color: #90928d;
+    }
+    &.delete {
+      p {
+        color: #ef3838;
+      }
+    }
+  }
+}
+::ng-deep .p-popover-content {
+  padding: 12px 15px;
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
