@@ -1,3 +1,9 @@
+<div class="course-info">
+  <div class="back" (click)="back()">
+    <i class="pi pi-chevron-left"></i>
+    <p>{{ course.name }}</p>
+  </div>
+
 <div class="tab-content">
   <div class="item" *ngFor="let topic of topics">
     <div class="heading">

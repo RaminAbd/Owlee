@@ -1,3 +1,22 @@
+
+.back {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+  width: 720px;
+  position: relative;
+  i {
+    color: #656668;
+    position: absolute;
+    left: -43px;
+    top: 5px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
 .tab-content {
   margin-top: 30px;
   display: flex;

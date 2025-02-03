@@ -9,7 +9,7 @@ import {
 } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/group-details.component';
 import {
   GroupMaterialsComponent
-} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-materials/group-materials.component';
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-materials/group-materials.component';
 import {
   GroupMembersComponent
 } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/group-members.component';
@@ -44,21 +44,21 @@ export class EducatorChildrenRoutes {
           data: { title: 'Dashboard' },
         },
         {
+          path: 'materials',
+          component: GroupMaterialsComponent,
+          data: { title: 'Dashboard' },
+        },
+        {
           path: 'groups/:groupId',
           component: GroupDetailsComponent,
           data: { title: 'Dashboard' },
           children:[
             {
-              path: 'materials',
-              component: GroupMaterialsComponent,
-              data: { title: 'Dashboard' },
-            },
-            {
               path: 'members',
               component: GroupMembersComponent,
               data: { title: 'Dashboard' },
             },
-            { path: '', redirectTo: 'materials', pathMatch: 'full' },
+            { path: '', redirectTo: 'members', pathMatch: 'full' },
           ]
         },
         { path: '', redirectTo: 'about', pathMatch: 'full' },

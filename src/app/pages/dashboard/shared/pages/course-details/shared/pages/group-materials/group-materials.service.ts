@@ -1,13 +1,14 @@
 import {inject, Injectable} from '@angular/core';
-import {TopicRequestModel} from '../../../../../../../../models/topic-request.model';
-import {SubtopicModel} from '../../../../../../../../models/subtopic.model';
-import {TopicMaterialModel} from '../../../../../../../../models/topic-material.model';
-import {MaterialUpsertComponent} from '../../../../../components/material-upsert/material-upsert.component';
-import {TopicApiService} from '../../../../../../../../services/topic.api.service';
-import {StorageService} from '../../../../../../../../../../../core/services/storage.service';
+import {TopicRequestModel} from '../../../../../models/topic-request.model';
+import {SubtopicModel} from '../../../../../models/subtopic.model';
+import {TopicMaterialModel} from '../../../../../models/topic-material.model';
+import {MaterialUpsertComponent} from '../../components/material-upsert/material-upsert.component';
+import {TopicApiService} from '../../../../../services/topic.api.service';
+import {StorageService} from '../../../../../../../../core/services/storage.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {TranslateService} from '@ngx-translate/core';
 import {GroupMaterialsComponent} from './group-materials.component';
+import {CoursesApiService} from '../../../../../../../admin-courses/shared/services/courses.api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,27 @@ export class GroupMaterialsService {
   private topicsService: TopicApiService = inject(TopicApiService);
   private storage: StorageService = inject(StorageService);
   public dialogService: DialogService = inject(DialogService);
+  public courseService: CoursesApiService = inject(CoursesApiService);
   constructor() { }
+
+  getCourse() {
+    const req = {
+      id: this.component.courseId,
+      lang: this.translate.currentLang,
+    };
+    this.courseService
+      .GetByIdByLang(this.courseService.serviceUrl, req)
+      .subscribe((resp) => {
+        this.component.course = resp.data;
+      });
+  }
 
   getAllTopics() {
     const req = {
-      groupId: this.component.groupId,
+      id: this.component.courseId,
       lang: this.translate.currentLang,
     };
-    this.topicsService.GetAllByGroup(req).subscribe((resp) => {
+    this.topicsService.GetAllByCourse(req).subscribe((resp) => {
       this.component.topics = resp.data;
       this.component.topics.forEach((x) => (x.subTopic = new SubtopicModel()));
     });

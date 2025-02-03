@@ -16,7 +16,9 @@ export class TopicApiService extends BaseCrudApiService {
   GetAllByGroup(req: any) {
     return this.get(this.serviceUrl + 'GetAllByGroup/', null, req);
   }
-
+  GetAllByCourse(req: any) {
+    return this.get(this.serviceUrl + 'GetAllByCouse', null, req);
+  }
   AddSubtopic(subTopic: any) {
     return this.post(this.serviceUrl + 'AddSubtopic', subTopic);
   }

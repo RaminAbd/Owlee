@@ -6,12 +6,13 @@ import {FormsModule} from '@angular/forms';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
 import {ConfirmDialog} from 'primeng/confirmdialog';
-import {TopicRequestModel} from '../../../../../../../../models/topic-request.model';
-import {SubtopicModel} from '../../../../../../../../models/subtopic.model';
-import {TopicMaterialModel} from '../../../../../../../../models/topic-material.model';
+import {TopicRequestModel} from '../../../../../models/topic-request.model';
+import {SubtopicModel} from '../../../../../models/subtopic.model';
+import {TopicMaterialModel} from '../../../../../models/topic-material.model';
 import {GroupMaterialsService} from './group-materials.service';
 import {ConfirmationService} from 'primeng/api';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CourseRequestModel} from '../../../../../models/course-request.model';
 
 @Component({
   selector: 'app-group-materials',
@@ -34,21 +35,28 @@ export class GroupMaterialsComponent {
   private service: GroupMaterialsService = inject(GroupMaterialsService);
   private translate: TranslateService = inject(TranslateService);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
   selectedTopic: TopicRequestModel = new TopicRequestModel();
   selectedSubTopic: SubtopicModel = new SubtopicModel();
   subTopic: SubtopicModel = new SubtopicModel();
   visible: boolean = false;
   topic: TopicRequestModel = new TopicRequestModel();
   topics: TopicRequestModel[] = [];
-  courseId = this.route.parent?.parent?.snapshot.paramMap.get('id') as string;
-  groupId = this.route.parent?.snapshot.paramMap.get('groupId') as string;
-  selectedMaterial: TopicMaterialModel = new TopicMaterialModel();
+  courseId = this.route.parent?.snapshot.paramMap.get('id') as string;
 
+  // groupId = this.route.parent?.snapshot.paramMap.get('groupId') as string;
+  selectedMaterial: TopicMaterialModel = new TopicMaterialModel();
+  course: CourseRequestModel = new CourseRequestModel();
   constructor() {
     this.service.component = this;
     this.service.getAllTopics();
-    this.topic.groupId = this.groupId;
+    this.service.getCourse();
+    // this.topic.groupId = this.groupId;
     this.topic.courseId = this.courseId;
+  }
+
+  back() {
+    this.router.navigate(['/main/educator/dashboard']);
   }
 
   openToolbar(topic: TopicRequestModel) {
