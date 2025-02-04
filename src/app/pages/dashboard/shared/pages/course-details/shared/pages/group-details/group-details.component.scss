@@ -1,3 +1,9 @@
+.back-change  {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .course-info {
   display: flex;
   flex-direction: column;
@@ -50,5 +56,36 @@
       }
     }
 
+  }
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .item {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 32px;
+    border-radius: 8px;
+    gap: 15px;
+    cursor: pointer;
+    .icon {
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p,
+    i {
+      font-weight: 500;
+      font-size: 14px;
+      color: #90928d;
+    }
+    &.delete {
+      p {
+        color: #ef3838;
+      }
+    }
   }
 }

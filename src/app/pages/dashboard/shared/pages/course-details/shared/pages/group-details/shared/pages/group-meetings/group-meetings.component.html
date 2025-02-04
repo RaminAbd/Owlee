@@ -5,10 +5,10 @@
         <p>{{ meetings.length + " " + ("Meetings" | translate) }}</p>
       </div>
       <div class="btns">
-        <button class="add-meeting" (click)="openUpsert('create')">
-          {{ "Add meeting" | translate }}
+        <button class="add-meeting" (click)="openRange()">
+          {{ "Add range" | translate }}
         </button>
-        <button class="add-meeting">{{ "Add meetings" | translate }}</button>
+        <button class="add-meeting" (click)="openMultiple()">{{ "Add meetings" | translate }}</button>
       </div>
     </div>
     <div class="list">

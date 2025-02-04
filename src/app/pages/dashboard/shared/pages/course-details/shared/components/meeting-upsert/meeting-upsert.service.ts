@@ -15,18 +15,20 @@ export class MeetingUpsertService {
   constructor() {}
 
   getMeeting() {
+    this.component.request.subtopics = [];
     this.meetingsService
-      .GetById(this.meetingsService.serviceUrl, this.component.id)
+      .GetById(this.meetingsService.serviceUrl, this.component.request.id)
       .subscribe((resp) => {
-        this.component.request.subtopics = resp.data.map((x: any) => x.id);
         this.component.date = new Date(resp.data.date);
-        this.component.request = resp.data;
+        this.component.request.subtopics = resp.data.subtopics.map(
+          (x: any) => x.id,
+        );
       });
   }
 
   save() {
     this.component.request.date = new Date(this.component.date).toISOString();
-    this.component.id === 'create' ? this.create() : this.update();
+    this.component.request.id === 'create' ? this.create() : this.update();
   }
 
   create() {

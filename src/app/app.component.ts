@@ -2,10 +2,13 @@ import {Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {Toast} from 'primeng/toast';
 import {AppTranslateService} from './core/services/app-translate.service';
+import {ConfirmDialog} from "primeng/confirmdialog";
+import {TranslatePipe} from "@ngx-translate/core";
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Toast],
+  imports: [RouterOutlet, Toast, ConfirmDialog, TranslatePipe, NgClass],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

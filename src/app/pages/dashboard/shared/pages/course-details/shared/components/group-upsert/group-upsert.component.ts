@@ -4,7 +4,7 @@ import { GroupUpsertService } from './group-upsert.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { GroupRequestModel } from '../../../../../models/group-request.model';
 import { FormsModule } from '@angular/forms';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-group-upsert',
@@ -30,10 +30,13 @@ export class GroupUpsertComponent {
     this.service.component = this;
     this.request.courseId = config.data.courseId;
     this.request.id = config.data.groupId;
+    if (this.request.id !== 'create') {
+      this.request = config.data.group;
+    }
+    console.log(config.data);
   }
 
-
   save() {
-    this.service.save()
+    this.service.save();
   }
 }

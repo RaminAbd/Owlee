@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MeetingUpsertService } from './meeting-upsert.service';
-import { Calendar } from 'primeng/calendar';
 import { MeetingRequestModel } from '../../../../../../../calendar/shared/models/meeting-request.model';
 import { DatePickerModule } from 'primeng/datepicker';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
@@ -27,14 +26,16 @@ export class MeetingUpsertComponent {
   id: string;
   date: any;
   subtopics: SubtopicModel[] = [];
+
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
   ) {
     this.service.component = this;
     this.subtopics = config.data.subTopics;
-    this.id = config.data.id;
-    if (this.id !== 'create') this.service.getMeeting();
+    this.request.id = config.data.id;
+    this.request.groupId = config.data.groupId;
+    if (this.request.id !== 'create') this.service.getMeeting();
   }
 
   save() {

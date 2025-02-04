@@ -1,0 +1,154 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  height: 100%;
+  justify-content: space-between;
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    button {
+      height: 48px;
+      width: 90px;
+    }
+    .items {
+      margin-top: 24px;
+      width: 100%;
+      border: 1px solid #e3e3e2;
+      border-radius: 15px;
+      max-height: 330px;
+      overflow: auto;
+      padding-right: 10px;
+      .item {
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        border-bottom: 1px solid #e3e3e2;
+        align-items: center;
+        &:last-child {
+          border-bottom: none;
+        }
+        .delete {
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .col {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+
+          label {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 16.94px;
+            color: #90928d;
+          }
+          .value {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            p {
+              font-size: 14px;
+              font-weight: 500;
+              line-height: 16.94px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .inputs {
+    display: flex;
+    //flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    width: 100%;
+    .input-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      width: 100%;
+      max-width: 223px;
+      label {
+        color: #90928d;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 12px;
+        color: var(--text-color) !important;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid var(--p-select-border-color) !important;
+        height: 48px !important;
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
+button {
+  width: 147px;
+  height: 41px;
+  border-radius: 12px;
+  background: #f6f6f6;
+  color: #656668;
+  font-size: 14px;
+  font-weight: 600;
+  &.save {
+    background: var(--primary-color);
+    color: #fff;
+  }
+}
+::ng-deep .p-select,
+::ng-deep .p-multiselect {
+  border-radius: 12px !important;
+  height: 48px !important;
+}
+.input-item {
+  input {
+    width: 100%;
+    padding-right: 30px;
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+  .block {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .input {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .icon {
+    position: absolute;
+    right: 16px;
+  }
+}
+::ng-deep .p-datepicker {
+  .p-inputtext {
+    height: 48px !important;
+    border-radius: 12px !important;
+  }
+}
+
+::ng-deep .p-multiselect-list-container {
+  max-height: 300px !important;
+}

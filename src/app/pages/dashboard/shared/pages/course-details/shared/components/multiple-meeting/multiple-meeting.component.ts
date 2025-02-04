@@ -1,0 +1,60 @@
+import { Component, inject } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MultipleMeetingService } from './multiple-meeting.service';
+import { MultipleMeetingRequestModel } from '../../../../../models/multiple-meeting-request.model';
+import { DatePicker } from 'primeng/datepicker';
+import { MultiSelect } from 'primeng/multiselect';
+import { TranslatePipe } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { NgForOf } from '@angular/common';
+import { FormatDate } from '../../../../../../../../core/extensions/format-date';
+import { SubtopicModel } from '../../../../../models/subtopic.model';
+
+@Component({
+  selector: 'app-multiple-meeting',
+  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf],
+  templateUrl: './multiple-meeting.component.html',
+  styleUrl: './multiple-meeting.component.scss',
+})
+export class MultipleMeetingComponent {
+  private service: MultipleMeetingService = inject(MultipleMeetingService);
+  request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
+  date: any;
+  dates: any[] = [];
+
+  subtopics: SubtopicModel[] = [];
+  selectedTopics: string[] = [];
+  constructor(
+    public config: DynamicDialogConfig,
+    public ref: DynamicDialogRef,
+  ) {
+    this.service.component = this;
+    this.subtopics = config.data.subTopics;
+    this.request.groupId = config.data.groupId;
+  }
+
+  save() {
+    console.log(this.request);
+    if (this.request.meetings.length > 0) {
+      this.service.create();
+    }
+  }
+
+  addMeeting() {
+    let item = {
+      showDate: this.formatDate(this.date),
+      subtopics: this.selectedTopics,
+      date: new Date(this.date).toISOString(),
+    };
+    this.request.meetings.push(item);
+    this.selectedTopics = [];
+    this.date = undefined;
+  }
+
+  formatDate(date: any) {
+    return new FormatDate(new Date(date), true).formattedDate;
+  }
+  deleteMeeting(i: any) {
+    this.request.meetings.splice(i, 1);
+  }
+}

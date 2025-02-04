@@ -5,6 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { TopicApiService } from '../../../../../../../../services/topic.api.service';
 import { FormatDate } from '../../../../../../../../../../../core/extensions/format-date';
 import { MeetingsApiService } from '../../../../../../../../../../calendar/shared/services/meetings.api.service';
+import {
+  ApplicationMessageCenterService
+} from '../../../../../../../../../../../core/services/ApplicationMessageCenter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +17,7 @@ export class GroupMeetingsService {
   private translate: TranslateService = inject(TranslateService);
   private topicsService: TopicApiService = inject(TopicApiService);
   private service: MeetingsApiService = inject(MeetingsApiService);
+  private message:ApplicationMessageCenterService = inject(ApplicationMessageCenterService);
   constructor() {}
 
   getAllMeetings() {
@@ -44,8 +48,17 @@ export class GroupMeetingsService {
         x.subTopic = new SubtopicModel();
         this.component.subTopics.push(...x.subtopics);
       });
-
-      console.log(this.component.subTopics);
     });
+  }
+
+  delete() {
+    this.service
+      .Delete(this.service.serviceUrl, this.component.selectedTask.id)
+      .subscribe((resp) => {
+        if (resp.succeeded) {
+          this.message.showTranslatedSuccessMessage('Deleted successfully.');
+          this.getAllMeetings()
+        }
+      });
   }
 }
