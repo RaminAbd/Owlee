@@ -31,7 +31,7 @@ export class StudentCourseDetailsComponent implements OnDestroy {
   );
   id = this.route.snapshot.paramMap.get('id') as string;
   response: CourseDetailedResponseModel = new CourseDetailedResponseModel();
-  selectedTab: number = 2;
+  selectedTab: number = 1;
   selectedMatTab: number = 1;
   showEducator: boolean = false;
   languages: KnownLanguagesResponseModel[] = [];

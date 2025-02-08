@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 54px 74px 54px 65px;
+  @media (max-width: 769px) {
+    padding: 24px 16px;
+  }
   .counts {
     display: flex;
     align-items: center;

@@ -148,7 +148,7 @@ export class StudentCalendarService {
         day === new Date().getDate()
       ) {
         this.component.dayItemStateSaver = dayItem;
-        this.component.handleSetDateInfo(this.component.dayItemStateSaver);
+        if(!this.component.isMobile()) this.component.handleSetDateInfo(this.component.dayItemStateSaver);
       }
 
     });

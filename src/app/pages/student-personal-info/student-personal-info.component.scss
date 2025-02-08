@@ -2,11 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 54px 74px 54px 65px;
+  @media (max-width: 769px) {
+    padding: 24px 16px;
+  }
   .tabs {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 723px;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     .item {
       height: 33px;
       padding: 8px 12px;
@@ -29,6 +36,9 @@
     display: flex;
     gap: 50px;
     margin-top: 40px;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     form {
       .row {
         display: flex;
@@ -126,6 +136,9 @@
 }
 
 .inputs {
+  @media (max-width: 769px) {
+    width: 100%;
+  }
   .heading {
     font-size: 14px;
     font-weight: 700;
@@ -176,11 +189,17 @@
     display: flex;
     gap: 16px;
     width: 100%;
+    @media (max-width: 769px) {
+      flex-direction: column;
+    }
     .input-item {
       display: flex;
       flex-direction: column;
       gap: 8px;
       flex: 1;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
       label {
         color: #90928d;
         font-size: 14px;
@@ -267,6 +286,9 @@ button {
 .pass-form{
   margin-top: 30px;
   width: 500px;
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 }
 .loading-back {
   position: absolute;

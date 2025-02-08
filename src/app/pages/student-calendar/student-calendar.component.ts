@@ -1,22 +1,21 @@
-import {Component, inject} from '@angular/core';
-import {NgClass, NgForOf, NgIf, SlicePipe} from "@angular/common";
-import {TranslatePipe} from "@ngx-translate/core";
-import {CalendarService} from '../calendar/calendar.service';
-import {MonthModel} from '../calendar/shared/models/month.model';
-import {ActiveDateInfoModel} from '../calendar/shared/models/active-date-info.model';
-import {EducatorMeetingsRequestModel} from '../calendar/shared/models/educator-meetings-request.model';
-import {StudentCalendarService} from './student-calendar.service';
-import {StudentMeetingsRequestModel} from './shared/models/student-meetings-request.model';
+import { Component, inject } from '@angular/core';
+import { NgClass, NgForOf, NgIf, SlicePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { CalendarService } from '../calendar/calendar.service';
+import { MonthModel } from '../calendar/shared/models/month.model';
+import { ActiveDateInfoModel } from '../calendar/shared/models/active-date-info.model';
+import { EducatorMeetingsRequestModel } from '../calendar/shared/models/educator-meetings-request.model';
+import { StudentCalendarService } from './student-calendar.service';
+import { StudentMeetingsRequestModel } from './shared/models/student-meetings-request.model';
 
 @Component({
   selector: 'app-student-calendar',
-    imports: [
-      NgClass, NgForOf, TranslatePipe, NgIf, SlicePipe
-    ],
+  imports: [NgClass, NgForOf, TranslatePipe, NgIf, SlicePipe],
   templateUrl: './student-calendar.component.html',
-  styleUrl: './student-calendar.component.scss'
+  styleUrl: './student-calendar.component.scss',
 })
 export class StudentCalendarComponent {
+  showActivities: boolean = false;
   private service: StudentCalendarService = inject(StudentCalendarService);
   monthData: MonthModel = new MonthModel();
   weekDays: { name: string; shortName: string }[] = [];
@@ -33,7 +32,12 @@ export class StudentCalendarComponent {
     this.service.buildDateRequest(new Date());
     this.weekDays = this.service.getWeekDays();
     this.monthData = this.service.updateMonthData(new Date());
-    this.handleSetDateInfo(this.dayItemStateSaver);
+    if (!this.isMobile()) this.handleSetDateInfo(this.dayItemStateSaver);
+  }
+
+  isMobile(): boolean {
+    console.log(window.matchMedia('(max-width: 1024px)').matches)
+    return window.matchMedia('(max-width: 1024px)').matches;
   }
 
   handlePreviousMonth(): void {
@@ -59,6 +63,7 @@ export class StudentCalendarComponent {
   handleSetDateInfo(day: any): void {
     day.dateString = this.service.formatDate(day.date);
     this.activeDateInfo = day;
+    this.showActivities = true;
     console.log(this.activeDateInfo);
   }
 

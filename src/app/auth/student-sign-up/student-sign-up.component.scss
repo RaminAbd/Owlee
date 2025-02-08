@@ -5,6 +5,13 @@
     width: 55%;
     padding: 48px 80px;
     overflow: auto;
+    @media (max-width: 1024px) {
+      padding: 48px 40px;
+    }
+    @media (max-width: 769px) {
+      width: 100%;
+      padding: 24px 18px;
+    }
     .logo {
       img {
         width: 150px;
@@ -51,12 +58,19 @@
             display: flex;
             gap: 16px;
             width: 100%;
+            @media (max-width: 480px) {
+              flex-direction: column;
+            }
             .input-item {
               display: flex;
               flex-direction: column;
               gap: 8px;
               flex: 1;
               max-width: calc(50% - 8px);
+              @media (max-width: 480px) {
+                max-width: 100%;
+                width: 100%;
+              }
               label {
                 color: #90928d;
                 font-size: 14px;
@@ -107,6 +121,9 @@
   .image-side {
     width: 45%;
     overflow: hidden;
+    @media (max-width: 769px) {
+      display: none;
+    }
     img {
       width: 100%;
       height: 100%;
