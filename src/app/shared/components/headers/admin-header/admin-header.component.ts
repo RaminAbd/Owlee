@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import {HeaderComponent} from '../../header/header.component';
+import { HeaderComponent } from '../../header/header.component';
+import { AdminNavigationBarComponent } from '../../navigation-bars/admin-navigation-bar/admin-navigation-bar.component';
 
 @Component({
   selector: 'app-admin-header',
-  imports: [
-    HeaderComponent
-  ],
-  template: `
-    <app-header></app-header>
-  `,
-  styles: ``
+  imports: [HeaderComponent],
+  template: ` <app-header [links]="links"></app-header> `,
+  styles: ``,
 })
-export class AdminHeaderComponent {
-
-}
+export class AdminHeaderComponent extends AdminNavigationBarComponent {}
