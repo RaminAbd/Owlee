@@ -20,6 +20,7 @@ body {
   padding: 0;
   font-family: "Inter", serif;
   //background: #fff;
+  overflow: hidden;
   &.blocked {
     overflow: hidden !important;
   }

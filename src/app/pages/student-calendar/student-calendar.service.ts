@@ -1,19 +1,20 @@
-import { inject, Injectable } from '@angular/core';
-import { CalendarComponent } from './calendar.component';
-import { MeetingsApiService } from './shared/services/meetings.api.service';
+import {inject, Injectable} from '@angular/core';
+import {CalendarComponent} from '../calendar/calendar.component';
+import {MeetingsApiService} from '../calendar/shared/services/meetings.api.service';
+import {StudentCalendarComponent} from './student-calendar.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class CalendarService {
-  component: CalendarComponent;
+export class StudentCalendarService {
+  component: StudentCalendarComponent;
   private service: MeetingsApiService = inject(MeetingsApiService);
 
   constructor() {}
 
   getMeetings() {
     this.service
-      .GetMeetingsByEducator(this.component.meetingsRequest)
+      .GetMeetingsByStudent(this.component.meetingsRequest)
       .subscribe((resp) => {
         resp.data = resp.data.map((item: any) => ({
           ...item,

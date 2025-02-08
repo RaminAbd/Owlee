@@ -1,27 +1,58 @@
 import { Component, inject, Input } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { NgIf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {
   ActivatedRoute,
   NavigationEnd,
   Router,
-  RouterLink,
+  RouterLink, RouterLinkActive,
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
-import { Title } from '@angular/platform-browser';
+import {DomSanitizer, SafeHtml, Title} from '@angular/platform-browser';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {AuthService} from '../../../auth/sign-in/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [TranslatePipe, NgIf, RouterLink],
+  imports: [TranslatePipe, NgIf, RouterLink, NgForOf, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  animations: [
+    trigger('menuExpand', [
+      state(
+        'open',
+        style({
+          width: '*', // Fully expanded
+          visibility: 'visible',
+        }),
+      ),
+      state(
+        'closed',
+        style({
+          width: '0px', // Collapsed
+          visibility: 'hidden',
+        }),
+      ),
+      transition('open <=> closed', [
+        animate('500ms ease-in-out'), // Animate height change
+      ]),
+    ]),
+  ],
 })
+
 export class HeaderComponent {
   private titleService: Title = inject(Title);
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private translate: TranslateService = inject(TranslateService);
   pageTitle: string = 'Owlee';
+  @Input() links: any[] = [];
   @Input() personalInfoURL: string;
   langOpen: boolean = false;
   selectedLang: string = 'en-Us';
@@ -33,7 +64,10 @@ export class HeaderComponent {
     { name: 'Russian', value: 'ru-Ru' },
     { name: 'Turkish', value: 'tr-Tr' },
   ];
-  constructor() {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private signInService: AuthService,
+  ) {
     this.selectedLang = this.translate.currentLang;
     console.log();
     this.setLangsToShow();
@@ -64,5 +98,33 @@ export class HeaderComponent {
     localStorage.setItem('systemLanguage', lang);
     this.translate.use(lang);
     this.setLangsToShow();
+  }
+
+
+  showMenu: boolean = false;
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+    var questPages = document.querySelector('.burger') as Element;
+    if (this.showMenu) {
+      questPages.classList.add('active');
+    } else {
+      questPages.classList.remove('active');
+    }
+  }
+
+  closeBurger() {
+    this.showMenu = false;
+    var questPages = document.querySelector('.burger') as Element;
+    questPages.classList.remove('active');
+  }
+
+  sanitize(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  logout() {
+    this.signInService.logout();
+    this.router.navigate(['/auth']);
   }
 }

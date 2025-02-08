@@ -1,0 +1,192 @@
+<div class="wrapper">
+  <div class="tabs">
+    <div
+      class="item"
+      [ngClass]="{ selected: selectedTab === 1 }"
+      (click)="selectedTab = 1"
+    >
+      <p>{{ "Your information" | translate }}</p>
+    </div>
+    <div
+      class="item"
+      [ngClass]="{ selected: selectedTab === 2 }"
+      (click)="selectedTab = 2"
+    >
+      <p>{{ "Change password" | translate }}</p>
+    </div>
+  </div>
+  <div class="form" *ngIf="selectedTab === 1">
+    <div class="inputs">
+      <div class="row">
+        <div class="input-item">
+          <label for="firstName">{{ "First name" | translate }}</label>
+          <input
+            type="text"
+            id="firstName"
+            [(ngModel)]="request.firstName"
+            [class.invalid]="!request.firstName && isSubmitted"
+          />
+        </div>
+        <div class="input-item">
+          <label for="lastName">{{ "Last name" | translate }}</label>
+          <input
+            type="text"
+            id="lastName"
+            [(ngModel)]="request.lastName"
+            [class.invalid]="!request.lastName && isSubmitted"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="phoneNumber">{{ "Phone number" | translate }} </label>
+          <div class="mask">
+            <p>+995</p>
+            <input
+              type="number"
+              id="phoneNumber"
+              [(ngModel)]="request.phoneNumber"
+              [class.invalid]="!request.phoneNumber && isSubmitted"
+              (keydown)="onKeyDown($event)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-item">
+          <label for="email">{{ "Email" | translate }}</label>
+          <input
+            type="text"
+            id="email"
+            [disabled]="true"
+            [(ngModel)]="request.username"
+          />
+        </div>
+        <div class="input-item">
+          <label for="courier">{{ "Known languages" | translate }}</label>
+          <p-multiSelect
+            id="courier"
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="knownLangs"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="request.systemLanguages"
+            [ngClass]="{
+              invalid: request.systemLanguages.length === 0 && isSubmitted,
+            }"
+            [filter]="true"
+          ></p-multiSelect>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="location">{{ "Location" | translate }}</label>
+          <input type="text" id="location" [(ngModel)]="request.location" />
+        </div>
+      </div>
+      <button type="button" (click)="validateFirstStep()">
+        {{ "Save" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="pass-form" *ngIf="selectedTab === 2">
+    <div class="inputs">
+      <div class="row">
+        <div class="input-item">
+          <label for="oldPassword">{{ "Current password" | translate }}</label>
+          <div class="block">
+            <input
+              [type]="oldPassVisible ? 'text' : 'password'"
+              id="oldPassword"
+              [(ngModel)]="request.oldPassword"
+              [class.invalid]="!request.oldPassword && passSubmitted"
+            />
+            <span>
+              <i
+                *ngIf="!oldPassVisible"
+                (click)="oldPassVisible = !oldPassVisible"
+                class="pi pi-eye"
+              ></i>
+              <i
+                *ngIf="oldPassVisible"
+                (click)="oldPassVisible = !oldPassVisible"
+                class="pi pi-eye-slash"
+              ></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="password">{{ "New password" | translate }}</label>
+          <div class="block">
+            <input
+              [type]="passVisible ? 'text' : 'password'"
+              id="password"
+              [(ngModel)]="request.password"
+              [class.invalid]="!request.password && passSubmitted"
+            />
+            <span>
+              <i
+                *ngIf="!passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye"
+              ></i>
+              <i
+                *ngIf="passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye-slash"
+              ></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="repeatpassword">{{
+              "Repeat new password" | translate
+            }}</label>
+          <div class="block">
+            <input
+              [type]="repeatPassVisible ? 'text' : 'password'"
+              id="repeatpassword"
+              [(ngModel)]="request.confirmPassword"
+              [class.invalid]="
+                (!request.confirmPassword && passSubmitted) ||
+                (request.password !== request.confirmPassword &&
+                  passSubmitted)
+              "
+            />
+            <span>
+              <i
+                *ngIf="!repeatPassVisible"
+                (click)="repeatPassVisible = !repeatPassVisible"
+                class="pi pi-eye"
+              ></i>
+              <i
+                *ngIf="repeatPassVisible"
+                (click)="repeatPassVisible = !repeatPassVisible"
+                class="pi pi-eye-slash"
+              ></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="validatePasswords()">
+        {{ "Save" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="loading-back" *ngIf="mainLoading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

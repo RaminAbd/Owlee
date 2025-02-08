@@ -10,5 +10,6 @@ export class StudentSignupRequestModel {
   oldPassword: string;
   systemLanguages: string[] = [];
   userName:string;
+  username:string;
   groupMemberId:string;
 }

@@ -1,35 +1,35 @@
 import {Component, inject} from '@angular/core';
-import {StorageService} from '../../core/services/storage.service';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {BaseApiService} from '../../core/services/base.api.service';
-import {Router} from '@angular/router';
-import {NgClass, NgForOf, NgIf, SlicePipe} from '@angular/common';
-import {MonthModel} from './shared/models/month.model';
-import {ActiveDateInfoModel} from './shared/models/active-date-info.model';
-import {DialogService} from 'primeng/dynamicdialog';
-import {CalendarService} from './calendar.service';
-import {EducatorMeetingsRequestModel} from './shared/models/educator-meetings-request.model';
+import {NgClass, NgForOf, NgIf, SlicePipe} from "@angular/common";
+import {TranslatePipe} from "@ngx-translate/core";
+import {CalendarService} from '../calendar/calendar.service';
+import {MonthModel} from '../calendar/shared/models/month.model';
+import {ActiveDateInfoModel} from '../calendar/shared/models/active-date-info.model';
+import {EducatorMeetingsRequestModel} from '../calendar/shared/models/educator-meetings-request.model';
+import {StudentCalendarService} from './student-calendar.service';
+import {StudentMeetingsRequestModel} from './shared/models/student-meetings-request.model';
 
 @Component({
-  selector: 'app-calendar',
-  imports: [NgClass, NgForOf, TranslatePipe, NgIf, SlicePipe],
-  templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss',
+  selector: 'app-student-calendar',
+    imports: [
+      NgClass, NgForOf, TranslatePipe, NgIf, SlicePipe
+    ],
+  templateUrl: './student-calendar.component.html',
+  styleUrl: './student-calendar.component.scss'
 })
-export class CalendarComponent {
-  private service: CalendarService = inject(CalendarService);
+export class StudentCalendarComponent {
+  private service: StudentCalendarService = inject(StudentCalendarService);
   monthData: MonthModel = new MonthModel();
   weekDays: { name: string; shortName: string }[] = [];
   currentDate: Date = new Date();
   activeDateInfo: ActiveDateInfoModel = new ActiveDateInfoModel();
-  meetingsRequest: EducatorMeetingsRequestModel =
-    new EducatorMeetingsRequestModel();
+  meetingsRequest: StudentMeetingsRequestModel =
+    new StudentMeetingsRequestModel();
   dayItemStateSaver: any;
   showMessage: boolean = false;
 
   constructor() {
     this.service.component = this;
-    this.meetingsRequest.educatorId = localStorage.getItem('userId') as string;
+    this.meetingsRequest.studentId = localStorage.getItem('userId') as string;
     this.service.buildDateRequest(new Date());
     this.weekDays = this.service.getWeekDays();
     this.monthData = this.service.updateMonthData(new Date());

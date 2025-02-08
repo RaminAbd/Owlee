@@ -56,6 +56,7 @@
               flex-direction: column;
               gap: 8px;
               flex: 1;
+              max-width: calc(50% - 8px);
               label {
                 color: #90928d;
                 font-size: 14px;

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { DatePicker } from 'primeng/datepicker';
-import { MultiSelect } from 'primeng/multiselect';
 import { NgForOf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
   selector: 'app-range-meeting',
   imports: [
     DatePicker,
-    MultiSelect,
     NgForOf,
     TranslatePipe,
     FormsModule,

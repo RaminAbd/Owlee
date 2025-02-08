@@ -9,11 +9,15 @@
     width: calc(100%);
     height: calc(100svh - 81px);
     overflow: auto;
-    padding: 54px 74px 54px 65px;
+    //padding: 54px 74px 54px 65px;
+
   }
 }
 .hasNavBar{
   width: calc(100% - 212px) !important;
+  @media (max-width: 1024px) {
+    width: calc(100%) !important;
+  }
 }
 
 
@@ -243,6 +247,12 @@
     }
   }
 }
+@media (max-width: 1024px) {
+  .navigation-section{
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 670px) {
   .main-wrapper{
     .content-section{

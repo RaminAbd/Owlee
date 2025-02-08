@@ -15,6 +15,10 @@ export class MeetingsApiService extends BaseCrudApiService {
     return this.get(this.serviceUrl + 'GetMeetingsByEducator', null, req);
   }
 
+  GetMeetingsByStudent(req: any) {
+    return this.get(this.serviceUrl + 'GetMeetingsByStudent', null, req);
+  }
+
   GetMeetingsByGroup(req: any) {
     return this.get(this.serviceUrl + 'GetMeetingsByGroup/', null, req);
   }
