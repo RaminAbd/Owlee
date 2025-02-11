@@ -36,8 +36,7 @@ export class StudentPersonalInfoService {
     };
     this.service.GetById(this.service.serviceUrl, id).subscribe((resp) => {
       this.component.request = resp.data;
-      if (!resp.data.languages) this.component.request.systemLanguages = [];
-      else this.component.request.systemLanguages = resp.data.languages;
+      if (!resp.data.systemLanguages) this.component.request.systemLanguages = [];
       console.log(this.component.request);
     });
   }
@@ -61,6 +60,7 @@ export class StudentPersonalInfoService {
   }
 
   updatePersonalInfo() {
+    this.component.request.phoneNumber = this.component.request.phoneNumber.toString();
     this.service
       .Update(this.service.serviceUrl, this.component.request)
       .subscribe((resp) => {

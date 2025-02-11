@@ -6,15 +6,13 @@ import { ApplicationMessageCenterService } from '../../../../core/services/Appli
 @Injectable({
   providedIn: 'root',
 })
-export class GroupMembersApiService extends BaseCrudApiService {
-  serviceUrl = 'v1/GroupMember/';
+export class TransactionsApiService extends BaseCrudApiService {
+  serviceUrl = 'v1/Transactions/';
   constructor(http: HttpClient, handler: ApplicationMessageCenterService) {
     super(http, handler);
   }
-  GetMembersByGroup(groupId: string) {
-    return this.get(this.serviceUrl + 'GetMembersByGroup/', groupId);
-  }
-  GetAvailableSlots(educatorId: string) {
-    return this.get(this.serviceUrl + 'GetAvailableSlots/', educatorId);
+
+  checkStatus(id: string) {
+    return this.get(this.serviceUrl + 'CheckStatus/', id);
   }
 }

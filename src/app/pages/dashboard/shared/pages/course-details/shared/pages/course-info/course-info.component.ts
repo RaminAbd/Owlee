@@ -1,16 +1,15 @@
 import {Component, inject, OnDestroy} from '@angular/core';
 import {LangChangeEvent, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import { Location, NgClass, NgIf } from '@angular/common';
+import { Location, NgIf } from '@angular/common';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { CourseInfoService } from './course-info.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KnownLanguagesResponseModel } from '../../../../../../../known-languages/shared/models/known-languages-response.model';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-course-info',
-  imports: [TranslatePipe, NgClass, ConfirmDialog, NgIf],
+  imports: [TranslatePipe, NgIf],
   templateUrl: './course-info.component.html',
   styleUrl: './course-info.component.scss',
 })

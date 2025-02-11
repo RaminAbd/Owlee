@@ -39,6 +39,12 @@
       color: var(--primary-color);
       font-weight: 600;
       font-size: 16px;
+      &.not-allowed {
+        background-image: url("https://metagroupblob.blob.core.windows.net/delivery-container/bf81711c-3f0a-4445-bc76-e7b6479137ec-image%2023.png");
+        background-repeat: round;
+        background-size: cover;
+        color: #FFF;
+      }
     }
   }
   .search {

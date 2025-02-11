@@ -44,11 +44,9 @@ export class CourseGroupsService {
   checkSlots() {
     this.service.GetAvailableGroupSlots(this.component.id).subscribe((resp) => {
       if (resp.data !== 0) {
-        this.openDialog();
+        this.component.allowedToAddGroup = true;
       } else {
-        this.message.showTranslatedErrorMessage(
-          'By your subscription, you cannot create more group',
-        );
+        this.component.allowedToAddGroup = false;
       }
     });
   }
@@ -58,16 +56,16 @@ export class CourseGroupsService {
       header: 'Group',
       width: '460px',
       data: {
-        courseId:this.component.id,
+        courseId: this.component.id,
         groupId: 'create',
       },
       style: {
         maxWidth: '95%',
       },
-
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
+        this.checkSlots();
         this.getGroups();
       }
     });

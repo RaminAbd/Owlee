@@ -5,6 +5,8 @@ import { StorageService } from '../../core/services/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
+import {UpgradePlanComponent} from '../../shared/components/upgrade-plan/upgrade-plan.component';
+import {DialogService} from 'primeng/dynamicdialog';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,7 @@ export class DashboardService {
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
+  public dialogService: DialogService = inject(DialogService);
   constructor() {}
 
   getDashboard() {
@@ -41,9 +44,21 @@ export class DashboardService {
           'create',
         ]);
       } else {
-        this.message.showTranslatedErrorMessage(
-          'By your subscription, you cannot create more course',
-        );
+        this.upgradePlan()
+      }
+    });
+  }
+
+  upgradePlan() {
+    const ref = this.dialogService.open(UpgradePlanComponent, {
+      width: '860px',
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.checkSlots()
       }
     });
   }

@@ -10,6 +10,7 @@ import { GroupMembersComponent } from '../../../../pages/dashboard/shared/pages/
 import { PersonalInfoComponent } from '../../../../pages/personal-info/personal-info.component';
 import { CalendarComponent } from '../../../../pages/calendar/calendar.component';
 import { GroupMeetingsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-meetings/group-meetings.component';
+import {TransactionResultComponent} from '../../../../pages/transaction-result/transaction-result.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -76,7 +77,7 @@ export class EducatorChildrenRoutes {
       component: PersonalInfoComponent,
       data: { title: 'Personal Information' },
     },
-
+    { path: 'result/:id', component: TransactionResultComponent },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
   ];

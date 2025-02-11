@@ -1,14 +1,21 @@
 import { Component, inject, Input } from '@angular/core';
 import { GroupMembersService } from './group-members.service';
 import { GroupMembersResponseModel } from '../../../../../../../../models/group-members.response.model';
-import { NgForOf, NgStyle } from '@angular/common';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group-members',
-  imports: [NgForOf, ReactiveFormsModule, TranslatePipe, FormsModule, NgStyle],
+  imports: [
+    NgForOf,
+    ReactiveFormsModule,
+    TranslatePipe,
+    FormsModule,
+    NgStyle,
+    NgIf,
+  ],
   templateUrl: './group-members.component.html',
   styleUrl: './group-members.component.scss',
 })
@@ -19,6 +26,7 @@ export class GroupMembersComponent {
   members: GroupMembersResponseModel[] = [];
   searchText: string;
   filteredList: GroupMembersResponseModel[] = [];
+  allowedToAddGroup: boolean = true;
   constructor() {
     this.service.component = this;
     this.service.getAll();
@@ -34,7 +42,11 @@ export class GroupMembersComponent {
     this.service.open();
   }
 
-  remove(id:string): void {
-    this.service.removeGroupMember(id)
+  remove(id: string): void {
+    this.service.removeGroupMember(id);
+  }
+
+  upgradePlan() {
+    this.service.upgradePlan();
   }
 }

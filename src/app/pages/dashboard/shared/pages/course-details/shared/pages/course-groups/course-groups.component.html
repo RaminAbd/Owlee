@@ -12,13 +12,19 @@
           <input
             type="text"
             [(ngModel)]="searchText"
-            placeholder="{{'Search' | translate}}..."
+            placeholder="{{ 'Search' | translate }}..."
             (input)="searchByName()"
           />
         </div>
       </div>
       <div class="btn">
-        <button (click)="checkSlots()">{{ "Add new" | translate }}</button>
+        <button *ngIf="allowedToAddGroup" class="allowed" (click)="openDialog()">
+          {{ "Add new" | translate }}
+        </button>
+        <button *ngIf="!allowedToAddGroup"  class="not-allowed" (click)="upgradePlan()">
+          <img src="lock.svg" alt="" />
+          {{ "Upgrade plan to add more" | translate }}
+        </button>
       </div>
     </div>
     <div class="list">

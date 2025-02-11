@@ -1,0 +1,27 @@
+
+<div class="wrapper">
+  <div class="success-wrapper" *ngIf="success && !loading">
+    <div class="content">
+      <i class="pi pi-check-circle"></i>
+      <h3>{{'Payment Success' | translate}}</h3>
+      <button (click)="goToDashboard()">{{'Go back' | translate}}</button>
+    </div>
+  </div>
+  <div class="fail-wrapper" *ngIf="!success && !loading">
+    <div class="content">
+      <i class="pi pi-exclamation-circle"></i>
+      <h3>{{'Payment Failed' | translate}}</h3>
+      <button (click)="goToDashboard()">{{'Go back' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div class="loading-back" *ngIf="loading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

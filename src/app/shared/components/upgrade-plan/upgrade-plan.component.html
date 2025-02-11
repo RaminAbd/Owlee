@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <div class="heading">
+    <h2>{{ "Upgrade plan" | translate }}</h2>
+    <h3>{{ "Upgrade to access" | translate }}</h3>
+  </div>
+  <div class="counts">
+    <div class="item">
+      <img src="d-check.svg" alt="" />
+      <p>{{ selectedPackage.maxCapacity }} Max students</p>
+    </div>
+    <div class="item">
+      <img src="d-check.svg" alt="" />
+      <p>{{ selectedPackage.courseAmount }} Courses</p>
+    </div>
+    <div class="item">
+      <img src="d-check.svg" alt="" />
+      <p>{{ selectedPackage.groupPerCourse }} Groups per course</p>
+    </div>
+    <div class="item">
+      <img src="d-check.svg" alt="" />
+      <p>{{ selectedPackage.peoplePerGroup }} Students per group</p>
+    </div>
+  </div>
+  <div class="items">
+    <div
+      class="item"
+      *ngFor="let item of subscriptionPackages"
+      [ngClass]="{ selected: item.id === selectedPackage.id }"
+      (click)="selectedPackage = item"
+    >
+      <div class="name">
+        <p>{{ item.name }}</p>
+      </div>
+      <div class="price">
+        <p>
+          <span>{{ item.price }}₾</span> / {{ "month" | translate }}
+        </p>
+      </div>
+      <div class="btn">
+        <button (click)="selectedPackage = item">
+          {{
+            item.id === activePackage.id
+              ? ("Current plan" | translate)
+              : ("Upgrade" | translate)
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="upgrade()">
+      {{ "Upgrade plan" | translate }}
+
+    </button>
+  </div>
+</div>
+<div class="loading-back" *ngIf="loading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>
