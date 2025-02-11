@@ -17,6 +17,7 @@ import {EducatorMeetingsRequestModel} from './shared/models/educator-meetings-re
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
+  showActivities: boolean = false;
   private service: CalendarService = inject(CalendarService);
   monthData: MonthModel = new MonthModel();
   weekDays: { name: string; shortName: string }[] = [];
@@ -33,7 +34,12 @@ export class CalendarComponent {
     this.service.buildDateRequest(new Date());
     this.weekDays = this.service.getWeekDays();
     this.monthData = this.service.updateMonthData(new Date());
-    this.handleSetDateInfo(this.dayItemStateSaver);
+    if (!this.isMobile()) this.handleSetDateInfo(this.dayItemStateSaver);
+  }
+
+  isMobile(): boolean {
+    console.log(window.matchMedia('(max-width: 1250px)').matches)
+    return window.matchMedia('(max-width: 1250px)').matches;
   }
 
   handlePreviousMonth(): void {
@@ -59,6 +65,7 @@ export class CalendarComponent {
   handleSetDateInfo(day: any): void {
     day.dateString = this.service.formatDate(day.date);
     this.activeDateInfo = day;
+    this.showActivities = true;
     console.log(this.activeDateInfo);
   }
 

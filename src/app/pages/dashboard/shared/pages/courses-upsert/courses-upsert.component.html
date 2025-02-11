@@ -56,7 +56,7 @@
           [ngClass]="{ selected: lang.id === request.systemLanguageId }"
         >
           <img
-            src="https://s3-alpha-sig.figma.com/img/b459/aab2/66cea63b2c3492604914589dcf80c063?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NQUYc5Xjtp7NAGrk~GLVR6kBJtq6IO97eG-al1V0qh5A~gS2KpDLljg9F150uU8b-lBaYJo5Xr8v9NzfmXD7Mm3AJLyj63LsTvIWXlyygorLNcj2PZGOKeUnSIMIJ4bMYtW5r9s3e935~KEWHO6nvu-KYR1wu2NM~oITKssGW09hTBD~mwWBsl7r6RcW70hloZeXLLzWxrzNmo~n1KrbxuZwghtPjYfkIMfloj2SpWD9wQmd~HJw17z-PG5P-Sgq~PWq5mVglzdkvFtVr8c~ofcPL9k5nFPzxuW-Fq9StDBZkjrHcGPghugZHQwzf0KKCeaPIj4oHF2fmzpUbigN2Q__"
+            [src]="lang.icon"
             alt=""
           />
           <p>{{ lang.name }}</p>

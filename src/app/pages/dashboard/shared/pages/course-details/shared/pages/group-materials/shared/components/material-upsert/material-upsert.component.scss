@@ -42,6 +42,10 @@
       color: #656668;
       font-size: 14px;
       font-weight: 600;
+      @media (max-width: 400px) {
+        width: auto;
+        flex: 1;
+      }
       &.save{
         background: var(--primary-color);
         color: #FFF;

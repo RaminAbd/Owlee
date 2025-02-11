@@ -78,6 +78,7 @@ export class CourseInfoService {
     this.service.GetAvailableCourseSlots(educatorId).subscribe((resp) => {
       this.component.copyLoading = false;
       if (resp.data !== 0) {
+        console.log('geldi')
         this.component.confirm(
           'Are you sure you want to copy this course?',
           () => {

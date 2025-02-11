@@ -41,6 +41,9 @@
         (click)="getInfo(item)"
       >
         <div class="image">
+          <div class="lang-icon">
+            <img [src]="item.icon" alt="">
+          </div>
           <img [src]="item.image" alt="" />
         </div>
         <div class="info">

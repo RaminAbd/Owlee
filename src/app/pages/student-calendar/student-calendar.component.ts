@@ -36,8 +36,8 @@ export class StudentCalendarComponent {
   }
 
   isMobile(): boolean {
-    console.log(window.matchMedia('(max-width: 1024px)').matches)
-    return window.matchMedia('(max-width: 1024px)').matches;
+    console.log(window.matchMedia('(max-width: 1250px)').matches)
+    return window.matchMedia('(max-width: 1250px)').matches;
   }
 
   handlePreviousMonth(): void {

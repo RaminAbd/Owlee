@@ -1,7 +1,8 @@
 import {
   Component,
   ElementRef,
-  inject, OnDestroy,
+  inject,
+  OnDestroy,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -9,19 +10,47 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudentCourseDetailsService } from './student-course-details.service';
 import { CourseRequestModel } from '../../../../dashboard/shared/models/course-request.model';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
+import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { CourseDetailedResponseModel } from '../../models/course-detailed-response.model';
 import { KnownLanguagesResponseModel } from '../../../../known-languages/shared/models/known-languages-response.model';
 import { SubtopicModel } from '../../../../dashboard/shared/models/subtopic.model';
 import { TopicRequestModel } from '../../../../dashboard/shared/models/topic-request.model';
-import {FormsModule} from '@angular/forms';
-import {TopicMaterialModel} from '../../../../dashboard/shared/models/topic-material.model';
+import { FormsModule } from '@angular/forms';
+import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-material.model';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-student-course-details',
   imports: [NgIf, TranslatePipe, NgClass, NgForOf, FormsModule],
   templateUrl: './student-course-details.component.html',
   styleUrl: './student-course-details.component.scss',
+  animations: [
+    trigger('expanderAnimation', [
+      state(
+        'collapsed',
+        style({
+          maxHeight: '0px',
+          opacity: 0,
+          zIndex: -1,
+        }),
+      ),
+      state(
+        'expanded',
+        style({
+          maxHeight: '200px',
+          opacity: 1,
+          zIndex: 1,
+        }),
+      ),
+      transition('collapsed <=> expanded', [animate('0.3s ease-out')]),
+    ]),
+  ],
 })
 export class StudentCourseDetailsComponent implements OnDestroy {
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -35,15 +64,18 @@ export class StudentCourseDetailsComponent implements OnDestroy {
   selectedMatTab: number = 1;
   showEducator: boolean = false;
   languages: KnownLanguagesResponseModel[] = [];
-  allFiles:TopicMaterialModel[] = [];
-  filteredFiles:TopicMaterialModel[] = [];
-  langSubscribtion:any
+  allFiles: TopicMaterialModel[] = [];
+  filteredFiles: TopicMaterialModel[] = [];
+  langSubscribtion: any;
+  expanderStates: string[] = [];
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
-    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.service.getKnownLangs();
-    });
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => {
+        this.service.getKnownLangs();
+      },
+    );
   }
 
   back() {
@@ -85,7 +117,7 @@ export class StudentCourseDetailsComponent implements OnDestroy {
       .filter((topic) => topic.subtopics.length > 0);
   }
 
-  fileText:any
+  fileText: any;
 
   filterFiles() {
     this.filteredFiles = this.allFiles.filter((obj) =>
@@ -93,7 +125,13 @@ export class StudentCourseDetailsComponent implements OnDestroy {
     );
   }
 
+  toggleExpander(index: number) {
+    this.expanderStates[index] === 'expanded'
+      ? (this.expanderStates[index] = 'collapsed')
+      : (this.expanderStates[index] = 'expanded');
+  }
+
   ngOnDestroy() {
-    this.langSubscribtion.unsubscribe()
+    this.langSubscribtion.unsubscribe();
   }
 }

@@ -6,6 +6,9 @@
   cursor: pointer;
   width: 720px;
   position: relative;
+  @media (max-width: 769px) {
+    width: 100%;
+  }
   i {
     color: #656668;
     position: absolute;
@@ -15,6 +18,9 @@
   p {
     font-size: 20px;
     font-weight: 700;
+    @media (max-width: 480px) {
+      font-size: 17px;
+    }
   }
 }
 .tab-content {
@@ -67,7 +73,7 @@
         }
       }
       .add-subtopic {
-        input {
+        button {
           width: 100%;
           color: #90928d;
           background: transparent !important;
@@ -82,14 +88,14 @@
     }
   }
   .create-topic {
-    input {
+    button{
       width: 100%;
-      color: #90928d;
-      background: transparent !important;
-      border: none;
-      font-size: 20px;
+      height: 41px;
+      border-radius: 6px;
+      background: #C6E7FF;
+      font-size: 16px;
       font-weight: 600;
-      padding: 0 !important;
+      color: var(--primary-color);
     }
   }
 }
@@ -207,6 +213,19 @@ button {
     align-items: center;
     gap: 10px;
     width: 60%;
+    @media (max-width: 400px) {
+      font-size: 14px;
+    }
+  }
+  .mat-lang{
+    color: #13170C;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    @media (max-width: 400px) {
+      font-size: 12px;
+    }
   }
 }
 .add-mat{

@@ -1,31 +1,24 @@
-import {Component, inject} from '@angular/core';
-import {NgClass, NgForOf} from '@angular/common';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Popover} from 'primeng/popover';
-import {FormsModule} from '@angular/forms';
-import {Dialog} from 'primeng/dialog';
-import {Button} from 'primeng/button';
-import {ConfirmDialog} from 'primeng/confirmdialog';
-import {TopicRequestModel} from '../../../../../models/topic-request.model';
-import {SubtopicModel} from '../../../../../models/subtopic.model';
-import {TopicMaterialModel} from '../../../../../models/topic-material.model';
-import {GroupMaterialsService} from './group-materials.service';
-import {ConfirmationService} from 'primeng/api';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CourseRequestModel} from '../../../../../models/course-request.model';
+import { Component, inject } from '@angular/core';
+import { NgClass, NgForOf } from '@angular/common';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Popover } from 'primeng/popover';
+import { FormsModule } from '@angular/forms';
+import { Dialog } from 'primeng/dialog';
+import { Button } from 'primeng/button';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { TopicRequestModel } from '../../../../../models/topic-request.model';
+import { SubtopicModel } from '../../../../../models/subtopic.model';
+import { TopicMaterialModel } from '../../../../../models/topic-material.model';
+import { GroupMaterialsService } from './group-materials.service';
+import { ConfirmationService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CourseRequestModel } from '../../../../../models/course-request.model';
+import { TopicUpsertComponent } from './shared/components/topic-upsert/topic-upsert.component';
+import { SubTopicUpsertComponent } from './shared/components/sub-topic-upsert/sub-topic-upsert.component';
 
 @Component({
   selector: 'app-group-materials',
-  imports: [
-    NgClass,
-    TranslatePipe,
-    NgForOf,
-    Popover,
-    FormsModule,
-    Dialog,
-    Button,
-    ConfirmDialog,
-  ],
+  imports: [TranslatePipe, NgForOf, Popover, FormsModule],
   templateUrl: './group-materials.component.html',
   styleUrl: './group-materials.component.scss',
 })
@@ -36,22 +29,17 @@ export class GroupMaterialsComponent {
   private translate: TranslateService = inject(TranslateService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
-  selectedTopic: TopicRequestModel = new TopicRequestModel();
   selectedSubTopic: SubtopicModel = new SubtopicModel();
   subTopic: SubtopicModel = new SubtopicModel();
-  visible: boolean = false;
   topic: TopicRequestModel = new TopicRequestModel();
   topics: TopicRequestModel[] = [];
   courseId = this.route.parent?.snapshot.paramMap.get('id') as string;
-
-  // groupId = this.route.parent?.snapshot.paramMap.get('groupId') as string;
   selectedMaterial: TopicMaterialModel = new TopicMaterialModel();
   course: CourseRequestModel = new CourseRequestModel();
   constructor() {
     this.service.component = this;
     this.service.getAllTopics();
     this.service.getCourse();
-    // this.topic.groupId = this.groupId;
     this.topic.courseId = this.courseId;
   }
 
@@ -60,17 +48,37 @@ export class GroupMaterialsComponent {
   }
 
   openToolbar(topic: TopicRequestModel) {
-    this.selectedTopic = structuredClone(topic);
+    this.topic = structuredClone(topic);
   }
 
   addTopic() {
     delete this.topic.index;
-    this.service.addTopic();
+    this.openTopicDialog(() => {
+      this.service.addTopic();
+    });
   }
 
-  updateTopic() {
-    this.visible = false;
-    this.service.updateTopic();
+  editTopic() {
+    this.openTopicDialog(() => {
+      this.service.updateTopic();
+    });
+  }
+
+  openTopicDialog(callBack: any) {
+    const ref = this.service.dialogService.open(TopicUpsertComponent, {
+      header: 'Topic',
+      width: '460px',
+      data: this.topic,
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.topic = e;
+        callBack();
+      }
+    });
   }
 
   copyTopic() {
@@ -85,25 +93,41 @@ export class GroupMaterialsComponent {
     });
   }
 
-
-  handleSubTools(topic: TopicRequestModel, sub: SubtopicModel) {
-    this.selectedTopic = structuredClone(topic);
-    this.selectedTopic.subTopic = structuredClone(sub);
+  ///// Sub Topic
+  addSubTopic(topic: TopicRequestModel) {
+    this.topic = topic;
+    this.openSubDialog(() => {
+      this.service.addSubTopic();
+    });
   }
 
-  handleSubTopic(topic: TopicRequestModel) {
-    if (topic.subTopic.id) {
-      this.service.updateSubtopic(topic);
-    } else {
-      this.service.addSubTopic(topic);
-    }
+  handleSubTools(topic: TopicRequestModel, sub: SubtopicModel) {
+    this.topic = structuredClone(topic);
+    this.topic.subTopic = structuredClone(sub);
   }
 
   editSubTopic() {
-    let finded = this.topics.find((x) => x.id == this.selectedTopic.id);
-    if (finded) {
-      finded.subTopic = this.selectedTopic.subTopic;
-    }
+    this.openSubDialog(() => {
+      this.service.updateSubtopic();
+    });
+  }
+
+  openSubDialog(callBack: any) {
+    const ref = this.service.dialogService.open(SubTopicUpsertComponent, {
+      header: 'Subtopic',
+      width: '460px',
+      data: this.topic,
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        console.log(e);
+        this.topic = e;
+        callBack();
+      }
+    });
   }
 
   deleteSubTopic() {
@@ -111,7 +135,6 @@ export class GroupMaterialsComponent {
       this.service.deleteSubTopic();
     });
   }
-
 
   openMaterialDialog(
     topic: TopicRequestModel,
@@ -136,7 +159,6 @@ export class GroupMaterialsComponent {
     this.service.openDialog(this.selectedSubTopic, this.selectedMaterial);
   }
 
-
   confirm(message: string, success: any) {
     this.confirmationService.confirm({
       header: this.translate.instant('Confirmation'),
@@ -156,8 +178,7 @@ export class GroupMaterialsComponent {
       accept: () => {
         success();
       },
-      reject: () => {
-      },
+      reject: () => {},
     });
   }
 }

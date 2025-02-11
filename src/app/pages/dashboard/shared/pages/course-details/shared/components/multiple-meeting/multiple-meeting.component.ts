@@ -37,18 +37,32 @@ export class MultipleMeetingComponent {
     console.log(this.request);
     if (this.request.meetings.length > 0) {
       this.service.create();
+    } else {
+      this.service.message.showTranslatedWarningMessage('At least 1 meeting!');
     }
   }
 
   addMeeting() {
-    let item = {
-      showDate: this.formatDate(this.date),
-      subtopics: this.selectedTopics,
-      date: new Date(this.date).toISOString(),
-    };
-    this.request.meetings.push(item);
-    this.selectedTopics = [];
-    this.date = undefined;
+    if (this.selectedTopics.length > 0) {
+      if (this.date) {
+        let item = {
+          showDate: this.formatDate(this.date),
+          subtopics: this.selectedTopics,
+          date: new Date(this.date).toISOString(),
+        };
+        this.request.meetings.push(item);
+        this.selectedTopics = [];
+        this.date = undefined;
+      } else {
+        this.service.message.showTranslatedWarningMessage(
+          'Date field is required!',
+        );
+      }
+    } else {
+      this.service.message.showTranslatedWarningMessage(
+        'Topic field is required!',
+      );
+    }
   }
 
   formatDate(date: any) {

@@ -32,12 +32,3 @@
     <p>{{ request.description }}</p>
   </div>
 </div>
-
-<p-confirmdialog>
-  <ng-template #message let-message>
-    <div class="confirm-content">
-      <i [ngClass]="message.icon" class="!text-6xl text-primary-500"></i>
-      <p>{{ message.message | translate }}</p>
-    </div>
-  </ng-template>
-</p-confirmdialog>

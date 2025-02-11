@@ -21,7 +21,7 @@
       <div class="input-item">
         <label>{{ "Max Capacity" | translate }}</label>
         <input
-          type="text"
+          type="number"
           [ngClass]="{ invalid: !request.maxCapacity && isSubmitted }"
           [(ngModel)]="request.maxCapacity"
         />
@@ -31,7 +31,7 @@
       <div class="input-item">
         <label>{{ "Course Amount" | translate }}</label>
         <input
-          type="text"
+          type="number"
           [ngClass]="{ invalid: !request.courseAmount && isSubmitted }"
           [(ngModel)]="request.courseAmount"
         />
@@ -39,7 +39,7 @@
       <div class="input-item">
         <label>{{ "Group Per Course" | translate }}</label>
         <input
-          type="text"
+          type="number"
           [ngClass]="{ invalid: !request.groupPerCourse && isSubmitted }"
           [(ngModel)]="request.groupPerCourse"
         />
@@ -47,7 +47,7 @@
       <div class="input-item">
         <label>{{ "People Per Group" | translate }}</label>
         <input
-          type="text"
+          type="number"
           [ngClass]="{ invalid: !request.peoplePerGroup && isSubmitted }"
           [(ngModel)]="request.peoplePerGroup"
         />

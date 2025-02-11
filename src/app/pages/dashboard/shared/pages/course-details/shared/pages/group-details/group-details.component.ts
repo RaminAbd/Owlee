@@ -72,6 +72,9 @@ export class GroupDetailsComponent implements OnDestroy {
         groupId: this.group.id,
         group: structuredClone(this.group),
       },
+      style: {
+        maxWidth: '95%',
+      },
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {

@@ -1,11 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {MaterialUpsertComponent} from './material-upsert.component';
-import {ApplicationMessageCenterService} from '../../../../../../../../core/services/ApplicationMessageCenter.service';
-import {TopicApiService} from '../../../../../services/topic.api.service';
-import {
-  KnownLanguagesApiService
-} from '../../../../../../../known-languages/shared/services/known-languages.api.service';
-import {TranslateService} from '@ngx-translate/core';
+import { inject, Injectable } from '@angular/core';
+import { MaterialUpsertComponent } from './material-upsert.component';
+import { ApplicationMessageCenterService } from '../../../../../../../../../../../core/services/ApplicationMessageCenter.service';
+import { TopicApiService } from '../../../../../../../../services/topic.api.service';
+import { KnownLanguagesApiService } from '../../../../../../../../../../known-languages/shared/services/known-languages.api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +19,7 @@ export class MaterialUpsertService {
     KnownLanguagesApiService,
   );
 
-  constructor() {
-  }
+  constructor() {}
 
   getKnownLangs() {
     this.langService
@@ -34,11 +31,27 @@ export class MaterialUpsertService {
 
   save() {
     delete this.component.request.index;
-    if (!this.component.request.id) {
-      this.buildCreateRequest();
+    if (this.isValid()) {
+      if (!this.component.request.id) {
+        this.buildCreateRequest();
+      } else {
+        this.buildUpdateRequest();
+      }
     } else {
-      this.buildUpdateRequest();
+      this.message.showTranslatedWarningMessage('Field are not valid!');
     }
+  }
+
+  isValid() {
+    let result = true;
+    if (
+      !this.component.request.name ||
+      !this.component.request.url ||
+      !this.component.request.systemLanguageId
+    ) {
+      result = false;
+    }
+    return result;
   }
 
   buildCreateRequest() {

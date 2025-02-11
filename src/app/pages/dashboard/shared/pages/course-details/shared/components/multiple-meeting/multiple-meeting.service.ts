@@ -9,7 +9,7 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
 export class MultipleMeetingService {
   component: MultipleMeetingComponent;
   private meetingsService: MeetingsApiService = inject(MeetingsApiService);
-  private message: ApplicationMessageCenterService = inject(
+  public message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
   constructor() {}

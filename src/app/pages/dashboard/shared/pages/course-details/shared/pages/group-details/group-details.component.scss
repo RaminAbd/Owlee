@@ -10,6 +10,9 @@
   gap: 30px;
   padding-top: 10px;
   z-index: 1;
+  @media (max-width: 769px) {
+    gap: 15px;
+  }
 
   .back {
     display: flex;
@@ -18,7 +21,9 @@
     cursor: pointer;
     width: 720px;
     position: relative;
-
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     i {
       color: #656668;
       position: absolute;
@@ -29,6 +34,9 @@
     p {
       font-size: 20px;
       font-weight: 700;
+      @media (max-width: 480px) {
+        font-size: 17px;
+      }
     }
   }
   .content {

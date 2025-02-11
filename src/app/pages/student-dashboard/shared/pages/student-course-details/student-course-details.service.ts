@@ -52,6 +52,10 @@ export class StudentCourseDetailsService {
       );
       this.component.filteredFiles = structuredClone(this.component.allFiles);
 
+      this.component.expanderStates = Array.from(
+        { length: this.component.response.topics.length },
+        () => 'collapsed',
+      );
       console.log(this.component.response);
     });
   }

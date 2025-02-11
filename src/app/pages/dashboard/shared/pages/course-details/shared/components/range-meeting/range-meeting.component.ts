@@ -68,6 +68,7 @@ export class RangeMeetingComponent {
   }
 
   save() {
+    console.log(this.request, this.days);
     if (!this.from || !this.to) {
       this.message.showTranslatedWarningMessage('Fill all fields');
       return;
@@ -82,9 +83,13 @@ export class RangeMeetingComponent {
       day.hour = day.hourName - 4;
     });
 
-    this.request.items = this.days.filter((x) => x.hourName !== 0);
+    this.request.items = this.days.filter((x) => x.hourName !== 0 && x.hourName);
+    if(this.request.items.length == 0) {
+      this.message.showTranslatedWarningMessage('Select week day!');
+      return;
+    }
     this.service.createSchedule();
-    console.log(this.request);
+
   }
 
   deleteDay(i: number) {

@@ -34,6 +34,7 @@ export class SubscriptionPackageUpsertComponent {
   }
 
   save() {
+    this.isSubmitted = true;
     this.service.save()
   }
 }

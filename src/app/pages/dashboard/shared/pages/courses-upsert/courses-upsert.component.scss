@@ -1,11 +1,19 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  @media (max-width: 769px) {
+    padding: 24px 16px;
+  }
   .form {
     width: 600px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 40px 0;
+    @media (max-width: 769px) {
+      width: 100%;
+      padding:  0;
+    }
     .name {
       width: 100%;
       input {
@@ -23,6 +31,9 @@
       display: flex;
       align-items: center;
       gap: 24px;
+      @media (max-width: 769px) {
+        flex-wrap: wrap;
+      }
       label {
         font-size: 14px;
         font-weight: 500;
@@ -31,6 +42,9 @@
         display: flex;
         align-items: center;
         gap: 16px;
+        @media (max-width: 769px) {
+          flex-wrap: wrap;
+        }
         .item {
           min-width: 113px;
           height: 41px;

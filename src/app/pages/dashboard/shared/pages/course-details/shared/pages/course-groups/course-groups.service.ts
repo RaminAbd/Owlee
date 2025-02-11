@@ -60,7 +60,10 @@ export class CourseGroupsService {
       data: {
         courseId:this.component.id,
         groupId: 'create',
-      }
+      },
+      style: {
+        maxWidth: '95%',
+      },
 
     });
     ref.onClose.subscribe((e: any) => {

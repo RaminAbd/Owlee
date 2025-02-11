@@ -546,3 +546,8 @@ button {
 .p-datepicker-panel{
   padding: var(--p-datepicker-panel-padding) 0;
 }
+.p-dialog{
+  @media (max-width: 480px) {
+    max-width: 95% !important;
+  }
+}

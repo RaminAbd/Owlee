@@ -14,6 +14,7 @@ export class Confirmation {
       header: translate.instant('Confirmation'),
       message: translate.instant(message),
       icon: 'pi pi-exclamation-circle',
+
       rejectButtonProps: {
         label: translate.instant('Cancel'),
         icon: 'pi pi-times',

@@ -234,17 +234,18 @@
     .left {
       width: calc(100% - 320px);
       padding-bottom: 50px;
-      @media (max-width: 1024px) {
+      @media (max-width: 1250px) {
         width: 100%;
       }
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1250px) {
       .activities-back {
         display: none;
       }
       .activities-back.active {
         position: absolute;
         left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.3);
@@ -270,7 +271,7 @@
         .close {
           cursor: pointer;
           display: none;
-          @media (max-width: 1024px) {
+          @media (max-width: 1250px) {
             display: block;
           }
           i {
@@ -334,7 +335,6 @@
       }
     }
   }
-  position: relative;
   .disabled-overlay {
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(3.0999999046325684px);

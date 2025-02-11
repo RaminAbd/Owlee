@@ -34,6 +34,11 @@
         border-bottom: 1px solid #e3e3e2;
         align-items: center;
         gap: 30px;
+        @media (max-width: 769px) {
+          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: flex-end;
+        }
         &:last-child {
           border-bottom: none;
         }
@@ -51,7 +56,10 @@
           display: flex;
           flex-direction: column;
           gap: 7px;
-
+          @media (max-width: 769px) {
+            width: 100%;
+            align-items: flex-start;
+          }
           label {
             font-size: 14px;
             font-weight: 600;
@@ -78,6 +86,10 @@
     align-items: flex-end;
     gap: 16px;
     width: 100%;
+    @media (max-width: 769px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     .input-item {
       display: flex;
       flex-direction: column;
@@ -85,6 +97,9 @@
       flex: 1;
       width: 100%;
       max-width: 223px;
+      @media (max-width: 769px) {
+        max-width: 100%
+      }
       label {
         color: #90928d;
         font-size: 14px;
@@ -116,6 +131,10 @@ button {
   color: #656668;
   font-size: 14px;
   font-weight: 600;
+  @media (max-width: 400px) {
+    width: auto;
+    flex: 1;
+  }
   &.save {
     background: var(--primary-color);
     color: #fff;
@@ -127,6 +146,12 @@ button {
   height: 48px !important;
 }
 .input-item {
+  @media (max-width: 1024px) {
+    width: 130px;
+  }
+  @media (max-width: 769px) {
+    width: 100%;
+  }
   input {
     width: 100%;
     padding-right: 30px;

@@ -25,6 +25,7 @@
         color: var(--text-color) !important;
         font-weight: 600;
         font-size: 14px;
+        border: 1px solid var(--p-select-border-color) !important;
         height: 48px !important;
       }
     }
@@ -51,9 +52,4 @@
       }
     }
   }
-}
-::ng-deep .p-select,
-::ng-deep .p-multiselect {
-  border-radius: 12px !important;
-  height: 48px !important;
 }

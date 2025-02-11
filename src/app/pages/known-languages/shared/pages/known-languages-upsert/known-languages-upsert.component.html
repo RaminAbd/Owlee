@@ -64,7 +64,7 @@
         <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
         <input
           type="text"
-          [ngClass]="{ invalid: !item.isValid }"
+          [ngClass]="{ invalid: !item.isValid || (!item.value || isSubmitted)}"
           [(ngModel)]="item.value"
           placeholder="{{ item.languageName | translate }}"
         />

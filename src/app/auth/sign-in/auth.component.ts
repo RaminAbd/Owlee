@@ -3,20 +3,14 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from './auth.service';
 import {AuthRequestModel} from '../shared/models/auth-request.model';
 import {NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
 import {TranslatePipe} from '@ngx-translate/core';
-import {LottieComponent} from "ngx-lottie";
-import {MultiSelect} from "primeng/multiselect";
 
 @Component({
   selector: 'app-auth',
     imports: [
         ReactiveFormsModule,
         NgIf,
-        RouterLink,
         TranslatePipe,
-        LottieComponent,
-        MultiSelect
     ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'

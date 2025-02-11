@@ -28,7 +28,19 @@ export class MeetingUpsertService {
 
   save() {
     this.component.request.date = new Date(this.component.date).toISOString();
-    this.component.request.id === 'create' ? this.create() : this.update();
+    if (this.isValid())
+      this.component.request.id === 'create' ? this.create() : this.update();
+    else this.message.showTranslatedWarningMessage('Fields are not valid');
+  }
+
+  isValid() {
+    let result = true;
+    if (
+      !this.component.request.date ||
+      this.component.request.subtopics.length == 0
+    )
+      result = false;
+    return result;
   }
 
   create() {

@@ -71,7 +71,6 @@ export class CoursesUpsertService {
     } else {
       this.component.id === 'create' ? this.create() : this.update();
     }
-    console.log(this.component.request);
   }
 
   private create() {

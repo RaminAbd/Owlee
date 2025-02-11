@@ -52,6 +52,9 @@ export class GroupMeetingsComponent {
         subTopics: this.subTopics,
         groupId: this.groupId,
       },
+      style: {
+        maxWidth: '95%',
+      },
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
@@ -84,6 +87,9 @@ export class GroupMeetingsComponent {
         subTopics: this.subTopics,
         groupId: this.groupId,
       },
+      style: {
+        maxWidth: '95%',
+      },
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
@@ -95,10 +101,13 @@ export class GroupMeetingsComponent {
   openRange() {
     const ref = this.dialogService.open(RangeMeetingComponent, {
       header: this.translate.instant('Schedule meetings'),
-      width: '70%',
+      width: this.isMobile() ? '95%': '70%',
       height: '90%',
       data: {
         groupId: this.groupId,
+      },
+      style: {
+        maxWidth: '95%',
       },
     });
     ref.onClose.subscribe((e: any) => {
@@ -106,5 +115,10 @@ export class GroupMeetingsComponent {
         this.service.getAllMeetings();
       }
     });
+  }
+
+  isMobile(): boolean {
+    console.log(window.matchMedia('(max-width: 1160px)').matches)
+    return window.matchMedia('(max-width: 1160px)').matches;
   }
 }

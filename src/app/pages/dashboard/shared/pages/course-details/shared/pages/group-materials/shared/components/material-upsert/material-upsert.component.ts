@@ -1,12 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MaterialUpsertService } from './material-upsert.service';
-import { TopicMaterialModel } from '../../../../../models/topic-material.model';
+import { TopicMaterialModel } from '../../../../../../../../models/topic-material.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
-import { KnownLanguagesResponseModel } from '../../../../../../../known-languages/shared/models/known-languages-response.model';
-import { SubtopicModel } from '../../../../../models/subtopic.model';
+import { KnownLanguagesResponseModel } from '../../../../../../../../../../known-languages/shared/models/known-languages-response.model';
+import { SubtopicModel } from '../../../../../../../../models/subtopic.model';
 
 @Component({
   selector: 'app-material-upsert',

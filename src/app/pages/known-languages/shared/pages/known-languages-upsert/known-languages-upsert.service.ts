@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { SubscriptionPackageApiService } from '../../../../subscription-package/shared/services/subscription-package.api.service';
 import { KnownLanguagesUpsertComponent } from './known-languages-upsert.component';
 import { KnownLanguagesApiService } from '../../services/known-languages.api.service';
-import {BlobService} from '../../../../../core/services/blob.service';
-import {FileModel} from '../../../../../core/models/File.model';
+import { BlobService } from '../../../../../core/services/blob.service';
+import { FileModel } from '../../../../../core/models/File.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +22,8 @@ export class KnownLanguagesUpsertService {
   private getForm() {
     this.service.GetForm(this.service.serviceUrl).subscribe((resp) => {
       this.component.request = resp.data;
-      this.component.request.icon = new FileModel()
-      this.component.request.icon.isValid =true;
+      this.component.request.icon = new FileModel();
+      this.component.request.icon.isValid = true;
       this.component.request.name.items.map((x) => (x.isValid = true));
     });
   }
@@ -40,6 +40,10 @@ export class KnownLanguagesUpsertService {
   save() {
     if (this.isValid())
       this.component.id === 'create' ? this.create() : this.update();
+    else
+      this.component.message.showTranslatedWarningMessage(
+        'Fields are not valid',
+      );
   }
 
   private create() {
@@ -72,10 +76,16 @@ export class KnownLanguagesUpsertService {
 
   private isValid() {
     let result = true;
+    if (!this.component.request.icon.fileUrl) {
+      this.component.request.icon.isValid = false;
+      result = false;
+    }
     this.component.request.name.items.forEach((x) => {
       if (!x.value) {
         result = false;
         x.isValid = false;
+      } else {
+        x.isValid = true;
       }
     });
     return result;

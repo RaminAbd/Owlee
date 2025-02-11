@@ -4,6 +4,9 @@
   flex-direction: column;
   gap: 30px;
   padding-top: 10px;
+  @media (max-width: 769px) {
+    width: 100%;
+  }
   .back {
     display: flex;
     gap: 20px;
@@ -11,6 +14,9 @@
     cursor: pointer;
     width: 720px;
     position: relative;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     i {
       color: #656668;
       position: absolute;
@@ -25,16 +31,25 @@
   .image {
     display: flex;
     gap: 20px;
+    @media (max-width: 769px) {
+      flex-direction: column;
+    }
     .main-image {
       width: 600px;
       max-height: 185px;
       border-radius: 8px;
       object-fit: cover;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
     }
     .actions {
       display: flex;
       flex-direction: column;
       gap: 10px;
+      @media (max-width: 769px) {
+        flex-direction: row;
+      }
       .item {
         display: flex;
         align-items: center;
@@ -87,6 +102,9 @@
   }
   .description {
     width: 600px;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     p {
       font-size: 14px;
       font-weight: 500;

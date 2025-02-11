@@ -27,7 +27,24 @@ export class SubscriptionPackageUpsertService {
   }
 
   save() {
-    this.component.id === 'create' ? this.create() : this.update();
+    if (this.isValid())
+      this.component.id === 'create' ? this.create() : this.update();
+    else this.component.message.showTranslatedWarningMessage('Fields are not valid');
+  }
+
+  isValid() {
+    let result: boolean = true;
+    if (
+      !this.component.request.name ||
+      !this.component.request.price ||
+      !this.component.request.maxCapacity ||
+      !this.component.request.courseAmount ||
+      !this.component.request.groupPerCourse ||
+      !this.component.request.peoplePerGroup
+    ) {
+      result = false;
+    }
+    return result;
   }
 
   private create() {

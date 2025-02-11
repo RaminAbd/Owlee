@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="input-item">
+      <label for="name">{{ "Subtopic name" | translate }}</label>
+      <input type="text" id="name" [(ngModel)]="topic.subTopic.name" />
+    </div>
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="save()">{{ "Save" | translate }}</button>
+  </div>
+</div>

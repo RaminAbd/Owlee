@@ -28,6 +28,9 @@ export class GroupMembersService {
       header: this.translate.instant('Add member'),
       width: '460px',
       data: this.component.groupId,
+      style: {
+        maxWidth: '95%',
+      },
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
