@@ -68,7 +68,7 @@
                   <p>{{ task.courseName }}</p>
                 </div>
                 <div class="task">
-                  <p>+{{ day.tasks.length - 2 }} More</p>
+                  <p>+{{ day.tasks.length - 2 }} {{ 'More' | translate }}</p>
                 </div>
               </div>
 
@@ -80,7 +80,7 @@
 
               <div class="mobile tasks" *ngIf="day.tasks.length > 1">
                 <div class="task">
-                  <p>{{ day.tasks.length }} Tasks</p>
+                  <p>{{ day.tasks.length }} {{ 'Tasks' | translate }}</p>
                 </div>
               </div>
             </div>

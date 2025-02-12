@@ -5,10 +5,10 @@
   <div class="home-content">
     <section id="first">
       <div class="heading">
-        <p>Learn. Grow. Succeed.</p>
-        <h1>Make your course more valuable!</h1>
+        <p>{{ "Learn.Grow.Succeed." | translate }}</p>
+        <h1>{{ "Make your course more valuable!" | translate }}</h1>
         <button routerLink="sign-up">
-          Sign up
+          {{ "Sign up" | translate }}
           <i class="pi pi-arrow-right"></i>
         </button>
       </div>
@@ -24,8 +24,10 @@
         <div class="image-container comp">
           <div class="left">
             <p class="text-block">
-              Owlee simplifies teaching processes, enabling educators to
-              efficiently manage classes and materials
+              {{
+                "Owlee simplifies teaching processes, enabling educators to efficiently manage classes and materials"
+                  | translate
+              }}
             </p>
             <div class="imgs">
               <img
@@ -48,8 +50,10 @@
         <div class="image-container mobile">
           <div class="txt">
             <p class="text-block">
-              Owlee simplifies teaching processes, enabling educators to
-              efficiently manage classes and materials
+              {{
+                "Owlee simplifies teaching processes, enabling educators to efficiently manage classes and materials"
+                  | translate
+              }}
             </p>
           </div>
           <div class="imgs">
@@ -72,16 +76,10 @@
     <section id="third">
       <div class="txt">
         <p>
-          Owlee is a user-friendly Learning Management System (LMS) designed
-          specifically for independent educators, tutors, and small training
-          businesses. It provides an all-in-one platform to simplify course
-          management, enhance student engagement. With Owlee, educators can
-          efficiently manage their courses anytime, anywhere through a
-          responsive mobile interface, ensuring seamless access to lesson
-          planning, student tracking, and material distribution. By automating
-          administrative tasks, Owlee helps educators save valuable time and
-          resources, allowing them to focus more on delivering high-quality
-          learning experiences. 
+          {{
+            "Owlee is a user - friendly Learning Management System(LMS) designed specifically for independent educators, tutors, and small training businesses.It provides an all - in - one platform to simplify course management, enhance student engagement.With Owlee, educators can efficiently manage their courses anytime, anywhere through a responsive mobile interface, ensuring seamless access to lesson planning, student tracking, and material distribution. By automating administrative tasks, Owlee helps educators save valuable time and resources, allowing them to focus more on delivering high - quality learning experiences."
+              | translate
+          }}
         </p>
       </div>
       <div class="counts">
@@ -95,7 +93,7 @@
             </div>
             <div class="info">
               <p>200</p>
-              <label>Students</label>
+              <label>{{ "Students" | translate }}</label>
             </div>
           </div>
           <div class="item">
@@ -107,7 +105,7 @@
             </div>
             <div class="info">
               <p>20</p>
-              <label>Courses</label>
+              <label>{{ "Courses" | translate }}</label>
             </div>
           </div>
           <div class="item">
@@ -119,7 +117,7 @@
             </div>
             <div class="info">
               <p>15</p>
-              <label>Teachers</label>
+              <label>{{ "Teachers" | translate }}</label>
             </div>
           </div>
         </div>
@@ -127,19 +125,25 @@
     </section>
     <section id="fourth">
       <div class="heading">
-        <h2>Services</h2>
+        <h2>{{ "Services" | translate }}</h2>
         <p>
-          Enhancing the overall learning experience for both educators and
-          students.
+          {{
+            "Enhancing the overall learning experience for both educators and students."
+              | translate
+          }}
         </p>
       </div>
       <div class="items">
         <div class="item r">
           <div class="txt">
-            <h4>Lecture Scheduling & Calendar Integration</h4>
+            <h4>
+              {{ "Lecture Scheduling & Calendar Integration" | translate }}
+            </h4>
             <p>
-              Plan and organize lessons with an intuitive scheduling system,
-              ensuring students stay updated with class timings.
+              {{
+                "Plan and organize lessons with an intuitive scheduling system, ensuring students stay updated with class timings."
+                  | translate
+              }}
             </p>
           </div>
           <div class="image">
@@ -151,10 +155,12 @@
         </div>
         <div class="item l">
           <div class="txt">
-            <h4>Student Management</h4>
+            <h4>{{ "Student Management" | translate }}</h4>
             <p>
-              Easily track student progress, attendance, and performance through
-              a centralized dashboard.
+              {{
+                "Easily track student progress, attendance, and performance through a centralized dashboard."
+                  | translate
+              }}
             </p>
           </div>
           <div class="image">
@@ -166,10 +172,12 @@
         </div>
         <div class="item r">
           <div class="txt">
-            <h4>Material Management</h4>
+            <h4>{{ "Material Management" | translate }}</h4>
             <p>
-              Upload, organize, and distribute learning resources, including
-              PDFs, videos, and interactive content.
+              {{
+                "Upload, organize, and distribute learning resources, including PDFs, videos, and interactive content."
+                  | translate
+              }}
             </p>
           </div>
           <div class="image">
@@ -183,10 +191,12 @@
     </section>
     <section id="fifth">
       <div class="heading">
-        <h2>Choose your right plan!</h2>
+        <h2>{{ "Choose your right plan!" | translate }}</h2>
         <p>
-          Select from best plans, ensuring a perfect match. Need more or less?
-          Customize your subscription for a seamless fit!
+          {{
+            "Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!"
+              | translate
+          }}
         </p>
       </div>
       <div class="items">
@@ -196,8 +206,8 @@
           </div>
           <div class="descr">
             <p>
-              Ideal for these who’ve got
-              {{ item.maxCapacity }} students.
+              {{ "Recommended for those who’ve got" | translate }}
+              {{ item.maxCapacity }} {{ "students" | translate }}.
             </p>
           </div>
           <div class="price">
@@ -208,20 +218,24 @@
           <div class="features">
             <div class="f-item">
               <img src="d-check.svg" alt="" />
-              <p>{{ item.courseAmount }} Courses</p>
+              <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
             </div>
             <div class="f-item">
               <img src="d-check.svg" alt="" />
-              <p>{{ item.groupPerCourse }} Groups per course</p>
+              <p>
+                {{ item.groupPerCourse }} {{ "Groups per course" | translate }}
+              </p>
             </div>
             <div class="f-item">
               <img src="d-check.svg" alt="" />
-              <p>{{ item.peoplePerGroup }} Students per group</p>
+              <p>
+                {{ item.peoplePerGroup }} {{ "Students per group" | translate }}
+              </p>
             </div>
           </div>
           <div class="btn">
-            <button  routerLink="sign-up">
-              {{ "Get started" }}
+            <button routerLink="sign-up">
+              {{ "Get started" | translate }}
             </button>
           </div>
         </div>
@@ -229,8 +243,8 @@
     </section>
     <section id="sixth">
       <div class="heading">
-        <h2>Got a question?</h2>
-        <p>Fill in the form to get your answer</p>
+        <h2>{{ "Got a question ?" | translate }}</h2>
+        <p>{{ "Fill in the form to get your answer" | translate }}</p>
       </div>
       <div class="links">
         <div class="items">
@@ -257,29 +271,31 @@
         </div>
         <form>
           <div class="input-item">
-            <label for="name">Full name</label>
+            <label for="name">{{ "Full name" | translate }}</label>
             <input type="text" id="name" />
           </div>
           <div class="input-item">
-            <label for="mail">Email</label>
+            <label for="mail">{{ "Email" | translate }}</label>
             <input type="text" id="mail" />
           </div>
           <div class="input-item">
-            <label for="message">Message</label>
+            <label for="message">{{ "Message" | translate }}</label>
             <textarea type="text" id="message"></textarea>
           </div>
           <div class="btn">
-            <button>Send</button>
+            <button>{{ "Send" | translate }}</button>
           </div>
         </form>
       </div>
     </section>
     <section id="seventh">
       <div class="heading">
-        <h2>Our team</h2>
+        <h2>{{ "Our team" | translate }}</h2>
         <p>
-          Hire great people and give them the resources and support to do their
-          best work
+          {{
+            "Hire great people and give them the resources and support to do their best work"
+              | translate
+          }}
         </p>
       </div>
       <div class="items">
@@ -336,14 +352,28 @@
     <footer>
       <div class="top">
         <div class="txt">
-          <h5>Make your course more valuable!</h5>
+          <h5>{{ "Make your course more valuable!" | translate }}</h5>
         </div>
         <nav>
           <ul>
-            <li><a href="#first" aria-label="home">Home</a></li>
-            <li><a href="#fourth" aria-label="services">Services</a></li>
-            <li><a href="#fifth" aria-label="packages">Packages</a></li>
-            <li><a href="#sixth" aria-label="contact">Contact Us</a></li>
+            <li>
+              <a href="#first" aria-label="home">{{ "Home" | translate }}</a>
+            </li>
+            <li>
+              <a href="#fourth" aria-label="services">{{
+                "Services" | translate
+              }}</a>
+            </li>
+            <li>
+              <a href="#fifth" aria-label="packages">{{
+                "Packages" | translate
+              }}</a>
+            </li>
+            <li>
+              <a href="#sixth" aria-label="contact">{{
+                "Contact Us" | translate
+              }}</a>
+            </li>
           </ul>
         </nav>
       </div>

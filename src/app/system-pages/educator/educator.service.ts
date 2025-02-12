@@ -18,7 +18,9 @@ export class EducatorService {
     let userId: string = localStorage.getItem('userId') as string;
     this.service.GetStatus(userId).subscribe((resp) => {
       if (!resp.data.isShown) {
-        this.openExpirationDialog(resp.data);
+        if (resp.data.days <= 3) {
+          this.openExpirationDialog(resp.data);
+        }
       }
     });
   }
