@@ -9,7 +9,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-home-header',
-  imports: [NgForOf, NgIf, TranslatePipe, RouterLink, RouterLinkActive],
+  imports: [NgIf, TranslatePipe, RouterLink],
   templateUrl: './home-header.component.html',
   styleUrl: './home-header.component.scss',
   animations: [

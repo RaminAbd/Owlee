@@ -9,7 +9,6 @@ import { EducatorChildrenRoutes } from './system-pages/educator/shared/models/ed
 import { StudentSignUpComponent } from './auth/student-sign-up/student-sign-up.component';
 import { StudentChildrenRoutes } from './system-pages/student/shared/models/student-children-routes';
 import { HomeComponent } from './pages/home/home.component';
-import { TransactionResultComponent } from './pages/transaction-result/transaction-result.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

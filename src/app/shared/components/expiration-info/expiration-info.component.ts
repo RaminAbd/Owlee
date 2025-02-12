@@ -5,7 +5,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-expiration-info',
-  imports: [NgForOf, TranslatePipe, NgIf],
+  imports: [TranslatePipe, NgIf],
   templateUrl: './expiration-info.component.html',
   styleUrl: './expiration-info.component.scss',
 })

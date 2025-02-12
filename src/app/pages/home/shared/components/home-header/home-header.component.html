@@ -5,9 +5,10 @@
   <div class="lang-info">
     <nav>
       <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Packages</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#first" aria-label="home">Home</a></li>
+        <li><a href="#fourth" aria-label="services">Services</a></li>
+        <li><a href="#fifth" aria-label="packages">Packages</a></li>
+        <li><a href="#sixth" aria-label="contact">Contact Us</a></li>
       </ul>
     </nav>
     <span class="link lang-s" (click)="langOpen = !langOpen">
@@ -55,9 +56,10 @@
     <div class="nav-links">
       <div class="nav">
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Packages</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#first" aria-label="home" (click)="closeBurger()">Home</a></li>
+          <li><a href="#fourth" aria-label="services" (click)="closeBurger()">Services</a></li>
+          <li><a href="#fifth" aria-label="packages" (click)="closeBurger()">Packages</a></li>
+          <li><a href="#sixth" aria-label="contact" (click)="closeBurger()">Contact Us</a></li>
         </ul>
       </div>
       <div class="lang-info">
