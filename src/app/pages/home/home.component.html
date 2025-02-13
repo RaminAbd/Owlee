@@ -269,21 +269,40 @@
             alt=""
           />
         </div>
-        <form>
+        <form  [formGroup]="form">
           <div class="input-item">
             <label for="name">{{ "Full name" | translate }}</label>
-            <input type="text" id="name" />
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              [class.invalid]="!form.get('name')?.value && isSubmitted"
+            />
           </div>
           <div class="input-item">
-            <label for="mail">{{ "Email" | translate }}</label>
-            <input type="text" id="mail" />
+            <label for="email">{{ "Email" | translate }}</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              [class.invalid]="
+                form.get('email')?.hasError('pattern') ||
+                (!form.get('email')?.value && isSubmitted) ||
+                form.get('email')?.hasError('incorrect')
+              "
+            />
           </div>
           <div class="input-item">
             <label for="message">{{ "Message" | translate }}</label>
-            <textarea type="text" id="message"></textarea>
+            <textarea
+              type="text"
+              id="message"
+              formControlName="message"
+              [class.invalid]="!form.get('message')?.value && isSubmitted"
+            ></textarea>
           </div>
           <div class="btn">
-            <button>{{ "Send" | translate }}</button>
+            <button (click)="send()">{{ "Send" | translate }}</button>
           </div>
         </form>
       </div>
