@@ -70,6 +70,9 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        @media (max-width: 769px) {
+          margin-top: -45px;
+        }
         img {
           width: 150%;
         }
