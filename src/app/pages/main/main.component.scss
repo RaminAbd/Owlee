@@ -9,6 +9,8 @@
     width: calc(100%);
     height: calc(100svh - 81px);
     overflow: auto;
+    overflow-x: hidden;
+    padding-bottom: 50px;
     //padding: 54px 74px 54px 65px;
 
   }

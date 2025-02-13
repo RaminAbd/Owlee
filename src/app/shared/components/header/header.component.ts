@@ -108,6 +108,7 @@ export class HeaderComponent {
     var questPages = document.querySelector('.burger') as Element;
     if (this.showMenu) {
       questPages.classList.add('active');
+
     } else {
       questPages.classList.remove('active');
     }
