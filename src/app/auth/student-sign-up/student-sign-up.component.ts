@@ -15,7 +15,7 @@ import { KnownLanguagesResponseModel } from '../../pages/known-languages/shared/
 import { EducatorSignupRequestModel } from '../sign-up/shared/models/educator-signup-request.model';
 import { AnimationItem } from 'lottie-web';
 import { StudentSignUpService } from './student-sign-up.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { StudentSignupRequestModel } from './shared/models/student-signup-request.model';
 
 @Component({
@@ -29,6 +29,7 @@ import { StudentSignupRequestModel } from './shared/models/student-signup-reques
     NgClass,
     MultiSelect,
     LottieComponent,
+    RouterLink,
   ],
   templateUrl: './student-sign-up.component.html',
   styleUrl: './student-sign-up.component.scss',

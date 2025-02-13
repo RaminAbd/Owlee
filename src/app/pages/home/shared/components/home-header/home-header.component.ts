@@ -40,8 +40,6 @@ export class HomeHeaderComponent {
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private translate: TranslateService = inject(TranslateService);
   pageTitle: string = 'Owlee';
-  @Input() links: any[] = [];
-  @Input() personalInfoURL: string;
   langOpen: boolean = false;
   selectedLang: string = 'en-Us';
   langsToShow: any[] = [];
@@ -107,12 +105,5 @@ export class HomeHeaderComponent {
     questPages.classList.remove('active');
   }
 
-  sanitize(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  }
 
-  logout() {
-    this.signInService.logout();
-    this.router.navigate(['/auth']);
-  }
 }

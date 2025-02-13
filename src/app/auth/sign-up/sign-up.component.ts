@@ -24,6 +24,7 @@ import { EducatorQualificationModel } from './shared/models/educator-qualificati
 import { FileModel } from '../../core/models/File.model';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -37,6 +38,7 @@ import { AnimationItem } from 'lottie-web';
     MultiSelect,
     NgForOf,
     LottieComponent,
+    RouterLink,
   ],
   templateUrl: './sign-up.component.html',
   animations: [

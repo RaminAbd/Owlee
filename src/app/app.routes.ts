@@ -11,10 +11,14 @@ import { StudentChildrenRoutes } from './system-pages/student/shared/models/stud
 import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'student-sign-up/:id', component: StudentSignUpComponent },
+  { path: '', component: HomeComponent, data: { title: 'Home' } },
+  { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
+  { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign up' } },
+  {
+    path: 'student-sign-up/:id',
+    component: StudentSignUpComponent,
+    data: { title: 'Sign up' },
+  },
   {
     path: 'main',
     canActivate: [MainPageGuard],
