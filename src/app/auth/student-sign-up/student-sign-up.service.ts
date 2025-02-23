@@ -1,12 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { SignUpComponent } from '../sign-up/sign-up.component';
-import { EducatorsApiService } from '../../pages/educators/shared/services/educators.api.service';
-import { AccountsApiService } from '../shared/services/accounts.api.service';
-import { LanguageService } from '../../core/services/language.service';
-import { BlobService } from '../../core/services/blob.service';
 import { KnownLanguagesApiService } from '../../pages/known-languages/shared/services/known-languages.api.service';
 import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
-import { VerificationApiService } from '../shared/services/verification.api.service';
 import { AuthApiService } from '../shared/services/auth.api.service';
 import { AuthService } from '../sign-in/auth.service';
 import { TranslateService } from '@ngx-translate/core';

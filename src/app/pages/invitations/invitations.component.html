@@ -1,0 +1,33 @@
+<div class="course-info">
+  <div class="content">
+    <div class="heading">
+      <div class="search">
+        <p>{{ invitations.length + " " + "Invitations" }}</p>
+        <div class="search-block">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="{{ 'Search' }}..."
+            (input)="searchByName()"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <div class="item" *ngFor="let item of filteredList">
+        <div class="col">
+          <label>{{ "Course" }}</label>
+          <p>{{ item.courseName }}</p>
+        </div>
+        <div class="col">
+          <label>{{ "Group" }}</label>
+          <p>{{ item.groupName }}</p>
+        </div>
+
+        <button (click)="accept(item.id)">Accept</button>
+        <button style="background: #EF3838;margin-left:15px;" class="reject" (click)="reject(item.id)">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -20,7 +20,7 @@ import {AuthService} from '../../../auth/sign-in/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [TranslatePipe, NgIf, RouterLink, NgForOf, RouterLinkActive],
+  imports: [TranslatePipe, NgIf, RouterLink, NgForOf, RouterLinkActive, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
@@ -28,20 +28,19 @@ import {AuthService} from '../../../auth/sign-in/auth.service';
       state(
         'open',
         style({
-          width: '*', // Fully expanded
+          width: '*',
           visibility: 'visible',
+          display: 'block',
         }),
       ),
       state(
         'closed',
         style({
-          width: '0px', // Collapsed
+          width: '0px',
           visibility: 'hidden',
         }),
       ),
-      transition('open <=> closed', [
-        animate('500ms ease-in-out'), // Animate height change
-      ]),
+      transition('open <=> closed', [animate('500ms ease-in-out')]),
     ]),
   ],
 })
@@ -52,6 +51,7 @@ export class HeaderComponent {
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private translate: TranslateService = inject(TranslateService);
   pageTitle: string = 'Owlee';
+  isHidden = false;
   @Input() links: any[] = [];
   @Input() personalInfoURL: string;
   langOpen: boolean = false;
@@ -122,6 +122,12 @@ export class HeaderComponent {
 
   sanitize(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  onAnimationDone() {
+    if (!this.showMenu) {
+      this.isHidden = true;
+    }
   }
 
   logout() {

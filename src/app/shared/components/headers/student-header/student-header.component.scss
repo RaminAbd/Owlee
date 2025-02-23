@@ -245,3 +245,16 @@ nav {
 .hidden {
   display: none;
 }
+.bell{
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  .dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    background: red;
+    position: absolute;
+    right: 0;
+  }
+}

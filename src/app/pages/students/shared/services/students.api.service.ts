@@ -15,4 +15,15 @@ export class StudentsApiService extends BaseCrudApiService {
   SignUp(req: any) {
     return this.post(this.serviceUrl + 'SignUp', req);
   }
+
+  GetInvitations(req:any) {
+    return this.get(this.serviceUrl + 'GetInvitations/', null, req);
+  }
+
+  Accept(req: any) {
+    return this.post(this.serviceUrl + 'AcceptInvitation', req);
+  }
+  Reject(req: any) {
+    return this.post(this.serviceUrl + 'RejectInvitation', req);
+  }
 }

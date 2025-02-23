@@ -66,7 +66,8 @@
       <span></span>
     </div>
   </div>
-  <nav [@menuExpand]="showMenu ? 'open' : 'closed'">
+  <nav (@menuExpand.done)="onAnimationDone()"
+       [ngClass]="{ hidden: isHidden }"  [@menuExpand]="showMenu ? 'open' : 'closed'">
     <div class="nav-links">
       <div class="nav">
         <ul>

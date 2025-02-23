@@ -8,7 +8,7 @@ import {NavigationBarComponent} from '../../navigation-bar/navigation-bar.compon
   styles: ``,
 })
 export class StudentNavigationBarComponent {
-  links: any[] = [
+  public links: any[] = [
     {
       name: 'Dashboard',
       url: 'student/dashboard',

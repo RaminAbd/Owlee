@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive} from '@angular/router';
@@ -9,7 +9,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-home-header',
-  imports: [NgIf, TranslatePipe, RouterLink],
+  imports: [NgIf, TranslatePipe, RouterLink, NgClass],
   templateUrl: './home-header.component.html',
   styleUrl: './home-header.component.scss',
   animations: [
@@ -17,20 +17,19 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       state(
         'open',
         style({
-          width: '*', // Fully expanded
+          width: '*',
           visibility: 'visible',
+          display: 'block',
         }),
       ),
       state(
         'closed',
         style({
-          width: '0px', // Collapsed
+          width: '0px',
           visibility: 'hidden',
         }),
       ),
-      transition('open <=> closed', [
-        animate('500ms ease-in-out'), // Animate height change
-      ]),
+      transition('open <=> closed', [animate('500ms ease-in-out')]),
     ]),
   ],
 })
@@ -43,6 +42,7 @@ export class HomeHeaderComponent {
   langOpen: boolean = false;
   selectedLang: string = 'en-Us';
   langsToShow: any[] = [];
+  isHidden = false;
   langs = [
     { name: 'Georgian', value: 'ka-Geo' },
     { name: 'English', value: 'en-Us' },
@@ -105,5 +105,9 @@ export class HomeHeaderComponent {
     questPages.classList.remove('active');
   }
 
-
+  onAnimationDone() {
+    if (!this.showMenu) {
+      this.isHidden = true;
+    }
+  }
 }

@@ -9,23 +9,27 @@
       <span class="dropdown-block" *ngIf="langOpen">
         <span class="items">
           <span class="link item" (click)="selectLang('en-Us')">{{
-            "English" | translate
-          }}</span>
+              "English" | translate
+            }}</span>
           <span class="link item" (click)="selectLang('ka-Geo')">{{
-            "Georgian" | translate
-          }}</span>
+              "Georgian" | translate
+            }}</span>
           <span class="link item" (click)="selectLang('az-Aze')">{{
-            "Azerbaijani" | translate
-          }}</span>
+              "Azerbaijani" | translate
+            }}</span>
           <span class="link item" (click)="selectLang('ru-Ru')">{{
-            "Russian" | translate
-          }}</span>
+              "Russian" | translate
+            }}</span>
           <span class="link item" (click)="selectLang('tr-Tr')">{{
-            "Turkish" | translate
-          }}</span>
+              "Turkish" | translate
+            }}</span>
         </span>
       </span>
     </span>
+    <a class="bell" routerLink="/main/student/invitations">
+      <div class="dot" *ngIf="invitations.length > 0"></div>
+      <i class="pi pi-bell"></i>
+    </a>
     <a *ngIf="personalInfoURL" [routerLink]="personalInfoURL" class="info">
       <svg
         width="40"
@@ -135,20 +139,20 @@
           <span class="dropdown-block" *ngIf="langOpen">
             <span class="items">
               <span class="link item" (click)="closeBurger(); selectLang('en-Us')">{{
-                "English" | translate
-              }}</span>
+                  "English" | translate
+                }}</span>
               <span class="link item" (click)="closeBurger(); selectLang('ka-Geo')">{{
-                "Georgian" | translate
-              }}</span>
+                  "Georgian" | translate
+                }}</span>
               <span class="link item" (click)="closeBurger(); selectLang('az-Aze')">{{
-                "Azerbaijani" | translate
-              }}</span>
+                  "Azerbaijani" | translate
+                }}</span>
               <span class="link item" (click)="closeBurger(); selectLang('ru-Ru')">{{
-                "Russian" | translate
-              }}</span>
+                  "Russian" | translate
+                }}</span>
               <span class="link item" (click)="closeBurger(); selectLang('tr-Tr')">{{
-                "Turkish" | translate
-              }}</span>
+                  "Turkish" | translate
+                }}</span>
             </span>
           </span>
         </span>

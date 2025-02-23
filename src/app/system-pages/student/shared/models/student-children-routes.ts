@@ -7,6 +7,7 @@ import {
 } from '../../../../pages/student-dashboard/shared/pages/student-course-details/student-course-details.component';
 import {StudentPersonalInfoComponent} from '../../../../pages/student-personal-info/student-personal-info.component';
 import {StudentCalendarComponent} from '../../../../pages/student-calendar/student-calendar.component';
+import {InvitationsComponent} from '../../../../pages/invitations/invitations.component';
 
 export class StudentChildrenRoutes {
   static children: Route[] = [
@@ -33,6 +34,13 @@ export class StudentChildrenRoutes {
       component: StudentPersonalInfoComponent,
       data: { title: 'Personal Information' },
     },
+
+    {
+      path: 'invitations',
+      component: InvitationsComponent,
+      data: { title: 'Invitations' },
+    },
+
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
