@@ -20,7 +20,7 @@ body {
   padding: 0;
   font-family: "Inter", serif;
   //background: #fff;
-  overflow: hidden;
+  //overflow: hidden;
   &.blocked {
     overflow: hidden !important;
   }
@@ -93,13 +93,13 @@ input {
 }
 
 .invalid {
-  border: 1px solid #ffc9c9 !important;
+  border: 1px solid #ff6868 !important;
   border-radius: 8px;
 }
 p-dropdown.invalid {
   //border: none !important;
   .p-dropdown {
-    border: 1px solid #ffc9c9 !important;
+    border: 1px solid #ff6868 !important;
   }
 }
 button {
@@ -534,7 +534,7 @@ button {
     pointer-events: all !important;
   }
   .invalid {
-    border: 1px solid #ffc9c9 !important;
+    border: 1px solid #ff6868 !important;
     border-radius: 8px;
   }
   p-datepicker{

@@ -40,6 +40,7 @@ export class KnownLanguagesUpsertComponent {
   }
 
   save() {
+    this.isSubmitted = true;
     this.service.save();
   }
 

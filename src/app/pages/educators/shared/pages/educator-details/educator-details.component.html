@@ -1,0 +1,451 @@
+<div class="wrapper">
+  <div class="tabs">
+    <div
+      class="item"
+      [ngClass]="{ selected: selectedTab === 1 }"
+      (click)="selectedTab = 1"
+    >
+      <p>{{ "Courses" | translate }}</p>
+    </div>
+    <div
+      class="item"
+      [ngClass]="{ selected: selectedTab === 2 }"
+      (click)="selectedTab = 2"
+    >
+      <p>{{ "Change information" | translate }}</p>
+    </div>
+  </div>
+  <div class="courses-wrapper" *ngIf="selectedTab === 1">
+    <div class="counts">
+      <div class="item">
+        <p>{{ response.coursesCount }}</p>
+        <label>{{ "My courses" | translate }}</label>
+      </div>
+      <div class="item">
+        <p>{{ response.groupsCount }}</p>
+        <label>{{ "Groups" | translate }}</label>
+      </div>
+      <div class="item">
+        <p>{{ response.studentCount }}</p>
+        <label>{{ "Students" | translate }}</label>
+      </div>
+    </div>
+
+    <div class="courses">
+      <div class="items komp">
+        <div
+          class="item"
+          *ngFor="let item of response.courses"
+          (click)="getInfo(item)"
+        >
+          <div class="image">
+            <img [src]="item.image" alt="" />
+          </div>
+          <div class="info">
+            <div class="name">
+              <p>{{ item.name }}</p>
+              <p class="lecturer">
+                {{ item.educatorFullName }}
+              </p>
+            </div>
+            <div class="lang">
+              <div class="img">
+                <img [src]="item.icon" alt="" />
+              </div>
+              <p>{{ item.language }}</p>
+            </div>
+            <div class="statistics">
+              <div class="st-item">
+                <label>{{ "Groups" | translate }}</label>
+                <div class="value">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="16"
+                    viewBox="0 0 17 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M5.76535 6.91842C6.68279 6.91842 7.56265 6.55397 8.21138 5.90524C8.86011 5.25651 9.22456 4.37665 9.22456 3.45921C9.22456 2.54177 8.86011 1.66191 8.21138 1.01318C7.56265 0.364451 6.68279 0 5.76535 0C4.84791 0 3.96805 0.364451 3.31932 1.01318C2.67059 1.66191 2.30614 2.54177 2.30614 3.45921C2.30614 4.37665 2.67059 5.25651 3.31932 5.90524C3.96805 6.55397 4.84791 6.91842 5.76535 6.91842ZM14.6056 4.61228C14.6056 5.22391 14.3626 5.81048 13.9301 6.24297C13.4976 6.67545 12.911 6.91842 12.2994 6.91842C11.6878 6.91842 11.1012 6.67545 10.6687 6.24297C10.2362 5.81048 9.99327 5.22391 9.99327 4.61228C9.99327 4.00065 10.2362 3.41408 10.6687 2.98159C11.1012 2.54911 11.6878 2.30614 12.2994 2.30614C12.911 2.30614 13.4976 2.54911 13.9301 2.98159C14.3626 3.41408 14.6056 4.00065 14.6056 4.61228ZM5.76535 7.68713C7.2974 7.68713 8.6903 8.15451 9.71423 8.81407C10.227 9.14461 10.6659 9.53435 10.9849 9.95945C11.2978 10.3784 11.5307 10.8819 11.5307 11.4208C11.5307 12.0012 11.2617 12.4662 10.8665 12.8022C10.4937 13.1173 10.0079 13.3218 9.50591 13.4625C8.49659 13.7446 7.16133 13.8368 5.76535 13.8368C4.36937 13.8368 3.03411 13.7446 2.02556 13.4625C1.52282 13.3218 1.03699 13.1173 0.664937 12.8022C0.268281 12.467 0 12.0012 0 11.4208C0 10.8811 0.23292 10.3784 0.545786 9.96022C0.864803 9.53435 1.30374 9.14385 1.81647 8.81484C2.8404 8.15374 4.2333 7.68713 5.76535 7.68713ZM12.2994 7.68713C13.3141 7.68713 14.235 8.02229 14.913 8.49505C15.5449 8.93552 16.143 9.63044 16.143 10.4322C16.143 10.8834 15.9485 11.257 15.6525 11.5284C15.3781 11.7805 15.0307 11.9343 14.6963 12.0357C14.0275 12.2379 13.1665 12.2994 12.2994 12.2994H12.1434C12.2433 12.0319 12.2994 11.7383 12.2994 11.4208C12.2994 10.6597 11.9742 9.99866 11.5999 9.49899C11.2263 9.0001 10.7312 8.56116 10.1785 8.1991C10.835 7.86296 11.5619 7.68749 12.2994 7.68713Z"
+                      fill="#13170C"
+                    />
+                  </svg>
+                  <p>{{ item.groupCount }}</p>
+                </div>
+              </div>
+              <div class="st-item">
+                <label>{{ "Materials" | translate }}</label>
+                <div class="value">
+                  <svg
+                    width="13"
+                    height="15"
+                    viewBox="0 0 13 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.7686 0C11.1577 0 11.5308 0.154553 11.8059 0.429659C12.081 0.704765 12.2356 1.07789 12.2356 1.46695V13.2025C12.2356 13.5916 12.081 13.9647 11.8059 14.2398C11.5308 14.5149 11.1577 14.6695 10.7686 14.6695H1.96695C1.57789 14.6695 1.20477 14.5149 0.929659 14.2398C0.654553 13.9647 0.5 13.5916 0.5 13.2025V1.46695C0.5 1.07789 0.654553 0.704765 0.929659 0.429659C1.20477 0.154553 1.57789 0 1.96695 0H10.7686ZM6.36779 8.06821H4.16737C3.97284 8.06821 3.78628 8.14549 3.64873 8.28304C3.51117 8.4206 3.4339 8.60716 3.4339 8.80169C3.4339 8.99622 3.51117 9.18278 3.64873 9.32033C3.78628 9.45788 3.97284 9.53516 4.16737 9.53516H6.36779C6.56232 9.53516 6.74888 9.45788 6.88644 9.32033C7.02399 9.18278 7.10127 8.99622 7.10127 8.80169C7.10127 8.60716 7.02399 8.4206 6.88644 8.28304C6.74888 8.14549 6.56232 8.06821 6.36779 8.06821ZM8.56821 4.40084H4.16737C3.98042 4.40105 3.80061 4.47263 3.66467 4.60097C3.52873 4.72931 3.44693 4.90471 3.43597 5.09133C3.42501 5.27796 3.48573 5.46172 3.60572 5.60508C3.72571 5.74844 3.89591 5.84058 4.08155 5.86266L4.16737 5.86779H8.56821C8.75516 5.86758 8.93497 5.796 9.07091 5.66766C9.20685 5.53933 9.28866 5.36393 9.29961 5.1773C9.31057 4.99068 9.24985 4.80691 9.12986 4.66355C9.00987 4.52019 8.83967 4.42806 8.65403 4.40598L8.56821 4.40084Z"
+                      fill="#13170C"
+                    />
+                  </svg>
+                  <p>{{ item.materialsCount }}</p>
+                </div>
+              </div>
+              <div class="st-item">
+                <label>{{ "Students" | translate }}</label>
+                <div class="value">
+                  <svg
+                    width="12"
+                    height="14"
+                    viewBox="0 0 12 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.73181 6.97119C6.64391 6.97119 7.51866 6.60886 8.16361 5.96391C8.80857 5.31895 9.1709 4.44421 9.1709 3.5321C9.1709 2.62 8.80857 1.74526 8.16361 1.1003C7.51866 0.455349 6.64391 0.0930176 5.73181 0.0930176C4.81971 0.0930176 3.94496 0.455349 3.30001 1.1003C2.65506 1.74526 2.29272 2.62 2.29272 3.5321C2.29272 4.44421 2.65506 5.31895 3.30001 5.96391C3.94496 6.60886 4.81971 6.97119 5.73181 6.97119ZM5.73181 7.73543C7.25494 7.73543 8.63975 8.20009 9.65772 8.85581C10.1675 9.18443 10.6039 9.5719 10.921 9.99453C11.2321 10.411 11.4636 10.9116 11.4636 11.4474C11.4636 12.0244 11.1961 12.4867 10.8033 12.8207C10.4327 13.134 9.94966 13.3373 9.45061 13.4772C8.44716 13.7577 7.11967 13.8494 5.73181 13.8494C4.34395 13.8494 3.01646 13.7577 2.01378 13.4772C1.51396 13.3373 1.03096 13.134 0.661069 12.8207C0.26672 12.4875 0 12.0244 0 11.4474C0 10.9109 0.231565 10.411 0.542611 9.99529C0.859772 9.5719 1.29615 9.18367 1.8059 8.85657C2.82387 8.19933 4.20868 7.73543 5.73181 7.73543Z"
+                      fill="#13170C"
+                    />
+                  </svg>
+                  <p>{{ item.studentCount }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="btn">
+              <button>
+                <i class="pi pi-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="items mobile">
+        <div
+          class="item"
+          *ngFor="let item of response.courses"
+          (click)="getInfo(item)"
+        >
+          <div class="image-name">
+            <div class="image">
+              <img [src]="item.image" alt="" />
+            </div>
+            <div class="name">
+              <p>{{ item.name }}</p>
+              <p class="lecturer">
+                {{ item.educatorFullName }}
+              </p>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="st-item">
+              <label>{{ "Group of" | translate }}</label>
+              <div class="value">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="16"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                >
+                  <path
+                    d="M5.76535 6.91842C6.68279 6.91842 7.56265 6.55397 8.21138 5.90524C8.86011 5.25651 9.22456 4.37665 9.22456 3.45921C9.22456 2.54177 8.86011 1.66191 8.21138 1.01318C7.56265 0.364451 6.68279 0 5.76535 0C4.84791 0 3.96805 0.364451 3.31932 1.01318C2.67059 1.66191 2.30614 2.54177 2.30614 3.45921C2.30614 4.37665 2.67059 5.25651 3.31932 5.90524C3.96805 6.55397 4.84791 6.91842 5.76535 6.91842ZM14.6056 4.61228C14.6056 5.22391 14.3626 5.81048 13.9301 6.24297C13.4976 6.67545 12.911 6.91842 12.2994 6.91842C11.6878 6.91842 11.1012 6.67545 10.6687 6.24297C10.2362 5.81048 9.99327 5.22391 9.99327 4.61228C9.99327 4.00065 10.2362 3.41408 10.6687 2.98159C11.1012 2.54911 11.6878 2.30614 12.2994 2.30614C12.911 2.30614 13.4976 2.54911 13.9301 2.98159C14.3626 3.41408 14.6056 4.00065 14.6056 4.61228ZM5.76535 7.68713C7.2974 7.68713 8.6903 8.15451 9.71423 8.81407C10.227 9.14461 10.6659 9.53435 10.9849 9.95945C11.2978 10.3784 11.5307 10.8819 11.5307 11.4208C11.5307 12.0012 11.2617 12.4662 10.8665 12.8022C10.4937 13.1173 10.0079 13.3218 9.50591 13.4625C8.49659 13.7446 7.16133 13.8368 5.76535 13.8368C4.36937 13.8368 3.03411 13.7446 2.02556 13.4625C1.52282 13.3218 1.03699 13.1173 0.664937 12.8022C0.268281 12.467 0 12.0012 0 11.4208C0 10.8811 0.23292 10.3784 0.545786 9.96022C0.864803 9.53435 1.30374 9.14385 1.81647 8.81484C2.8404 8.15374 4.2333 7.68713 5.76535 7.68713ZM12.2994 7.68713C13.3141 7.68713 14.235 8.02229 14.913 8.49505C15.5449 8.93552 16.143 9.63044 16.143 10.4322C16.143 10.8834 15.9485 11.257 15.6525 11.5284C15.3781 11.7805 15.0307 11.9343 14.6963 12.0357C14.0275 12.2379 13.1665 12.2994 12.2994 12.2994H12.1434C12.2433 12.0319 12.2994 11.7383 12.2994 11.4208C12.2994 10.6597 11.9742 9.99866 11.5999 9.49899C11.2263 9.0001 10.7312 8.56116 10.1785 8.1991C10.835 7.86296 11.5619 7.68749 12.2994 7.68713Z"
+                    fill="#13170C"
+                  />
+                </svg>
+                <p>{{ item.groupMemberCount }}</p>
+              </div>
+            </div>
+            <div class="st-item">
+              <label>{{ "Materials" | translate }}</label>
+              <div class="value">
+                <svg
+                  width="13"
+                  height="15"
+                  viewBox="0 0 13 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.7686 0C11.1577 0 11.5308 0.154553 11.8059 0.429659C12.081 0.704765 12.2356 1.07789 12.2356 1.46695V13.2025C12.2356 13.5916 12.081 13.9647 11.8059 14.2398C11.5308 14.5149 11.1577 14.6695 10.7686 14.6695H1.96695C1.57789 14.6695 1.20477 14.5149 0.929659 14.2398C0.654553 13.9647 0.5 13.5916 0.5 13.2025V1.46695C0.5 1.07789 0.654553 0.704765 0.929659 0.429659C1.20477 0.154553 1.57789 0 1.96695 0H10.7686ZM6.36779 8.06821H4.16737C3.97284 8.06821 3.78628 8.14549 3.64873 8.28304C3.51117 8.4206 3.4339 8.60716 3.4339 8.80169C3.4339 8.99622 3.51117 9.18278 3.64873 9.32033C3.78628 9.45788 3.97284 9.53516 4.16737 9.53516H6.36779C6.56232 9.53516 6.74888 9.45788 6.88644 9.32033C7.02399 9.18278 7.10127 8.99622 7.10127 8.80169C7.10127 8.60716 7.02399 8.4206 6.88644 8.28304C6.74888 8.14549 6.56232 8.06821 6.36779 8.06821ZM8.56821 4.40084H4.16737C3.98042 4.40105 3.80061 4.47263 3.66467 4.60097C3.52873 4.72931 3.44693 4.90471 3.43597 5.09133C3.42501 5.27796 3.48573 5.46172 3.60572 5.60508C3.72571 5.74844 3.89591 5.84058 4.08155 5.86266L4.16737 5.86779H8.56821C8.75516 5.86758 8.93497 5.796 9.07091 5.66766C9.20685 5.53933 9.28866 5.36393 9.29961 5.1773C9.31057 4.99068 9.24985 4.80691 9.12986 4.66355C9.00987 4.52019 8.83967 4.42806 8.65403 4.40598L8.56821 4.40084Z"
+                    fill="#13170C"
+                  />
+                </svg>
+                <p>{{ item.topicCount }}</p>
+              </div>
+            </div>
+            <div class="st-item">
+              <label>{{ "Language" | translate }}</label>
+              <div class="value">
+                <div class="img">
+                  <img [src]="item.icon" alt="" />
+                </div>
+                <p>{{ item.language }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form" *ngIf="selectedTab === 2">
+    <div class="image">
+      <div class="file-input profile">
+        <div
+          class="preview"
+          [ngClass]="{
+            invalid: !request.profileImage.isValid && isSubmitted,
+          }"
+        >
+          <img [src]="request.profileImage.fileUrl" alt="" />
+        </div>
+
+        <label class="file-label" for="file">
+          <svg
+            *ngIf="!request.profileImage.fileLoading"
+            width="16"
+            height="17"
+            viewBox="0 0 16 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 16.2875C1.45 16.2875 0.979333 16.0919 0.588 15.7005C0.196666 15.3092 0.000666667 14.8382 0 14.2875V12.2875C0 12.0042 0.0960001 11.7669 0.288 11.5755C0.48 11.3842 0.717333 11.2882 1 11.2875C1.28267 11.2869 1.52033 11.3829 1.713 11.5755C1.90567 11.7682 2.00133 12.0055 2 12.2875V14.2875H14V12.2875C14 12.0042 14.096 11.7669 14.288 11.5755C14.48 11.3842 14.7173 11.2882 15 11.2875C15.2827 11.2869 15.5203 11.3829 15.713 11.5755C15.9057 11.7682 16.0013 12.0055 16 12.2875V14.2875C16 14.8375 15.8043 15.3085 15.413 15.7005C15.0217 16.0925 14.5507 16.2882 14 16.2875H2ZM7 4.13754L5.125 6.01254C4.925 6.21254 4.68767 6.30854 4.413 6.30054C4.13833 6.29254 3.90067 6.18821 3.7 5.98754C3.51667 5.78754 3.42067 5.55421 3.412 5.28754C3.40333 5.02087 3.49933 4.78754 3.7 4.58754L7.3 0.987539C7.4 0.887539 7.50833 0.816873 7.625 0.77554C7.74167 0.734206 7.86667 0.713206 8 0.71254C8.13333 0.711873 8.25833 0.732873 8.375 0.77554C8.49167 0.818206 8.6 0.888873 8.7 0.987539L12.3 4.58754C12.5 4.78754 12.596 5.02087 12.588 5.28754C12.58 5.55421 12.484 5.78754 12.3 5.98754C12.1 6.18754 11.8627 6.29187 11.588 6.30054C11.3133 6.30921 11.0757 6.21321 10.875 6.01254L9 4.13754V11.2875C9 11.5709 8.904 11.8085 8.712 12.0005C8.52 12.1925 8.28267 12.2882 8 12.2875C7.71733 12.2869 7.48 12.1909 7.288 11.9995C7.096 11.8082 7 11.5709 7 11.2875V4.13754Z"
+              fill="#5A4BEA"
+            />
+          </svg>
+          <i
+            *ngIf="request.profileImage.fileLoading"
+            class="pi pi-spin pi-spinner"
+          ></i>
+          <p>
+            {{ "Change" | translate }}
+          </p>
+        </label>
+        <input
+          id="file"
+          type="file"
+          [(ngModel)]="request.profileImage.fakeFile"
+          (change)="getFile($event)"
+          multiple="false"
+          accept="image/*"
+        />
+      </div>
+    </div>
+    <div class="inputs">
+      <div class="row">
+        <div class="input-item">
+          <label for="firstName">{{ "First name" | translate }}</label>
+          <input
+            type="text"
+            id="firstName"
+            [(ngModel)]="request.firstName"
+            [class.invalid]="!request.firstName && isSubmitted"
+          />
+        </div>
+        <div class="input-item">
+          <label for="lastName">{{ "Last name" | translate }}</label>
+          <input
+            type="text"
+            id="lastName"
+            [(ngModel)]="request.lastName"
+            [class.invalid]="!request.lastName && isSubmitted"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="personalId">{{ "Personal Id" | translate }}</label>
+          <input
+            type="number"
+            id="personalId"
+            [(ngModel)]="request.personalId"
+            [class.invalid]="!request.personalId && isSubmitted"
+          />
+        </div>
+
+        <div class="input-item">
+          <label for="phoneNumber">{{ "Phone number" | translate }} </label>
+          <div class="mask">
+            <p>+995</p>
+            <input
+              type="number"
+              id="phoneNumber"
+              [(ngModel)]="request.phoneNumber"
+              [class.invalid]="!request.phoneNumber && isSubmitted"
+              (keydown)="onKeyDown($event)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-item">
+          <label for="email">{{ "Email" | translate }}</label>
+          <input
+            type="text"
+            id="email"
+            [disabled]="true"
+            [(ngModel)]="request.userName"
+          />
+        </div>
+        <div class="input-item">
+          <label for="courier">{{ "Known languages" | translate }}</label>
+          <p-multiSelect
+            id="courier"
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="knownLangs"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="request.systemLanguages"
+            [ngClass]="{
+              invalid: request.systemLanguages.length === 0 && isSubmitted,
+            }"
+            [filter]="true"
+          ></p-multiSelect>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-item">
+          <label for="location">{{ "Location" | translate }}</label>
+          <input type="text" id="location" [(ngModel)]="request.location" />
+        </div>
+        <div class="input-item">
+          <label for="password">{{ "New password" | translate }}</label>
+          <div class="block">
+            <input
+              [type]="passVisible ? 'text' : 'password'"
+              id="password"
+              [(ngModel)]="request.password"
+            />
+            <span>
+              <i
+                *ngIf="!passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye"
+              ></i>
+              <i
+                *ngIf="passVisible"
+                (click)="passVisible = !passVisible"
+                class="pi pi-eye-slash"
+              ></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-item" style="width: 100%">
+          <label class="label">{{ "Date of birth" | translate }}</label>
+          <div class="date-inputs" style="display: flex; gap: 5px">
+            <div class="input-block" style="flex: 1">
+              <p-dropdown
+                [style]="{ width: '100%', height: '40px' }"
+                [options]="days"
+                [(ngModel)]="selectedDay"
+                optionLabel="name"
+                [class.invalid]="(!selectedDay && isSubmitted) || dateInvalid"
+              ></p-dropdown>
+            </div>
+            <div class="input-block" style="flex: 3">
+              <p-dropdown
+                [style]="{ width: '100%', height: '40px' }"
+                [options]="months"
+                [(ngModel)]="selectedMonth"
+                optionLabel="name"
+                [class.invalid]="(!selectedMonth && isSubmitted) || dateInvalid"
+              ></p-dropdown>
+            </div>
+            <div class="input-block" style="flex: 2">
+              <p-dropdown
+                [style]="{ width: '100%', height: '40px' }"
+                [options]="years"
+                [(ngModel)]="selectedYear"
+                optionLabel="name"
+                [class.invalid]="(!selectedYear && isSubmitted) || dateInvalid"
+              ></p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="heading" (click)="addQualification()">
+        <label>{{ "Add Qualification" | translate }}</label>
+        <i class="pi pi-plus-circle"></i>
+      </div>
+      <div
+        class="row"
+        style="align-items: flex-end"
+        *ngFor="let item of request.qualifications; let i = index"
+      >
+        <div class="input-item">
+          <label for="qualifName{{ i }}">{{
+            "Qualification name" | translate
+          }}</label>
+          <input
+            type="text"
+            id="qualifName{{ i }}"
+            [(ngModel)]="item.title"
+            [class.invalid]="!item.title && isSubmitted"
+          />
+        </div>
+        <div class="input-item file-input">
+          <label>{{ "Qualification file" | translate }}</label>
+          <label
+            class="file-label"
+            for="fileq{{ i }}"
+            [ngClass]="{
+              invalid: !item.file.isValid && isSubmitted,
+            }"
+          >
+            <p *ngIf="!item.file.fileUrl && !item.file.fileLoading">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="200"
+                height="40"
+                viewBox="0 0 200 40"
+                fill="none"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M97.778 29H102.222C105.343 29 106.904 29 108.025 28.265C108.509 27.948 108.925 27.5389 109.251 27.061C110 25.961 110 24.428 110 21.364C110 18.299 110 16.767 109.251 15.667C108.925 15.1892 108.509 14.78 108.025 14.463C107.305 13.99 106.403 13.821 105.022 13.761C104.363 13.761 103.796 13.271 103.667 12.636C103.568 12.1709 103.312 11.7541 102.942 11.456C102.571 11.1579 102.109 10.9969 101.634 11H98.366C97.378 11 96.527 11.685 96.333 12.636C96.204 13.271 95.637 13.761 94.978 13.761C93.598 13.821 92.696 13.991 91.975 14.463C91.4916 14.7801 91.0754 15.1892 90.75 15.667C90 16.767 90 18.299 90 21.364C90 24.428 90 25.96 90.749 27.061C91.073 27.537 91.489 27.946 91.975 28.265C93.096 29 94.657 29 97.778 29ZM100 17.273C97.699 17.273 95.833 19.104 95.833 21.363C95.833 23.623 97.699 25.454 100 25.454C102.301 25.454 104.167 23.623 104.167 21.364C104.167 19.104 102.301 17.273 100 17.273ZM100 18.909C98.62 18.909 97.5 20.008 97.5 21.364C97.5 22.719 98.62 23.818 100 23.818C101.38 23.818 102.5 22.719 102.5 21.364C102.5 20.008 101.38 18.909 100 18.909ZM104.722 18.091C104.722 17.639 105.095 17.273 105.556 17.273H106.666C107.126 17.273 107.5 17.639 107.5 18.091C107.498 18.3099 107.409 18.5191 107.253 18.6724C107.097 18.8258 106.886 18.9109 106.667 18.909H105.556C105.448 18.9101 105.34 18.8898 105.239 18.8492C105.139 18.8087 105.047 18.7487 104.97 18.6728C104.892 18.5968 104.83 18.5064 104.788 18.4065C104.745 18.3067 104.723 18.1995 104.722 18.091Z"
+                  fill="#4B4B5A"
+                />
+              </svg>
+            </p>
+            <i *ngIf="item.file.fileLoading" class="pi pi-spin pi-spinner"></i>
+            <p *ngIf="item.file.fileUrl && !item.file.fileLoading">
+              {{ getFileName(item.file.fileName) }}
+            </p>
+          </label>
+          <input
+            id="fileq{{ i }}"
+            type="file"
+            [(ngModel)]="item.file.fakeFile"
+            (change)="getFiles($event, item)"
+            multiple="false"
+            accept="image/*"
+          />
+        </div>
+        <i
+          style="height: 40px"
+          class="pi pi-times-circle"
+          (click)="removeQualification(i)"
+        ></i>
+      </div>
+      <button type="button" (click)="validateFirstStep()">
+        {{ "Save" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="loading-back" *ngIf="mainLoading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

@@ -1,22 +1,20 @@
-import { Component, inject, OnDestroy } from '@angular/core';
-import { DropdownModule } from 'primeng/dropdown';
+import { Component, inject } from '@angular/core';
+import { StudentSignupRequestModel } from '../../../../../auth/student-sign-up/shared/models/student-signup-request.model';
+import { KnownLanguagesResponseModel } from '../../../../known-languages/shared/models/known-languages-response.model';
+import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
+import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { StudentDetailsService } from './student-details.service';
 import { MultiSelect } from 'primeng/multiselect';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
-import { EducatorSignupRequestModel } from '../../auth/sign-up/shared/models/educator-signup-request.model';
-import { KnownLanguagesResponseModel } from '../known-languages/shared/models/known-languages-response.model';
-import { EducatorQualificationModel } from '../../auth/sign-up/shared/models/educator-qualification.model';
-import { FileModel } from '../../core/models/File.model';
-import { AnimationItem } from 'lottie-web';
-import { StudentPersonalInfoService } from './student-personal-info.service';
-import {StudentSignupRequestModel} from '../../auth/student-sign-up/shared/models/student-signup-request.model';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudentDashboardResponseModel } from '../../../../student-dashboard/shared/models/student-dashboard-response.model';
+import { DashboardCourseModel } from '../../../../dashboard/shared/models/dashboard-course.model';
 
 @Component({
-  selector: 'app-student-personal-info',
+  selector: 'app-student-details',
   imports: [
-    DropdownModule,
     LottieComponent,
     MultiSelect,
     NgIf,
@@ -24,30 +22,29 @@ import {StudentSignupRequestModel} from '../../auth/student-sign-up/shared/model
     TranslatePipe,
     NgClass,
     FormsModule,
+    NgForOf,
   ],
-  templateUrl: './student-personal-info.component.html',
-  styleUrl: './student-personal-info.component.scss',
+  templateUrl: './student-details.component.html',
+  styleUrl: './student-details.component.scss',
 })
-export class StudentPersonalInfoComponent implements OnDestroy {
-  private service: StudentPersonalInfoService = inject(
-    StudentPersonalInfoService,
-  );
+export class StudentDetailsComponent {
+  private service: StudentDetailsService = inject(StudentDetailsService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
   request: StudentSignupRequestModel = new StudentSignupRequestModel();
+  response: StudentDashboardResponseModel = new StudentDashboardResponseModel();
   selectedTab: number = 1;
   isSubmitted = false;
   knownLangs: KnownLanguagesResponseModel[] = [];
-
-  oldPassVisible: boolean = false;
   passVisible: boolean = false;
-  repeatPassVisible: boolean = false;
-
   passSubmitted: boolean = false;
   langSubscribtion: any;
-
+  id: string = this.route.snapshot.paramMap.get('id') as string;
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
     this.service.getStudentInfo();
+    this.service.getDashboard();
 
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
@@ -65,11 +62,7 @@ export class StudentPersonalInfoComponent implements OnDestroy {
   validateFirstStep() {
     this.isSubmitted = true;
     this.service.save();
-  }
-
-  validatePasswords() {
-    this.passSubmitted = true;
-    if (this.service.validatePasswords()) {
+    if (this.request.password) {
       this.service.savePassword();
     }
   }
@@ -91,5 +84,9 @@ export class StudentPersonalInfoComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
+  }
+
+  getInfo(item: DashboardCourseModel) {
+    this.router.navigate(['/main/admin/courses/', item.id]);
   }
 }

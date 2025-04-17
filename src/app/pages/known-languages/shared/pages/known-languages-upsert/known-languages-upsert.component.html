@@ -11,16 +11,10 @@
           class="file-label"
           for="file"
           [ngClass]="{
-                    invalid:
-                      !request.icon.isValid,
-                  }"
+            invalid: !request.icon.isValid && isSubmitted,
+          }"
         >
-          <p
-            *ngIf="
-                      !request.icon.fileUrl &&
-                      !request.icon.fileLoading
-                    "
-          >
+          <p *ngIf="!request.icon.fileUrl && !request.icon.fileLoading">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="200"
@@ -36,16 +30,8 @@
               />
             </svg>
           </p>
-          <i
-            *ngIf="request.icon.fileLoading"
-            class="pi pi-spin pi-spinner"
-          ></i>
-          <p
-            *ngIf="
-                      request.icon.fileUrl &&
-                      !request.icon.fileLoading
-                    "
-          >
+          <i *ngIf="request.icon.fileLoading" class="pi pi-spin pi-spinner"></i>
+          <p *ngIf="request.icon.fileUrl && !request.icon.fileLoading">
             {{ getFileName(request.icon.fileName) }}
           </p>
         </label>
@@ -64,7 +50,7 @@
         <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
         <input
           type="text"
-          [ngClass]="{ invalid: !item.isValid || (!item.value || isSubmitted)}"
+          [ngClass]="{ invalid: !item.isValid && isSubmitted }"
           [(ngModel)]="item.value"
           placeholder="{{ item.languageName | translate }}"
         />

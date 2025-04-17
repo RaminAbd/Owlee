@@ -20,14 +20,14 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
           width: '*',
           visibility: 'visible',
           display: 'block',
-        }),
+        })
       ),
       state(
         'closed',
         style({
           width: '0px',
           visibility: 'hidden',
-        }),
+        })
       ),
       transition('open <=> closed', [animate('500ms ease-in-out')]),
     ]),
@@ -92,17 +92,22 @@ export class HomeHeaderComponent {
   toggleMenu() {
     this.showMenu = !this.showMenu;
     var questPages = document.querySelector('.burger') as Element;
+    var body = document.querySelector('body') as Element;
     if (this.showMenu) {
       questPages.classList.add('active');
+      body.classList.add('blocked');
     } else {
       questPages.classList.remove('active');
+      body.classList.remove('blocked');
     }
   }
 
   closeBurger() {
     this.showMenu = false;
     var questPages = document.querySelector('.burger') as Element;
+    var body = document.querySelector('body') as Element;
     questPages.classList.remove('active');
+    body.classList.remove('blocked');
   }
 
   onAnimationDone() {

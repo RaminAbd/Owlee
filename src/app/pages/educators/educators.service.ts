@@ -36,6 +36,7 @@ export class EducatorsService {
       { field: 'phoneNumber', header: 'Phone number' },
       { field: 'dateOfBirth', header: 'Date of birth' },
       { field: 'location', header: 'Location' },
+      { field: 'showActions', header: 'Actions' },
     ];
   }
 }

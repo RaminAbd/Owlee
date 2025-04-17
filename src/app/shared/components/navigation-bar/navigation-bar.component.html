@@ -1,6 +1,6 @@
 <div class="nav-bar-wrapper">
   <div class="heading">
-    <a routerLink="/"  class="logo">
+    <a [routerLink]="links[0].url" class="logo">
       <img src="text-logo.svg" alt="" />
     </a>
   </div>
@@ -39,7 +39,7 @@
           strokeLinejoin="round"
         />
       </svg>
-      <p>{{ 'Log out' | translate }}</p>
+      <p>{{ "Log out" | translate }}</p>
     </div>
   </div>
 </div>

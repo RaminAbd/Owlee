@@ -5,7 +5,7 @@
   <div class="home-content">
     <section id="first">
       <div class="heading">
-        <p>{{ "Learn.Grow.Succeed." | translate }}</p>
+        <p>{{ "Learn. Grow. Succeed." | translate }}</p>
         <h1>{{ "Make your course more valuable!" | translate }}</h1>
         <button routerLink="sign-up">
           {{ "Sign up" | translate }}
@@ -71,6 +71,7 @@
             />
           </div>
         </div>
+        <button class="join" routerLink="auth">{{ 'Join us' | translate }}</button>
       </div>
     </section>
     <section id="third">
@@ -152,6 +153,7 @@
               alt=""
             />
           </div>
+          <button class="join" routerLink="auth">{{ 'Join us' | translate }}</button>
         </div>
         <div class="item l">
           <div class="txt">
@@ -243,7 +245,7 @@
     </section>
     <section id="sixth">
       <div class="heading">
-        <h2>{{ "Got a question ?" | translate }}</h2>
+        <h2>{{ "Got a question?" | translate }}</h2>
         <p>{{ "Fill in the form to get your answer" | translate }}</p>
       </div>
       <div class="links">
@@ -269,7 +271,7 @@
             alt=""
           />
         </div>
-        <form  [formGroup]="form">
+        <form [formGroup]="form">
           <div class="input-item">
             <label for="name">{{ "Full name" | translate }}</label>
             <input
@@ -369,40 +371,44 @@
       </div>
     </section>
     <footer>
-      <div class="top">
-        <div class="txt">
-          <h5>{{ "Make your course more valuable!" | translate }}</h5>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="#first" aria-label="home">{{ "Home" | translate }}</a>
-            </li>
-            <li>
-              <a href="#fourth" aria-label="services">{{
-                "Services" | translate
-              }}</a>
-            </li>
-            <li>
-              <a href="#fifth" aria-label="packages">{{
-                "Packages" | translate
-              }}</a>
-            </li>
-            <li>
-              <a href="#sixth" aria-label="contact">{{
-                "Contact Us" | translate
-              }}</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
       <div class="bottom">
-        <div class="logo">
-          <img src="logo.svg" alt="" />
+        <div class="row2">
+          <div class="left">
+            <div class="logo">
+              <img src="logo.svg" alt="" />
+            </div>
+            <div class="name">
+              <p>Owlee</p>
+            </div>
+          </div>
+          <div class="right">
+            <nav>
+              <ul>
+                <li>
+                  <a href="#first" aria-label="home">{{
+                    "Home" | translate
+                  }}</a>
+                </li>
+                <li>
+                  <a href="#fourth" aria-label="services">{{
+                    "Services" | translate
+                  }}</a>
+                </li>
+                <li>
+                  <a href="#fifth" aria-label="packages">{{
+                    "Packages" | translate
+                  }}</a>
+                </li>
+                <li>
+                  <a href="#sixth" aria-label="contact">{{
+                    "Contact Us" | translate
+                  }}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <div class="name">
-          <p>Owlee</p>
-        </div>
+
         <div class="copy">
           <p>
             2022 © Blackbird | Designed and developed by Butterfly Effect LLC

@@ -28,6 +28,7 @@ export class StudentsService {
       { field: 'username', header: 'Email' },
       { field: 'phoneNumber', header: 'Phone number' },
       { field: 'location', header: 'Location' },
+      { field: 'showActions', header: 'Actions' },
     ];
   }
 }

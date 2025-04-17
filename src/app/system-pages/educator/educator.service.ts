@@ -19,7 +19,7 @@ export class EducatorService {
     this.service.GetStatus(userId).subscribe((resp) => {
       if (!resp.data.isShown) {
         if (resp.data.days <= 3) {
-          this.openExpirationDialog(resp.data);
+          // this.openExpirationDialog(resp.data);
         }
       }
     });

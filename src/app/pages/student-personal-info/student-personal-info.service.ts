@@ -80,7 +80,7 @@ export class StudentPersonalInfoService {
       !this.component.request.firstName ||
       !this.component.request.lastName ||
       !this.component.request.phoneNumber ||
-      !this.component.request.userName ||
+      !this.component.request.username ||
       !this.component.request.location ||
       this.component.request.systemLanguages.length === 0
     ) {
