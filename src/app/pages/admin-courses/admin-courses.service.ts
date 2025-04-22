@@ -20,8 +20,8 @@ export class AdminCoursesService {
   constructor() {}
 
   getAll() {
-    this.service.GetAll(this.service.serviceUrl).subscribe((resp) => {
-      this.component.courses = resp.data.map((course: any) => {
+    this.service.GetAllDashboard(this.translate.currentLang).subscribe((resp) => {
+      this.component.courses = resp.data.courses.map((course: any) => {
         return {
           ...course,
           language: this.getLanguageById(course.systemLanguageId),
@@ -49,6 +49,9 @@ export class AdminCoursesService {
     this.component.cols = [
       { field: 'name', header: 'Name' },
       { field: 'language', header: 'Language' },
+      { field: 'groupCount', header: 'Groups' },
+      { field: 'materialsCount', header: 'Materials' },
+      { field: 'studentCount', header: 'Students' },
       { field: 'showActions', header: 'Actions' },
     ];
   }

@@ -45,9 +45,7 @@ export class AuthService {
       this.component.signinLoading = false;
       this.component.requestSent = false;
       if (!resp.succeeded) {
-        this.appMessageService.showTranslatedErrorMessage(
-          'The username or password is incorrect!',
-        );
+        this.appMessageService.showTranslatedErrorMessage(resp.error);
       } else {
         this.setToStorage(resp.data, req);
         this.navigateByRole(resp.data);

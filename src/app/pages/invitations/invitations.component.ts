@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { InvitationsService } from './invitations.service';
-import { NgForOf, NgStyle } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-invitations',
-  imports: [NgStyle, FormsModule, NgForOf],
+  imports: [ FormsModule, NgForOf],
   templateUrl: './invitations.component.html',
   styleUrl: './invitations.component.scss',
 })

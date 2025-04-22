@@ -1,0 +1,15 @@
+.confirm-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 25px;
+  i{
+    font-size: 40px;
+    color: orange;
+  }
+  p{
+    font-size: 25px;
+  }
+}

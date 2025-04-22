@@ -25,6 +25,6 @@ export class AdminCoursesComponent {
   }
 
   getInfo(e:any) {
-    this.router.navigate(['/main/admin/courses/', e.data.id]);
+    this.router.navigate(['/main/admin/courses/', e.data.courseId]);
   }
 }

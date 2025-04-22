@@ -6,4 +6,5 @@ export class StudentsResponseModel {
   phoneNumber: string;
   location: string;
   languages: any;
+  isBlocked:boolean;
 }

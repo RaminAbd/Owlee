@@ -2,7 +2,7 @@
   <router-outlet></router-outlet>
 </div>
 <p-toast></p-toast>
-<p-confirmdialog >
+<p-confirmdialog [style]="{'width':'300px'}">
   <ng-template #message let-message>
     <div class="confirm-content">
       <i [ngClass]="message.icon" class="!text-6xl text-primary-500"></i>

@@ -31,4 +31,8 @@ export class CoursesApiService extends BaseCrudApiService {
   GetDetailed(req: any) {
     return this.get(this.serviceUrl + 'GetDetailed/', null, req);
   }
+
+  GetAllDashboard(lang:string){
+    return this.get(this.serviceUrl + 'GetAllDashboard/', lang);
+  }
 }

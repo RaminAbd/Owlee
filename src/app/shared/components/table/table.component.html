@@ -91,6 +91,16 @@
               <img src="table/delete.svg" alt="" />
             </button>
           </div>
+
+          <div class="d-flex students-actions" *ngIf="col.field === 'studentsActions'">
+            <button class="edit" (click)="tableAction(rowData, 4, $event)">
+              <img src="table/eye.svg" alt="" />
+            </button>
+            <button class="delete" (click)="confirm(rowData, 5, $event)">
+              <i style="color: #000 !important" class="pi pi-lock" *ngIf="!rowData.isBlocked"></i>
+              <i style="color: #000 !important" class="pi pi-unlock" *ngIf="rowData.isBlocked"></i>
+            </button>
+          </div>
         </td>
       </tr>
     </ng-template>

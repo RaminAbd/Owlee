@@ -16,7 +16,7 @@ export class StudentsApiService extends BaseCrudApiService {
     return this.post(this.serviceUrl + 'SignUp', req);
   }
 
-  GetInvitations(req:any) {
+  GetInvitations(req: any) {
     return this.get(this.serviceUrl + 'GetInvitations/', null, req);
   }
 
@@ -25,5 +25,12 @@ export class StudentsApiService extends BaseCrudApiService {
   }
   Reject(req: any) {
     return this.post(this.serviceUrl + 'RejectInvitation', req);
+  }
+
+  Block(id: string) {
+    return this.get(this.serviceUrl + 'Block/', id);
+  }
+  UnBlock(id: string) {
+    return this.get(this.serviceUrl + 'UnBlock/', id);
   }
 }

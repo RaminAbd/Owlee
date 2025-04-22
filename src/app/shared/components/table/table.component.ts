@@ -53,6 +53,7 @@ export class TableComponent {
       acceptLabel: 'Yes',
       rejectLabel: 'No',
       icon: 'pi pi-exclamation-triangle',
+
       accept: () => {
         this.tableAction(data, type, event);
       },

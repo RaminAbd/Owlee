@@ -2,12 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { StudentsApiService } from './shared/services/students.api.service';
 import { StudentsComponent } from './students.component';
 import { StudentsResponseModel } from './shared/models/students-response.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
   private service: StudentsApiService = inject(StudentsApiService);
+  private router: Router = inject(Router);
   component: StudentsComponent;
   constructor() {}
 
@@ -17,6 +19,7 @@ export class StudentsService {
         (item: StudentsResponseModel) => ({
           ...item,
           fullName: item.firstName + ' ' + item.lastName,
+          status:item.isBlocked ? 'Blocked' : 'Active'
         }),
       );
     });
@@ -28,7 +31,41 @@ export class StudentsService {
       { field: 'username', header: 'Email' },
       { field: 'phoneNumber', header: 'Phone number' },
       { field: 'location', header: 'Location' },
-      { field: 'showActions', header: 'Actions' },
+      { field: 'status', header: 'Status' },
+      { field: 'studentsActions', header: 'Actions' },
     ];
+  }
+
+  tableActionHandler(e: any) {
+    switch (e.type) {
+      case 4:
+        this.router.navigate(['/main/admin/students/', e.data.id]);
+        break;
+      case 5:
+        this.changeStatus(e.data);
+        break;
+
+    }
+  }
+
+  private changeStatus(data:any) {
+    if(data.isBlocked){
+      this.unBlock(data.id)
+    }
+    else{
+      this.block(data.id)
+    }
+  }
+
+  private unBlock(id:string) {
+    this.service.UnBlock(id).subscribe((resp) => {
+      this.getAll();
+    })
+  }
+
+  private block(id:string) {
+    this.service.Block(id).subscribe((resp) => {
+      this.getAll();
+    })
   }
 }
