@@ -10,6 +10,9 @@ import { AdminCoursesComponent } from '../../../../pages/admin-courses/admin-cou
 import { StudentCourseDetailsComponent } from '../../../../pages/student-dashboard/shared/pages/student-course-details/student-course-details.component';
 import { StudentDetailsComponent } from '../../../../pages/students/shared/pages/student-details/student-details.component';
 import { EducatorDetailsComponent } from '../../../../pages/educators/shared/pages/educator-details/educator-details.component';
+import {
+  AdminCourseDetailsComponent
+} from '../../../../pages/admin-courses/shared/pages/admin-course-details/admin-course-details.component';
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
@@ -63,7 +66,7 @@ export class AdminChildrenRoutes {
 
     {
       path: 'courses/:id',
-      component: StudentCourseDetailsComponent,
+      component: AdminCourseDetailsComponent,
       data: { title: 'Dashboard' },
     },
 

@@ -20,34 +20,22 @@ export class AdminCoursesService {
   constructor() {}
 
   getAll() {
-    this.service.GetAllDashboard(this.translate.currentLang).subscribe((resp) => {
-      this.component.courses = resp.data.courses.map((course: any) => {
-        return {
-          ...course,
-          language: this.getLanguageById(course.systemLanguageId),
-        };
-      });
-    });
-  }
-
-  getAllLanguages() {
-    this.langService
-      .GetAllByLang(this.langService.serviceUrl, this.translate.currentLang)
+    this.service
+      .GetAllDashboard(this.translate.currentLang)
       .subscribe((resp) => {
-        this.languages = resp.data;
-        console.log(this.languages);
-        this.getAll();
+        this.component.courses = resp.data.courses.map((course: any) => {
+          return {
+            ...course,
+          };
+        });
       });
   }
 
-  getLanguageById(id: string) {
-    const lang = this.languages.find((x) => x.id === id);
-    return lang ? lang.name : null;
-  }
 
   setCols() {
     this.component.cols = [
       { field: 'name', header: 'Name' },
+      { field: 'educatorName', header: 'Educator' },
       { field: 'language', header: 'Language' },
       { field: 'groupCount', header: 'Groups' },
       { field: 'materialsCount', header: 'Materials' },

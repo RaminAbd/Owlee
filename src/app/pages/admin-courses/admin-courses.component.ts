@@ -1,10 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CoursesResponseModel } from './shared/models/courses-response.model';
-import { EducatorsService } from '../educators/educators.service';
-import { EducatorsResponseModel } from '../educators/shared/models/educators-response.model';
 import { AdminCoursesService } from './admin-courses.service';
 import { TableComponent } from '../../shared/components/table/table.component';
-import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-course.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,11 +17,11 @@ export class AdminCoursesComponent {
   cols: any[] = [];
   constructor() {
     this.service.component = this;
-    this.service.getAllLanguages();
+    this.service.getAll();
     this.service.setCols();
   }
 
-  getInfo(e:any) {
+  getInfo(e: any) {
     this.router.navigate(['/main/admin/courses/', e.data.courseId]);
   }
 }

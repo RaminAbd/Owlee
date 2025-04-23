@@ -4,4 +4,5 @@ export class GroupMembersResponseModel {
   email: string;
   accepted: boolean;
   fullName: string;
+  username:string;
 }
