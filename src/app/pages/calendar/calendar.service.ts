@@ -24,7 +24,17 @@ export class CalendarService {
           this.component.currentDate,
           resp.data,
         );
-        console.log(resp.data);
+        this.component.weekData = this.updateWeekData(
+          this.component.currentDate,
+          resp.data,
+        );
+
+        this.component.dayData = this.updateDayData(
+          this.component.currentDate,
+          resp.data,
+        );
+
+        console.log(this.component.dayData);
       });
   }
 
@@ -35,12 +45,30 @@ export class CalendarService {
     return `${hours}:${minutes}`;
   }
 
-  buildDateRequest(date: Date) {
-    const today = date;
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 2);
-    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    this.component.meetingsRequest.from = firstDay.toISOString();
-    this.component.meetingsRequest.to = lastDay.toISOString();
+
+  buildDateRequest(date: Date, viewMode: 'month' | 'week' | 'day'): void {
+    let from: Date, to: Date;
+    if (viewMode === 'month') {
+      const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+      const firstDayOfGrid = new Date(firstDayOfMonth);
+      firstDayOfGrid.setDate(firstDayOfGrid.getDate() - (firstDayOfGrid.getDay() || 7) + 1);
+      const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      const lastDayOfGrid = new Date(lastDayOfMonth);
+      lastDayOfGrid.setDate(lastDayOfGrid.getDate() + (6 - (lastDayOfGrid.getDay() || 7)));
+      from = firstDayOfGrid;
+      to = lastDayOfGrid;
+    } else if (viewMode === 'week') {
+      const startOfWeek = new Date(date);
+      startOfWeek.setDate(date.getDate() - (date.getDay() || 7) + 1);
+      from = startOfWeek;
+      to = new Date(startOfWeek);
+      to.setDate(startOfWeek.getDate() + 6);
+    } else {
+      from = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0); // 00:00:00
+      to = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59); // 23:59:59
+    }
+    this.component.meetingsRequest.from = from.toISOString();
+    this.component.meetingsRequest.to = to.toISOString();
     this.getMeetings();
   }
 
@@ -138,8 +166,10 @@ export class CalendarService {
         );
 
         dayItem.tasks = finded || [];
-        dayItem.tasks.sort((a:any, b:any) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
+        dayItem.tasks.sort(
+          (a: any, b: any) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime(),
+        );
       }
       if (
         year === new Date().getFullYear() &&
@@ -147,9 +177,9 @@ export class CalendarService {
         day === new Date().getDate()
       ) {
         this.component.dayItemStateSaver = dayItem;
-        if(!this.component.isMobile()) this.component.handleSetDateInfo(this.component.dayItemStateSaver);
+        if (!this.component.isMobile())
+          this.component.handleSetDateInfo(this.component.dayItemStateSaver);
       }
-
     });
     return { monthName, weeks };
   }
@@ -166,4 +196,116 @@ export class CalendarService {
     }).format(date);
     return { formattedDate, dayOfWeek };
   }
+
+  updateWeekData(date: Date, scheduleData?: any): any {
+    const startOfWeek = new Date(date);
+    startOfWeek.setDate(date.getDate() - (date.getDay() || 7) + 1);
+    const days: any[] = [];
+    for (let i = 0; i < 7; i++) {
+      const dayDate = new Date(startOfWeek);
+      dayDate.setDate(startOfWeek.getDate() + i);
+      const dayItem = {
+        hours: Array.from({ length: 24 }, (_, hour) => ({
+          hour: hour, // 0 to 23
+          tasks: [] as any[],
+        })),
+        date: dayDate,
+        dayNumber: dayDate.getDate(),
+        disabled: false,
+      };
+      if (scheduleData) {
+        const finded = scheduleData.filter(
+          (x: any) =>
+            new Date(x.date).getFullYear() === dayDate.getFullYear() &&
+            new Date(x.date).getMonth() === dayDate.getMonth() &&
+            new Date(x.date).getDate() === dayDate.getDate(),
+        );
+        finded.forEach((task: any) => {
+          let hour = 0;
+          // Try parsing time field (e.g., "08:09" or "08:09am")
+          if (task.time) {
+            const timeMatch = task.time.match(/(\d{1,2}):(\d{2})(am|pm)?/i);
+            if (timeMatch) {
+              hour = parseInt(timeMatch[1], 10);
+              const minutes = parseInt(timeMatch[2], 10);
+              const period = timeMatch[3] ? timeMatch[3].toLowerCase() : '';
+              if (period === 'pm' && hour !== 12) hour += 12;
+              if (period === 'am' && hour === 12) hour = 0;
+              // Ensure hour is within 0-23
+              hour = hour % 24;
+            } else {
+              // Fallback to assuming 24-hour format if no am/pm
+              hour = parseInt(task.time.split(':')[0], 10) % 24;
+            }
+          } else {
+            // Fallback to date field if time is missing
+            hour = new Date(task.date).getHours();
+          }
+          if (!isNaN(hour) && hour >= 0 && hour < 24) {
+            if (dayItem.hours[hour]) {
+              dayItem.hours[hour].tasks.push(task);
+            }
+          }
+        });
+        dayItem.hours.forEach((hourObj: any) => {
+          hourObj.tasks.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        });
+      }
+      days.push(dayItem);
+    }
+    return { startDate: startOfWeek, days };
+  }
+
+
+  updateDayData(date: Date, scheduleData?: any): any {
+    console.log(this.component.currentDate);
+    const dayItem = {
+      hours: Array.from({ length: 24 }, (_, hour) => ({
+        hour: hour, // 0 to 23
+        tasks: [] as any[],
+      })),
+      date: new Date(date),
+      dayNumber: date.getDate(),
+      disabled: false,
+    };
+    if (scheduleData) {
+      const finded = scheduleData.filter(
+        (x: any) =>
+          new Date(x.date).getFullYear() === date.getFullYear() &&
+          new Date(x.date).getMonth() === date.getMonth() &&
+          new Date(x.date).getDate() === date.getDate(),
+      );
+      finded.forEach((task: any) => {
+        let hour = 0;
+        // Try parsing time field (e.g., "08:09" or "08:09am")
+        if (task.time) {
+          const timeMatch = task.time.match(/(\d{1,2}):(\d{2})(am|pm)?/i);
+          if (timeMatch) {
+            hour = parseInt(timeMatch[1], 10);
+            const period = timeMatch[3] ? timeMatch[3].toLowerCase() : '';
+            if (period === 'pm' && hour !== 12) hour += 12;
+            if (period === 'am' && hour === 12) hour = 0;
+            // Ensure hour is within 0-23
+            hour = hour % 24;
+          } else {
+            // Fallback to assuming 24-hour format if no am/pm
+            hour = parseInt(task.time.split(':')[0], 10) % 24;
+          }
+        } else {
+          // Fallback to date field if time is missing
+          hour = new Date(task.date).getHours();
+        }
+        if (!isNaN(hour) && hour >= 0 && hour < 24) {
+          if (dayItem.hours[hour]) {
+            dayItem.hours[hour].tasks.push(task);
+          }
+        }
+      });
+      dayItem.hours.forEach((hourObj: any) => {
+        hourObj.tasks.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      });
+    }
+    return dayItem;
+  }
+
 }
