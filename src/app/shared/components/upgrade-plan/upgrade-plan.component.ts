@@ -6,6 +6,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {AnimationOptions, LottieComponent} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-upgrade-plan',
@@ -14,7 +15,8 @@ import {AnimationItem} from 'lottie-web';
     NgForOf,
     NgClass,
     LottieComponent,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './upgrade-plan.component.html',
   styleUrl: './upgrade-plan.component.scss',

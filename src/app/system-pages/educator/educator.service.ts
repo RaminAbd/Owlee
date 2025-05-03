@@ -17,11 +17,16 @@ export class EducatorService {
   checkDays() {
     let userId: string = localStorage.getItem('userId') as string;
     this.service.GetStatus(userId).subscribe((resp) => {
-      if (!resp.data.isShown) {
-        if (resp.data.days <= 3) {
-          // this.openExpirationDialog(resp.data);
+      console.log(resp.data);
+      if (resp.data.days <= 3 && resp.data.days >0 ) {
+        if (!resp.data.isShown) {
+          this.openExpirationDialog(resp.data);
         }
       }
+      if(resp.data.days === 0){
+        this.openExpirationDialog(resp.data);
+      }
+
     });
   }
 
@@ -42,7 +47,7 @@ export class EducatorService {
 
   upgradePlan() {
     const ref = this.dialogService.open(UpgradePlanComponent, {
-      width: '860px',
+      width: '960px',
       style: {
         maxWidth: '95%',
       },

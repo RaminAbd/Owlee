@@ -37,6 +37,7 @@ export class SubscriptionPackageUpsertService {
     if (
       !this.component.request.name ||
       !this.component.request.price ||
+      !this.component.request.annualPrice ||
       !this.component.request.maxCapacity ||
       !this.component.request.courseAmount ||
       !this.component.request.groupPerCourse ||

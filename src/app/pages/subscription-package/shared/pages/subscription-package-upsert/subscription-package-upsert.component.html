@@ -11,11 +11,19 @@
         />
       </div>
       <div class="input-item">
-        <label>{{ "Price" | translate }}</label>
+        <label>{{ "Monthly price" | translate }}</label>
         <input
           type="number"
           [ngClass]="{ invalid: !request.price && isSubmitted }"
           [(ngModel)]="request.price"
+        />
+      </div>
+      <div class="input-item">
+        <label>{{ "Annual price" | translate }}</label>
+        <input
+          type="number"
+          [ngClass]="{ invalid: !request.annualPrice && isSubmitted }"
+          [(ngModel)]="request.annualPrice"
         />
       </div>
       <div class="input-item">

@@ -6,4 +6,5 @@ export class SubscriptionPackageModel {
   groupPerCourse: number;
   peoplePerGroup: number;
   price: number;
+  annualPrice:number;
 }

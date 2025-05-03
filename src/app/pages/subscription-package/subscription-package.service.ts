@@ -32,6 +32,7 @@ export class SubscriptionPackageService {
       { field: 'groupPerCourse', header: 'Group Per Course' },
       { field: 'peoplePerGroup', header: 'People Per Group' },
       { field: 'price', header: 'Price' },
+      { field: 'annualPrice', header: 'Annual' },
       { field: 'crudActions', header: 'Actions' },
     ];
   }

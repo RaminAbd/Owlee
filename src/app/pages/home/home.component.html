@@ -71,7 +71,9 @@
             />
           </div>
         </div>
-        <button class="join" routerLink="auth">{{ 'Join us' | translate }}</button>
+        <button class="join" routerLink="auth">
+          {{ "Join us" | translate }}
+        </button>
       </div>
     </section>
     <section id="third">
@@ -153,7 +155,9 @@
               alt=""
             />
           </div>
-          <button class="join" routerLink="auth">{{ 'Join us' | translate }}</button>
+          <button class="join" routerLink="auth">
+            {{ "Join us" | translate }}
+          </button>
         </div>
         <div class="item l">
           <div class="txt">
@@ -193,7 +197,7 @@
     </section>
     <section id="fifth">
       <div class="heading">
-        <h2>{{ "Choose your right plan!" | translate }}</h2>
+        <h2>{{ "Start your free trial!" | translate }}</h2>
         <p>
           {{
             "Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!"
@@ -203,6 +207,9 @@
       </div>
       <div class="items">
         <div class="item" *ngFor="let item of subscriptionPackages">
+          <div class="pop">
+            <p>{{ 'Most popular' | translate }}</p>
+          </div>
           <div class="name">
             <p>{{ item.name }}</p>
           </div>
