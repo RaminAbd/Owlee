@@ -20,6 +20,7 @@ export class UpgradePlanService {
   getPackages() {
     this.service.GetAll(this.service.serviceUrl).subscribe((resp) => {
       this.component.subscriptionPackages = resp.data;
+      console.log(this.component.subscriptionPackages);
       this.getActive();
     });
   }
@@ -27,6 +28,7 @@ export class UpgradePlanService {
   getActive() {
     let userId: string = localStorage.getItem('userId') as string;
     this.service.GetActive(userId).subscribe((resp) => {
+      console.log(resp.data);
       this.component.selectedPackage = resp.data;
       this.component.activePackage = resp.data;
     });
@@ -37,10 +39,28 @@ export class UpgradePlanService {
     const req = {
       educatorId: userId,
       packageId: this.component.selectedPackage.id,
+      type:this.component.selectedPackageType
     };
     this.subsService.Renew(req).subscribe((resp) => {
       this.component.loading = false;
       this.component.openExternalUrl(resp.data.url);
     });
+  }
+
+  canChange() {
+    this.component.loading = true;
+    let userId: string = localStorage.getItem('userId') as string;
+    const req = {
+      educatorId: userId,
+      SubscriptionId: this.component.selectedPackage.id,
+    }
+    this.subsService.CanChange(req).subscribe((resp) => {
+      if(resp.data.canChange){
+        this.renew()
+      }
+      else{
+        this.component.loading = false;
+      }
+    })
   }
 }

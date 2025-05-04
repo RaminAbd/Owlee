@@ -52,10 +52,11 @@ export class GroupMembersService {
 
   upgradePlan() {
     const ref = this.dialogService.open(UpgradePlanComponent, {
-      width: '860px',
+      width: '960px',
       style: {
         maxWidth: '95%',
       },
+      data:2
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {

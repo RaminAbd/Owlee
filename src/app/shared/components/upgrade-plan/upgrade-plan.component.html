@@ -3,52 +3,72 @@
     <h2>{{ "Upgrade plan" | translate }}</h2>
     <h3>{{ "Upgrade to access" | translate }}</h3>
   </div>
-<!--  <div class="counts">-->
-<!--    <div class="item">-->
-<!--      <img src="d-check.svg" alt="" />-->
-<!--      <p>{{ selectedPackage.maxCapacity }} Max students</p>-->
-<!--    </div>-->
-<!--    <div class="item">-->
-<!--      <img src="d-check.svg" alt="" />-->
-<!--      <p>{{ selectedPackage.courseAmount }} Courses</p>-->
-<!--    </div>-->
-<!--    <div class="item">-->
-<!--      <img src="d-check.svg" alt="" />-->
-<!--      <p>{{ selectedPackage.groupPerCourse }} Groups per course</p>-->
-<!--    </div>-->
-<!--    <div class="item">-->
-<!--      <img src="d-check.svg" alt="" />-->
-<!--      <p>{{ selectedPackage.peoplePerGroup }} Students per group</p>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="items">-->
-<!--    <div-->
-<!--      class="item"-->
-<!--      *ngFor="let item of subscriptionPackages"-->
-<!--      [ngClass]="{ selected: item.id === selectedPackage.id }"-->
-<!--      (click)="selectedPackage = item"-->
-<!--    >-->
-<!--      <div class="name">-->
-<!--        <p>{{ item.name }}</p>-->
-<!--      </div>-->
-<!--      <div class="price">-->
-<!--        <p>-->
-<!--          <span>{{ item.price }}₾</span> / {{ "month" | translate }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="btn">-->
-<!--        <button (click)="selectedPackage = item">-->
-<!--          {{-->
-<!--            item.id === activePackage.id-->
-<!--              ? ("Current plan" | translate)-->
-<!--              : ("Upgrade" | translate)-->
-<!--          }}-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="counts">-->
+  <!--    <div class="item">-->
+  <!--      <img src="d-check.svg" alt="" />-->
+  <!--      <p>{{ selectedPackage.maxCapacity }} Max students</p>-->
+  <!--    </div>-->
+  <!--    <div class="item">-->
+  <!--      <img src="d-check.svg" alt="" />-->
+  <!--      <p>{{ selectedPackage.courseAmount }} Courses</p>-->
+  <!--    </div>-->
+  <!--    <div class="item">-->
+  <!--      <img src="d-check.svg" alt="" />-->
+  <!--      <p>{{ selectedPackage.groupPerCourse }} Groups per course</p>-->
+  <!--    </div>-->
+  <!--    <div class="item">-->
+  <!--      <img src="d-check.svg" alt="" />-->
+  <!--      <p>{{ selectedPackage.peoplePerGroup }} Students per group</p>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="items">-->
+  <!--    <div-->
+  <!--      class="item"-->
+  <!--      *ngFor="let item of subscriptionPackages"-->
+  <!--      [ngClass]="{ selected: item.id === selectedPackage.id }"-->
+  <!--      (click)="selectedPackage = item"-->
+  <!--    >-->
+  <!--      <div class="name">-->
+  <!--        <p>{{ item.name }}</p>-->
+  <!--      </div>-->
+  <!--      <div class="price">-->
+  <!--        <p>-->
+  <!--          <span>{{ item.price }}₾</span> / {{ "month" | translate }}-->
+  <!--        </p>-->
+  <!--      </div>-->
+  <!--      <div class="btn">-->
+  <!--        <button (click)="selectedPackage = item">-->
+  <!--          {{-->
+  <!--            item.id === activePackage.id-->
+  <!--              ? ("Current plan" | translate)-->
+  <!--              : ("Upgrade" | translate)-->
+  <!--          }}-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <div class="switcher">
+    <div
+      class="item"
+      (click)="selectedPackageType = 1"
+      [ngClass]="{ selected: selectedPackageType === 1 }"
+    >
+      <p>{{ "Monthly" | translate }}</p>
+    </div>
+    <div
+      class="item"
+      (click)="selectedPackageType = 2"
+      [ngClass]="{ selected: selectedPackageType === 2 }"
+    >
+      <p>{{ "Annually" | translate }}</p>
+    </div>
+  </div>
   <div class="items">
-    <div class="item" *ngFor="let item of subscriptionPackages">
+    <div
+      class="item"
+      *ngFor="let item of subscriptionPackages"
+      [ngClass]="{ selectedItem: item.id === selectedPackage.id }"
+    >
       <div class="name">
         <p>{{ item.name }}</p>
       </div>
@@ -60,7 +80,12 @@
       </div>
       <div class="price">
         <p>
-          <span>{{ item.price }}₾</span> / {{ "month" | translate }}
+          <span
+            >{{
+              selectedPackageType === 1 ? item.price : item.annualPrice
+            }}₾</span
+          >
+          / {{ "month" | translate }}
         </p>
       </div>
       <div class="features">
@@ -70,9 +95,7 @@
         </div>
         <div class="f-item">
           <img src="d-check.svg" alt="" />
-          <p>
-            {{ item.groupPerCourse }} {{ "Groups per course" | translate }}
-          </p>
+          <p>{{ item.groupPerCourse }} {{ "Groups per course" | translate }}</p>
         </div>
         <div class="f-item">
           <img src="d-check.svg" alt="" />
@@ -81,22 +104,24 @@
           </p>
         </div>
       </div>
-            <div class="btn">
-              <button (click)="selectedPackage = item">
-                {{
-                  item.id === activePackage.id
-                    ? ("Current plan" | translate)
-                    : ("Upgrade" | translate)
-                }}
-              </button>
-            </div>
+      <div class="btn">
+        <button (click)="selectedPackage = item">
+          {{
+            item.id === activePackage.id
+              ? ("Current plan" | translate)
+              : ("Upgrade" | translate)
+          }}
+        </button>
+      </div>
     </div>
+  </div>
+  <div class="warning" *ngIf="errorMessage" style="width: 100%">
+    <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
     <button class="save" (click)="upgrade()">
       {{ "Upgrade plan" | translate }}
-
     </button>
   </div>
 </div>

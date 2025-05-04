@@ -205,10 +205,26 @@
           }}
         </p>
       </div>
+      <div class="switcher">
+        <div
+          class="item"
+          (click)="selectedPackageType = 1"
+          [ngClass]="{ selected: selectedPackageType === 1 }"
+        >
+          <p>{{ "Monthly" | translate }}</p>
+        </div>
+        <div
+          class="item"
+          (click)="selectedPackageType = 2"
+          [ngClass]="{ selected: selectedPackageType === 2 }"
+        >
+          <p>{{ "Annually" | translate }}</p>
+        </div>
+      </div>
       <div class="items">
         <div class="item" *ngFor="let item of subscriptionPackages">
           <div class="pop">
-            <p>{{ 'Most popular' | translate }}</p>
+            <p>{{ "Most popular" | translate }}</p>
           </div>
           <div class="name">
             <p>{{ item.name }}</p>
@@ -221,7 +237,12 @@
           </div>
           <div class="price">
             <p>
-              <span>{{ item.price }}₾</span> / {{ "month" | translate }}
+              <span
+                >{{
+                  selectedPackageType === 1 ? item.price : item.annualPrice
+                }}₾</span
+              >
+              / {{ "month" | translate }}
             </p>
           </div>
           <div class="features">

@@ -51,6 +51,7 @@ export class EducatorService {
       style: {
         maxWidth: '95%',
       },
+      data:1
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {

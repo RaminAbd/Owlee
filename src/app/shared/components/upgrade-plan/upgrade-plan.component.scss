@@ -8,6 +8,11 @@
   }
 }
 .wrapper {
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   .heading {
     display: flex;
     flex-direction: column;
@@ -262,6 +267,55 @@
         }
       }
 
+      &.selectedItem {
+        border: 1px solid rgba(0, 146, 69, 0.46);
+        background: linear-gradient(
+            158deg,
+            #009245 -5.01%,
+            rgba(0, 146, 69, 0.19) 34.15%,
+            rgba(0, 146, 69, 0.05) 63.02%,
+            rgba(0, 146, 69, 0) 113.74%
+        );
+        box-shadow: 1px 6px 70.9px -16px rgba(0, 0, 0, 0.1);
+        //transform: scale(1.055);
+        .btn {
+          button {
+            border: 1px solid #3b3199;
+            background: #3b3199;
+            color: #fff;
+          }
+        }
+        .pop {
+          display: block;
+          p {
+            color: #fff;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+          }
+        }
+        .name {
+          background: #fff;
+          p {
+            color: #13170c;
+          }
+        }
+        @media (max-width: 769px) {
+          transform: scale(1);
+          border: 1px solid #e3e3e2;
+          background: #fff;
+          box-shadow: 1px 6px 70.9px -16px rgba(0, 0, 0, 0.1);
+          .btn {
+            button {
+              border: 1px solid #e3e3e2;
+              color: #13170c;
+              background: none;
+            }
+          }
+        }
+      }
+
       //&:hover {
       //  border: 1px solid rgba(0, 146, 69, 0.46);
       //  background: linear-gradient(
@@ -297,11 +351,46 @@
       //}
     }
   }
+  .switcher {
+    display: inline-flex;
+    background-color: #f3f3f3;
+    border-radius: 50px;
+    padding: 5px;
+    width: auto;
+    height: 60px;
+    .item {
+      border: none;
+      border-radius: 50px;
+      padding: 10px 30px;
+      //background-color: transparent;
+
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        color: #004c24;
+        font-size: 20px;
+      }
+      &.selected {
+        background-color: #009245;
+        p {
+          color: #fff;
+        }
+      }
+    }
+  }
   .btns{
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     margin-top: 32px;
+    width: 100%;
     button{
       width: 147px;
       height: 41px;

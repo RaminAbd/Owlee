@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, OnInit } from '@angular/core';
 import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
 import { SubscriptionPackageModel } from '../subscription-package/shared/models/subscription-package.model';
 import { HomeService } from './home.service';
-import { NgForOf } from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -22,6 +22,7 @@ import {
     RouterLink,
     FormsModule,
     ReactiveFormsModule,
+    NgClass,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
     email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
     message: ['', [Validators.required]],
   });
+  selectedPackageType:number = 1
   constructor() {
     this.service.component = this;
     this.service.getAllPackages();
