@@ -1,6 +1,6 @@
 <div class="sign-up-wrapper">
   <div class="form-side">
-    <a routerLink="/"  class="logo">
+    <a routerLink="/" class="logo">
       <img src="text-logo.svg" alt="" />
     </a>
     <div class="txt">
@@ -180,7 +180,9 @@
                 </div>
               </div>
             </div>
-            <button type="button" (click)="validateFirstStep()">{{ 'Next' | translate }}</button>
+            <button type="button" (click)="validateFirstStep()">
+              {{ "Next" | translate }}
+            </button>
           </div>
         </form>
         <form [formGroup]="secondStepForm" class="item expander-container">
@@ -238,14 +240,7 @@
             <div class="row">
               <div class="input-item file-input">
                 <label>{{ "Profile image" | translate }}</label>
-                <label
-                  class="file-label"
-                  for="file"
-                  [ngClass]="{
-                    invalid:
-                      !request.profileImage.isValid && secondStepSubmitted,
-                  }"
-                >
+                <label class="file-label" for="file">
                   <p
                     *ngIf="
                       !request.profileImage.fileUrl &&
@@ -309,7 +304,9 @@
                 ></p-multiSelect>
               </div>
             </div>
-            <button type="button" (click)="validateSecondStep()">{{ 'Next' | translate }}</button>
+            <button type="button" (click)="validateSecondStep()">
+              {{ "Next" | translate }}
+            </button>
           </div>
         </form>
         <div class="item expander-container qualifs">
@@ -322,7 +319,7 @@
           </div>
           <div class="inputs" [@expanderAnimation]="expanderStates[2]">
             <div class="heading" (click)="addQualification()">
-              <label>{{ 'Add Qualification' | translate }}</label>
+              <label>{{ "Add Qualification" | translate }}</label>
               <i class="pi pi-plus-circle"></i>
             </div>
             <div
@@ -389,7 +386,9 @@
                 (click)="removeQualification(i)"
               ></i>
             </div>
-            <button type="button" (click)="validateThirdStep()">{{ 'Next' | translate }}</button>
+            <button type="button" (click)="validateThirdStep()">
+              {{ "Next" | translate }}
+            </button>
           </div>
         </div>
         <div class="item expander-container">
@@ -401,7 +400,7 @@
             <p>{{ "Confirm email" | translate }}</p>
           </div>
           <div class="inputs" [@expanderAnimation]="expanderStates[3]">
-            <div class="row">
+            <div class="row" style="align-items: flex-end">
               <div class="input-item">
                 <label for="code">{{ "Verification code" | translate }}</label>
                 <input
@@ -415,8 +414,12 @@
                   "
                 />
               </div>
+              <button (click)="sendCode()"  style="height: 40px;">{{ "Send code" | translate }}</button>
+
             </div>
-            <button type="button" (click)="validateFourthStep()">{{ 'Next' | translate }}</button>
+            <button type="button" (click)="validateFourthStep()">
+              {{ "Next" | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -424,7 +427,7 @@
   </div>
   <div class="image-side">
     <img
-      src="https://metagroupblob.blob.core.windows.net/delivery-container/22a02b8f-cbfb-43cc-b76e-b81b51c7e224-image%209.png"
+      src="https://owleeblob.blob.core.windows.net/images/0b3910e9-4b8f-4f0c-af18-0e505afb7a1b-Registration%20%281%29.png"
       alt=""
     />
   </div>

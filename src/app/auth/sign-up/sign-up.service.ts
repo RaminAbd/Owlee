@@ -73,7 +73,9 @@ export class SignUpService {
     const req = {
       email: this.component.request.email,
     };
-    this.verificationService.SendVerification(req).subscribe((resp) => {});
+    this.verificationService.SendVerification(req).subscribe((resp) => {
+      this.message.showTranslatedSuccessMessage('Verification code sent');
+    });
   }
 
   private checkMailExists() {
@@ -86,6 +88,16 @@ export class SignUpService {
         } else {
           this.component.firstStepPassed = true;
           this.component.toggleExpander(1);
+        }
+      });
+  }
+  checkMail() {
+    this.accountsService
+      .Exists(this.component.request.email)
+      .subscribe((resp) => {
+        if (resp.data.exists) {
+          this.message.showTranslatedWarningMessage('Email already exists');
+        } else {
           this.sendVerificationCode();
         }
       });

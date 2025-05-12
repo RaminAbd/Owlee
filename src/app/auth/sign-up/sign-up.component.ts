@@ -160,7 +160,6 @@ export class SignUpComponent implements OnDestroy {
     this.secondStepSubmitted = true;
     if (
       this.secondStepForm.valid &&
-      this.request.profileImage.fileUrl &&
       this.request.systemLanguages.length > 0
     ) {
       this.service.validateAge();
@@ -254,5 +253,14 @@ export class SignUpComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
+  }
+
+  sendCode() {
+    if ( !this.request.email){
+      this.service.message.showTranslatedWarningMessage('Mail is not valid');
+    }
+    else {
+      this.service.checkMail()
+    }
   }
 }

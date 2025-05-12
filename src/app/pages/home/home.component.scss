@@ -219,6 +219,8 @@
         }
         .image-container img {
           width: calc((100% / 3) - 5px);
+          aspect-ratio: 1 / 1.2;
+          object-fit: cover;
         }
       }
     }
@@ -1013,13 +1015,14 @@
             align-items: center;
             //gap: 6px;
             text-align: center;
-            h4 {
+            a {
               color: #13170c;
               text-align: center;
               font-size: 24px;
               font-style: normal;
               font-weight: 500;
               line-height: 56px; /* 233.333% */
+              text-decoration: none;
             }
             p {
               color: #656668;
