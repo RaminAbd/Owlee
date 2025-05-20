@@ -1,3 +1,4 @@
+
 .schedule-wrapper {
   .heading {
     h2 {
@@ -11,16 +12,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-right: 1px solid #eee;
     padding: 20px 30px 30px 40px;
-    @media (max-width: 1024px) {
-      justify-content: center;
+    @media (max-width: 500px) {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 30px 10px;
+      .view-selector{
+        width: 100%;
+      }
     }
     .paging {
       display: flex;
       align-items: center;
       gap: 18px;
       p {
-        width: 140px;
+        //width: 140px;
         color: var(--text-color);
         font-size: 16px;
         font-weight: 700;
@@ -85,6 +93,8 @@
     .row.week-days {
       display: flex;
       align-items: center;
+      height: 30px;
+      border-right: 1px solid #eee;
 
       .week-day {
         flex: 1;
@@ -102,7 +112,7 @@
       border: 1px solid #d9d9d9;
       border-left: 0;
       border-bottom: 0;
-      margin-top: 10px;
+      //margin-top: 10px;
       //background: #f6f7fb;
       .days {
         display: flex;
@@ -156,25 +166,25 @@
                 gap: 10px;
                 align-self: stretch;
               }
-            }
-            p {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              width: 100%;
-              white-space: nowrap;
-              max-width: 85px;
-              overflow: hidden;
-              color: #13170c;
-              text-overflow: ellipsis;
-              font-family: Inter;
-              font-size: 12px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: normal;
-              @media (max-width: 769px) {
-                white-space: normal;
-                font-size: 8px;
-                word-break: break-word;
+              p {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                white-space: nowrap;
+                max-width: 85px;
+                overflow: hidden;
+                color: #13170c;
+                text-overflow: ellipsis;
+                font-family: Inter;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                @media (max-width: 769px) {
+                  white-space: normal;
+                  font-size: 8px;
+                  word-break: break-word;
+                }
               }
             }
           }
@@ -245,7 +255,7 @@
       .activities-back.active {
         position: absolute;
         left: 0;
-        top: 0;
+        top:0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.3);
@@ -262,7 +272,7 @@
     }
     .activities {
       width: 320px;
-      border-left: 1px solid #e9edf0;
+      //border-left: 1px solid #e9edf0;
       padding: 22px;
       .heading {
         display: flex;
@@ -335,6 +345,7 @@
       }
     }
   }
+
   .disabled-overlay {
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(3.0999999046325684px);
@@ -493,5 +504,161 @@
 .komp{
   @media (max-width: 769px) {
     display: none !important;
+  }
+}
+
+.weekly-grid {
+  display: flex;
+  .time-labels {
+    display: grid;
+    grid-template-rows: 50px ; /* Added extra row for date */
+    width: 60px;
+    .date-slot {
+      height: 60px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .time-slot {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #eee;
+      font-size: 12px;
+    }
+  }
+  .week-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+    &.day-grid{
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .week-day-header {
+      text-align: center;
+      //padding: 10px;
+      font-weight: bold;
+      //border-bottom: 1px solid #eee;
+      p {
+        margin: 0;
+      }
+      .heading{
+        border-bottom: 1px solid #eee;
+        p{
+          @media (max-width: 500px) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: 60px repeat(24, 60px); /* Adjusted for extra row */
+      .grid-cell {
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+    .grid-cells {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: 60px repeat(24, 60px); /* Adjusted for extra row */
+      .task {
+        //background-color: #d6eaf8;
+        //border: 1px solid #3498db;
+        padding: 5px;
+        margin: 2px;
+        border-radius: 4px;
+        cursor: pointer;
+        p {
+          margin: 0;
+          font-size: 12px;
+        }
+        &.task-active {
+          background-color: #e6f4ea;
+        }
+      }
+    }
+    .task{
+      height: 50px;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      padding: 6px 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      display: flex;
+      &.filled{
+        background: #C6E7FF;
+      }
+
+      p.task-name{
+        width: 100%;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 107px;
+        color: #13170c;
+        @media (max-width: 769px) {
+          white-space: normal;
+          font-size: 8px;
+          word-break: break-word;
+        }
+      }
+      p.task-time{
+        color: #656668;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+    .empty{
+      padding: 0;
+      cursor: pointer;
+    }
+  }
+  .hours{
+    border-right: 1px solid #eee;
+  }
+}
+
+.day-grid{
+  p.task-name{
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100% !important;
+    color: #13170c;
+    @media (max-width: 769px) {
+      white-space: normal;
+      font-size: 12px !important;
+      word-break: initial !important;
+    }
   }
 }

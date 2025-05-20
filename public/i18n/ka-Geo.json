@@ -48,13 +48,13 @@
   "Remember me": "დამიმახსოვრე",
   "Login": "შესვლა",
   "Registration": "რეგისტრაცია",
-  "Join Our Teaching Community: Inspire, Educate, Empower!": "შემოუერტდით ჩვენს სასწავლო საზოგადოებას: შთააგონე, ასწავლეთ, გააძლიერეთ!",
+  "Join Our Teaching Community: Inspire, Educate, Empower!": "შემოუერთდით ჩვენს სასწავლო საზოგადოებას: შთააგონე, ასწავლეთ, გააძლიერეთ!",
   "Sign Up and Share Your Knowledge!": "დარეგისტრირდით და გააზიარეთ თქვენი ცოდნა!",
   "Account Setup": "ანგარიშის შექმნა",
   "First name": "სახელი",
   "Last name": "გვარი",
   "Personal Id": "პირადი ნომერი",
-  "Location": "ადგილმდებარეობა",
+  "Location": "მისამართი",
   "Confirm password": "Პაროლის დადასტურება",
   "Next": "შემდეგი",
   "Personal Information": "პირადი ინფორმაცია",
@@ -171,5 +171,6 @@
   "Please select Pro Plus package": "გთხოვთ, აირჩიოთ Pro Plus პაკეტი",
   "You cannot upgrade your plan. Please contact customer support.": "თქვენ არ შეგიძლიათ თქვენი გეგმის განახლება. გთხოვთ, დაუკავშირდეთ მომხმარებელთა მხარდაჭერის სამსახურ",
   "Send code": "კოდის გაგზავნა",
-  "Verification code sent": "დამადასტურებელი კოდი გაიგზავნა"
+  "Verification code sent": "დამადასტურებელი კოდი გაიგზავნა",
+  "Start For Free": "დაიწყეთ უფასოდ"
 }

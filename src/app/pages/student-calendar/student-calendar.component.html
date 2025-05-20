@@ -2,10 +2,21 @@
   <div class="schedule-content">
     <div class="left">
       <div class="paging-info">
+        <div class="view-selector">
+          <p-dropdown
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="viewModes"
+            [(ngModel)]="viewMode"
+            optionLabel="name"
+            optionValue="value"
+            (ngModelChange)="changeViewMode()"
+          ></p-dropdown>
+        </div>
+
         <div class="paging">
           <div class="icons">
             <svg
-              (click)="handlePreviousMonth()"
+              (click)="handlePrevious()"
               xmlns="http://www.w3.org/2000/svg"
               width="7"
               height="11"
@@ -21,7 +32,7 @@
               />
             </svg>
             <svg
-              (click)="handleNextMonth()"
+              (click)="handleNext()"
               xmlns="http://www.w3.org/2000/svg"
               width="7"
               height="11"
@@ -37,51 +48,143 @@
               />
             </svg>
           </div>
-          <p>{{ monthData.monthName }} {{ currentDate.getFullYear() }}</p>
+          <p *ngIf="viewMode === 'month'">
+            {{ monthData.monthName }} {{ currentDate.getFullYear() }}
+          </p>
+          <p *ngIf="viewMode === 'week'">
+            Week of {{ weekData.startDate | date: "MMM d, yyyy" }}
+          </p>
+          <p *ngIf="viewMode === 'day'">
+            {{ dayData.date | date: "MMM d, yyyy" }}
+          </p>
         </div>
       </div>
       <div class="board">
-        <div class="row week-days">
-          <div class="week-day" *ngFor="let day of weekDays">
-            <p>{{ day.shortName }}</p>
+        <div class="month-board" *ngIf="viewMode === 'month'">
+          <div class="row week-days">
+            <div class="week-day" *ngFor="let day of weekDays">
+              <p>{{ day.shortName }}</p>
+            </div>
+          </div>
+          <div class="weeks">
+            <div
+              class="days"
+              *ngFor="let week of monthData.weeks; let i = index"
+            >
+              <div
+                class="day"
+                *ngFor="let day of week.days"
+                [ngClass]="{ active: isActive(day), today: isToday(day.date) }"
+                (click)="handleSetDateInfo(day)"
+              >
+                <div class="day-num">
+                  <p class="day-number">{{ day.dayNumber }}</p>
+                </div>
+                <div class="komp tasks" *ngIf="day.tasks.length <= 2">
+                  <div class="task" *ngFor="let task of day.tasks">
+                    <p>{{ task.courseName }}</p>
+                  </div>
+                </div>
+
+                <div class="komp tasks" *ngIf="day.tasks.length > 2">
+                  <div
+                    class="task"
+                    *ngFor="let task of day.tasks | slice: 0 : 2"
+                  >
+                    <p>{{ task.courseName }}</p>
+                  </div>
+                  <div class="task">
+                    <p>+{{ day.tasks.length - 2 }} {{ "More" | translate }}</p>
+                  </div>
+                </div>
+
+                <div class="mobile tasks" *ngIf="day.tasks.length === 1">
+                  <div class="task" *ngFor="let task of day.tasks">
+                    <p>{{ task.courseName }}</p>
+                  </div>
+                </div>
+
+                <div class="mobile tasks" *ngIf="day.tasks.length > 1">
+                  <div class="task">
+                    <p>{{ day.tasks.length }} {{ "Tasks" | translate }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="weeks">
-          <div class="days" *ngFor="let week of monthData.weeks; let i = index">
+        <div *ngIf="viewMode === 'week'" class="weekly-grid">
+          <div class="hours">
             <div
-              class="day"
-              *ngFor="let day of week.days"
-              [ngClass]="{ active: isActive(day), today: isToday(day.date) }"
-              (click)="handleSetDateInfo(day)"
-            >
-              <div class="day-num">
-                <p class="day-number">{{ day.dayNumber }}</p>
+              class="time-slot date-slot"
+              style="height: 40px; border-bottom: 1px solid #eee"
+            ></div>
+            <div class="time-labels">
+              <div class="time-slot" *ngFor="let hour of hoursOfDay">
+                {{ hour }}
               </div>
-
-              <div class="komp tasks" *ngIf="day.tasks.length <= 2">
-                <div class="task" *ngFor="let task of day.tasks">
-                  <p>{{ task.courseName }}</p>
+            </div>
+          </div>
+          <div class="week-grid">
+            <div class="week-day-header" *ngFor="let day of weekData.days">
+              <div
+                class="heading"
+                style="height: 40px; border-right: 1px solid #eee"
+              >
+                <p>{{ day.date | date: "EEE" }}</p>
+                <p>{{ day.date | date: "d" }}</p>
+              </div>
+              <div class="hours-inner">
+                <div class="hour-item" *ngFor="let hour of day.hours">
+                  <div
+                    class="task empty"
+                    *ngIf="hour.tasks.length === 0"
+                    (click)="handleSetWeeklyDate(day)"
+                  ></div>
+                  <div
+                    class="task filled"
+                    *ngFor="let task of hour.tasks"
+                    [ngClass]="{ 'task-active': isActive(day) }"
+                    (click)="handleSetWeeklyDate(day, task)"
+                  >
+                    <p class="task-name">
+                      {{ task.courseName ?? "Unnamed Task" }}
+                    </p>
+                    <p class="task-time">{{ task.time }}</p>
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="viewMode === 'day'" class="weekly-grid ">
+          <div class="hours">
 
-              <div class="komp tasks" *ngIf="day.tasks.length > 2">
-                <div class="task" *ngFor="let task of day.tasks | slice: 0 : 2">
-                  <p>{{ task.courseName }}</p>
-                </div>
-                <div class="task">
-                  <p>+{{ day.tasks.length - 2 }} More</p>
-                </div>
+            <div class="time-labels">
+              <div class="time-slot" *ngFor="let hour of hoursOfDay">
+                {{ hour }}
               </div>
+            </div>
+          </div>
+          <div class="week-grid day-grid">
+            <div class="hours-inner">
+              <div class="hour-item" *ngFor="let hour of dayData.hours">
+                <!--                (click)="handleSetWeeklyDate(day)"-->
+                <div
+                  class="task empty"
+                  *ngIf="hour.tasks.length === 0"
+                  (click)="handleSetDailyDate(dayData)"
+                ></div>
+                <div
+                  class="task filled"
+                  *ngFor="let task of hour.tasks"
 
-              <div class="mobile tasks" *ngIf="day.tasks.length === 1">
-                <div class="task" *ngFor="let task of day.tasks">
-                  <p>{{ task.courseName }}</p>
-                </div>
-              </div>
-
-              <div class="mobile tasks" *ngIf="day.tasks.length > 1">
-                <div class="task">
-                  <p>{{ day.tasks.length }} Tasks</p>
+                  (click)="handleSetDailyDate(dayData, task)"
+                >
+                  <p class="task-name">
+                    {{ task.courseName ?? "Unnamed Task" }}
+                  </p>
+                  <p class="task-time">{{ task.time }}</p>
                 </div>
               </div>
             </div>
@@ -113,8 +216,8 @@
             </div>
             <div class="btns">
               <a class="join" [href]="task.link" target="_blank">{{
-                "Click to join" | translate
-              }}</a>
+                  "Click to join" | translate
+                }}</a>
               <button class="copy" (click)="copyToClipboard(task)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
