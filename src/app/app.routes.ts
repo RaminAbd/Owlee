@@ -9,10 +9,22 @@ import { EducatorChildrenRoutes } from './system-pages/educator/shared/models/ed
 import { StudentSignUpComponent } from './auth/student-sign-up/student-sign-up.component';
 import { StudentChildrenRoutes } from './system-pages/student/shared/models/student-children-routes';
 import { HomeComponent } from './pages/home/home.component';
+import { TermsComponent } from './pages/docs/terms/terms.component';
+import { HomePrivacyComponent } from './pages/docs/home-privacy/home-privacy.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
   { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
+  {
+    path: 'terms-conditions',
+    component: TermsComponent,
+    data: { title: 'Terms' },
+  },
+  {
+    path: 'privacy',
+    component: HomePrivacyComponent,
+    data: { title: 'Privacy' },
+  },
   { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign up' } },
   {
     path: 'student-sign-up/:id',

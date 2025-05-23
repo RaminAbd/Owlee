@@ -8,6 +8,7 @@
           type="text"
           [ngClass]="{ invalid: !request.name && isSubmitted }"
           [(ngModel)]="request.name"
+          disabled
         />
       </div>
       <div class="input-item">

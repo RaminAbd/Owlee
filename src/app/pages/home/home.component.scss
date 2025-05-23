@@ -1232,16 +1232,23 @@
         }
 
         .copy {
-          p {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding:0  50px;
+          p, a, span {
             color: #fff;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
             line-height: 24px; /* 150% */
+            text-decoration: none;
             @media (max-width: 769px) {
               font-size: 12px;
             }
           }
+
         }
       }
     }
