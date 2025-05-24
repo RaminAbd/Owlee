@@ -213,9 +213,18 @@ export class SignUpService {
     this.component.mainLoading = true;
     this.component.request.phoneNumber =
       this.component.request.phoneNumber.toString();
-    this.service.SignUp(this.component.request).subscribe((resp: any) => {
+    const request:any = structuredClone(this.component.request);
+    if(!this.component.request.profileImage.fileUrl){
+      delete request.profileImage;
+    }
+    console.log(request);
+    this.service.SignUp(request).subscribe((resp: any) => {
       if (resp.succeeded) {
         this.signIn();
+      }
+      else{
+        this.component.mainLoading = false;
+        this.message.showTranslatedErrorMessage(resp.message);
       }
     });
   }
