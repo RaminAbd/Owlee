@@ -79,9 +79,14 @@ export class StudentSignUpService {
     this.component.mainLoading = true;
     this.component.request.phoneNumber =
       this.component.request.phoneNumber.toString();
+
     this.service.SignUp(this.component.request).subscribe((resp: any) => {
+      this.component.mainLoading = false;
       if (resp.succeeded) {
         this.signIn();
+      }
+      else{
+
       }
     });
   }

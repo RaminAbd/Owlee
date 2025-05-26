@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GroupUpsertService } from './group-upsert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { GroupRequestModel } from '../../../../../models/group-request.model';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
@@ -13,14 +13,15 @@ import { DropdownModule } from 'primeng/dropdown';
   styleUrl: './group-upsert.component.scss',
 })
 export class GroupUpsertComponent {
+  private translate: TranslateService = inject(TranslateService);
   request: GroupRequestModel = new GroupRequestModel();
   types: any[] = [
-    { name: 'Group', value: 1 },
-    { name: 'Individual', value: 2 },
+    { name: this.translate.instant('Group'), value: 1 },
+    { name: this.translate.instant('Individual'), value: 2 },
   ];
   implementationTypes: any[] = [
-    { name: 'Online', value: 1 },
-    { name: 'Offline', value: 2 },
+    { name: this.translate.instant('Online'), value: 1 },
+    { name: this.translate.instant('Offline'), value: 2 },
   ];
   constructor(
     public config: DynamicDialogConfig,

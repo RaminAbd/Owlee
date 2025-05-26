@@ -21,7 +21,7 @@ export class MultipleMeetingComponent {
   request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
   date: any;
   dates: any[] = [];
-
+  isSubmitted = false;
   subtopics: SubtopicModel[] = [];
   selectedTopics: string[] = [];
   constructor(
@@ -36,7 +36,10 @@ export class MultipleMeetingComponent {
   save() {
     console.log(this.request);
     if (this.request.meetings.length > 0) {
-      this.service.create();
+      if(!this.isSubmitted){
+        this.service.create();
+        this.isSubmitted = true;
+      }
     } else {
       this.service.message.showTranslatedWarningMessage('At least 1 meeting!');
     }

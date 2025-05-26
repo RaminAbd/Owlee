@@ -38,14 +38,16 @@ export class InviteStudentDialogComponent {
   }
 
   save() {
-    this.isSubmitted = true;
     if (this.form.valid) {
       let includes = this.members.some(
         (x: any) => x.email === this.form.value.email,
       );
       console.log(this.members, includes, this.form.value.email);
       if (!includes) {
-        this.service.createGroupMember();
+        if (!this.isSubmitted) {
+          this.service.createGroupMember();
+          this.isSubmitted = true;
+        }
       } else {
         this.message.showTranslatedWarningMessage(
           'Member with given email already exists',

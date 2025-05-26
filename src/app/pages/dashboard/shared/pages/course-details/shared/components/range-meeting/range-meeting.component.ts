@@ -29,6 +29,7 @@ export class RangeMeetingComponent {
   request: RangeRequestModel = new RangeRequestModel();
   from: any;
   to: any;
+  isSubmitted = false;
   hours: { name: string; value: number }[] = Array.from(
     { length: 24 },
     (_, i) => ({
@@ -58,6 +59,7 @@ export class RangeMeetingComponent {
     { name: 'Saturday', dayOfWeek: 5, hour: 0, hourName: 0, minute: 0 },
     { name: 'Sunday', dayOfWeek: 6, hour: 0, hourName: 0, minute: 0 },
   ];
+  deletedItems: { item: any; index: number }[] = [];
 
   constructor(
     public config: DynamicDialogConfig,
@@ -88,11 +90,27 @@ export class RangeMeetingComponent {
       this.message.showTranslatedWarningMessage('Select week day!');
       return;
     }
-    this.service.createSchedule();
+    if(!this.isSubmitted) {
+      this.service.createSchedule();
+      this.isSubmitted = true;
+    }
 
   }
 
   deleteDay(i: number) {
-    this.days.splice(i, 1);
+    const deletedItem = this.days.splice(i, 1)[0];
+    this.deletedItems.push({ item: deletedItem, index: i });
   }
+
+  redo(): void {
+    if (this.deletedItems.length > 0) {
+      const last = this.deletedItems.pop();
+      if (last) {
+        this.days.splice(last.index, 0, last.item);
+      }
+    }
+
+    console.log(this.deletedItems);
+  }
+
 }

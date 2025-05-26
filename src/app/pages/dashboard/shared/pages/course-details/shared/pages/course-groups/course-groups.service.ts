@@ -53,7 +53,7 @@ export class CourseGroupsService {
 
   openDialog() {
     const ref = this.dialogService.open(GroupUpsertComponent, {
-      header: 'Group',
+      header: this.translate.instant('Group'),
       width: '460px',
       data: {
         courseId: this.component.id,
