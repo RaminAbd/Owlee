@@ -1,6 +1,5 @@
-
 export class StudentSignupRequestModel {
-  id:string;
+  id: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -9,7 +8,8 @@ export class StudentSignupRequestModel {
   confirmPassword: string;
   oldPassword: string;
   systemLanguages: string[] = [];
-  userName:string;
-  username:string;
-  groupMemberId:string;
+  userName: string;
+  username: string;
+  groupMemberId: string;
+  privacyAccepted: boolean = false;
 }

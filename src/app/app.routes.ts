@@ -11,6 +11,9 @@ import { StudentChildrenRoutes } from './system-pages/student/shared/models/stud
 import { HomeComponent } from './pages/home/home.component';
 import { TermsComponent } from './pages/docs/terms/terms.component';
 import { HomePrivacyComponent } from './pages/docs/home-privacy/home-privacy.component';
+import {EducatorSignupPolicyComponent} from './pages/docs/educator-signup-policy/educator-signup-policy.component';
+import {StudentSignupPolicyComponent} from './pages/docs/student-signup-policy/student-signup-policy.component';
+import {EducatorPaymentPolicyComponent} from './pages/docs/educator-payment-policy/educator-payment-policy.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
@@ -25,6 +28,24 @@ export const routes: Routes = [
     component: HomePrivacyComponent,
     data: { title: 'Privacy' },
   },
+
+  {
+    path: 'educator-privacy',
+    component: EducatorSignupPolicyComponent,
+    data: { title: 'Privacy' },
+  },
+  {
+    path: 'student-privacy',
+    component: StudentSignupPolicyComponent,
+    data: { title: 'Privacy' },
+  },
+  {
+    path: 'payment-policy',
+    component: EducatorPaymentPolicyComponent,
+    data: { title: 'Privacy' },
+  },
+
+
   { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign up' } },
   {
     path: 'student-sign-up/:id',

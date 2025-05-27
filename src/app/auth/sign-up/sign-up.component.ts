@@ -24,7 +24,7 @@ import { EducatorQualificationModel } from './shared/models/educator-qualificati
 import { FileModel } from '../../core/models/File.model';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
-import {RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -158,10 +158,7 @@ export class SignUpComponent implements OnDestroy {
 
   validateSecondStep() {
     this.secondStepSubmitted = true;
-    if (
-      this.secondStepForm.valid &&
-      this.request.systemLanguages.length > 0
-    ) {
+    if (this.secondStepForm.valid && this.request.systemLanguages.length > 0) {
       this.service.validateAge();
     } else {
       this.secondStepPassed = false;
@@ -227,7 +224,9 @@ export class SignUpComponent implements OnDestroy {
 
   validateFourthStep() {
     this.fourthStepSubmitted = true;
-    if (this.request.verificationCode.toString().length !== 4) {
+    const code = this.request.verificationCode?.toString();
+
+    if (!code || code.length !== 4 || !this.request.privacyAccepted) {
       this.fourthStepPassed = false;
       this.service.message.showTranslatedWarningMessage('Fields are not valid');
     } else {
@@ -256,11 +255,10 @@ export class SignUpComponent implements OnDestroy {
   }
 
   sendCode() {
-    if ( !this.request.email){
+    if (!this.request.email) {
       this.service.message.showTranslatedWarningMessage('Mail is not valid');
-    }
-    else {
-      this.service.checkMail()
+    } else {
+      this.service.checkMail();
     }
   }
 }

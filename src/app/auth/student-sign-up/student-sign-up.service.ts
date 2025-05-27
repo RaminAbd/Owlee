@@ -59,7 +59,8 @@ export class StudentSignUpService {
       !this.component.request.userName ||
       !this.component.request.password ||
       !this.component.request.location ||
-      !this.component.request.confirmPassword
+      !this.component.request.confirmPassword||
+      !this.component.request.privacyAccepted
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
       this.component.firstStepPassed = false;

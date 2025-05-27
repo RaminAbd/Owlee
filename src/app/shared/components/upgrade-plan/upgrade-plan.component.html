@@ -118,6 +118,24 @@
   <div class="warning" *ngIf="errorMessage" style="width: 100%">
     <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
+  <div class="row" style="display: flex;width: 100%;align-items: center;">
+    <div class="input-block" style="display: flex; align-items: center; gap: 6px">
+      <input
+        type="checkbox"
+        [(ngModel)]="privacyAccepted"
+        style="width: 20px; height: 20px"
+        id="privacy"
+        [class.invalid]="!privacyAccepted && isSubmitted"
+      />
+      <label
+        for="privacy"
+        style="cursor: pointer;"
+        [class.invalidLabel]="!privacyAccepted && isSubmitted"
+      >{{ "I have read and agree to the " | translate }}
+        <a routerLink="/payment-policy" target="_blank">{{ "Privacy Policy." | translate }}</a></label
+      >
+    </div>
+  </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
     <button class="save" (click)="upgrade()">

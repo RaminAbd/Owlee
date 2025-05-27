@@ -255,3 +255,8 @@
     height: 300px;
   }
 }
+::ng-deep{
+  label.invalidLabel{
+    color: red !important;
+  }
+}

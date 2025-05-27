@@ -56,6 +56,7 @@ export class StudentSignUpComponent implements OnDestroy {
     ],
     phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
     location: ['', [Validators.required]],
+    privacyAccepted: [false, [Validators.required]],
     password: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
   });

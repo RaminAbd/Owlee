@@ -414,10 +414,28 @@
                   "
                 />
               </div>
-              <button (click)="sendCode()"  style="height: 40px;">{{ "Send code" | translate }}</button>
-
+              <button (click)="sendCode()" style="height: 40px">
+                {{ "Send code" | translate }}
+              </button>
             </div>
-
+            <div class="row">
+              <div class="input-block" style="display: flex; align-items: center; gap: 6px">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="request.privacyAccepted"
+                  style="width: 20px; height: 20px"
+                  id="privacy"
+                  [class.invalid]="!request.privacyAccepted && fourthStepSubmitted"
+                />
+                <label
+                  for="privacy"
+                  style="cursor: pointer;"
+                  [class.invalidLabel]="!request.privacyAccepted && fourthStepSubmitted"
+                  >{{ "I have read and agree to the " | translate }}
+                  <a routerLink="/educator-privacy" target="_blank">{{ "Privacy Policy." | translate }}</a></label
+                >
+              </div>
+            </div>
 
             <button type="button" (click)="validateFourthStep()">
               {{ "Next" | translate }}

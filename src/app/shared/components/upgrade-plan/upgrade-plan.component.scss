@@ -410,3 +410,8 @@
     }
   }
 }
+::ng-deep{
+  label.invalidLabel{
+    color: red !important;
+  }
+}
