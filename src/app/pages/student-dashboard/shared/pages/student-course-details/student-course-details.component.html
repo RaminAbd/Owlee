@@ -27,7 +27,7 @@
       <div class="lang-ed">
         <div class="language">
           <label>{{ "Educator" | translate }}</label>
-          <p class="ed-link" (click)="showEducator = true">
+          <p class="ed-link" (click)="showEducator = true" *ngIf="response.educator.firstName">
             {{ response.educator.firstName + " " + response.educator.lastName }}
             <i class="pi pi-angle-right"></i>
           </p>

@@ -1,6 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { CalendarComponent } from './calendar.component';
 import { MeetingsApiService } from './shared/services/meetings.api.service';
+import {CoursesApiService} from '../admin-courses/shared/services/courses.api.service';
+import {StorageService} from '../../core/services/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +11,21 @@ import { MeetingsApiService } from './shared/services/meetings.api.service';
 export class CalendarService {
   component: CalendarComponent;
   private service: MeetingsApiService = inject(MeetingsApiService);
-
+  private coursesService: CoursesApiService = inject(CoursesApiService);
+  private storage: StorageService = inject(StorageService);
+  private translate: TranslateService = inject(TranslateService);
   constructor() {}
+
+  getCourses() {
+    let authResp = this.storage.getObject('authResponse');
+    const req = {
+      educatorId: authResp.id,
+      lang: this.translate.currentLang,
+    };
+    this.coursesService.GetByEducator(req).subscribe((resp) => {
+      this.component.courses = structuredClone(resp.data.courses);
+    });
+  }
 
   getMeetings() {
     this.service

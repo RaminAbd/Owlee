@@ -18,6 +18,7 @@ import { CalendarService } from './calendar.service';
 import { EducatorMeetingsRequestModel } from './shared/models/educator-meetings-request.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {DashboardCourseModel} from '../dashboard/shared/models/dashboard-course.model';
 
 @Component({
   selector: 'app-calendar',
@@ -59,6 +60,9 @@ export class CalendarComponent {
   hoursOfDay: string[] = Array.from({ length: 24 }, (_, i) => {
     return `${i}:00`; // 0:00 to 23:00
   });
+
+  courses: DashboardCourseModel[] = [];
+
   constructor() {
     this.service.component = this;
     this.meetingsRequest.educatorId = localStorage.getItem('userId') as string;
