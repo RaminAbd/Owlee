@@ -81,7 +81,7 @@ export class GroupMeetingsComponent {
   openMultiple() {
     const ref = this.dialogService.open(MultipleMeetingComponent, {
       header: this.translate.instant('Schedule meetings'),
-      width: '620px',
+      width: '720px',
       height: '630px',
       data: {
         subTopics: this.subTopics,

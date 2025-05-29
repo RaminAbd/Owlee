@@ -24,6 +24,7 @@ export class MultipleMeetingComponent {
   isSubmitted = false;
   subtopics: SubtopicModel[] = [];
   selectedTopics: string[] = [];
+  duration: number = 0;
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -36,7 +37,7 @@ export class MultipleMeetingComponent {
   save() {
     console.log(this.request);
     if (this.request.meetings.length > 0) {
-      if(!this.isSubmitted){
+      if (!this.isSubmitted) {
         this.service.create();
         this.isSubmitted = true;
       }
@@ -48,14 +49,21 @@ export class MultipleMeetingComponent {
   addMeeting() {
     if (this.selectedTopics.length > 0) {
       if (this.date) {
-        let item = {
-          showDate: this.formatDate(this.date),
-          subtopics: this.selectedTopics,
-          date: new Date(this.date).toISOString(),
-        };
-        this.request.meetings.push(item);
-        this.selectedTopics = [];
-        this.date = undefined;
+        if (this.duration > 0) {
+          let item = {
+            showDate: this.formatDate(this.date),
+            subtopics: this.selectedTopics,
+            date: new Date(this.date).toISOString(),
+            duration: this.duration,
+          };
+          this.request.meetings.push(item);
+          this.selectedTopics = [];
+          this.date = undefined;
+        } else {
+          this.service.message.showTranslatedWarningMessage(
+            "Duration can't be 0",
+          );
+        }
       } else {
         this.service.message.showTranslatedWarningMessage(
           'Date field is required!',

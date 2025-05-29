@@ -4,6 +4,7 @@ import { MeetingsApiService } from './shared/services/meetings.api.service';
 import {CoursesApiService} from '../admin-courses/shared/services/courses.api.service';
 import {StorageService} from '../../core/services/storage.service';
 import {TranslateService} from '@ngx-translate/core';
+import {SubtopicModel} from '../dashboard/shared/models/subtopic.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class CalendarService {
       this.component.courses = structuredClone(resp.data.courses);
     });
   }
+
 
   getMeetings() {
     this.service

@@ -18,7 +18,9 @@ import { CalendarService } from './calendar.service';
 import { EducatorMeetingsRequestModel } from './shared/models/educator-meetings-request.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {DashboardCourseModel} from '../dashboard/shared/models/dashboard-course.model';
+import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-course.model';
+import { MeetingUpsertComponent } from '../dashboard/shared/pages/course-details/shared/components/meeting-upsert/meeting-upsert.component';
+import { CalendarMeetingsCreateComponent } from './shared/components/calendar-meetings-create/calendar-meetings-create.component';
 
 @Component({
   selector: 'app-calendar',
@@ -38,6 +40,8 @@ import {DashboardCourseModel} from '../dashboard/shared/models/dashboard-course.
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
+  private translate: TranslateService = inject(TranslateService);
+  public dialogService: DialogService = inject(DialogService);
   showActivities: boolean = false;
   viewModes: any[] = [
     { name: 'Monthly', value: 'month' },
@@ -65,6 +69,7 @@ export class CalendarComponent {
 
   constructor() {
     this.service.component = this;
+    this.service.getCourses()
     this.meetingsRequest.educatorId = localStorage.getItem('userId') as string;
     this.service.buildDateRequest(new Date(), this.viewMode);
     this.weekDays = this.service.getWeekDays();
@@ -180,5 +185,24 @@ export class CalendarComponent {
   handleSetDailyDate(day: any, task?: any) {
     day.tasks = task ? [task] : [];
     this.handleSetDateInfo(day);
+  }
+
+  openMultiple() {
+    const ref = this.dialogService.open(CalendarMeetingsCreateComponent, {
+      header: this.translate.instant('Schedule meetings'),
+      width: '1020px',
+      height: '630px',
+      data: {
+        courses: this.courses,
+      },
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.service.getMeetings();
+      }
+    });
   }
 }

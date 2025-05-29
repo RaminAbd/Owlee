@@ -91,7 +91,8 @@ export class RangeMeetingComponent {
       return;
     }
     if(!this.isSubmitted) {
-      this.service.createSchedule();
+      console.log(this.request);
+      // this.service.createSchedule();
       this.isSubmitted = true;
     }
 

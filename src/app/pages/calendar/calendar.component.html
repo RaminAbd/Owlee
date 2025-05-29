@@ -58,6 +58,16 @@
             {{ dayData.date | date: "MMM d, yyyy" }}
           </p>
         </div>
+
+        <div class="btns">
+          <button
+            class="add-meeting"
+            (click)="openMultiple()"
+            [disabled]="courses.length === 0"
+          >
+            {{ "Add meetings" | translate }}
+          </button>
+        </div>
       </div>
       <div class="board">
         <div class="month-board" *ngIf="viewMode === 'month'">
@@ -157,9 +167,8 @@
             </div>
           </div>
         </div>
-        <div *ngIf="viewMode === 'day'" class="weekly-grid ">
+        <div *ngIf="viewMode === 'day'" class="weekly-grid">
           <div class="hours">
-
             <div class="time-labels">
               <div class="time-slot" *ngFor="let hour of hoursOfDay">
                 {{ hour }}
@@ -169,7 +178,7 @@
           <div class="week-grid day-grid">
             <div class="hours-inner">
               <div class="hour-item" *ngFor="let hour of dayData.hours">
-<!--                (click)="handleSetWeeklyDate(day)"-->
+                <!--                (click)="handleSetWeeklyDate(day)"-->
                 <div
                   class="task empty"
                   *ngIf="hour.tasks.length === 0"
@@ -178,7 +187,6 @@
                 <div
                   class="task filled"
                   *ngFor="let task of hour.tasks"
-
                   (click)="handleSetDailyDate(dayData, task)"
                 >
                   <p class="task-name">

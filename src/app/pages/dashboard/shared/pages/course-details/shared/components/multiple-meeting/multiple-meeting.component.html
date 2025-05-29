@@ -47,6 +47,10 @@
           id="enable"
         ></p-multiSelect>
       </div>
+      <div class="input-item">
+        <label for="enable">{{ "Duration" | translate }}</label>
+        <input type="number" [(ngModel)]="duration" />
+      </div>
       <button (click)="addMeeting()">{{ "Add" | translate }}</button>
     </div>
 
@@ -55,6 +59,10 @@
         <div class="col">
           <label>{{ "Date" | translate }}</label>
           <p class="value">{{ item.showDate }}</p>
+        </div>
+        <div class="col">
+          <label>{{ "Duration" | translate }}</label>
+          <p class="value">{{ item.duration }}</p>
         </div>
         <div class="col">
           <label>{{ "Topics count" | translate }}</label>
