@@ -2,17 +2,6 @@
   <div class="schedule-content">
     <div class="left">
       <div class="paging-info">
-        <div class="view-selector">
-          <p-dropdown
-            [style]="{ width: '100%', height: '40px' }"
-            [options]="viewModes"
-            [(ngModel)]="viewMode"
-            optionLabel="name"
-            optionValue="value"
-            (ngModelChange)="changeViewMode()"
-          ></p-dropdown>
-        </div>
-
         <div class="paging">
           <div class="icons">
             <svg
@@ -57,6 +46,16 @@
           <p *ngIf="viewMode === 'day'">
             {{ dayData.date | date: "MMM d, yyyy" }}
           </p>
+        </div>
+        <div class="view-selector">
+          <p-dropdown
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="viewModes"
+            [(ngModel)]="viewMode"
+            optionLabel="name"
+            optionValue="value"
+            (ngModelChange)="changeViewMode()"
+          ></p-dropdown>
         </div>
 
         <div class="btns">
@@ -187,6 +186,7 @@
                 <div
                   class="task filled"
                   *ngFor="let task of hour.tasks"
+                  [ngClass]="{ extra: hour.tasks.length > 1 }"
                   (click)="handleSetDailyDate(dayData, task)"
                 >
                   <p class="task-name">

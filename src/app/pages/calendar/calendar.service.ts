@@ -35,8 +35,9 @@ export class CalendarService {
       .subscribe((resp) => {
         resp.data = resp.data.map((item: any) => ({
           ...item,
-          time: this.extractTime(item.date),
+          time: this.extractTime(item),
         }));
+        console.log(resp.data)
 
         this.component.monthData = this.updateMonthData(
           this.component.currentDate,
@@ -52,16 +53,21 @@ export class CalendarService {
           resp.data,
         );
 
-        console.log(this.component.dayData);
       });
   }
 
-  extractTime(isoDate: string): string {
-    const dateObj = new Date(isoDate);
-    const hours = dateObj.getUTCHours().toString().padStart(2, '0');
-    const minutes = dateObj.getUTCMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+  extractTime(item: any): string {
+    const startDate = new Date(item.date);
+    const startHours = startDate.getUTCHours().toString().padStart(2, '0');
+    const startMinutes = startDate.getUTCMinutes().toString().padStart(2, '0');
+
+    const endDate = new Date(startDate.getTime() + item.duration * 60000);
+    const endHours = endDate.getUTCHours().toString().padStart(2, '0');
+    const endMinutes = endDate.getUTCMinutes().toString().padStart(2, '0');
+
+    return `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`;
   }
+
 
 
   buildDateRequest(date: Date, viewMode: 'month' | 'week' | 'day'): void {
@@ -72,7 +78,7 @@ export class CalendarService {
       firstDayOfGrid.setDate(firstDayOfGrid.getDate() - (firstDayOfGrid.getDay() || 7) + 1);
       const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
       const lastDayOfGrid = new Date(lastDayOfMonth);
-      lastDayOfGrid.setDate(lastDayOfGrid.getDate() + (6 - (lastDayOfGrid.getDay() || 7)));
+      lastDayOfGrid.setDate(lastDayOfGrid.getDate() + (7 - (lastDayOfGrid.getDay() || 7)));
       from = firstDayOfGrid;
       to = lastDayOfGrid;
     } else if (viewMode === 'week') {

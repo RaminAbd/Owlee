@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="remember">
+              <div class="remember" style="flex: 1">
                 <input
                   type="checkbox"
                   id="rememberMe"
@@ -68,12 +68,14 @@
                 />
                 <label for="rememberMe">{{ "Remember me" | translate }}</label>
               </div>
+              <div class="forgot" style="flex: 1; display: flex; justify-content: flex-end;">
+                <a routerLink="/forgot">{{ "Forgot password?" | translate }}</a>
+              </div>
             </div>
             <button>
               {{ "Login" | translate
               }}<i class="pi pi-spin pi-spinner" *ngIf="signinLoading"></i>
             </button>
-
           </div>
         </form>
       </div>

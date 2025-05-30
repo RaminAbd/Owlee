@@ -37,7 +37,8 @@ export class MeetingUpsertService {
     let result = true;
     if (
       !this.component.request.date ||
-      this.component.request.subtopics.length == 0
+      this.component.request.subtopics.length == 0 ||
+      !this.component.request.duration
     )
       result = false;
     return result;

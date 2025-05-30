@@ -45,7 +45,7 @@ export class GroupMeetingsComponent {
   openUpsert(id: string) {
     const ref = this.dialogService.open(MeetingUpsertComponent, {
       header: this.translate.instant('Schedule a meeting'),
-      width: '620px',
+      width: '720px',
       height: '630px',
       data: {
         id: id,

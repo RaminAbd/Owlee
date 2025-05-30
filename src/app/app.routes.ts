@@ -14,10 +14,12 @@ import { HomePrivacyComponent } from './pages/docs/home-privacy/home-privacy.com
 import {EducatorSignupPolicyComponent} from './pages/docs/educator-signup-policy/educator-signup-policy.component';
 import {StudentSignupPolicyComponent} from './pages/docs/student-signup-policy/student-signup-policy.component';
 import {EducatorPaymentPolicyComponent} from './pages/docs/educator-payment-policy/educator-payment-policy.component';
+import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
   { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
+  { path: 'forgot', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
   {
     path: 'terms-conditions',
     component: TermsComponent,

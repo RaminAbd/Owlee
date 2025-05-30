@@ -391,14 +391,14 @@
 }
 .add-meeting {
   display: flex;
-  //padding: 8px 16px;
+  padding: 8px 16px;
   align-items: center;
   border-radius: 6px;
   background: #c6e7ff;
   color: var(--primary-color);
   font-size: 16px;
   font-weight: 600;
-  width: 130px;
+  //width: 130px;
   height: 35px;
   justify-content: center;
 }
@@ -594,20 +594,30 @@
         }
       }
     }
-    .task{
-      height: 50px;
+    .hour-item{
       border-right: 1px solid #eee;
       border-bottom: 1px solid #eee;
+      height: 50px;
+      display: flex;
+
+    }
+    .task{
+      height: 50px;
+      //border-right: 1px solid #eee;
+      //border-bottom: 1px solid #eee;
       cursor: pointer;
       padding: 6px 8px;
       flex-direction: column;
       align-items: flex-start;
       gap: 6px;
       display: flex;
+      flex:1;
       &.filled{
         background: #C6E7FF;
       }
-
+      &.extra{
+        background: #ffc6c6;
+      }
       p.task-name{
         width: 100%;
         text-overflow: ellipsis;

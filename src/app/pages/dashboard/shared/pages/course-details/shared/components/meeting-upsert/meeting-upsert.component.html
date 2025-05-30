@@ -36,6 +36,10 @@
       </div>
     </div>
     <div class="input-item">
+      <label for="enable">{{ "Duration" | translate }}</label>
+      <input type="number" [(ngModel)]="request.duration" />
+    </div>
+    <div class="input-item">
       <label for="enable">{{ "Sub topics" | translate }}</label>
       <p-multiSelect
         [style]="{ width: '100%', height: '40px' }"

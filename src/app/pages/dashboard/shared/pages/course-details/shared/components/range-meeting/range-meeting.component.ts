@@ -11,13 +11,7 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
 
 @Component({
   selector: 'app-range-meeting',
-  imports: [
-    DatePicker,
-    NgForOf,
-    TranslatePipe,
-    FormsModule,
-    DropdownModule,
-  ],
+  imports: [DatePicker, NgForOf, TranslatePipe, FormsModule, DropdownModule],
   templateUrl: './range-meeting.component.html',
   styleUrl: './range-meeting.component.scss',
 })
@@ -51,13 +45,56 @@ export class RangeMeetingComponent {
       dayOfWeek: 0,
       hour: 0,
       minute: 0,
+      duration: 0,
     },
-    { name: 'Tuesday', dayOfWeek: 1, hour: 0, hourName: 0, minute: 0 },
-    { name: 'Wednesday', dayOfWeek: 2, hour: 0, hourName: 0, minute: 0 },
-    { name: 'Thursday', dayOfWeek: 3, hour: 0, hourName: 0, minute: 0 },
-    { name: 'Friday', dayOfWeek: 4, hour: 0, hourName: 0, minute: 0 },
-    { name: 'Saturday', dayOfWeek: 5, hour: 0, hourName: 0, minute: 0 },
-    { name: 'Sunday', dayOfWeek: 6, hour: 0, hourName: 0, minute: 0 },
+    {
+      name: 'Tuesday',
+      dayOfWeek: 1,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
+    {
+      name: 'Wednesday',
+      dayOfWeek: 2,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
+    {
+      name: 'Thursday',
+      dayOfWeek: 3,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
+    {
+      name: 'Friday',
+      dayOfWeek: 4,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
+    {
+      name: 'Saturday',
+      dayOfWeek: 5,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
+    {
+      name: 'Sunday',
+      dayOfWeek: 6,
+      hour: 0,
+      hourName: 0,
+      minute: 0,
+      duration: 0,
+    },
   ];
   deletedItems: { item: any; index: number }[] = [];
 
@@ -79,23 +116,35 @@ export class RangeMeetingComponent {
       this.message.showTranslatedWarningMessage('Invalid dates');
       return;
     }
+
     this.request.from = new Date(this.from).toISOString();
     this.request.to = new Date(this.to).toISOString();
     this.days.forEach((day) => {
       day.hour = day.hourName - 4;
     });
 
-    this.request.items = this.days.filter((x) => x.hourName !== 0 && x.hourName);
-    if(this.request.items.length == 0) {
+    this.request.items = this.days.filter(
+      (x) => x.hourName !== 0 && x.hourName,
+    );
+    if (this.request.items.length == 0) {
       this.message.showTranslatedWarningMessage('Select week day!');
       return;
     }
-    if(!this.isSubmitted) {
-      console.log(this.request);
-      // this.service.createSchedule();
-      this.isSubmitted = true;
+    let durationValid = true;
+    this.request.items.forEach((item) => {
+      if (item.duration < 1) durationValid = false;
+    });
+
+    if(!durationValid) {
+      this.message.showTranslatedWarningMessage('Invalid durations');
+      return;
     }
 
+    if (!this.isSubmitted) {
+      console.log(this.request);
+      this.service.createSchedule();
+      this.isSubmitted = true;
+    }
   }
 
   deleteDay(i: number) {
@@ -113,5 +162,4 @@ export class RangeMeetingComponent {
 
     console.log(this.deletedItems);
   }
-
 }

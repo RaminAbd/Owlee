@@ -4,4 +4,5 @@ export class MeetingRequestModel {
   groupId: string;
   subtopics: string[] = [];
   link?: string;
+  duration: number;
 }
