@@ -3,42 +3,6 @@
     <div class="inputs">
       <div class="row1">
         <div class="input-item">
-          <label for="course">{{ "Course" | translate }}</label>
-          <p-dropdown
-            [style]="{ width: '100%', height: '40px' }"
-            [options]="courses"
-            optionLabel="name"
-            optionValue="courseId"
-            [(ngModel)]="courseId"
-            (ngModelChange)="courseChanged()"
-            id="course"
-          ></p-dropdown>
-        </div>
-        <div class="input-item">
-          <label for="group">{{ "Group" | translate }}</label>
-          <p-dropdown
-            [style]="{ width: '100%', height: '40px' }"
-            [options]="groups"
-            optionLabel="name"
-            optionValue="id"
-            [(ngModel)]="request.groupId"
-            id="group"
-          ></p-dropdown>
-        </div>
-        <div class="input-item">
-          <label for="enable">{{ "Sub topics" | translate }}</label>
-          <p-multiSelect
-            [style]="{ width: '100%', height: '40px' }"
-            [options]="subTopics"
-            optionLabel="name"
-            optionValue="id"
-            [(ngModel)]="selectedTopics"
-            id="enable"
-          ></p-multiSelect>
-        </div>
-      </div>
-      <div class="row1">
-        <div class="input-item">
           <label>{{ "Start date" | translate }}</label>
           <div class="input">
             <p-datepicker
@@ -72,6 +36,43 @@
               </svg>
             </div>
           </div>
+        </div>
+        <div class="input-item">
+          <label for="course">{{ "Course" | translate }}</label>
+          <p-dropdown
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="courses"
+            optionLabel="name"
+            optionValue="courseId"
+            [(ngModel)]="courseId"
+            (ngModelChange)="courseChanged()"
+            id="course"
+          ></p-dropdown>
+        </div>
+        <div class="input-item">
+          <label for="group">{{ "Group" | translate }}</label>
+          <p-dropdown
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="groups"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="request.groupId"
+            id="group"
+          ></p-dropdown>
+        </div>
+
+      </div>
+      <div class="row1">
+        <div class="input-item">
+          <label for="enable">{{ "Sub topics" | translate }}</label>
+          <p-multiSelect
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="subTopics"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="selectedTopics"
+            id="enable"
+          ></p-multiSelect>
         </div>
         <div class="input-item">
           <label for="enable">{{ "Duration" | translate }}</label>

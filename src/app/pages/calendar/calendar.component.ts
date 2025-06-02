@@ -191,7 +191,7 @@ export class CalendarComponent {
     const ref = this.dialogService.open(CalendarMeetingsCreateComponent, {
       header: this.translate.instant('Schedule meetings'),
       width: '1020px',
-      height: '630px',
+      // height: '630px',
       data: {
         courses: this.courses,
       },
