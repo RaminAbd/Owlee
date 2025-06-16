@@ -1,11 +1,24 @@
 import { Component, inject, Input } from '@angular/core';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
-import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { AuthService } from '../../../../../auth/sign-in/auth.service';
 import { filter, map, mergeMap } from 'rxjs';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { StorageService } from '../../../../../core/services/storage.service';
 
 @Component({
   selector: 'app-home-header',
@@ -20,20 +33,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
           width: '*',
           visibility: 'visible',
           display: 'block',
-        })
+        }),
       ),
       state(
         'closed',
         style({
           width: '0px',
           visibility: 'hidden',
-        })
+        }),
       ),
       transition('open <=> closed', [animate('500ms ease-in-out')]),
     ]),
   ],
 })
 export class HomeHeaderComponent {
+  private authService: AuthService = inject(AuthService);
+  private storage: StorageService = inject(StorageService);
   private titleService: Title = inject(Title);
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -113,6 +128,17 @@ export class HomeHeaderComponent {
   onAnimationDone() {
     if (!this.showMenu) {
       this.isHidden = true;
+    }
+  }
+
+  signin() {
+    let ar = this.storage.getObject('authResponse');
+    console.log(ar);
+    if (ar) {
+      this.authService.navigateByRole(ar);
+    }
+    else{
+      this.router.navigate(['/auth']);
     }
   }
 }

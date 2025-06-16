@@ -50,7 +50,7 @@
     </span>
     <div class="auth">
       <button class="signUp" [routerLink]="'/sign-up'">{{ 'Start For Free'  | translate}}</button>
-      <button class="signIn" [routerLink]="'/auth'">{{ 'Log in'  |translate}}</button>
+      <button class="signIn" (click)="signin()">{{ 'Log in'  |translate}}</button>
     </div>
   </div>
 </div>
