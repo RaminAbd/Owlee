@@ -191,5 +191,11 @@
   "Hour": "Hour",
   "Minute": "Minute",
   "Duration": "Duration",
-  "Forgot password?": "Forgot password?"
+  "Forgot password?": "Forgot password?",
+  "I have read and agree to the Privacy Policy": "I have read and agree to the Privacy Policy",
+  "Current plan": "Current plan",
+  "Upgrade": "Upgrade",
+  "Continue": "Continue",
+  "Monthly": "Monthly",
+  "Annually": "Annually"
 }

@@ -194,5 +194,11 @@
   "Hour": "Час",
   "Minute": "Минута",
   "Duration": "Продолжительность",
-  "Forgot password?": "Забыли пароль?"
+  "Forgot password?": "Забыли пароль?",
+  "I have read and agree to the Privacy Policy": "Я прочитал(а) и согласен(сна) с Политикой конфиденциальности",
+  "Current plan": "Текущий план",
+  "Upgrade": "Обновить",
+  "Continue": "Продолжить",
+  "Monthly": "Ежемесячно",
+  "Annually": "Ежегодно"
 }

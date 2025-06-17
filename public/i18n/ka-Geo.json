@@ -192,5 +192,11 @@
   "Hour": "საათი",
   "Minute": "წუთი",
   "Duration": "ხანგრძლივობა",
-  "Forgot password?": "პაროლი დაგავიწყდათ?"
+  "Forgot password?": "პაროლი დაგავიწყდათ?",
+  "I have read and agree to the Privacy Policy": "წავიკითხე და ვეთანხმები კონფიდენციალურობის პოლიტიკას",
+  "Current plan": "მიმდინარე გეგმა",
+  "Upgrade": "განახლება",
+  "Continue": "გაგრძელება",
+  "Monthly": "ყოველთვიურად",
+  "Annually": "ყოველწლიურად"
 }

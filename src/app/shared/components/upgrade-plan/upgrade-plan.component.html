@@ -118,8 +118,11 @@
   <div class="warning" *ngIf="errorMessage" style="width: 100%">
     <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
-  <div class="row" style="display: flex;width: 100%;align-items: center;">
-    <div class="input-block" style="display: flex; align-items: center; gap: 6px">
+  <div class="row" style="display: flex; width: 100%; align-items: center">
+    <div
+      class="input-block"
+      style="display: flex; align-items: center; gap: 6px"
+    >
       <input
         type="checkbox"
         [(ngModel)]="privacyAccepted"
@@ -129,17 +132,23 @@
       />
       <label
         for="privacy"
-        style="cursor: pointer;"
+        style="cursor: pointer"
         [class.invalidLabel]="!privacyAccepted && isSubmitted"
-      >{{ "I have read and agree to the " | translate }}
-        <a routerLink="/payment-policy" target="_blank">{{ "Privacy Policy." | translate }}</a></label
       >
+        <a routerLink="/educator-privacy" target="_blank">{{
+          "I have read and agree to the Privacy Policy" | translate
+        }}</a>
+      </label>
     </div>
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
     <button class="save" (click)="upgrade()">
-      {{ "Upgrade plan" | translate }}
+      {{
+        selectedPackage.id === activePackage.id
+          ? ("Continue" | translate)
+          : ("Upgrade plan" | translate)
+      }}
     </button>
   </div>
 </div>

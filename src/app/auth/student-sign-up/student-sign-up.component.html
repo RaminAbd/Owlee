@@ -189,11 +189,15 @@
                 />
                 <label
                   for="privacy"
-                  style="cursor: pointer;"
-                  [class.invalidLabel]="!request.privacyAccepted && firstStepSubmitted"
-                >{{ "I have read and agree to the " | translate }}
-                  <a routerLink="/student-privacy" target="_blank">{{ "Privacy Policy." | translate }}</a></label
+                  style="cursor: pointer"
+                  [class.invalidLabel]="
+                    !request.privacyAccepted && firstStepSubmitted
+                  "
                 >
+                  <a routerLink="/educator-privacy" target="_blank">{{
+                      "I have read and agree to the Privacy Policy" | translate
+                    }}</a>
+                </label>
               </div>
             </div>
             <button type="button" (click)="validateFirstStep()">{{ 'Save' | translate }}</button>

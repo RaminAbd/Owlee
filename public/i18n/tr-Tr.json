@@ -194,5 +194,11 @@
   "Hour": "Saat",
   "Minute": "Dakika",
   "Duration": "Süre",
-  "Forgot password?": "Parolanızı mı unuttunuz?"
+  "Forgot password?": "Parolanızı mı unuttunuz?",
+  "I have read and agree to the Privacy Policy": "Gizlilik Politikasını okudum ve kabul ediyorum",
+  "Current plan": "Mevcut plan",
+  "Upgrade": "Yükselt",
+  "Continue": "Devam et",
+  "Monthly": "Aylık",
+  "Annually": "Yıllık"
 }
