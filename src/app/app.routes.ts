@@ -15,6 +15,7 @@ import {EducatorSignupPolicyComponent} from './pages/docs/educator-signup-policy
 import {StudentSignupPolicyComponent} from './pages/docs/student-signup-policy/student-signup-policy.component';
 import {EducatorPaymentPolicyComponent} from './pages/docs/educator-payment-policy/educator-payment-policy.component';
 import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import {TransactionResultComponent} from './pages/transaction-result/transaction-result.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
@@ -94,6 +95,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'admin', pathMatch: 'full' },
     ],
   },
+
+  { path: 'result/:id', component: TransactionResultComponent },
   { path: '**', redirectTo: 'main', pathMatch: 'full' },
   // { path: '', redirectTo: 'main', pathMatch: 'full' },
 ];

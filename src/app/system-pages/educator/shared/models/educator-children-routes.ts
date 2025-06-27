@@ -77,7 +77,7 @@ export class EducatorChildrenRoutes {
       component: PersonalInfoComponent,
       data: { title: 'Personal Information' },
     },
-    { path: 'result/:id', component: TransactionResultComponent },
+
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
   ];

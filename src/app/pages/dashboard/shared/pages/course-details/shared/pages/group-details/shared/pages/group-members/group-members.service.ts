@@ -66,8 +66,7 @@ export class GroupMembersService {
   }
 
   checkSlots() {
-    let educatorId: string = localStorage.getItem('userId') as string;
-    this.service.GetAvailableSlots(educatorId).subscribe((resp) => {
+    this.service.GetAvailableSlots(this.component.groupId).subscribe((resp) => {
       console.log(resp.data);
       if (resp.data !== 0) {
         this.component.allowedToAddGroup = true;
