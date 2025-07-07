@@ -1,17 +1,15 @@
-import {inject, Injectable} from '@angular/core';
-import {
-  MultipleMeetingComponent
-} from '../../../../dashboard/shared/pages/course-details/shared/components/multiple-meeting/multiple-meeting.component';
-import {MeetingsApiService} from '../../services/meetings.api.service';
-import {ApplicationMessageCenterService} from '../../../../../core/services/ApplicationMessageCenter.service';
-import {CalendarMeetingsCreateComponent} from './calendar-meetings-create.component';
-import {GroupsApiService} from '../../../../dashboard/shared/services/groups.api.service';
-import {SubtopicModel} from '../../../../dashboard/shared/models/subtopic.model';
-import {TopicApiService} from '../../../../dashboard/shared/services/topic.api.service';
-import {TranslateService} from '@ngx-translate/core';
+import { inject, Injectable } from '@angular/core';
+import { MultipleMeetingComponent } from '../../../../dashboard/shared/pages/course-details/shared/components/multiple-meeting/multiple-meeting.component';
+import { MeetingsApiService } from '../../services/meetings.api.service';
+import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
+import { CalendarMeetingsCreateComponent } from './calendar-meetings-create.component';
+import { GroupsApiService } from '../../../../dashboard/shared/services/groups.api.service';
+import { SubtopicModel } from '../../../../dashboard/shared/models/subtopic.model';
+import { TopicApiService } from '../../../../dashboard/shared/services/topic.api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalendarMeetingsCreateService {
   component: CalendarMeetingsCreateComponent;
@@ -29,8 +27,12 @@ export class CalendarMeetingsCreateService {
       .CreateMany(this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Successfully created!');
-          this.component.ref.close(true);
+          setTimeout(() => {
+            this.message.showTranslatedSuccessMessage('Successfully created!');
+
+            this.component.ref.close(true);
+            this.component.isSubmitted = false;
+          }, 5000);
         }
       });
   }

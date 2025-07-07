@@ -200,5 +200,15 @@
   "Upgrade": "Обновить",
   "Continue": "Продолжить",
   "Monthly": "Ежемесячно",
-  "Annually": "Ежегодно"
+  "Annually": "Ежегодно",
+  "Are you sure you want to delete this meeting?": "Вы уверены, что хотите удалить эту встречу?",
+  "Are you sure?": "Вы уверены?",
+  "Are you sure you want to delete this group?": "Вы уверены, что хотите удалить эту группу?",
+  "Monday": "Понедельник",
+  "Tuesday": "Вторник",
+  "Wednesday": "Среда",
+  "Thursday": "Четверг",
+  "Friday": "Пятница",
+  "Saturday": "Суббота",
+  "Sunday": "Воскресенье"
 }

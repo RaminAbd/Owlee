@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DatePicker } from 'primeng/datepicker';
 import { MultiSelect } from 'primeng/multiselect';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MultipleMeetingService } from '../../../../dashboard/shared/pages/course-details/shared/components/multiple-meeting/multiple-meeting.service';
 import { MultipleMeetingRequestModel } from '../../../../dashboard/shared/models/multiple-meeting-request.model';
@@ -25,6 +25,7 @@ import { TopicRequestModel } from '../../../../dashboard/shared/models/topic-req
     TranslatePipe,
     FormsModule,
     DropdownModule,
+    NgIf,
   ],
   templateUrl: './calendar-meetings-create.component.html',
   styleUrl: './calendar-meetings-create.component.scss',

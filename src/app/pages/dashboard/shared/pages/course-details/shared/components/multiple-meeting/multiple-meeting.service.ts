@@ -19,8 +19,12 @@ export class MultipleMeetingService {
       .CreateMany(this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Successfully created!');
-          this.component.ref.close(true);
+          setTimeout(() => {
+            this.message.showTranslatedSuccessMessage(
+              'Created successfully.',
+            );
+            this.component.ref.close(true);
+          }, 5000);
         }
       });
   }

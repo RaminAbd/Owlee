@@ -6,13 +6,13 @@ import { DatePicker } from 'primeng/datepicker';
 import { MultiSelect } from 'primeng/multiselect';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import { FormatDate } from '../../../../../../../../core/extensions/format-date';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
 
 @Component({
   selector: 'app-multiple-meeting',
-  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf],
+    imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf],
   templateUrl: './multiple-meeting.component.html',
   styleUrl: './multiple-meeting.component.scss',
 })

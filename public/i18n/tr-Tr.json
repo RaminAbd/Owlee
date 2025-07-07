@@ -200,5 +200,15 @@
   "Upgrade": "Yükselt",
   "Continue": "Devam et",
   "Monthly": "Aylık",
-  "Annually": "Yıllık"
+  "Annually": "Yıllık",
+  "Are you sure you want to delete this meeting?": "Bu toplantıyı silmek istediğinizden emin misiniz?",
+  "Are you sure?": "Emin misiniz?",
+  "Are you sure you want to delete this group?": "Bu grubu silmek istediğinizden emin misiniz?",
+  "Monday": "Pazartesi",
+  "Tuesday": "Salı",
+  "Wednesday": "Çarşamba",
+  "Thursday": "Perşembe",
+  "Friday": "Cuma",
+  "Saturday": "Cumartesi",
+  "Sunday": "Pazar"
 }

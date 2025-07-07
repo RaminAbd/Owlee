@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="input-item">
-      <label for="enable">{{ "Duration" | translate }}</label>
+      <label for="enable">{{ "Duration" | translate }} ( {{"Minute" | translate}} )</label>
       <input type="number" [(ngModel)]="request.duration" />
     </div>
     <div class="input-item">
@@ -53,6 +53,18 @@
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
-    <button class="save" (click)="save()">{{ "Save" | translate }}</button>
+    <button
+      class="save"
+      (click)="save()"
+      style="position: relative"
+      [disabled]="isSubmitted"
+    >
+      {{ "Save" | translate }}
+      <i
+        class="pi pi-spin pi-spinner"
+        style="position: absolute; right: 10px"
+        *ngIf="isSubmitted"
+      ></i>
+    </button>
   </div>
 </div>

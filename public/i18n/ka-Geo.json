@@ -198,5 +198,15 @@
   "Upgrade": "განახლება",
   "Continue": "გაგრძელება",
   "Monthly": "ყოველთვიურად",
-  "Annually": "ყოველწლიურად"
+  "Annually": "ყოველწლიურად",
+  "Are you sure you want to delete this meeting?": "დარწმუნებული ხართ, რომ გსურთ ამ შეხვედრის წაშლა?",
+  "Are you sure?": "დარწმუნებული ხართ?",
+  "Are you sure you want to delete this group?": "დარწმუნებული ხართ, რომ გსურთ ამ ჯგუფის წაშლა?",
+  "Monday": "ორშაბათი",
+  "Tuesday": "სამშაბათი",
+  "Wednesday": "ოთხშაბათი",
+  "Thursday": "ხუთშაბათი",
+  "Friday": "პარასკევი",
+  "Saturday": "შაბათი",
+  "Sunday": "კვირა"
 }

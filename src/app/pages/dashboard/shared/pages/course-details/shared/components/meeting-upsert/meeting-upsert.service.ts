@@ -49,8 +49,12 @@ export class MeetingUpsertService {
       .Create(this.meetingsService.serviceUrl, this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Successfully created!');
-          this.component.ref.close(true);
+          setTimeout(() => {
+            this.message.showTranslatedSuccessMessage(
+              'Created successfully.',
+            );
+            this.component.ref.close(true);
+          }, 5000);
         }
       });
   }
@@ -60,8 +64,12 @@ export class MeetingUpsertService {
       .Update(this.meetingsService.serviceUrl, this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Successfully updated!');
-          this.component.ref.close(true);
+          setTimeout(() => {
+            this.message.showTranslatedSuccessMessage(
+              'Created successfully.',
+            );
+            this.component.ref.close(true);
+          }, 5000);
         }
       });
   }

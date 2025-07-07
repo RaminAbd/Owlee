@@ -197,5 +197,15 @@
   "Upgrade": "Yenilə",
   "Continue": "Davam et",
   "Monthly": "Aylıq",
-  "Annually": "İllik"
+  "Annually": "İllik",
+  "Are you sure you want to delete this meeting?": "Bu görüşü silmək istədiyinizə əminsiniz?",
+  "Are you sure?": "əminsən?",
+  "Are you sure you want to delete this group?": "Bu qrupu silmək istədiyinizə əminsiniz?",
+  "Monday": "Bazar ertəsi",
+  "Tuesday": "Çərşənbə axşamı",
+  "Wednesday": "Çərşənbə",
+  "Thursday": "Cümə axşamı",
+  "Friday": "Cümə",
+  "Saturday": "Şənbə",
+  "Sunday": "Bazar"
 }

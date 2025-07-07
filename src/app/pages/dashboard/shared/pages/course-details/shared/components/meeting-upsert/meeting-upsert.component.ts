@@ -8,15 +8,17 @@ import { MeetingRequestModel } from '../../../../../../../calendar/shared/models
 import { DatePickerModule } from 'primeng/datepicker';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
 import { MultiSelect } from 'primeng/multiselect';
+import {NgIf} from "@angular/common";
 @Component({
   selector: 'app-meeting-upsert',
-  imports: [
-    DropdownModule,
-    FormsModule,
-    TranslatePipe,
-    DatePickerModule,
-    MultiSelect,
-  ],
+    imports: [
+        DropdownModule,
+        FormsModule,
+        TranslatePipe,
+        DatePickerModule,
+        MultiSelect,
+        NgIf,
+    ],
   templateUrl: './meeting-upsert.component.html',
   styleUrl: './meeting-upsert.component.scss',
 })
@@ -26,7 +28,7 @@ export class MeetingUpsertComponent {
   id: string;
   date: any;
   subtopics: SubtopicModel[] = [];
-
+  isSubmitted = false;
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -39,6 +41,7 @@ export class MeetingUpsertComponent {
   }
 
   save() {
+    this.isSubmitted = true;
     this.service.save();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DatePicker } from 'primeng/datepicker';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -11,7 +11,7 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
 
 @Component({
   selector: 'app-range-meeting',
-  imports: [DatePicker, NgForOf, TranslatePipe, FormsModule, DropdownModule],
+  imports: [DatePicker, NgForOf, TranslatePipe, FormsModule, DropdownModule, NgIf],
   templateUrl: './range-meeting.component.html',
   styleUrl: './range-meeting.component.scss',
 })
