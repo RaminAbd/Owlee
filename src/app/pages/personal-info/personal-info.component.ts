@@ -62,7 +62,6 @@ export class PersonalInfoComponent  implements OnDestroy {
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
-    this.service.getEducatorInfo();
     this.service.initMonths();
 
     this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {

@@ -10,6 +10,7 @@ import { StorageService } from '../../core/services/storage.service';
 import { AuthApiService } from '../../auth/shared/services/auth.api.service';
 import { AuthRequestModel } from '../../auth/shared/models/auth-request.model';
 import { EducatorSignupRequestModel } from '../../auth/sign-up/shared/models/educator-signup-request.model';
+import { FileModel } from '../../core/models/File.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,8 @@ export class PersonalInfoService {
     this.service.GetById(this.service.serviceUrl, id).subscribe((resp) => {
       this.setDates(resp.data);
       this.component.request = resp.data;
+      if (!this.component.request.profileImage)
+        this.component.request.profileImage = new FileModel();
       this.component.request.profileImage.isValid = true;
       this.component.request.qualifications.forEach((qualification) => {
         qualification.file.isValid = true;
@@ -86,6 +89,7 @@ export class PersonalInfoService {
       )
       .subscribe((resp) => {
         this.component.knownLangs = resp.data;
+        this.getEducatorInfo();
       });
   }
 
@@ -288,14 +292,14 @@ export class PersonalInfoService {
 
         this.component.passSubmitted = false;
         this.getEducatorInfo();
-        this.changeLocalStorage()
+        this.changeLocalStorage();
 
         this.component.request = new EducatorSignupRequestModel();
       }
     });
   }
 
-  changeLocalStorage(){
+  changeLocalStorage() {
     let storage = this.storage.getObject('authRequest');
     storage.password = this.component.request.password;
     this.storage.saveObject('authRequest', storage);

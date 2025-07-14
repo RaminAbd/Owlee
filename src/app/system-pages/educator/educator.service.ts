@@ -17,20 +17,22 @@ export class EducatorService {
   checkDays() {
     let userId: string = localStorage.getItem('userId') as string;
     this.service.GetStatus(userId).subscribe((resp) => {
-      console.log(resp.data, 'Status');
-      if (resp.data.days <= 3 && resp.data.days >0 ) {
+      if (resp.data.days <= 3 && resp.data.days > 0) {
         if (!resp.data.isShown) {
-          this.openExpirationDialog(resp.data);
+          this.openExpirationDialog(resp.data, false);
         }
       }
-      if(resp.data.days === 0 && resp.data.hours === 0 && resp.data.minutes === 0) {
-        this.openExpirationDialog(resp.data);
+      if (
+        resp.data.days === 0 &&
+        resp.data.hours === 0 &&
+        resp.data.minutes === 0
+      ) {
+        this.openExpirationDialog(resp.data, true);
       }
-
     });
   }
 
-  openExpirationDialog(data: any) {
+  openExpirationDialog(data: any, forceToUpgrade: boolean) {
     const ref = this.dialogService.open(ExpirationInfoComponent, {
       width: '460px',
       data: data,
@@ -40,21 +42,21 @@ export class EducatorService {
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
-        this.upgradePlan();
+        this.upgradePlan(forceToUpgrade);
       }
     });
   }
 
-  upgradePlan() {
+  upgradePlan(forceToUpgrade: boolean) {
     const ref = this.dialogService.open(UpgradePlanComponent, {
       width: '960px',
       style: {
         maxWidth: '95%',
       },
-      data:1
+      data: 1,
     });
     ref.onClose.subscribe((e: any) => {
-      if (e) {
+      if (forceToUpgrade) {
         this.checkDays();
       }
     });

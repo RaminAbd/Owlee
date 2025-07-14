@@ -10,6 +10,7 @@ import { LanguageService } from '../../../../../core/services/language.service';
 import { EducatorSignupRequestModel } from '../../../../../auth/sign-up/shared/models/educator-signup-request.model';
 import { EducatorDetailsComponent } from './educator-details.component';
 import { CoursesApiService } from '../../../../admin-courses/shared/services/courses.api.service';
+import {FileModel} from '../../../../../core/models/File.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,8 @@ export class EducatorDetailsService {
       .subscribe((resp) => {
         this.setDates(resp.data);
         this.component.request = resp.data;
+        if (!this.component.request.profileImage)
+          this.component.request.profileImage = new FileModel();
         this.component.request.profileImage.isValid = true;
         this.component.request.qualifications.forEach((qualification) => {
           qualification.file.isValid = true;
