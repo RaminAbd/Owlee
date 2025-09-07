@@ -411,7 +411,10 @@
   }
 }
 ::ng-deep{
-  label.invalidLabel{
+
+}
+label.invalidLabel{
+  a{
     color: red !important;
   }
 }

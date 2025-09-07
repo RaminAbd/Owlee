@@ -34,8 +34,8 @@ export class LanguageService {
           'ka-Geo': kaLang,
           'az-Aze': azLang,
           'en-Us': enLang,
-          'ru-Ru': enLang,
-          'tr-Tr': enLang,
+          'ru-Ru': ruLang,
+          'tr-Tr': trLang,
         };
         this.languagesDataSubject.next(data);
         return data;
@@ -62,6 +62,7 @@ export class LanguageService {
 
   getByKey(key: string) {
     const currentLanguageData = this.getCurrentLanguageData();
+    console.log(currentLanguageData[key])
     return currentLanguageData ? currentLanguageData[key] : '';
   }
 }

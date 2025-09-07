@@ -5,6 +5,19 @@
       <input type="text" id="name" [(ngModel)]="request.name" />
     </div>
     <div class="input-item">
+      <label for="implementationType">{{
+          "Implementation type" | translate
+        }}</label>
+      <p-dropdown
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="implementationTypes"
+        optionLabel="name"
+        optionValue="value"
+        [(ngModel)]="request.implementationType"
+        id="implementationType"
+      ></p-dropdown>
+    </div>
+    <div class="input-item">
       <label for="enable">{{ "Type" | translate }}</label>
       <p-dropdown
         [style]="{ width: '100%', height: '40px' }"
@@ -15,19 +28,7 @@
         id="enable"
       ></p-dropdown>
     </div>
-    <div class="input-item">
-      <label for="implementationType">{{
-        "Implementation type" | translate
-      }}</label>
-      <p-dropdown
-        [style]="{ width: '100%', height: '40px' }"
-        [options]="implementationTypes"
-        optionLabel="name"
-        optionValue="value"
-        [(ngModel)]="request.implementationType"
-        id="implementationType"
-      ></p-dropdown>
-    </div>
+
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>

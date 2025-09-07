@@ -8,6 +8,7 @@
             [style]="{ width: '100%' }"
             [(ngModel)]="date"
             [showTime]="true"
+            appendTo="body"
           />
           <div class="icon">
             <svg
@@ -43,6 +44,7 @@
           [options]="subtopics"
           optionLabel="name"
           optionValue="id"
+          appendTo="body"
           [(ngModel)]="selectedTopics"
           id="enable"
         ></p-multiSelect>

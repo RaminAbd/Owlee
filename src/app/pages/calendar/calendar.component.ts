@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { StorageService } from '../../core/services/storage.service';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { BaseApiService } from '../../core/services/base.api.service';
-import { Router } from '@angular/router';
+import {
+  LangChangeEvent,
+  TranslatePipe,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   DatePipe,
   NgClass,
@@ -21,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-course.model';
 import { MeetingUpsertComponent } from '../dashboard/shared/pages/course-details/shared/components/meeting-upsert/meeting-upsert.component';
 import { CalendarMeetingsCreateComponent } from './shared/components/calendar-meetings-create/calendar-meetings-create.component';
+import { Confirmation } from '../../core/extensions/confirmation';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-calendar',
@@ -42,11 +45,13 @@ import { CalendarMeetingsCreateComponent } from './shared/components/calendar-me
 export class CalendarComponent {
   private translate: TranslateService = inject(TranslateService);
   public dialogService: DialogService = inject(DialogService);
+  private confirmationService: ConfirmationService =
+    inject(ConfirmationService);
   showActivities: boolean = false;
   viewModes: any[] = [
-    { name: 'Monthly', value: 'month' },
-    { name: 'Weekly', value: 'week' },
-    { name: 'Daily', value: 'day' },
+    { name: this.translate.instant('Monthly'), value: 'month' },
+    { name: this.translate.instant('Weekly'), value: 'week' },
+    { name: this.translate.instant('Daily'), value: 'day' },
   ];
   viewMode: 'month' | 'week' | 'day' = 'month';
   private service: CalendarService = inject(CalendarService);
@@ -69,12 +74,20 @@ export class CalendarComponent {
 
   constructor() {
     this.service.component = this;
-    this.service.getCourses()
+    this.service.getCourses();
     this.meetingsRequest.educatorId = localStorage.getItem('userId') as string;
     this.service.buildDateRequest(new Date(), this.viewMode);
     this.weekDays = this.service.getWeekDays();
     this.monthData = this.service.updateMonthData(new Date());
     if (!this.isMobile()) this.handleSetDateInfo(this.dayItemStateSaver);
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.viewModes = [
+        { name: this.translate.instant('Monthly'), value: 'month' },
+        { name: this.translate.instant('Weekly'), value: 'week' },
+        { name: this.translate.instant('Daily'), value: 'day' },
+      ];
+    });
   }
 
   changeViewMode() {
@@ -204,5 +217,16 @@ export class CalendarComponent {
         this.service.getMeetings();
       }
     });
+  }
+
+  deleteMeeting(id: string) {
+    Confirmation.confirm(
+      this.confirmationService,
+      this.translate,
+      'Are you sure you want to delete this meeting?',
+      () => {
+        this.service.delete(id);
+      },
+    );
   }
 }

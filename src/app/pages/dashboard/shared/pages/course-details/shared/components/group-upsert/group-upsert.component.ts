@@ -22,6 +22,7 @@ export class GroupUpsertComponent {
   implementationTypes: any[] = [
     { name: this.translate.instant('Online'), value: 1 },
     { name: this.translate.instant('Offline'), value: 2 },
+    { name: this.translate.instant('Hybrid'), value: 3 },
   ];
   constructor(
     public config: DynamicDialogConfig,

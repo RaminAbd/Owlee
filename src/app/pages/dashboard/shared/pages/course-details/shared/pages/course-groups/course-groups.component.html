@@ -18,10 +18,18 @@
         </div>
       </div>
       <div class="btn">
-        <button *ngIf="allowedToAddGroup" class="allowed" (click)="openDialog()">
+        <button
+          *ngIf="allowedToAddGroup"
+          class="allowed"
+          (click)="openDialog()"
+        >
           {{ "Add new" | translate }}
         </button>
-        <button *ngIf="!allowedToAddGroup"  class="not-allowed" (click)="upgradePlan()">
+        <button
+          *ngIf="!allowedToAddGroup"
+          class="not-allowed"
+          (click)="upgradePlan()"
+        >
           <img src="lock.svg" alt="" />
           {{ "Upgrade plan to add more" | translate }}
         </button>
@@ -35,17 +43,22 @@
       >
         <div class="col name">
           <p>{{ item.name }}</p>
-          <p
-            class="type"
-            [ngStyle]="{
-              color: item.implementationType === 1 ? '#19C51F' : '#DB3AA9',
-            }"
-          >
-            {{
-              item.implementationType === 1
-                ? ("Online" | translate)
-                : ("Offline" | translate)
-            }}
+          <p class="type">
+            <span
+              style="color: #19c51f"
+              *ngIf="item.implementationType === 1"
+              >{{ "Online" | translate }}</span
+            >
+            <span
+              style="color: #db3aa9"
+              *ngIf="item.implementationType === 2"
+              >{{ "Offline" | translate }}</span
+            >
+            <span
+              style="color: #c6e7ff"
+              *ngIf="item.implementationType === 3"
+              >{{ "Hybrid" | translate }}</span
+            >
           </p>
         </div>
         <div class="col">

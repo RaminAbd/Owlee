@@ -69,39 +69,40 @@ export class CalendarMeetingsCreateComponent {
   }
 
   addMeeting() {
-    if (this.selectedTopics.length > 0) {
-      if (this.date) {
-        if (this.duration > 0) {
-          if (this.request.groupId) {
-            let item = {
-              showDate: this.formatDate(this.date),
-              subtopics: this.selectedTopics,
-              date: new Date(this.date).toISOString(),
-              duration: this.duration,
-            };
-            this.request.meetings.push(item);
-            this.selectedTopics = [];
-            this.date = undefined;
-          } else {
-            this.service.message.showTranslatedWarningMessage(
-              'Group field is required!',
-            );
-          }
+    if (this.date) {
+      if (this.duration > 0) {
+        if (this.request.groupId) {
+          let item = {
+            showDate: this.formatDate(this.date),
+            subtopics: this.selectedTopics,
+            date: new Date(this.date).toISOString(),
+            duration: this.duration,
+          };
+          this.request.meetings.push(item);
+          this.selectedTopics = [];
+          this.date = undefined;
         } else {
           this.service.message.showTranslatedWarningMessage(
-            "Duration can't be 0",
+            'Group field is required!',
           );
         }
       } else {
         this.service.message.showTranslatedWarningMessage(
-          'Date field is required!',
+          "Duration can't be 0",
         );
       }
     } else {
       this.service.message.showTranslatedWarningMessage(
-        'Topic field is required!',
+        'Date field is required!',
       );
     }
+    // if (this.selectedTopics.length > 0) {
+    //
+    // } else {
+    //   this.service.message.showTranslatedWarningMessage(
+    //     'Topic field is required!',
+    //   );
+    // }
   }
 
   formatDate(date: any) {

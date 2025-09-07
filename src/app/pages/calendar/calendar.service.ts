@@ -5,6 +5,7 @@ import {CoursesApiService} from '../admin-courses/shared/services/courses.api.se
 import {StorageService} from '../../core/services/storage.service';
 import {TranslateService} from '@ngx-translate/core';
 import {SubtopicModel} from '../dashboard/shared/models/subtopic.model';
+import {ApplicationMessageCenterService} from '../../core/services/ApplicationMessageCenter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class CalendarService {
   private coursesService: CoursesApiService = inject(CoursesApiService);
   private storage: StorageService = inject(StorageService);
   private translate: TranslateService = inject(TranslateService);
+  private message: ApplicationMessageCenterService = inject(ApplicationMessageCenterService);
   constructor() {}
 
   getCourses() {
@@ -332,4 +334,14 @@ export class CalendarService {
     return dayItem;
   }
 
+  delete(id:string) {
+    this.service
+      .Delete(this.service.serviceUrl, id)
+      .subscribe((resp) => {
+        if (resp.succeeded) {
+          this.message.showTranslatedSuccessMessage('Deleted successfully.');
+          this.getMeetings()
+        }
+      });
+  }
 }

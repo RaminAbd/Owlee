@@ -42,40 +42,46 @@ export class UpgradePlanComponent {
   constructor() {
     this.service.component = this;
     this.service.getPackages();
+    this.isSubmitted = false;
   }
 
   upgrade() {
-    if (!this.isSubmitted) {
-      this.isSubmitted = true;
-      console.log(this.privacyAccepted);
-      if (this.privacyAccepted) {
-        console.log(this.privacyAccepted);
-        if (this.upgradeType === 1) {
-          this.service.canChange();
-        } else {
-          if (
-            this.activePackage.name === 'Standard' &&
-            this.selectedPackage.name === 'Standard'
-          ) {
-            this.errorMessage = 'Please select Pro or Pro Plus package';
-          } else if (this.activePackage.name === 'Pro') {
-            if (this.selectedPackage.name !== 'Pro Plus') {
-              this.errorMessage = 'Please select Pro Plus package';
-            } else {
-              this.service.canChange();
-            }
-          } else if (this.activePackage.name === 'Pro Plus') {
-            this.errorMessage =
-              'You cannot upgrade your plan. Please contact customer support.';
-          } else {
-            this.service.canChange();
-          }
-        }
-      }
-      else{
-        this.isSubmitted = false;
-      }
+    console.log(this.isSubmitted, 'checking');
+    this.isSubmitted = true;
+    if (this.privacyAccepted) {
+      this.service.canChange();
     }
+    // if (!this.isSubmitted) {
+    //   this.isSubmitted = true;
+    //   console.log(this.privacyAccepted);
+    //   if (this.privacyAccepted) {
+    //     console.log(this.privacyAccepted);
+    //     if (this.upgradeType === 1) {
+    //       this.service.canChange();
+    //     } else {
+    //       if (
+    //         this.activePackage.name === 'Standard' &&
+    //         this.selectedPackage.name === 'Standard'
+    //       ) {
+    //         this.errorMessage = 'Please select Pro or Pro Plus package';
+    //       } else if (this.activePackage.name === 'Pro') {
+    //         if (this.selectedPackage.name !== 'Pro Plus') {
+    //           this.errorMessage = 'Please select Pro Plus package';
+    //         } else {
+    //           this.service.canChange();
+    //         }
+    //       } else if (this.activePackage.name === 'Pro Plus') {
+    //         this.errorMessage =
+    //           'You cannot upgrade your plan. Please contact customer support.';
+    //       } else {
+    //         this.service.canChange();
+    //       }
+    //     }
+    //   }
+    //   else{
+    //     this.isSubmitted = false;
+    //   }
+    // }
 
     // this.loading = true;
   }

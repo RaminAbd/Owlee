@@ -22,6 +22,7 @@
   "November": "November",
   "December": "December",
   "Languages": "Languages",
+  "Language": "Language",
   "Students": "Students",
   "Educators": "Educators",
   "Name": "Name",
@@ -198,6 +199,8 @@
   "Continue": "Continue",
   "Monthly": "Monthly",
   "Annually": "Annually",
+  "Weekly": "Weekly",
+  "Daily": "Daily",
   "Are you sure you want to delete this meeting?": "Are you sure you want to delete this meeting?",
   "Are you sure?": "Are you sure?",
   "Are you sure you want to delete this group?": "Are you sure you want to delete this group?",
@@ -207,5 +210,7 @@
   "Thursday": "Thursday",
   "Friday": "Friday",
   "Saturday": "Saturday",
-  "Sunday": "Sunday"
+  "Sunday": "Sunday",
+  "Day": "Day",
+  "Hybrid": "Hybrid"
 }

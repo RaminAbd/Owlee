@@ -56,7 +56,7 @@ export class UpgradePlanService {
     }
     this.subsService.CanChange(req).subscribe((resp) => {
       if(resp.data.canChange){
-        this.renew()
+        // this.renew()
       }
       else{
         this.component.loading = false;
