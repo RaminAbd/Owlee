@@ -54,8 +54,7 @@ export class SubscriptionPackageService {
   private delete(id: any) {
     this.service.Delete(this.service.serviceUrl, id).subscribe((resp) => {
       if (resp.succeeded) {
-        this.appMessageService.showSuccessMessage(
-          'Success!',
+        this.appMessageService.showTranslatedSuccessMessage(
           'Successfully deleted',
         );
         this.getAll();

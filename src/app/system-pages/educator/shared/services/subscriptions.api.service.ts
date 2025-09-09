@@ -22,4 +22,8 @@ export class SubscriptionsApiService extends BaseCrudApiService {
   CanChange(req:any){
     return this.get(this.serviceUrl + 'CanChange', null, req);
   }
+
+  CanUpdate(req:any){
+    return this.get(this.serviceUrl + 'CanUpdate', null, req);
+  }
 }

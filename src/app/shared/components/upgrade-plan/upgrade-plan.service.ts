@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { SubscriptionPackageApiService } from '../../../pages/subscription-package/shared/services/subscription-package.api.service';
 import { UpgradePlanComponent } from './upgrade-plan.component';
 import { SubscriptionsApiService } from '../../../system-pages/educator/shared/services/subscriptions.api.service';
+import { ApplicationMessageCenterService } from '../../../core/services/ApplicationMessageCenter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,9 @@ export class UpgradePlanService {
 
   private service: SubscriptionPackageApiService = inject(
     SubscriptionPackageApiService,
+  );
+  private message: ApplicationMessageCenterService = inject(
+    ApplicationMessageCenterService,
   );
   private subsService: SubscriptionsApiService = inject(
     SubscriptionsApiService,
@@ -39,7 +43,7 @@ export class UpgradePlanService {
     const req = {
       educatorId: userId,
       packageId: this.component.selectedPackage.id,
-      type:this.component.selectedPackageType
+      type: this.component.selectedPackageType,
     };
     this.subsService.Renew(req).subscribe((resp) => {
       this.component.loading = false;
@@ -53,14 +57,32 @@ export class UpgradePlanService {
     const req = {
       educatorId: userId,
       SubscriptionId: this.component.selectedPackage.id,
-    }
+    };
     this.subsService.CanChange(req).subscribe((resp) => {
-      if(resp.data.canChange){
-        // this.renew()
-      }
-      else{
+      if (resp.data.canChange) {
+        this.renew();
+      } else {
         this.component.loading = false;
+        this.component.errorMessage =
+          'Please continue current or select higher package';
       }
-    })
+    });
+  }
+
+  canUpdate() {
+    this.component.loading = true;
+    let userId: string = localStorage.getItem('userId') as string;
+    const req = {
+      educatorId: userId,
+      SubscriptionId: this.component.selectedPackage.id,
+    };
+    this.subsService.CanUpdate(req).subscribe((resp) => {
+      if (resp.data.canChange) {
+        this.renew();
+      } else {
+        this.component.loading = false;
+        this.component.errorMessage = 'Please select higher package';
+      }
+    });
   }
 }

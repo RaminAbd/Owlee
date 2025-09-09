@@ -46,10 +46,14 @@ export class UpgradePlanComponent {
   }
 
   upgrade() {
-    console.log(this.isSubmitted, 'checking');
+    console.log(this.upgradeType);
     this.isSubmitted = true;
     if (this.privacyAccepted) {
-      this.service.canChange();
+      if (this.upgradeType === 1) {
+        this.service.canChange();
+      } else {
+        this.service.canUpdate();
+      }
     }
     // if (!this.isSubmitted) {
     //   this.isSubmitted = true;

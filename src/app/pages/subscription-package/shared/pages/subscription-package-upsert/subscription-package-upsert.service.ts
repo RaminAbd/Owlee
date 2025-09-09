@@ -53,8 +53,7 @@ export class SubscriptionPackageUpsertService {
       .Create(this.service.serviceUrl, this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.component.message.showSuccessMessage(
-            'Success',
+          this.component.message.showTranslatedSuccessMessage(
             'Successfully created',
           );
           this.component.location.back();
@@ -67,8 +66,7 @@ export class SubscriptionPackageUpsertService {
       .Update(this.service.serviceUrl, this.component.request)
       .subscribe((resp) => {
         if (resp.succeeded) {
-          this.component.message.showSuccessMessage(
-            'Success',
+          this.component.message.showTranslatedSuccessMessage(
             'Successfully updated',
           );
           this.component.location.back();
