@@ -49,13 +49,15 @@
             </svg>
           </div>
           <p *ngIf="viewMode === 'month'">
-            {{ monthData.monthName }} {{ currentDate.getFullYear() }}
+            {{ monthData.monthName | translate}} {{ currentDate.getFullYear() }}
           </p>
           <p *ngIf="viewMode === 'week'">
-            Week of {{ weekData.startDate | date: "MMM d, yyyy" }}
+            {{ (weekData.startDate | date:'MMMM')! | translate }}
+            {{ weekData.startDate | date: "d, yyyy" }}
           </p>
           <p *ngIf="viewMode === 'day'">
-            {{ dayData.date | date: "MMM d, yyyy" }}
+            {{ (dayData.date | date:'MMMM')! | translate }}
+            {{ dayData.date | date: "d, yyyy" }}
           </p>
         </div>
       </div>
@@ -63,7 +65,7 @@
         <div class="month-board" *ngIf="viewMode === 'month'">
           <div class="row week-days">
             <div class="week-day" *ngFor="let day of weekDays">
-              <p>{{ day.shortName }}</p>
+              <p>{{ day.shortName | translate }}</p>
             </div>
           </div>
           <div class="weeks">
@@ -131,7 +133,7 @@
                 class="heading"
                 style="height: 40px; border-right: 1px solid #eee"
               >
-                <p>{{ day.date | date: "EEE" }}</p>
+                <p>{{ (day.date | date:'EEE')! | translate }}</p>
                 <p>{{ day.date | date: "d" }}</p>
               </div>
               <div class="hours-inner">
@@ -196,8 +198,11 @@
       <div class="activities">
         <div class="heading">
           <div class="active-date">
-            <p>{{ activeDateInfo.dateString.formattedDate }}</p>
-            <p class="w-day">{{ activeDateInfo.dateString.dayOfWeek }}</p>
+            <p>
+              {{ (activeDateInfo.date | date:'MMMM')! | translate }}
+              {{ activeDateInfo.date | date: "d, yyyy" }}
+            </p>
+            <p class="w-day">{{ activeDateInfo.dateString.dayOfWeek | translate}}</p>
           </div>
           <div class="close" (click)="showActivities = false">
             <i class="pi pi-times"></i>

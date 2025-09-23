@@ -5,4 +5,5 @@ export class MeetingRequestModel {
   subtopics: string[] = [];
   link?: string;
   duration: number;
+  courseId: string;
 }

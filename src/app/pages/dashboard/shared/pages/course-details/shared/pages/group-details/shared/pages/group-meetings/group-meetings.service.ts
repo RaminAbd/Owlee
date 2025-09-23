@@ -33,7 +33,8 @@ export class GroupMeetingsService {
   }
 
   formatDate(date: any) {
-    return new FormatDate(new Date(date), true).formattedDate;
+    const d = new Date(new Date(date).getTime() - 4 * 60 * 60 * 1000);
+    return new FormatDate(d, true).formattedDate;
   }
 
   getAllTopics() {

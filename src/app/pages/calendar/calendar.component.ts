@@ -24,6 +24,7 @@ import { MeetingUpsertComponent } from '../dashboard/shared/pages/course-details
 import { CalendarMeetingsCreateComponent } from './shared/components/calendar-meetings-create/calendar-meetings-create.component';
 import { Confirmation } from '../../core/extensions/confirmation';
 import { ConfirmationService } from 'primeng/api';
+import {CalendarMeetingEditComponent} from './shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
 
 @Component({
   selector: 'app-calendar',
@@ -156,6 +157,7 @@ export class CalendarComponent {
 
   handleSetDateInfo(day: any): void {
     day.dateString = this.service.formatDate(day.date);
+    console.log(this.activeDateInfo)
     this.activeDateInfo = day;
     this.showActivities = true;
   }
@@ -228,5 +230,25 @@ export class CalendarComponent {
         this.service.delete(id);
       },
     );
+  }
+
+  editMeeting(id: string) {
+    const ref = this.dialogService.open(CalendarMeetingEditComponent, {
+      header: this.translate.instant('Schedule a meeting'),
+      width: '720px',
+      height: '630px',
+      data: {
+        id: id,
+        courses: this.courses,
+      },
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        // this.service.getAllMeetings();
+      }
+    });
   }
 }

@@ -6,13 +6,13 @@ import { DatePicker } from 'primeng/datepicker';
 import { MultiSelect } from 'primeng/multiselect';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import {NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { FormatDate } from '../../../../../../../../core/extensions/format-date';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
 
 @Component({
   selector: 'app-multiple-meeting',
-    imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf],
+  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf],
   templateUrl: './multiple-meeting.component.html',
   styleUrl: './multiple-meeting.component.scss',
 })
@@ -52,7 +52,9 @@ export class MultipleMeetingComponent {
         let item = {
           showDate: this.formatDate(this.date),
           subtopics: this.selectedTopics,
-          date: new Date(this.date).toISOString(),
+          date: new Date(
+            new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           duration: this.duration,
         };
         this.request.meetings.push(item);

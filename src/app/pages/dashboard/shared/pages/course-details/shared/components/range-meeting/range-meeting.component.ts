@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DatePicker } from 'primeng/datepicker';
-import {NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -11,7 +11,14 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
 
 @Component({
   selector: 'app-range-meeting',
-  imports: [DatePicker, NgForOf, TranslatePipe, FormsModule, DropdownModule, NgIf],
+  imports: [
+    DatePicker,
+    NgForOf,
+    TranslatePipe,
+    FormsModule,
+    DropdownModule,
+    NgIf,
+  ],
   templateUrl: './range-meeting.component.html',
   styleUrl: './range-meeting.component.scss',
 })
@@ -25,11 +32,14 @@ export class RangeMeetingComponent {
   to: any;
   isSubmitted = false;
   hours: { name: string; value: number }[] = Array.from(
-    { length: 24 },
-    (_, i) => ({
-      name: i.toString().padStart(2, '0'),
-      value: i,
-    }),
+    { length: 19 }, // 24 - 5 = 19 items
+    (_, i) => {
+      const hour = i + 5;
+      return {
+        name: hour.toString().padStart(2, '0'),
+        value: hour,
+      };
+    },
   );
 
   minutes: { name: string; value: number }[] = Array.from(
@@ -117,10 +127,14 @@ export class RangeMeetingComponent {
       return;
     }
 
-    this.request.from = new Date(this.from).toISOString();
-    this.request.to = new Date(this.to).toISOString();
+    this.request.from = new Date(
+      new Date(this.from).getTime() + 4 * 60 * 60 * 1000,
+    ).toISOString();
+    this.request.to = new Date(
+      new Date(this.to).getTime() + 4 * 60 * 60 * 1000,
+    ).toISOString();
     this.days.forEach((day) => {
-      day.hour = day.hourName - 4;
+      day.hour = day.hourName ;
     });
 
     this.request.items = this.days.filter(
@@ -135,7 +149,7 @@ export class RangeMeetingComponent {
       if (item.duration < 1) durationValid = false;
     });
 
-    if(!durationValid) {
+    if (!durationValid) {
       this.message.showTranslatedWarningMessage('Invalid durations');
       return;
     }

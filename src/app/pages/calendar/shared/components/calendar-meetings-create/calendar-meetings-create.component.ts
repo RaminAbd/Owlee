@@ -75,7 +75,9 @@ export class CalendarMeetingsCreateComponent {
           let item = {
             showDate: this.formatDate(this.date),
             subtopics: this.selectedTopics,
-            date: new Date(this.date).toISOString(),
+            date: new Date(
+              new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
+            ).toISOString(),
             duration: this.duration,
           };
           this.request.meetings.push(item);

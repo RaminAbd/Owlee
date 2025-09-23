@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { TopicUpsertComponent } from './shared/components/topic-upsert/topic-upsert.component';
 import { SubTopicUpsertComponent } from './shared/components/sub-topic-upsert/sub-topic-upsert.component';
+import {LanguageService} from '../../../../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-group-materials',
@@ -26,6 +27,7 @@ export class GroupMaterialsComponent {
   private confirmationService: ConfirmationService =
     inject(ConfirmationService);
   private service: GroupMaterialsService = inject(GroupMaterialsService);
+  private langService: LanguageService = inject(LanguageService);
   private translate: TranslateService = inject(TranslateService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
@@ -66,7 +68,7 @@ export class GroupMaterialsComponent {
 
   openTopicDialog(callBack: any) {
     const ref = this.service.dialogService.open(TopicUpsertComponent, {
-      header: 'Topic',
+      header: this.langService.getByKey('Topic'),
       width: '460px',
       data: this.topic,
       style: {
@@ -114,7 +116,7 @@ export class GroupMaterialsComponent {
 
   openSubDialog(callBack: any) {
     const ref = this.service.dialogService.open(SubTopicUpsertComponent, {
-      header: 'Subtopic',
+      header:  this.langService.getByKey('Subtopic'),
       width: '460px',
       data: this.topic,
       style: {

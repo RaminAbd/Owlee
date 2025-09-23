@@ -39,7 +39,6 @@ export class CalendarService {
           ...item,
           time: this.extractTime(item),
         }));
-        console.log(resp.data)
 
         this.component.monthData = this.updateMonthData(
           this.component.currentDate,
@@ -112,7 +111,6 @@ export class CalendarService {
     }
     return weekDays;
   }
-
   updateMonthData(
     date: Date,
     scheduleData?: any,
@@ -175,40 +173,179 @@ export class CalendarService {
         });
       }
     }
+
     const allDays: any[] = [];
     weeks.forEach((week) => {
       allDays.push(...week.days);
     });
 
-    allDays.forEach((dayItem) => {
-      const year = dayItem.date.getFullYear();
-      const month = dayItem.date.getMonth();
-      const day = dayItem.date.getDate();
-      if (scheduleData) {
-        const finded = scheduleData.filter(
-          (x: any) =>
-            new Date(x.date).getMonth() === month &&
-            new Date(x.date).getDate() === day,
-        );
+    // ---------- Normalization & detection ----------
+    const stripTZ = (iso: string) => iso.replace(/(Z|[+-]\d{2}:\d{2})$/, '');
 
+    // Heuristic: if time text like "20:00" === parsed.getUTCHours() &&
+    // differs from parsed.getHours(), then the ISO likely carries UTC offset
+    // but the sender intended local-time -> we should parse as local.
+    const shouldTreatAsLocal = (() => {
+      if (!scheduleData || !scheduleData.length) return false;
+      const sample = scheduleData.slice(0, 5);
+      for (const entry of sample) {
+        if (!entry.date) continue;
+        const parsed = new Date(entry.date);
+        const timeText = typeof entry.time === 'string' ? entry.time.split(' - ')[0] : null;
+        if (!timeText) continue;
+        const hourFromText = Number(timeText.split(':')[0]);
+        if (Number.isNaN(hourFromText)) continue;
+
+        if (hourFromText === parsed.getUTCHours() && hourFromText !== parsed.getHours()) {
+          // time string matches UTC hour, but actual Date() local hour differs:
+          // this suggests the ISO had +00:00 but the server meant "20:00 local".
+          return true;
+        }
+      }
+      return false;
+    })();
+
+    const normalizedSchedule = (scheduleData || []).map((x: any) => {
+      const parsed = x.date ? new Date(shouldTreatAsLocal ? stripTZ(x.date) : x.date) : null;
+      return {
+        ...x,
+        _parsed: parsed,
+        _y: parsed ? parsed.getFullYear() : null,
+        _m: parsed ? parsed.getMonth() : null,
+        _d: parsed ? parsed.getDate() : null,
+      };
+    });
+
+    // ---------- Fill tasks by matching normalized schedule ----------
+    allDays.forEach((dayItem) => {
+      const y = dayItem.date.getFullYear();
+      const m = dayItem.date.getMonth();
+      const d = dayItem.date.getDate();
+
+      if (normalizedSchedule.length) {
+        const finded = normalizedSchedule.filter(
+          (x: any) => x._y === y && x._m === m && x._d === d,
+        );
         dayItem.tasks = finded || [];
         dayItem.tasks.sort(
           (a: any, b: any) =>
             new Date(a.date).getTime() - new Date(b.date).getTime(),
         );
       }
+
       if (
-        year === new Date().getFullYear() &&
-        month === new Date().getMonth() &&
-        day === new Date().getDate()
+        y === new Date().getFullYear() &&
+        m === new Date().getMonth() &&
+        d === new Date().getDate()
       ) {
         this.component.dayItemStateSaver = dayItem;
         if (!this.component.isMobile())
           this.component.handleSetDateInfo(this.component.dayItemStateSaver);
       }
     });
+
     return { monthName, weeks };
   }
+
+  // updateMonthData(
+  //   date: Date,
+  //   scheduleData?: any,
+  // ): { monthName: string; weeks: any[] } {
+  //   console.log(scheduleData);
+  //   const year = date.getFullYear();
+  //   const month = date.getMonth();
+  //   const monthName = date.toLocaleString('default', { month: 'long' });
+  //   const daysInMonth = new Date(year, month + 1, 0).getDate();
+  //   const daysArray: any[] = [];
+  //   for (let i = 1; i <= daysInMonth; i++) {
+  //     daysArray.push({
+  //       tasks: [],
+  //       date: new Date(year, month, i),
+  //       dayNumber: i,
+  //       disabled: false,
+  //     });
+  //   }
+  //
+  //   const weeks: any[] = [];
+  //   let currentWeek: any = { days: [] };
+  //
+  //   daysArray.forEach((dayItem, index) => {
+  //     const dayOfWeek = dayItem.date.getDay();
+  //     currentWeek.days.push(dayItem);
+  //     if (dayOfWeek === 0 || index === daysArray.length - 1) {
+  //       weeks.push(currentWeek);
+  //       currentWeek = { days: [] };
+  //     }
+  //   });
+  //
+  //   if (weeks[0].days.length && weeks[0].days[0].date.getDay() !== 1) {
+  //     const previousMonthLastDay = new Date(year, month, 0).getDate();
+  //     const daysToAdd = (weeks[0].days[0].date.getDay() || 7) - 1;
+  //     const previousMonthDays = [];
+  //     for (let i = daysToAdd; i > 0; i--) {
+  //       previousMonthDays.push({
+  //         tasks: [],
+  //         date: new Date(year, month - 1, previousMonthLastDay - i + 1),
+  //         dayNumber: previousMonthLastDay - i + 1,
+  //         disabled: true,
+  //       });
+  //     }
+  //     weeks[0].days = [...previousMonthDays, ...weeks[0].days];
+  //   }
+  //
+  //   const lastWeek = weeks[weeks.length - 1];
+  //   if (
+  //     lastWeek.days.length &&
+  //     lastWeek.days[lastWeek.days.length - 1].date.getDay() !== 0
+  //   ) {
+  //     const nextMonthFirstDay = 1;
+  //     const daysToAdd =
+  //       7 - lastWeek.days[lastWeek.days.length - 1].date.getDay();
+  //     for (let i = 0; i < daysToAdd; i++) {
+  //       lastWeek.days.push({
+  //         tasks: [],
+  //         date: new Date(year, month + 1, nextMonthFirstDay + i),
+  //         dayNumber: nextMonthFirstDay + i,
+  //         disabled: true,
+  //       });
+  //     }
+  //   }
+  //   const allDays: any[] = [];
+  //   weeks.forEach((week) => {
+  //     allDays.push(...week.days);
+  //   });
+  //
+  //   allDays.forEach((dayItem) => {
+  //     const year = dayItem.date.getFullYear();
+  //     const month = dayItem.date.getMonth();
+  //     const day = dayItem.date.getDate();
+  //
+  //     if (scheduleData) {
+  //       const finded = scheduleData.filter(
+  //         (x: any) =>
+  //           new Date(x.date).getMonth() === month &&
+  //           new Date(x.date).getDate() === day
+  //       );
+  //
+  //       dayItem.tasks = finded || [];
+  //       dayItem.tasks.sort(
+  //         (a: any, b: any) =>
+  //           new Date(a.date).getTime() - new Date(b.date).getTime(),
+  //       );
+  //     }
+  //     if (
+  //       year === new Date().getFullYear() &&
+  //       month === new Date().getMonth() &&
+  //       day === new Date().getDate()
+  //     ) {
+  //       this.component.dayItemStateSaver = dayItem;
+  //       if (!this.component.isMobile())
+  //         this.component.handleSetDateInfo(this.component.dayItemStateSaver);
+  //     }
+  //   });
+  //
+  //   return { monthName, weeks };
+  // }
 
   formatDate(dateString: string): { formattedDate: string; dayOfWeek: string } {
     const date = new Date(dateString);
@@ -284,7 +421,6 @@ export class CalendarService {
 
 
   updateDayData(date: Date, scheduleData?: any): any {
-    console.log(this.component.currentDate);
     const dayItem = {
       hours: Array.from({ length: 24 }, (_, hour) => ({
         hour: hour, // 0 to 23

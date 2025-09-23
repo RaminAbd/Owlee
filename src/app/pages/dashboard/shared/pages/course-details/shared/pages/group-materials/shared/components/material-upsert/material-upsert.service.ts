@@ -38,7 +38,7 @@ export class MaterialUpsertService {
         this.buildUpdateRequest();
       }
     } else {
-      this.message.showTranslatedWarningMessage('Field are not valid!');
+      this.message.showTranslatedWarningMessage('Field are not valid');
     }
   }
 

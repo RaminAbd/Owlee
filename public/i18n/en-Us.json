@@ -213,7 +213,7 @@
   "Sunday": "Sunday",
   "Day": "Day",
   "Hybrid": "Hybrid",
-  "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students.": "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students."б
+  "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students.": "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students.",
   "Mail is not valid": "Mail is not valid",
   "Form is not valid": "Form is not valid",
   "Password mismatch": "Password mismatch",
@@ -247,5 +247,9 @@
   "Accepted Invitation": "Accepted Invitation",
   "Passwords do not match": "Passwords do not match",
   "Old password is not correct!": "Old password is not correct!",
-  "Password should be minimum 6 digits": "Password should be minimum 6 digits"
+  "Password should be minimum 6 digits": "Password should be minimum 6 digits",
+  "Subtopic name": "Subtopic name",
+  "Subtopic": "Subtopic",
+  "Topic name": "Topic name",
+  "Topic": "Topic"
 }

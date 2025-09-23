@@ -34,7 +34,7 @@ export class CalendarMeetingsCreateService {
             this.component.isSubmitted = false;
           }, 5000);
         }
-      });
+      }, error => this.component.isSubmitted = false);
   }
 
   getGroups() {

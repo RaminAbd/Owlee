@@ -247,5 +247,9 @@
   "Accepted Invitation": "Qəbul edilmiş dəvət",
   "Passwords do not match": "Parollar uyğun gəlmir",
   "Old password is not correct!": "Köhnə parol düzgün deyil!",
-  "Password should be minimum 6 digits": "Parol minimum 6 rəqəmdən ibarət olmalıdır"
+  "Password should be minimum 6 digits": "Parol minimum 6 rəqəmdən ibarət olmalıdır",
+  "Subtopic name": "Alt mövzu adı",
+  "Subtopic": "Alt mövzu",
+  "Topic name": "Mövzunun adı",
+  "Topic": "Mövzu"
 }

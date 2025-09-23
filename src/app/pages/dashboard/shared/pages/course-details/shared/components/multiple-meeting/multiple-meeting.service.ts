@@ -26,6 +26,6 @@ export class MultipleMeetingService {
             this.component.ref.close(true);
           }, 5000);
         }
-      });
+      }, error => this.component.isSubmitted = false);
   }
 }

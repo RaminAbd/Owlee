@@ -164,7 +164,7 @@
   "Click here to add a topic": "თემის დასამატებლად აქ დააწკაპუნეთ",
   "More": "მეტი",
   "Tasks": "ამოცანები",
-  "Click to join": "დაკლიკეთ და შემოუერთდით",
+  "Click to join": "შემოუერთდით",
   "Go ahead, take a nap, binge - watch a show, or enjoy some well - deserved freedom!": "მიდი, დაასვენე თვალები, გაერთე - უყურე საყვარელ შოუს ან დატკბი დამსახურებული თავისფლებით!",
   "Most popular": "ყველაზე პოპულარული",
   "Start your free trial!": "დაიწყეთ თქვენი უფასო საცდელი პერიოდი!",
@@ -248,5 +248,9 @@
   "Accepted Invitation": "მოწვევა მიღებულია",
   "Passwords do not match": "პაროლები არ ემთხვევა",
   "Old password is not correct!": "ძველი პაროლი არასწორია!",
-  "Password should be minimum 6 digits": "პაროლი უნდა შედგებოდეს მინიმუმ 6 ციფრისგან"
+  "Password should be minimum 6 digits": "პაროლი უნდა შედგებოდეს მინიმუმ 6 ციფრისგან",
+  "Subtopic name": "ქვეთემის სახელი",
+  "Subtopic": "ქვეთემა",
+  "Topic name": "თემის სახელი",
+  "Topic": "თემა"
 }

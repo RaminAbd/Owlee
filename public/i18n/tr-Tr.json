@@ -216,7 +216,7 @@
   "Sunday": "Pazar",
   "Day": "Gün",
   "Hybrid": "Hibrit",
-  "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students.": "Öğrenme sürecini yönetmek hiç bu kadar kolay olmamıştı. Owlee platformunda tüm gruplarınız için dijital bir alan oluşturabilir, ders materyallerini ve ders toplantısını paylaşabilir ve öğrencilerle iletişimi yönetebilirsiniz."б
+  "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students.": "Öğrenme sürecini yönetmek hiç bu kadar kolay olmamıştı. Owlee platformunda tüm gruplarınız için dijital bir alan oluşturabilir, ders materyallerini ve ders toplantısını paylaşabilir ve öğrencilerle iletişimi yönetebilirsiniz.",
   "Mail is not valid": "E-posta geçerli değil",
   "Form is not valid": "Form geçerli değil",
   "Password mismatch": "Şifre uyuşmuyor",
@@ -250,5 +250,9 @@
   "Accepted Invitation": "Davet kabul edildi",
   "Passwords do not match": "Şifreler eşleşmiyor",
   "Old password is not correct!": "Eski şifre doğru değil!",
-  "Password should be minimum 6 digits": "Şifre en az 6 haneli olmalıdır"
+  "Password should be minimum 6 digits": "Şifre en az 6 haneli olmalıdır",
+  "Subtopic name": "Alt konu adı",
+  "Subtopic": "Alt konu",
+  "Topic name": "Konu adı",
+  "Topic": "Konu"
 }
