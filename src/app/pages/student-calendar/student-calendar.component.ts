@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {DatePipe, NgClass, NgForOf, NgIf, SlicePipe} from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import { CalendarService } from '../calendar/calendar.service';
 import { MonthModel } from '../calendar/shared/models/month.model';
 import { ActiveDateInfoModel } from '../calendar/shared/models/active-date-info.model';
@@ -18,11 +18,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   styleUrl: './student-calendar.component.scss',
 })
 export class StudentCalendarComponent {
+  private translate: TranslateService = inject(TranslateService);
   showActivities: boolean = false;
   viewModes: any[] = [
-    { name: 'Monthly', value: 'month' },
-    { name: 'Weekly', value: 'week' },
-    { name: 'Daily', value: 'day' },
+    { name: this.translate.instant('Monthly'), value: 'month' },
+    { name: this.translate.instant('Weekly'), value: 'week' },
+    { name: this.translate.instant('Daily'), value: 'day' },
   ];
   viewMode: 'month' | 'week' | 'day' = 'month';
   private service: StudentCalendarService = inject(StudentCalendarService);
