@@ -37,6 +37,13 @@ export class StudentPersonalInfoService {
     this.service.GetById(this.service.serviceUrl, id).subscribe((resp) => {
       this.component.request = resp.data;
       if (!resp.data.systemLanguages) this.component.request.systemLanguages = [];
+
+
+      const validLanguageIds = new Set(this.component.knownLangs.map(l => l.id));
+
+      this.component.request.systemLanguages = this.component.request.systemLanguages.filter(id =>
+        validLanguageIds.has(id)
+      );
       console.log(this.component.request);
     });
   }
@@ -49,6 +56,7 @@ export class StudentPersonalInfoService {
       )
       .subscribe((resp) => {
         this.component.knownLangs = resp.data;
+        this.getStudentInfo()
       });
   }
 
@@ -62,14 +70,20 @@ export class StudentPersonalInfoService {
   updatePersonalInfo() {
     this.component.request.phoneNumber = this.component.request.phoneNumber.toString();
     this.service
-      .Update(this.service.serviceUrl, this.component.request)
+      .EditPersonalInfo(this.component.request)
       .subscribe((resp) => {
+        this.component.isSubmitted = false;
+        this.component.mainLoading = false;
         if (resp.succeeded) {
           this.message.showTranslatedSuccessMessage('Successfully updated!');
           this.getStudentInfo();
-          this.component.isSubmitted = false;
-          this.component.mainLoading = false;
+
         }
+      },error => {
+        this.component.isSubmitted = false;
+        this.component.mainLoading = false;
+        this.message.showTranslatedErrorMessage('Something went wrong!');
+
       });
   }
 

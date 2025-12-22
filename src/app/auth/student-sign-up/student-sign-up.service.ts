@@ -87,9 +87,9 @@ export class StudentSignUpService {
         this.signIn();
       }
       else{
-
+        this.component.mainLoading = false
       }
-    });
+    },error => this.component.mainLoading = false);
   }
 
   private signIn() {

@@ -33,4 +33,8 @@ export class StudentsApiService extends BaseCrudApiService {
   UnBlock(id: string) {
     return this.get(this.serviceUrl + 'UnBlock/', id);
   }
+
+  EditPersonalInfo(req: any) {
+    return this.post(this.serviceUrl + 'EditPersonalInfo', req);
+  }
 }
