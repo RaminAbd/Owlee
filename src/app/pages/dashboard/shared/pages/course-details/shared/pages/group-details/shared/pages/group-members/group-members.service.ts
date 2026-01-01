@@ -5,6 +5,8 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { InviteStudentDialogComponent } from '../../../../../components/invite-student-dialog/invite-student-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { UpgradePlanComponent } from '../../../../../../../../../../../shared/components/upgrade-plan/upgrade-plan.component';
+import {NotesApiService} from '../../../../../../../../services/notes.api.service';
+import {MemberCommentComponent} from './components/member-comment/member-comment.component';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,6 @@ export class GroupMembersService {
   component: GroupMembersComponent;
   public dialogService: DialogService = inject(DialogService);
   public translate: TranslateService = inject(TranslateService);
-
   constructor() {}
 
   getAll() {
@@ -72,6 +73,30 @@ export class GroupMembersService {
         this.component.allowedToAddGroup = true;
       } else {
         this.component.allowedToAddGroup = false;
+      }
+    });
+  }
+
+  getComments(id: string) {
+    const req = {
+      EducatorId:localStorage.getItem('userId') as string,
+      StudentId:id
+    }
+    console.log(req)
+    const ref = this.dialogService.open(MemberCommentComponent, {
+      width: '456px',
+      header: this.translate.instant('Notes'),
+      closable:true,
+      style: {
+        maxWidth: '95%',
+      },
+      data: {
+        request:req
+      }
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        // this.checkSlots();
       }
     });
   }

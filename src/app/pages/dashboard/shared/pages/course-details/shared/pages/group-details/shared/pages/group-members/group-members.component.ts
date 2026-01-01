@@ -5,6 +5,7 @@ import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-group-members',
@@ -15,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
     FormsModule,
     NgStyle,
     NgIf,
+    Dialog,
   ],
   templateUrl: './group-members.component.html',
   styleUrl: './group-members.component.scss',
@@ -27,6 +29,8 @@ export class GroupMembersComponent {
   searchText: string;
   filteredList: GroupMembersResponseModel[] = [];
   allowedToAddGroup: boolean = true;
+  showEditComment:boolean = false;
+  showComments:boolean = false;
   constructor() {
     this.service.component = this;
     this.service.getAll();
@@ -48,5 +52,9 @@ export class GroupMembersComponent {
 
   upgradePlan() {
     this.service.upgradePlan();
+  }
+
+  editComment(id: string) {
+    this.service.getComments(id)
   }
 }

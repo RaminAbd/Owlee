@@ -240,3 +240,22 @@ button {
     margin-top: 24px;
   }
 }
+.cdk-drag-preview {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  border: 1px solid #e3e3e2;
+  border-radius: 6px;
+  padding: 16px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.heading,
+.sub-heading {
+  cursor: grab;
+}

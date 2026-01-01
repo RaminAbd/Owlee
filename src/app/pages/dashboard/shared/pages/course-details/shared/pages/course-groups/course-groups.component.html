@@ -19,20 +19,12 @@
       </div>
       <div class="btn">
         <button
-          *ngIf="allowedToAddGroup"
           class="allowed"
           (click)="openDialog()"
         >
           {{ "Add new" | translate }}
         </button>
-        <button
-          *ngIf="!allowedToAddGroup"
-          class="not-allowed"
-          (click)="upgradePlan()"
-        >
-          <img src="lock.svg" alt="" />
-          {{ "Upgrade plan to add more" | translate }}
-        </button>
+
       </div>
     </div>
     <div class="list">

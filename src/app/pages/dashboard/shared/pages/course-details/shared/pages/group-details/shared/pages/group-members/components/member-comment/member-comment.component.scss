@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E3E3E2;
+    .input-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      width: 100%;
+      label {
+        color: #90928d;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 12px;
+        color: var(--text-color) !important;
+        font-weight: 600;
+        font-size: 14px;
+        height: 48px !important;
+      }
+    }
+    button{
+      display: flex;
+      width: 100%;
+      padding: 12px 16px;
+      justify-content: center;
+      align-items: center;
+      height: 41px;
+      gap: 10px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: #3B3199;
+      color: #FFF;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+  .btns{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    button{
+      width: 147px;
+      height: 41px;
+      border-radius: 12px;
+      background: #F6F6F6;
+      color: #656668;
+      font-size: 14px;
+      font-weight: 600;
+      @media (max-width: 400px) {
+        width: auto;
+        flex: 1;
+      }
+      &.save{
+        background: var(--primary-color);
+        color: #FFF;
+      }
+    }
+  }
+  .list{
+    .item{
+      padding: 16px 0;
+      border-bottom: 1px solid #E3E3E2;
+      p{
+        color: #13170C;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+  }
+}
+::ng-deep .p-select,
+::ng-deep .p-multiselect {
+  border-radius: 12px !important;
+  height: 48px !important;
+}

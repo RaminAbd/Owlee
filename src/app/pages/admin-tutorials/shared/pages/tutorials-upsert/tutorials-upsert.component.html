@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <app-upsert-heading
+    [name]="'Tutorials'"
+    (save)="save()"
+  ></app-upsert-heading>
+  <div class="content">
+    <div class="row">
+      <div class="input-item" >
+        <label>{{ "Url" | translate }} </label>
+        <input
+          type="text"
+          [ngClass]="{ invalid: !request.url && isSubmitted }"
+          [(ngModel)]="request.url"
+          placeholder="{{ 'Url' | translate }}"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-item" *ngFor="let item of request.title.items">
+        <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
+        <input
+          type="text"
+          [ngClass]="{ invalid: !item.isValid && isSubmitted }"
+          [(ngModel)]="item.value"
+          placeholder="{{ item.languageName | translate }}"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-item" *ngFor="let item of request.body.items">
+        <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
+        <textarea
+          type="text"
+          [ngClass]="{ invalid: !item.isValid && isSubmitted }"
+          [(ngModel)]="item.value"
+          placeholder="{{ item.languageName | translate }}"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</div>

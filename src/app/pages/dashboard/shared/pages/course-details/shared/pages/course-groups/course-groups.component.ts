@@ -28,10 +28,9 @@ export class CourseGroupsComponent implements OnDestroy {
   groups: GroupsResponseModel[] = [];
   searchText: string;
   langSubscribtion: any;
-  allowedToAddGroup: boolean = true;
+
   constructor() {
     this.service.component = this;
-    this.service.checkSlots();
     this.service.getCourse();
     this.service.getGroups();
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
@@ -72,18 +71,4 @@ export class CourseGroupsComponent implements OnDestroy {
     this.langSubscribtion.unsubscribe();
   }
 
-  upgradePlan() {
-    const ref = this.service.dialogService.open(UpgradePlanComponent, {
-      width: '960px',
-      style: {
-        maxWidth: '95%',
-      },
-      data:2
-    });
-    ref.onClose.subscribe((e: any) => {
-      if (e) {
-        this.service.checkSlots()
-      }
-    });
-  }
 }

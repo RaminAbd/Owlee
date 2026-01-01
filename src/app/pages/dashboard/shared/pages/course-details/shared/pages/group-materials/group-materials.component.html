@@ -10,57 +10,70 @@
         {{ "Click here to add a topic" | translate }}
       </button>
     </div>
-    <div class="item" *ngFor="let topic of topics">
-      <div class="heading">
-        <i class="pi pi-chevron-down"></i>
-        <p>{{ topic.name }}</p>
-        <button
-          class="menu-btn"
-          (click)="op.toggle($event); openToolbar(topic)"
+    <div
+      cdkDropList
+      [cdkDropListData]="topics"
+      (cdkDropListDropped)="dropTopic($event)"
+      style="display: flex; flex-direction: column; gap: 30px"
+    >
+      <div class="item" *ngFor="let topic of topics" cdkDrag>
+        <div class="heading" cdkDragHandle>
+          <i class="pi pi-chevron-down"></i>
+          <p>{{ topic.name }}</p>
+          <button
+            class="menu-btn"
+            (click)="op.toggle($event); openToolbar(topic)"
+          >
+            <img src="dots.svg" alt="" />
+          </button>
+        </div>
+        <div
+          class="sub-topics"
+          cdkDropList
+          [cdkDropListData]="topic.subtopics"
+          (cdkDropListDropped)="dropSubTopic($event, topic)"
         >
-          <img src="dots.svg" alt="" />
-        </button>
-      </div>
-      <div class="sub-topics">
-        <div class="sub-item" *ngFor="let sub of topic.subtopics">
-          <div class="sub-heading">
-            <p>{{ sub.name }}</p>
-            <button
-              class="menu-btn"
-              (click)="op1.toggle($event); handleSubTools(topic, sub)"
-            >
-              <img src="dots.svg" alt="" />
-            </button>
-          </div>
-          <div class="sub-content">
-            <div class="materials">
-              <div class="mat-item" *ngFor="let mat of sub.files">
-                <a href="{{ mat.url }}" target="_blank">
-                  <img src="mat-link.svg" alt="" />
-                  {{ mat.name }}
-                </a>
-                <p class="mat-lang">{{ mat.language }}</p>
-                <button
-                  class="menu-btn"
-                  (click)="op2.toggle($event); handleMatTools(sub, mat)"
-                >
-                  <img src="dots.svg" alt="" />
-                </button>
-              </div>
-              <div class="add-mat">
-                <button (click)="openMaterialDialog(topic, sub)">
-                  {{ "Add file" | translate }}
-                </button>
+          <div class="sub-item" *ngFor="let sub of topic.subtopics" cdkDrag>
+            <div class="sub-heading" cdkDragHandle>
+              <p>{{ sub.name }}</p>
+              <button
+                class="menu-btn"
+                (click)="op1.toggle($event); handleSubTools(topic, sub)"
+              >
+                <img src="dots.svg" alt="" />
+              </button>
+            </div>
+            <div class="sub-content">
+              <div class="materials">
+                <div class="mat-item" *ngFor="let mat of sub.files">
+                  <a href="{{ mat.url }}" target="_blank">
+                    <img src="mat-link.svg" alt="" />
+                    {{ mat.name }}
+                  </a>
+                  <p class="mat-lang">{{ mat.language }}</p>
+                  <button
+                    class="menu-btn"
+                    (click)="op2.toggle($event); handleMatTools(sub, mat)"
+                  >
+                    <img src="dots.svg" alt="" />
+                  </button>
+                </div>
+                <div class="add-mat">
+                  <button (click)="openMaterialDialog(topic, sub)">
+                    {{ "Add file" | translate }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sub-item add-subtopic">
-          <button (click)="addSubTopic(topic)">{{ 'Add sub topic' | translate }}</button>
+          <div class="sub-item add-subtopic">
+            <button (click)="addSubTopic(topic)">
+              {{ "Add sub topic" | translate }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
 
     <p-popover #op>
       <div class="flex flex-col gap-4 w-[25rem]">

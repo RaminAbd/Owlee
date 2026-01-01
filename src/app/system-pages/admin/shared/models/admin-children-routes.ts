@@ -13,6 +13,13 @@ import { EducatorDetailsComponent } from '../../../../pages/educators/shared/pag
 import {
   AdminCourseDetailsComponent
 } from '../../../../pages/admin-courses/shared/pages/admin-course-details/admin-course-details.component';
+import {AdminFaqsService} from '../../../../pages/admin-faqs/admin-faqs.service';
+import {AdminFaqsComponent} from '../../../../pages/admin-faqs/admin-faqs.component';
+import {FaqsUpsertComponent} from '../../../../pages/admin-faqs/shared/pages/faqs-upsert/faqs-upsert.component';
+import {AdminTutorialsComponent} from '../../../../pages/admin-tutorials/admin-tutorials.component';
+import {
+  TutorialsUpsertComponent
+} from '../../../../pages/admin-tutorials/shared/pages/tutorials-upsert/tutorials-upsert.component';
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
@@ -69,7 +76,27 @@ export class AdminChildrenRoutes {
       component: AdminCourseDetailsComponent,
       data: { title: 'Dashboard' },
     },
+    {
+      path: 'faqs',
+      component: AdminFaqsComponent,
+      data: { title: 'Faqs' },
+    },
+    {
+      path: 'faqs/:id',
+      component: FaqsUpsertComponent,
+      data: { title: 'Faqs' },
+    },
 
+    {
+      path: 'tutorials',
+      component: AdminTutorialsComponent,
+      data: { title: 'Tutorials' },
+    },
+    {
+      path: 'tutorials/:id',
+      component: TutorialsUpsertComponent,
+      data: { title: 'Tutorials' },
+    },
     { path: '', redirectTo: 'courses', pathMatch: 'full' },
     { path: '**', redirectTo: 'courses', pathMatch: 'full' },
   ];

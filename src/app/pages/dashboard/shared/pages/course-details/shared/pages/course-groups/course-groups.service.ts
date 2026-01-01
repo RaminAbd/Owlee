@@ -41,15 +41,6 @@ export class CourseGroupsService {
     });
   }
 
-  checkSlots() {
-    this.service.GetAvailableGroupSlots(this.component.id).subscribe((resp) => {
-      if (resp.data !== 0) {
-        this.component.allowedToAddGroup = true;
-      } else {
-        this.component.allowedToAddGroup = false;
-      }
-    });
-  }
 
   openDialog() {
     const ref = this.dialogService.open(GroupUpsertComponent, {
@@ -65,7 +56,6 @@ export class CourseGroupsService {
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
-        this.checkSlots();
         this.getGroups();
       }
     });

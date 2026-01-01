@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="input-item">
+      <label for="email">{{ "Add a new note" | translate }}</label>
+      <textarea
+        style="height: 80px;border-radius: 12px;"
+        id="email"
+        placeholder="{{ 'Type here' | translate }}..."
+        [(ngModel)]="comment"
+        [class.invalid]="!comment && isSubmitted"
+      ></textarea>
+    </div>
+    <button [disabled]="!comment" (click)="addComment()">{{ "Save" | translate }}</button>
+  </div>
+  <div class="list">
+    <div class="item" *ngFor="let item of comments">
+      <p>{{item.value}}</p>
+    </div>
+  </div>
+</div>

@@ -16,10 +16,11 @@ import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { TopicUpsertComponent } from './shared/components/topic-upsert/topic-upsert.component';
 import { SubTopicUpsertComponent } from './shared/components/sub-topic-upsert/sub-topic-upsert.component';
 import {LanguageService} from '../../../../../../../../core/services/language.service';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-group-materials',
-  imports: [TranslatePipe, NgForOf, Popover, FormsModule],
+  imports: [TranslatePipe, NgForOf, Popover, FormsModule, DragDropModule],
   templateUrl: './group-materials.component.html',
   styleUrl: './group-materials.component.scss',
 })
@@ -182,5 +183,20 @@ export class GroupMaterialsComponent {
       },
       reject: () => {},
     });
+  }
+
+  dropTopic(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.topics, event.previousIndex, event.currentIndex);
+  }
+
+  dropSubTopic(
+    event: CdkDragDrop<any[]>,
+    topic: any
+  ) {
+    moveItemInArray(
+      topic.subtopics,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }
