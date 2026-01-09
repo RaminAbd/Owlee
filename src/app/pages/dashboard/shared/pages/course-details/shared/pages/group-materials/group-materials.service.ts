@@ -67,12 +67,16 @@ export class GroupMaterialsService {
   }
 
   deleteTopic() {
-    this.topicsService
-      .Delete(this.topicsService.serviceUrl, this.component.topic.id)
-      .subscribe((resp) => {
-        this.getAllTopics();
-        this.component.topic = new TopicRequestModel();
-      });
+    let ids: any[] = [this.component.topic.id];
+    const req = {
+      educatorId: localStorage.getItem('userId'),
+      ids: ids,
+    };
+
+    this.topicsService.DeleteTopics(req).subscribe((resp) => {
+      this.getAllTopics();
+      this.component.topic = new TopicRequestModel();
+    });
   }
 
   copyTopic() {
@@ -108,15 +112,15 @@ export class GroupMaterialsService {
   }
 
   deleteSubTopic() {
-    this.topicsService
-      .DeleteSubTopic(
-        this.topicsService.serviceUrl,
-        this.component.topic.subTopic.id,
-      )
-      .subscribe((resp) => {
-        this.getAllTopics();
-        this.component.selectedSubTopic = new SubtopicModel();
-      });
+    let ids: any[] = [this.component.topic.subTopic.id];
+    const req = {
+      educatorId: localStorage.getItem('userId'),
+      ids: ids,
+    };
+    this.topicsService.DeleteSubtopics(req).subscribe((resp) => {
+      this.getAllTopics();
+      this.component.selectedSubTopic = new SubtopicModel();
+    });
   }
 
   openDialog(sub: SubtopicModel, material: TopicMaterialModel) {
@@ -126,6 +130,29 @@ export class GroupMaterialsService {
       data: {
         subTopic: sub,
         material: material,
+        courseId: this.component.courseId,
+      },
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.getAllTopics();
+      }
+    });
+  }
+
+  openTopicMaterialDialog(topic: any) {
+    let sub = new SubtopicModel();
+    sub.id = topic.id;
+    const ref = this.dialogService.open(MaterialUpsertComponent, {
+      header: 'File',
+      width: '460px',
+      data: {
+        subTopic: sub,
+        material: new TopicMaterialModel(),
+        courseId: this.component.courseId,
       },
       style: {
         maxWidth: '95%',
@@ -139,15 +166,99 @@ export class GroupMaterialsService {
   }
 
   deleteMaterial() {
-    this.topicsService
-      .DeleteFile(
-        this.topicsService.serviceUrl,
-        this.component.selectedMaterial.id,
-      )
-      .subscribe((resp) => {
-        this.getAllTopics();
-        this.component.selectedSubTopic = new SubtopicModel();
-        this.component.selectedMaterial = new TopicMaterialModel();
+    let ids: any[] = [this.component.selectedMaterial.id];
+    const req = {
+      educatorId: localStorage.getItem('userId'),
+      ids: ids,
+    };
+    this.topicsService.DeleteFiles(req).subscribe((resp) => {
+      this.getAllTopics();
+      this.component.selectedSubTopic = new SubtopicModel();
+      this.component.selectedMaterial = new TopicMaterialModel();
+    });
+  }
+
+  reIndexTopics() {
+    const req = {
+      courseId: this.component.courseId,
+      topics: this.component.topics.map((item) => ({
+        id: item.id,
+        index: item.index,
+      })),
+    };
+    console.log(req);
+    this.topicsService.ReIndex(req).subscribe((resp) => {});
+  }
+
+  reIndexSubTopics(topic: TopicRequestModel) {
+    const req = {
+      topicId: topic.id,
+      subtopics: topic.subtopics.map((item) => ({
+        id: item.id,
+        index: item.index,
+      })),
+    };
+    console.log(req);
+    this.topicsService.ReIndexSubtopics(req).subscribe((resp) => {});
+  }
+
+  removeItems() {
+    let topics = this.component.topics.filter((item) => item.selected);
+    if (topics.length > 0) {
+      this.removeTopics(topics);
+    }
+
+    let subTopics: any[] = [];
+    this.component.topics.forEach((item) => {
+      subTopics.push(...item.subtopics.filter((item) => item.selected));
+    });
+    if (subTopics.length > 0) {
+      this.removeSubTopics(subTopics);
+    }
+
+    let materials: any[] = [];
+    this.component.topics.forEach((item) => {
+      item.subtopics.forEach((sub) => {
+        materials.push(...sub.files.filter((mat) => mat.selected));
       });
+      materials.push(...item.files.filter((mat) => mat.selected));
+    });
+
+    if (materials.length > 0) {
+      this.removeMaterials(materials);
+    }
+  }
+
+  private removeTopics(topics: TopicRequestModel[]) {
+    const req = {
+      educatorId: localStorage.getItem('userId') as string,
+      ids: topics.map((x) => x.id),
+    };
+    console.log(req);
+    this.topicsService.DeleteTopics(req).subscribe((resp) => {
+      this.getAllTopics();
+    });
+  }
+
+  private removeSubTopics(subTopics: any[]) {
+    const req = {
+      educatorId: localStorage.getItem('userId') as string,
+      ids: subTopics.map((x) => x.id),
+    };
+    console.log(req, 'subs');
+    this.topicsService.DeleteSubtopics(req).subscribe((resp) => {
+      this.getAllTopics();
+    });
+  }
+
+  private removeMaterials(materials: any[]) {
+    const req = {
+      educatorId: localStorage.getItem('userId') as string,
+      ids: materials.map((x) => x.id),
+    };
+    console.log(req, 'mats');
+    this.topicsService.DeleteFiles(req).subscribe((resp) => {
+      this.getAllTopics();
+    });
   }
 }

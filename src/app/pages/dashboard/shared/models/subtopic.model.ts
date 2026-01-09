@@ -6,4 +6,5 @@ export class SubtopicModel {
   name: string;
   index?: number;
   files: TopicMaterialModel[] = [];
+  selected: boolean;
 }

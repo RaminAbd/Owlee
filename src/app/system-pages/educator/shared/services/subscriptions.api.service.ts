@@ -19,11 +19,15 @@ export class SubscriptionsApiService extends BaseCrudApiService {
     return this.post(this.serviceUrl + 'Renew', req);
   }
 
-  CanChange(req:any){
+  CanChange(req: any) {
     return this.get(this.serviceUrl + 'CanChange', null, req);
   }
 
-  CanUpdate(req:any){
+  CanUpdate(req: any) {
     return this.get(this.serviceUrl + 'CanUpdate', null, req);
+  }
+
+  getByEducatorId(id: string) {
+    return this.get(this.serviceUrl + 'Get/', id);
   }
 }

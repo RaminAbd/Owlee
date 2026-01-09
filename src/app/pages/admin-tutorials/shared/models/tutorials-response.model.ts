@@ -3,4 +3,5 @@ export class TutorialsResponseModel {
   title: string;
   body: string;
   url: string;
+  videoUrl: any;
 }

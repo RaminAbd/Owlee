@@ -38,4 +38,8 @@ export class BlobService extends BaseCrudApiService {
     document.body.appendChild(a);
     a.click();
   }
+
+  SetSize(req: any) {
+    return this.post(this.ServiceUrl + 'SetSize', req);
+  }
 }

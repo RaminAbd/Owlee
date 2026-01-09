@@ -42,4 +42,24 @@ export class TopicApiService extends BaseCrudApiService {
   DeleteFile(serviceUrl: string, id: string) {
     return this.delete(serviceUrl + 'DeleteFile/', id);
   }
+
+  ReIndex(req: any) {
+    return this.post(this.serviceUrl + 'ReIndex', req);
+  }
+
+  ReIndexSubtopics(req: any) {
+    return this.post(this.serviceUrl + 'ReIndexSubtopics', req);
+  }
+
+  DeleteTopics(req: any) {
+    return this.post(this.serviceUrl + 'DeleteTopics', req);
+  }
+
+  DeleteSubtopics(req: any) {
+    return this.post(this.serviceUrl + 'DeleteSubtopics', req);
+  }
+
+  DeleteFiles(req: any) {
+    return this.post(this.serviceUrl + 'DeleteFiles', req);
+  }
 }

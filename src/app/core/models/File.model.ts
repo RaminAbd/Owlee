@@ -10,4 +10,5 @@ export class FileModel {
   fileLoading?: boolean;
   isValid:boolean;
   fakeFile:any
+  fileSize:any
 }

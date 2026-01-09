@@ -10,6 +10,34 @@
         {{ "Click here to add a topic" | translate }}
       </button>
     </div>
+    <div class="selection">
+      <div class="left">
+        <p-toggleswitch
+          [(ngModel)]="enableSelection"
+          (ngModelChange)="changeSelectionState()"
+        />
+        <p (click)="enableSelection = !enableSelection; changeSelectionState()">
+          {{ "Select multiple" | translate }}
+        </p>
+      </div>
+      <div class="remove" *ngIf="enableSelection">
+        <button (click)="removeItems()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M16.6667 4.16675C16.8877 4.16675 17.0996 4.25455 17.2559 4.41083C17.4122 4.56711 17.5 4.77907 17.5 5.00008C17.5 5.2211 17.4122 5.43306 17.2559 5.58934C17.0996 5.74562 16.8877 5.83341 16.6667 5.83341H15.8333L15.8308 5.89258L15.0533 16.7851C15.0234 17.2056 14.8352 17.5991 14.5268 17.8864C14.2183 18.1737 13.8124 18.3334 13.3908 18.3334H6.60833C6.18678 18.3334 5.78089 18.1737 5.4724 17.8864C5.16392 17.5991 4.97576 17.2056 4.94583 16.7851L4.16833 5.89341L4.16667 5.83341H3.33333C3.11232 5.83341 2.90036 5.74562 2.74408 5.58934C2.5878 5.43306 2.5 5.2211 2.5 5.00008C2.5 4.77907 2.5878 4.56711 2.74408 4.41083C2.90036 4.25455 3.11232 4.16675 3.33333 4.16675H16.6667ZM11.6667 1.66675C11.8877 1.66675 12.0996 1.75455 12.2559 1.91083C12.4122 2.06711 12.5 2.27907 12.5 2.50008C12.5 2.7211 12.4122 2.93306 12.2559 3.08934C12.0996 3.24562 11.8877 3.33341 11.6667 3.33341H8.33333C8.11232 3.33341 7.90036 3.24562 7.74408 3.08934C7.5878 2.93306 7.5 2.7211 7.5 2.50008C7.5 2.27907 7.5878 2.06711 7.74408 1.91083C7.90036 1.75455 8.11232 1.66675 8.33333 1.66675H11.6667Z"
+              fill="#EF3838"
+            />
+          </svg>
+          {{ "Remove selected items" }}
+        </button>
+      </div>
+    </div>
     <div
       cdkDropList
       [cdkDropListData]="topics"
@@ -17,15 +45,45 @@
       style="display: flex; flex-direction: column; gap: 30px"
     >
       <div class="item" *ngFor="let topic of topics" cdkDrag>
-        <div class="heading" cdkDragHandle>
+        <div class="heading">
           <i class="pi pi-chevron-down"></i>
-          <p>{{ topic.name }}</p>
-          <button
-            class="menu-btn"
-            (click)="op.toggle($event); openToolbar(topic)"
+          <div
+            class="naming"
+            *ngIf="enableSelection"
+            (click)="
+              topic.selected = !topic.selected; topicSelectionChange(topic)
+            "
           >
-            <img src="dots.svg" alt="" />
-          </button>
+            <p-checkbox
+              [(ngModel)]="topic.selected"
+              [binary]="true"
+              (ngModelChange)="topicSelectionChange(topic)"
+            />
+            <p>{{ topic.name }}</p>
+          </div>
+          <p *ngIf="!enableSelection">{{ topic.name }}</p>
+          <div class="d-btns" style="padding-right: 16px">
+            <button
+              class="menu-btn"
+              (click)="op.toggle($event); openToolbar(topic)"
+            >
+              <img src="dots.svg" alt="" />
+            </button>
+            <button style="cursor: grab; height: 20px" cdkDragHandle>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="6"
+                viewBox="0 0 16 6"
+                fill="none"
+              >
+                <path
+                  d="M1 6C0.71667 6 0.479337 5.904 0.288004 5.712C0.0966702 5.52 0.000670115 5.28267 3.44827e-06 5C-0.000663218 4.71733 0.0953369 4.48 0.288004 4.288C0.48067 4.096 0.718003 4 1 4H15C15.2833 4 15.521 4.096 15.713 4.288C15.905 4.48 16.0007 4.71733 16 5C15.9993 5.28267 15.9033 5.52033 15.712 5.713C15.5207 5.90567 15.2833 6.00133 15 6H1ZM1 2C0.71667 2 0.479337 1.904 0.288004 1.712C0.0966702 1.52 0.000670115 1.28267 3.44827e-06 1C-0.000663218 0.717333 0.0953369 0.48 0.288004 0.288C0.48067 0.0960001 0.718003 0 1 0H15C15.2833 0 15.521 0.0960001 15.713 0.288C15.905 0.48 16.0007 0.717333 16 1C15.9993 1.28267 15.9033 1.52033 15.712 1.713C15.5207 1.90567 15.2833 2.00133 15 2H1Z"
+                  fill="#C6C7C5"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
         <div
           class="sub-topics"
@@ -34,41 +92,214 @@
           (cdkDropListDropped)="dropSubTopic($event, topic)"
         >
           <div class="sub-item" *ngFor="let sub of topic.subtopics" cdkDrag>
-            <div class="sub-heading" cdkDragHandle>
-              <p>{{ sub.name }}</p>
-              <button
-                class="menu-btn"
-                (click)="op1.toggle($event); handleSubTools(topic, sub)"
-              >
-                <img src="dots.svg" alt="" />
-              </button>
-            </div>
-            <div class="sub-content">
-              <div class="materials">
-                <div class="mat-item" *ngFor="let mat of sub.files">
-                  <a href="{{ mat.url }}" target="_blank">
-                    <img src="mat-link.svg" alt="" />
-                    {{ mat.name }}
-                  </a>
-                  <p class="mat-lang">{{ mat.language }}</p>
+            <div class="sub-inner">
+              <div class="sub-heading">
+                <p
+                  *ngIf="enableSelection"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    cursor: pointer;
+                  "
+                  (click)="
+                    sub.selected = !sub.selected;
+                    subTopicSelectionChange(topic, sub)
+                  "
+                >
+                  <p-checkbox
+                    [(ngModel)]="sub.selected"
+                    [binary]="true"
+                    (ngModelChange)="subTopicSelectionChange(topic, sub)"
+                  />
+
+                  {{ sub.name }}
+                </p>
+                <p *ngIf="!enableSelection">{{ sub.name }}</p>
+                <div class="d-btns">
                   <button
                     class="menu-btn"
-                    (click)="op2.toggle($event); handleMatTools(sub, mat)"
+                    (click)="op1.toggle($event); handleSubTools(topic, sub)"
                   >
                     <img src="dots.svg" alt="" />
                   </button>
+                  <button style="cursor: grab; height: 20px" cdkDragHandle>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="6"
+                      viewBox="0 0 16 6"
+                      fill="none"
+                    >
+                      <path
+                        d="M1 6C0.71667 6 0.479337 5.904 0.288004 5.712C0.0966702 5.52 0.000670115 5.28267 3.44827e-06 5C-0.000663218 4.71733 0.0953369 4.48 0.288004 4.288C0.48067 4.096 0.718003 4 1 4H15C15.2833 4 15.521 4.096 15.713 4.288C15.905 4.48 16.0007 4.71733 16 5C15.9993 5.28267 15.9033 5.52033 15.712 5.713C15.5207 5.90567 15.2833 6.00133 15 6H1ZM1 2C0.71667 2 0.479337 1.904 0.288004 1.712C0.0966702 1.52 0.000670115 1.28267 3.44827e-06 1C-0.000663218 0.717333 0.0953369 0.48 0.288004 0.288C0.48067 0.0960001 0.718003 0 1 0H15C15.2833 0 15.521 0.0960001 15.713 0.288C15.905 0.48 16.0007 0.717333 16 1C15.9993 1.28267 15.9033 1.52033 15.712 1.713C15.5207 1.90567 15.2833 2.00133 15 2H1Z"
+                        fill="#C6C7C5"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="sub-content">
+                <div class="materials">
+                  <div class="mat-item" *ngFor="let mat of sub.files">
+                    <a
+                      href="{{ mat.file.fileUrl ? mat.file.fileUrl : mat.url }}"
+                      target="_blank"
+                    >
+                      <p-checkbox
+                        *ngIf="enableSelection"
+                        (ngModelChange)="
+                          fileSelectionChange($event, topic, sub, mat)
+                        "
+                        [(ngModel)]="mat.selected"
+                        [binary]="true"
+                      />
+
+                      <img
+                        *ngIf="!mat.file.fileUrl"
+                        src="mat-link.svg"
+                        alt=""
+                      />
+                      <svg
+                        *ngIf="mat.file.fileUrl"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="19"
+                        viewBox="0 0 15 19"
+                        fill="none"
+                      >
+                        <path
+                          d="M8.0617 0.750488H4.32891C2.64145 0.750488 1.79862 0.750488 1.27431 1.30393C0.75 1.85738 0.75 2.74704 0.75 4.52827V13.9727C0.75 15.7539 0.75 16.6436 1.27431 17.197C1.79862 17.7505 2.64145 17.7505 4.32891 17.7505H9.69726C11.3847 17.7505 12.2276 17.7505 12.7519 17.197C13.2762 16.6436 13.2762 15.7539 13.2762 13.9727V6.25471C13.2762 5.86938 13.2762 5.67577 13.2082 5.50293C13.1402 5.3301 13.0113 5.19221 12.7519 4.91927L9.32685 1.30393C9.06738 1.03004 8.93854 0.894044 8.7748 0.822266C8.61017 0.750488 8.42675 0.750488 8.0617 0.750488Z"
+                          stroke="#5A4BEA"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M7.90771 0.750488V4.52827C7.90771 5.41888 7.90772 5.86371 8.16987 6.14043C8.43202 6.41715 8.85344 6.41715 9.69717 6.41715H13.2761"
+                          stroke="#5A4BEA"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                      {{ mat.name }}
+                    </a>
+                    <p class="mat-lang">{{ mat.language }}</p>
+                    <div class="d-btns">
+                      <button
+                        class="menu-btn"
+                        (click)="op2.toggle($event); handleMatTools(sub, mat)"
+                      >
+                        <img src="dots.svg" alt="" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div class="add-mat">
                   <button (click)="openMaterialDialog(topic, sub)">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="19"
+                      viewBox="0 0 15 19"
+                      fill="none"
+                    >
+                      <path
+                        d="M8.24189 0.500244H4.28947C2.50274 0.500244 1.61032 0.500244 1.05516 1.08624C0.5 1.67224 0.5 2.61424 0.5 4.50024V14.5002C0.5 16.3862 0.5 17.3282 1.05516 17.9142C1.61032 18.5002 2.50274 18.5002 4.28947 18.5002H9.97368C11.7604 18.5002 12.6528 18.5002 13.208 17.9142C13.7632 17.3282 13.7632 16.3862 13.7632 14.5002V6.32824C13.7632 5.92024 13.7632 5.71524 13.6912 5.53224C13.6192 5.34924 13.4827 5.20324 13.208 4.91424L9.58147 1.08624C9.30674 0.796244 9.17032 0.652244 8.99695 0.576244C8.82263 0.500244 8.62842 0.500244 8.24189 0.500244Z"
+                        stroke="#13170C"
+                      />
+                      <path
+                        d="M8.0791 0.500244V4.50024C8.0791 5.44324 8.0791 5.91424 8.35668 6.20724C8.63426 6.50024 9.08047 6.50024 9.97384 6.50024H13.7633"
+                        stroke="#13170C"
+                      />
+                    </svg>
                     {{ "Add file" | translate }}
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          <div *ngIf="topic.files.length > 0" class="sub-item topic-files">
+            <div class="sub-inner">
+              <div class="sub-content">
+                <div class="materials">
+                  <div class="mat-item" *ngFor="let mat of topic.files">
+                    <a
+                      href="{{ mat.file.fileUrl ? mat.file.fileUrl : mat.url }}"
+                      target="_blank"
+                    >
+                      <p-checkbox
+                        *ngIf="enableSelection"
+                        (ngModelChange)="
+                          topicFileSelectionChange($event, topic, mat)
+                        "
+                        [(ngModel)]="mat.selected"
+                        [binary]="true"
+                      />
+
+                      <img
+                        *ngIf="!mat.file.fileUrl"
+                        src="mat-link.svg"
+                        alt=""
+                      />
+                      <svg
+                        *ngIf="mat.file.fileUrl"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="19"
+                        viewBox="0 0 15 19"
+                        fill="none"
+                      >
+                        <path
+                          d="M8.0617 0.750488H4.32891C2.64145 0.750488 1.79862 0.750488 1.27431 1.30393C0.75 1.85738 0.75 2.74704 0.75 4.52827V13.9727C0.75 15.7539 0.75 16.6436 1.27431 17.197C1.79862 17.7505 2.64145 17.7505 4.32891 17.7505H9.69726C11.3847 17.7505 12.2276 17.7505 12.7519 17.197C13.2762 16.6436 13.2762 15.7539 13.2762 13.9727V6.25471C13.2762 5.86938 13.2762 5.67577 13.2082 5.50293C13.1402 5.3301 13.0113 5.19221 12.7519 4.91927L9.32685 1.30393C9.06738 1.03004 8.93854 0.894044 8.7748 0.822266C8.61017 0.750488 8.42675 0.750488 8.0617 0.750488Z"
+                          stroke="#5A4BEA"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M7.90771 0.750488V4.52827C7.90771 5.41888 7.90772 5.86371 8.16987 6.14043C8.43202 6.41715 8.85344 6.41715 9.69717 6.41715H13.2761"
+                          stroke="#5A4BEA"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                      {{ mat.name }}
+                    </a>
+                    <p class="mat-lang">{{ mat.language }}</p>
+                    <div class="d-btns">
+                      <button
+                        class="menu-btn"
+                        (click)="op3.toggle($event); handleTopicMatTools(topic, mat)"
+                      >
+                        <img src="dots.svg" alt="" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="sub-item add-subtopic">
             <button (click)="addSubTopic(topic)">
               {{ "Add sub topic" | translate }}
+            </button>
+            <button
+              class="add-file"
+              (click)="openMaterialDialogForTopic(topic)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="19"
+                viewBox="0 0 15 19"
+                fill="none"
+              >
+                <path
+                  d="M8.24189 0.500244H4.28947C2.50274 0.500244 1.61032 0.500244 1.05516 1.08624C0.5 1.67224 0.5 2.61424 0.5 4.50024V14.5002C0.5 16.3862 0.5 17.3282 1.05516 17.9142C1.61032 18.5002 2.50274 18.5002 4.28947 18.5002H9.97368C11.7604 18.5002 12.6528 18.5002 13.208 17.9142C13.7632 17.3282 13.7632 16.3862 13.7632 14.5002V6.32824C13.7632 5.92024 13.7632 5.71524 13.6912 5.53224C13.6192 5.34924 13.4827 5.20324 13.208 4.91424L9.58147 1.08624C9.30674 0.796244 9.17032 0.652244 8.99695 0.576244C8.82263 0.500244 8.62842 0.500244 8.24189 0.500244Z"
+                  stroke="#3B3199"
+                />
+                <path
+                  d="M8.0791 0.500244V4.50024C8.0791 5.44324 8.0791 5.91424 8.35668 6.20724C8.63426 6.50024 9.08047 6.50024 9.97384 6.50024H13.7633"
+                  stroke="#3B3199"
+                />
+              </svg>
+              {{ "Add file" | translate }}
             </button>
           </div>
         </div>
@@ -165,30 +396,22 @@
     <p-popover #op2>
       <div class="flex flex-col gap-4 w-[25rem]">
         <div class="actions">
-          <div class="item edit" (click)="editMaterial(); op2.toggle($event)">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                opacity="0.5"
-                d="M17.3742 7.26085C17.6785 6.95652 17.9198 6.59522 18.0845 6.19761C18.2491 5.79999 18.3339 5.37384 18.3338 4.94348C18.3338 4.51312 18.249 4.08698 18.0842 3.68939C17.9195 3.2918 17.6781 2.93055 17.3738 2.62627C17.0694 2.32199 16.7081 2.08063 16.3105 1.91597C15.9129 1.75131 15.4867 1.66659 15.0564 1.66663C14.1872 1.6667 13.3537 2.01205 12.7392 2.62669L12 3.36585L12.0317 3.45835C12.3961 4.50075 12.9925 5.44676 13.7758 6.22502C14.5772 7.03142 15.556 7.63927 16.6342 8.00002L17.3742 7.26085Z"
-                fill="#90928D"
-              />
-              <path
-                d="M12.0324 3.33337L11.9999 3.36504L12.0315 3.45837C12.3959 4.50077 12.9923 5.44678 13.7757 6.22504C14.5771 7.03144 15.5559 7.63929 16.634 8.00004L9.5007 15.1334C9.01903 15.6142 8.7782 15.855 8.5132 16.0617C8.20026 16.3053 7.86191 16.5142 7.50403 16.685C7.2007 16.83 6.8782 16.9375 6.23236 17.1525L2.82986 18.2867C2.67416 18.3389 2.50701 18.3466 2.34717 18.309C2.18732 18.2714 2.04112 18.19 1.92497 18.0739C1.80882 17.9579 1.72732 17.8117 1.68962 17.6519C1.65191 17.4921 1.6595 17.3249 1.71153 17.1692L2.84653 13.7659C3.06153 13.1209 3.16903 12.7984 3.3132 12.495C3.48486 12.1362 3.69292 11.7995 3.93736 11.485C4.14403 11.22 4.38486 10.98 4.8657 10.4992L12.0324 3.33337Z"
-                fill="#90928D"
-              />
-            </svg>
-
-            <p>{{ "Edit" | translate }}</p>
-          </div>
           <div
             class="item delete"
             (click)="deleteMaterial(); op2.toggle($event)"
+          >
+            <div class="icon"><img src="delete.svg" alt="" /></div>
+            <p>{{ "Delete" | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </p-popover>
+    <p-popover #op3>
+      <div class="flex flex-col gap-4 w-[25rem]">
+        <div class="actions">
+          <div
+            class="item delete"
+            (click)="deleteMaterial(); op3.toggle($event)"
           >
             <div class="icon"><img src="delete.svg" alt="" /></div>
             <p>{{ "Delete" | translate }}</p>

@@ -11,6 +11,13 @@ import { PersonalInfoComponent } from '../../../../pages/personal-info/personal-
 import { CalendarComponent } from '../../../../pages/calendar/calendar.component';
 import { GroupMeetingsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-meetings/group-meetings.component';
 import {TransactionResultComponent} from '../../../../pages/transaction-result/transaction-result.component';
+import {LecturerHelpComponent} from '../../../../pages/lecturer-help/lecturer-help.component';
+import {
+  LecturerTutorialsComponent
+} from '../../../../pages/lecturer-help/shared/pages/lecturer-tutorials/lecturer-tutorials.component';
+import {
+  LecturerFaqsComponent
+} from '../../../../pages/lecturer-help/shared/pages/lecturer-faqs/lecturer-faqs.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -76,6 +83,26 @@ export class EducatorChildrenRoutes {
       path: 'personal-info',
       component: PersonalInfoComponent,
       data: { title: 'Personal Information' },
+    },
+
+    {
+      path: 'help',
+      component: LecturerHelpComponent,
+      data: { title: 'Help' },
+      children: [
+        {
+          path: 'tutorials',
+          component: LecturerTutorialsComponent,
+          data: { title: 'Help' },
+        },
+        {
+          path: 'faqs',
+          component: LecturerFaqsComponent,
+          data: { title: 'Help' },
+        },
+        { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+
+      ]
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

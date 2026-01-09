@@ -17,7 +17,7 @@
     </div>
     <div class="row">
       <div class="input-item" *ngFor="let item of request.body.items">
-        <label>{{ "Name" | translate }} ( {{ item.languageName }} )</label>
+        <label>{{ "Body" | translate }} ( {{ item.languageName }} )</label>
         <textarea
           type="text"
           [ngClass]="{ invalid: !item.isValid && isSubmitted }"

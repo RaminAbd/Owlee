@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgClass, NgForOf } from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Popover } from 'primeng/popover';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
 import { TopicUpsertComponent } from './shared/components/topic-upsert/topic-upsert.component';
 import { SubTopicUpsertComponent } from './shared/components/sub-topic-upsert/sub-topic-upsert.component';
-import {LanguageService} from '../../../../../../../../core/services/language.service';
+import { LanguageService } from '../../../../../../../../core/services/language.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Checkbox } from 'primeng/checkbox';
+import { ToggleSwitch } from 'primeng/toggleswitch';
 @Component({
   selector: 'app-group-materials',
-  imports: [TranslatePipe, NgForOf, Popover, FormsModule, DragDropModule],
+  imports: [
+    TranslatePipe,
+    NgForOf,
+    Popover,
+    FormsModule,
+    DragDropModule,
+    Checkbox,
+    ToggleSwitch,
+    NgIf,
+  ],
   templateUrl: './group-materials.component.html',
   styleUrl: './group-materials.component.scss',
 })
@@ -39,6 +50,7 @@ export class GroupMaterialsComponent {
   courseId = this.route.parent?.snapshot.paramMap.get('id') as string;
   selectedMaterial: TopicMaterialModel = new TopicMaterialModel();
   course: CourseRequestModel = new CourseRequestModel();
+  enableSelection: boolean = false;
   constructor() {
     this.service.component = this;
     this.service.getAllTopics();
@@ -97,6 +109,7 @@ export class GroupMaterialsComponent {
   }
 
   ///// Sub Topic
+
   addSubTopic(topic: TopicRequestModel) {
     this.topic = topic;
     this.openSubDialog(() => {
@@ -117,7 +130,7 @@ export class GroupMaterialsComponent {
 
   openSubDialog(callBack: any) {
     const ref = this.service.dialogService.open(SubTopicUpsertComponent, {
-      header:  this.langService.getByKey('Subtopic'),
+      header: this.langService.getByKey('Subtopic'),
       width: '460px',
       data: this.topic,
       style: {
@@ -149,6 +162,11 @@ export class GroupMaterialsComponent {
 
   handleMatTools(sub: SubtopicModel, mat: TopicMaterialModel) {
     this.selectedSubTopic = structuredClone(sub);
+    this.selectedMaterial = structuredClone(mat);
+  }
+
+  handleTopicMatTools(topic: TopicRequestModel, mat: TopicMaterialModel) {
+    this.topic = structuredClone(topic);
     this.selectedMaterial = structuredClone(mat);
   }
 
@@ -187,16 +205,96 @@ export class GroupMaterialsComponent {
 
   dropTopic(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.topics, event.previousIndex, event.currentIndex);
+    this.updateTopicIndexes();
+    this.service.reIndexTopics();
   }
 
-  dropSubTopic(
-    event: CdkDragDrop<any[]>,
-    topic: any
-  ) {
-    moveItemInArray(
-      topic.subtopics,
-      event.previousIndex,
-      event.currentIndex
-    );
+  private updateTopicIndexes() {
+    this.topics.forEach((topic, index) => {
+      topic.index = index;
+    });
   }
+
+  dropSubTopic(event: CdkDragDrop<any[]>, topic: any) {
+    moveItemInArray(topic.subtopics, event.previousIndex, event.currentIndex);
+    this.updateSubIndexes(topic);
+    this.service.reIndexSubTopics(topic);
+  }
+  private updateSubIndexes(topic: TopicRequestModel) {
+    console.log(topic);
+    topic.subtopics.forEach((topic, index) => {
+      topic.index = index;
+    });
+  }
+
+  changeSelectionState() {
+    this.topics.forEach((topic, index) => {
+      topic.selected = false;
+      topic.subtopics.forEach((sub: SubtopicModel) => {
+        sub.selected = false;
+        sub.files.forEach((file) => {
+          file.selected = false;
+        });
+      });
+    });
+  }
+
+  topicSelectionChange(topic: TopicRequestModel) {
+    topic.subtopics.forEach((sub: SubtopicModel) => {
+      sub.selected = topic.selected;
+      sub.files.forEach((file) => {
+        file.selected = topic.selected;
+      });
+    });
+    topic.files.forEach((file: any) => {
+      file.selected = topic.selected;
+    });
+  }
+
+  subTopicSelectionChange(topic: TopicRequestModel, sub: SubtopicModel) {
+    let selectedSubs = topic.subtopics.filter(
+      (sub: SubtopicModel) => sub.selected,
+    );
+    topic.selected = selectedSubs.length === topic.subtopics.length;
+    sub.files.forEach((file) => {
+      file.selected = sub.selected;
+    });
+  }
+
+  fileSelectionChange(
+    checked: boolean,
+    topic: TopicRequestModel,
+    sub: SubtopicModel,
+    file: TopicMaterialModel,
+  ) {
+    file.selected = checked;
+    let selectedMaterials = sub.files.filter(
+      (sub: TopicMaterialModel) => sub.selected,
+    );
+    sub.selected = selectedMaterials.length === sub.files.length;
+    this.subTopicSelectionChange(topic, sub);
+  }
+
+  topicFileSelectionChange(
+    checked: boolean,
+    topic: TopicRequestModel,
+
+    file: TopicMaterialModel,
+  ) {
+    file.selected = checked;
+    let selectedMaterials = topic.files.filter(
+      (sub: TopicMaterialModel) => sub.selected,
+    );
+    topic.selected = selectedMaterials.length === topic.files.length;
+    // this.subTopicSelectionChange(topic, sub);
+  }
+
+  removeItems() {
+    this.service.removeItems();
+  }
+
+  openMaterialDialogForTopic(topic: TopicRequestModel) {
+    this.service.openTopicMaterialDialog(topic);
+  }
+
 }

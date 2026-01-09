@@ -16,20 +16,20 @@ export class EducatorService {
 
   checkDays() {
     let userId: string = localStorage.getItem('userId') as string;
-    // this.service.GetStatus(userId).subscribe((resp) => {
-    //   if (resp.data.days <= 3 && resp.data.days > 0) {
-    //     if (!resp.data.isShown) {
-    //       this.openExpirationDialog(resp.data, false);
-    //     }
-    //   }
-    //   if (
-    //     resp.data.days === 0 &&
-    //     resp.data.hours === 0 &&
-    //     resp.data.minutes === 0
-    //   ) {
-    //     this.openExpirationDialog(resp.data, true);
-    //   }
-    // });
+    this.service.GetStatus(userId).subscribe((resp) => {
+      if (resp.data.days <= 3 && resp.data.days > 0) {
+        if (!resp.data.isShown) {
+          this.openExpirationDialog(resp.data, false);
+        }
+      }
+      if (
+        resp.data.days === 0 &&
+        resp.data.hours === 0 &&
+        resp.data.minutes === 0
+      ) {
+        this.openExpirationDialog(resp.data, true);
+      }
+    });
   }
 
   openExpirationDialog(data: any, forceToUpgrade: boolean) {

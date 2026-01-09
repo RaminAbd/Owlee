@@ -1,0 +1,33 @@
+.wrapper{
+  padding: 24px 81px;
+  .cnt{
+    max-width: 800px;
+    .tabs{
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 16px;
+      .item{
+        padding-bottom: 8px;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+        p{
+          color: #90928D;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+        &.active{
+          border-bottom: 1px solid #000;
+          p{
+            color: #13170C;
+          }
+        }
+      }
+    }
+    .tab-cnt{
+      margin-top: 24px;
+    }
+  }
+}

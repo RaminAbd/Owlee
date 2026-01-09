@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <div class="cnt">
+    <div class="tabs">
+      <div class="item" routerLink="tutorials" routerLinkActive="active">
+        <p>{{ "Tutorials" | translate }}</p>
+      </div>
+      <div class="item" routerLink="faqs" routerLinkActive="active">
+        <p>{{ "FAQs" | translate }}</p>
+      </div>
+    </div>
+    <div class="tab-cnt">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

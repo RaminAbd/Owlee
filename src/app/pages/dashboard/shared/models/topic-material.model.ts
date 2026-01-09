@@ -1,3 +1,5 @@
+import {FileModel} from '../../../../core/models/File.model';
+
 export class TopicMaterialModel {
   id: string;
   subtopicId: string;
@@ -5,6 +7,11 @@ export class TopicMaterialModel {
   index?: number;
   name: string;
   url: string;
-  language:string
+  language: string;
   icon: string;
+  selected: boolean;
+  file: FileModel = new FileModel();
+  fakeFile: any;
+  availableFrom:any;
+  availableTo:any
 }

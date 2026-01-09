@@ -8,4 +8,6 @@ export class TopicRequestModel {
   index?: number;
   subTopic:SubtopicModel = new SubtopicModel();
   subtopics: SubtopicModel[] = [];
+  selected: boolean;
+  files: any[]=[];
 }
