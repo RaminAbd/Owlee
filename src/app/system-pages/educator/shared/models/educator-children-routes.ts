@@ -10,20 +10,14 @@ import { GroupMembersComponent } from '../../../../pages/dashboard/shared/pages/
 import { PersonalInfoComponent } from '../../../../pages/personal-info/personal-info.component';
 import { CalendarComponent } from '../../../../pages/calendar/calendar.component';
 import { GroupMeetingsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-meetings/group-meetings.component';
-import {TransactionResultComponent} from '../../../../pages/transaction-result/transaction-result.component';
-import {LecturerHelpComponent} from '../../../../pages/lecturer-help/lecturer-help.component';
-import {
-  LecturerTutorialsComponent
-} from '../../../../pages/lecturer-help/shared/pages/lecturer-tutorials/lecturer-tutorials.component';
-import {
-  LecturerFaqsComponent
-} from '../../../../pages/lecturer-help/shared/pages/lecturer-faqs/lecturer-faqs.component';
-import {
-  CourseAssignmentsComponent
-} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/course-assignments.component';
-import {
-  AssignmentDetailsComponent
-} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/pages/assignment-details/assignment-details.component';
+import { TransactionResultComponent } from '../../../../pages/transaction-result/transaction-result.component';
+import { LecturerHelpComponent } from '../../../../pages/lecturer-help/lecturer-help.component';
+import { LecturerTutorialsComponent } from '../../../../pages/lecturer-help/shared/pages/lecturer-tutorials/lecturer-tutorials.component';
+import { LecturerFaqsComponent } from '../../../../pages/lecturer-help/shared/pages/lecturer-faqs/lecturer-faqs.component';
+import { CourseAssignmentsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/course-assignments.component';
+import { AssignmentDetailsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/pages/assignment-details/assignment-details.component';
+import { EducatorPlansComponent } from '../../../../pages/educator-plans/educator-plans.component';
+import { EducatorSubscriptionsComponent } from '../../../../pages/educator-plans/shared/pages/educator-subscriptions/educator-subscriptions.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -117,8 +111,22 @@ export class EducatorChildrenRoutes {
           data: { title: 'Help' },
         },
         { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+      ],
+    },
 
-      ]
+    {
+      path: 'plans',
+      component: EducatorPlansComponent,
+      data: { title: 'Plans' },
+      children: [
+        {
+          path: 'subscriptions',
+          component: EducatorSubscriptionsComponent,
+          data: { title: 'Plans' },
+        },
+        { path: '', redirectTo: 'subscriptions', pathMatch: 'full' },
+
+      ],
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
