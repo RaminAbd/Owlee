@@ -17,17 +17,11 @@
       <div class="flex my-table-header">
         <div class="back-name-create" *ngIf="!showCreate">
           <div class="name">
-            <h3>{{ TableName | translate}} </h3>
+            <h3>{{ TableName | translate }}</h3>
           </div>
         </div>
         <div class="back-name-create" *ngIf="showCreate">
-
-          <div
-            class="name"
-            *ngIf="TableName"
-
-            style="cursor: pointer"
-          >
+          <div class="name" *ngIf="TableName" style="cursor: pointer">
             <h3>{{ TableName }}</h3>
           </div>
           <button (click)="tableAction(null, 1)">
@@ -35,13 +29,13 @@
           </button>
         </div>
         <div class="search">
-          <span class="p-input-icon-left ml-auto" >
+          <span class="p-input-icon-left ml-auto">
             <i class="pi pi-search"></i>
             <input
               pInputText
               type="text"
               (input)="dt1.filterGlobal(getEventValue($event), 'contains')"
-              placeholder="{{'Search' | translate}}..."
+              placeholder="{{ 'Search' | translate }}..."
             />
           </span>
         </div>
@@ -92,13 +86,27 @@
             </button>
           </div>
 
-          <div class="d-flex students-actions" *ngIf="col.field === 'studentsActions'">
+          <div
+            class="d-flex students-actions"
+            *ngIf="col.field === 'studentsActions'"
+          >
             <button class="edit" (click)="tableAction(rowData, 4, $event)">
               <img src="table/eye.svg" alt="" />
             </button>
             <button class="delete" (click)="confirm(rowData, 5, $event)">
-              <i style="color: #000 !important" class="pi pi-lock" *ngIf="!rowData.isBlocked"></i>
-              <i style="color: #000 !important" class="pi pi-unlock" *ngIf="rowData.isBlocked"></i>
+              <i
+                style="color: #000 !important"
+                class="pi pi-lock"
+                *ngIf="!rowData.isBlocked"
+              ></i>
+              <i
+                style="color: #000 !important"
+                class="pi pi-unlock"
+                *ngIf="rowData.isBlocked"
+              ></i>
+            </button>
+            <button class="delete" (click)="confirm(rowData, 3, $event)">
+              <img src="table/delete.svg" alt="" />
             </button>
           </div>
         </td>

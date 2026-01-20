@@ -1,40 +1,33 @@
-import {inject, Injectable} from '@angular/core';
-import {ForgotPasswordComponent} from './forgot-password.component';
-import {EducatorsApiService} from '../../pages/educators/shared/services/educators.api.service';
-import {AccountsApiService} from '../shared/services/accounts.api.service';
-import {LanguageService} from '../../core/services/language.service';
-import {BlobService} from '../../core/services/blob.service';
-import {KnownLanguagesApiService} from '../../pages/known-languages/shared/services/known-languages.api.service';
-import {ApplicationMessageCenterService} from '../../core/services/ApplicationMessageCenter.service';
-import {VerificationApiService} from '../shared/services/verification.api.service';
-import {AuthApiService} from '../shared/services/auth.api.service';
-import {AuthService} from '../sign-in/auth.service';
-import {TranslateService} from '@ngx-translate/core';
-import {AuthRequestModel} from '../shared/models/auth-request.model';
+import { inject, Injectable } from '@angular/core';
+import { ForgotPasswordComponent } from './forgot-password.component';
+import { EducatorsApiService } from '../../pages/educators/shared/services/educators.api.service';
+import { AccountsApiService } from '../shared/services/accounts.api.service';
+import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
+import { VerificationApiService } from '../shared/services/verification.api.service';
+import { AuthService } from '../sign-in/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { StudentsApiService } from '../../pages/students/shared/services/students.api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ForgotPasswordService {
-  private service: EducatorsApiService = inject(EducatorsApiService);
-  private accountsService: AccountsApiService = inject(AccountsApiService);
-  private langService: LanguageService = inject(LanguageService);
-  private blob = inject(BlobService);
-  private knownLangService = inject(KnownLanguagesApiService);
+  public service: EducatorsApiService | StudentsApiService;
+  public educatorsService: EducatorsApiService = inject(EducatorsApiService);
+  public studentsService: StudentsApiService = inject(StudentsApiService);
   public message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
   private verificationService: VerificationApiService = inject(
     VerificationApiService,
   );
-  private authApiService: AuthApiService = inject(AuthApiService);
   private authService: AuthService = inject(AuthService);
   public translate = inject(TranslateService);
-  component:ForgotPasswordComponent;
-  constructor() { }
+  component: ForgotPasswordComponent;
+  constructor() {}
 
   checkMail() {
-    this.accountsService
+    this.service
       .Exists(this.component.request.email)
       .subscribe((resp) => {
         if (!resp.data.exists) {
@@ -58,26 +51,25 @@ export class ForgotPasswordService {
     const req = {
       username: this.component.request.email,
       newPassword: this.component.request.password,
-      verificationCode:this.component.request.verificationCode,
-    }
-    this.authApiService.ForgotPassword(req).subscribe((resp) => {
-      if(resp.succeeded){
+      verificationCode: this.component.request.verificationCode,
+    };
+    this.service.ForgotPassword(req).subscribe((resp) => {
+      if (resp.succeeded) {
         this.signIn();
+      } else {
+        this.component.loading = false;
       }
-      else{
-        this.component.loading = false
-      }
-    })
-    console.log(req)
+    });
+    console.log(req);
   }
 
   private signIn() {
-    const req: AuthRequestModel = {
+    const req: any = {
       userName: this.component.request.email,
       password: this.component.request.password,
       remember: false,
     };
-    this.authApiService.SignIn(req).subscribe((resp: any) => {
+    this.service.SignIn(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.message.showTranslatedErrorMessage(
           'The username or password is incorrect!',

@@ -16,11 +16,17 @@ import {StudentSignupPolicyComponent} from './pages/docs/student-signup-policy/s
 import {EducatorPaymentPolicyComponent} from './pages/docs/educator-payment-policy/educator-payment-policy.component';
 import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
 import {TransactionResultComponent} from './pages/transaction-result/transaction-result.component';
+import {AdminSignInComponent} from './auth/admin-sign-in/admin-sign-in.component';
+import {GoogleAuthCallbackComponent} from './auth/google-auth-callback/google-auth-callback.component';
+import {StudentSignUpNewComponent} from './auth/student-sign-up-new/student-sign-up-new.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
+  { path: 'admin-access', component: AdminSignInComponent, data: { title: 'Sign in' } },
   { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
-  { path: 'forgot', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
+  { path: 'auth/callback', component: GoogleAuthCallbackComponent },
+
+  { path: 'forgot/:role', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
   {
     path: 'terms-conditions',
     component: TermsComponent,
@@ -53,6 +59,11 @@ export const routes: Routes = [
   {
     path: 'student-sign-up/:id',
     component: StudentSignUpComponent,
+    data: { title: 'Sign up' },
+  },
+  {
+    path: 'student-sign-up',
+    component: StudentSignUpNewComponent,
     data: { title: 'Sign up' },
   },
   {

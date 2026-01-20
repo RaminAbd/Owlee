@@ -7,7 +7,7 @@ export class FileModel {
   searchValue: string
   createdAt: string
   createdAtMilliSeconds: number;
-  fileLoading?: boolean;
+  fileLoading: boolean;
   isValid:boolean;
   fakeFile:any
   fileSize:any

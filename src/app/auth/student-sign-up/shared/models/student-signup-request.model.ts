@@ -8,8 +8,8 @@ export class StudentSignupRequestModel {
   confirmPassword: string;
   oldPassword: string;
   systemLanguages: string[] = [];
-  userName: string;
   username: string;
   groupMemberId: string;
   privacyAccepted: boolean = false;
+  verificationCode: any;
 }

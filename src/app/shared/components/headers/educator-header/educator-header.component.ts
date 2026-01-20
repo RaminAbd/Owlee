@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../header/header.component';
 import { EducatorNavigationBarComponent } from '../../navigation-bars/educator-navigation-bar/educator-navigation-bar.component';
 

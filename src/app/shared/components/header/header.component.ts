@@ -17,10 +17,12 @@ import {
   trigger,
 } from '@angular/animations';
 import {AuthService} from '../../../auth/sign-in/auth.service';
+import {Notifications} from './shared/components/notifications/notifications';
+import {NotificationsResponseModel} from '../../../core/models/notifications-response.model';
 
 @Component({
   selector: 'app-header',
-  imports: [TranslatePipe, NgIf, RouterLink, NgForOf, RouterLinkActive, NgClass],
+  imports: [TranslatePipe, NgIf, RouterLink, NgForOf, RouterLinkActive, NgClass, Notifications],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
@@ -64,6 +66,7 @@ export class HeaderComponent {
     { name: 'Russian', value: 'ru-Ru' },
     { name: 'Turkish', value: 'tr-Tr' },
   ];
+  @Input()  showNotifications: boolean = true;
   constructor(
     private sanitizer: DomSanitizer,
     private signInService: AuthService,

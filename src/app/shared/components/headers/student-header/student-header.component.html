@@ -3,32 +3,37 @@
     <h3>{{ pageTitle | translate }}</h3>
   </div>
   <div class="lang-info">
+    <div class="notifs" (click)="langOpen = false">
+      <app-notifications></app-notifications>
+    </div>
     <span class="link lang-s" (click)="langOpen = !langOpen">
       <span style="cursor: pointer">{{ selectedLang | translate }}</span>
       <i class="pi pi-angle-down"></i>
       <span class="dropdown-block" *ngIf="langOpen">
         <span class="items">
           <span class="link item" (click)="selectLang('en-Us')">{{
-              "English" | translate
-            }}</span>
+            "English" | translate
+          }}</span>
           <span class="link item" (click)="selectLang('ka-Geo')">{{
-              "Georgian" | translate
-            }}</span>
+            "Georgian" | translate
+          }}</span>
           <span class="link item" (click)="selectLang('az-Aze')">{{
-              "Azerbaijani" | translate
-            }}</span>
+            "Azerbaijani" | translate
+          }}</span>
           <span class="link item" (click)="selectLang('ru-Ru')">{{
-              "Russian" | translate
-            }}</span>
+            "Russian" | translate
+          }}</span>
           <span class="link item" (click)="selectLang('tr-Tr')">{{
-              "Turkish" | translate
-            }}</span>
+            "Turkish" | translate
+          }}</span>
         </span>
       </span>
     </span>
     <a class="bell" routerLink="/main/student/invitations">
       <div class="dot" *ngIf="invitations.length > 0"></div>
-      <i class="pi pi-bell"></i>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.25 2.75V0.75M5.25 2.75V0.75M1 5.75H18.5M0.75 7.794C0.75 5.679 0.75 4.621 1.186 3.813C1.58025 3.09231 2.19199 2.5145 2.934 2.162C3.79 1.75 4.91 1.75 7.15 1.75H12.35C14.59 1.75 15.71 1.75 16.566 2.162C17.319 2.524 17.93 3.102 18.314 3.812C18.75 4.622 18.75 5.68 18.75 7.795V12.707C18.75 14.822 18.75 15.88 18.314 16.688C17.9198 17.4087 17.308 17.9865 16.566 18.339C15.71 18.75 14.59 18.75 12.35 18.75H7.15C4.91 18.75 3.79 18.75 2.934 18.338C2.19214 17.9858 1.58041 17.4083 1.186 16.688C0.75 15.878 0.75 14.82 0.75 12.705V7.794Z" stroke="#13170C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </a>
     <a *ngIf="personalInfoURL" [routerLink]="personalInfoURL" class="info">
       <svg
@@ -69,7 +74,7 @@
 <div class="back" *ngIf="langOpen" (click)="langOpen = false"></div>
 <div class="mobile-header" id="mob">
   <div class="row">
-    <a routerLink="/"  class="logo">
+    <a routerLink="/" class="logo">
       <img src="text-logo.svg" alt="" />
     </a>
     <div class="menu-burger burger" (click)="toggleMenu()">
@@ -78,8 +83,11 @@
       <span></span>
     </div>
   </div>
-  <nav (@menuExpand.done)="onAnimationDone()"
-       [ngClass]="{ hidden: isHidden }" [@menuExpand]="showMenu ? 'open' : 'closed'">
+  <nav
+    (@menuExpand.done)="onAnimationDone()"
+    [ngClass]="{ hidden: isHidden }"
+    [@menuExpand]="showMenu ? 'open' : 'closed'"
+  >
     <div class="nav-links">
       <div class="sec-links">
         <a
@@ -87,7 +95,7 @@
           [routerLink]="link.url"
           [routerLinkActive]="['active']"
           #rla="routerLinkActive"
-          (click)="closeBurger(); "
+          (click)="closeBurger()"
         >
           <span
             style="display: flex"
@@ -99,7 +107,12 @@
         </a>
       </div>
       <div class="lang-info">
-        <a *ngIf="personalInfoURL" [routerLink]="personalInfoURL" class="info" (click)="closeBurger(); ">
+        <a
+          *ngIf="personalInfoURL"
+          [routerLink]="personalInfoURL"
+          class="info"
+          (click)="closeBurger()"
+        >
           <svg
             width="40"
             height="41"
@@ -138,25 +151,34 @@
           <i class="pi pi-angle-down"></i>
           <span class="dropdown-block" *ngIf="langOpen">
             <span class="items">
-              <span class="link item" (click)="closeBurger(); selectLang('en-Us')">{{
-                  "English" | translate
-                }}</span>
-              <span class="link item" (click)="closeBurger(); selectLang('ka-Geo')">{{
-                  "Georgian" | translate
-                }}</span>
-              <span class="link item" (click)="closeBurger(); selectLang('az-Aze')">{{
-                  "Azerbaijani" | translate
-                }}</span>
-              <span class="link item" (click)="closeBurger(); selectLang('ru-Ru')">{{
-                  "Russian" | translate
-                }}</span>
-              <span class="link item" (click)="closeBurger(); selectLang('tr-Tr')">{{
-                  "Turkish" | translate
-                }}</span>
+              <span
+                class="link item"
+                (click)="closeBurger(); selectLang('en-Us')"
+                >{{ "English" | translate }}</span
+              >
+              <span
+                class="link item"
+                (click)="closeBurger(); selectLang('ka-Geo')"
+                >{{ "Georgian" | translate }}</span
+              >
+              <span
+                class="link item"
+                (click)="closeBurger(); selectLang('az-Aze')"
+                >{{ "Azerbaijani" | translate }}</span
+              >
+              <span
+                class="link item"
+                (click)="closeBurger(); selectLang('ru-Ru')"
+                >{{ "Russian" | translate }}</span
+              >
+              <span
+                class="link item"
+                (click)="closeBurger(); selectLang('tr-Tr')"
+                >{{ "Turkish" | translate }}</span
+              >
             </span>
           </span>
         </span>
-
       </div>
     </div>
     <div class="logout" (click)="logout()">
@@ -175,7 +197,7 @@
           strokeLinejoin="round"
         />
       </svg>
-      <p>{{ 'Log out' | translate }}</p>
+      <p>{{ "Log out" | translate }}</p>
     </div>
   </nav>
 </div>

@@ -8,6 +8,9 @@ import {
 import {StudentPersonalInfoComponent} from '../../../../pages/student-personal-info/student-personal-info.component';
 import {StudentCalendarComponent} from '../../../../pages/student-calendar/student-calendar.component';
 import {InvitationsComponent} from '../../../../pages/invitations/invitations.component';
+import {
+  StudentAssignmentDetailsComponent
+} from '../../../../pages/student-dashboard/shared/pages/student-assignment-details/student-assignment-details.component';
 
 export class StudentChildrenRoutes {
   static children: Route[] = [
@@ -20,6 +23,12 @@ export class StudentChildrenRoutes {
     {
       path: 'dashboard/course/info/:id',
       component: StudentCourseDetailsComponent,
+      data: {title: 'Dashboard'},
+    },
+
+    {
+      path: 'dashboard/course/info/:id/:assignmentId',
+      component: StudentAssignmentDetailsComponent,
       data: {title: 'Dashboard'},
     },
 

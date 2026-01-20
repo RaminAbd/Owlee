@@ -46,7 +46,7 @@ export class StudentSignUpService {
         this.component.groupMemberId,
       )
       .subscribe((resp) => {
-        this.component.request.userName = resp.data.email;
+        this.component.request.username = resp.data.email;
         this.component.request.groupMemberId = resp.data.id;
       });
   }
@@ -56,10 +56,10 @@ export class StudentSignUpService {
       !this.component.request.firstName ||
       !this.component.request.lastName ||
       !this.component.request.phoneNumber ||
-      !this.component.request.userName ||
+      !this.component.request.username ||
       !this.component.request.password ||
       !this.component.request.location ||
-      !this.component.request.confirmPassword||
+      !this.component.request.confirmPassword ||
       !this.component.request.privacyAccepted
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
@@ -81,24 +81,27 @@ export class StudentSignUpService {
     this.component.request.phoneNumber =
       this.component.request.phoneNumber.toString();
 
-    this.service.SignUp(this.component.request).subscribe((resp: any) => {
-      this.component.mainLoading = false;
-      if (resp.succeeded) {
-        this.signIn();
-      }
-      else{
-        this.component.mainLoading = false
-      }
-    },error => this.component.mainLoading = false);
+    console.log(this.component.request);
+    this.service.SignUp(this.component.request).subscribe(
+      (resp: any) => {
+        this.component.mainLoading = false;
+        if (resp.succeeded) {
+          this.signIn();
+        } else {
+          this.component.mainLoading = false;
+        }
+      },
+      (error) => (this.component.mainLoading = false),
+    );
   }
 
   private signIn() {
-    const req: AuthRequestModel = {
-      userName: this.component.request.userName,
+    const req: any = {
+      username: this.component.request.username,
       password: this.component.request.password,
-      remember: false,
+      remember: true,
     };
-    this.authApiService.SignIn(req).subscribe((resp: any) => {
+    this.service.SignIn(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.message.showTranslatedErrorMessage(
           'The username or password is incorrect!',

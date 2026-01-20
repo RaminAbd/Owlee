@@ -12,7 +12,16 @@
       <p>{{ "Sign Up and Share Your Knowledge!" | translate }}</p>
     </div>
     <div>
-      <div class="expanders">
+      <div class="tabs" style="margin-top: 32px" routerLink="/student-sign-up">
+        <div class="tab">
+          <p>{{ "Student" | translate }}</p>
+        </div>
+        <div class="tab selected" >
+          <p>{{ "Educator" | translate }}</p>
+        </div>
+      </div>
+
+      <div class="expanders" style="margin-top: 8px">
         <form [formGroup]="firstStepForm" class="item expander-container">
           <div class="heading" (click)="toggleExpander(0)">
             <img

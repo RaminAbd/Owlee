@@ -3,6 +3,9 @@
     <h3>{{ pageTitle | translate }}</h3>
   </div>
   <div class="lang-info">
+    <div class="notifs" *ngIf="showNotifications" (click)="langOpen = false">
+      <app-notifications></app-notifications>
+    </div>
     <span class="link lang-s" (click)="langOpen = !langOpen">
       <span style="cursor: pointer">{{ selectedLang | translate }}</span>
       <i class="pi pi-angle-down"></i>

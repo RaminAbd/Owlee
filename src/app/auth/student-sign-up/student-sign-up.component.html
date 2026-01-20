@@ -8,7 +8,16 @@
       <p>{{ 'Sign Up and Share Your Knowledge!' | translate }}</p>
     </div>
     <div>
-      <div class="expanders">
+      <div class="tabs" style="margin-top: 32px">
+        <div class="tab selected">
+          <p>{{ "Student" | translate }}</p>
+        </div>
+        <div class="tab" routerLink="/sign-up">
+          <p>{{ "Educator" | translate }}</p>
+        </div>
+      </div>
+
+      <div class="expanders" style="margin-top: 8px">
         <form [formGroup]="firstStepForm" class="item expander-container">
           <div class="heading">
             <p>{{ "Account Setup" | translate }}</p>
@@ -99,17 +108,17 @@
                 </div>
               </div>
               <div class="input-item">
-                <label for="userName">{{ "Username" | translate }}</label>
+                <label for="username">{{ "Email" | translate }}</label>
                 <input
                   type="text"
-                  id="userName"
-                  formControlName="userName"
-                  [(ngModel)]="request.userName"
+                  id="username"
+                  formControlName="username"
+                  [(ngModel)]="request.username"
                   [class.invalid]="
-                    firstStepForm.get('userName')?.hasError('pattern') ||
-                    (!firstStepForm.get('userName')?.value &&
+                    firstStepForm.get('username')?.hasError('pattern') ||
+                    (!firstStepForm.get('username')?.value &&
                       firstStepSubmitted) ||
-                    firstStepForm.get('userName')?.hasError('incorrect')
+                    firstStepForm.get('username')?.hasError('incorrect')
                   "
                 />
               </div>

@@ -8,6 +8,8 @@ import { CryptoService } from '../shared/services/crypto.service';
 import { AuthRequestModel } from '../shared/models/auth-request.model';
 import { AuthResponseModel } from '../shared/models/auth-response.model';
 import { RoleNameByCode } from '../../core/role-handlers/RoleNameByCode';
+import { StudentsApiService } from '../../pages/students/shared/services/students.api.service';
+import { EducatorsApiService } from '../../pages/educators/shared/services/educators.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,8 @@ import { RoleNameByCode } from '../../core/role-handlers/RoleNameByCode';
 export class AuthService {
   component: AuthComponent;
   constructor(
-    private apiService: AuthApiService,
+    private studentsService: StudentsApiService,
+    private educatorsService: EducatorsApiService,
     private appMessageService: ApplicationMessageCenterService,
     private storage: StorageService,
     private router: Router,
@@ -38,10 +41,25 @@ export class AuthService {
     this.storage.removeObject('userInfo');
   }
 
-  SignIn(req: AuthRequestModel) {
+  SignInAsStudent(req: AuthRequestModel) {
     this.component.signinLoading = true;
     this.component.requestSent = true;
-    this.apiService.SignIn(req).subscribe((resp: any) => {
+    this.studentsService.SignIn(req).subscribe((resp: any) => {
+      this.component.signinLoading = false;
+      this.component.requestSent = false;
+      if (!resp.succeeded) {
+        this.appMessageService.showTranslatedErrorMessage(resp.error);
+      } else {
+        this.setToStorage(resp.data, req);
+        this.navigateByRole(resp.data);
+      }
+    });
+  }
+
+  SignInAsLecturer(req: AuthRequestModel) {
+    this.component.signinLoading = true;
+    this.component.requestSent = true;
+    this.educatorsService.SignIn(req).subscribe((resp: any) => {
       this.component.signinLoading = false;
       this.component.requestSent = false;
       if (!resp.succeeded) {
@@ -75,5 +93,37 @@ export class AuthService {
     this.storage.removeObject('authResponse');
     this.storage.removeObject('role');
     this.storage.removeObject('token');
+  }
+
+
+
+  continueAsStudent(req:any){
+    this.studentsService.SignUpWithGoogle(req).subscribe((resp: any) => {
+      if (!resp.succeeded) {
+        this.appMessageService.showTranslatedErrorMessage(
+          'The username or password is incorrect!',
+        );
+      } else {
+        this.storage.saveObject('authResponse', resp.data);
+        localStorage.setItem('userId', resp.data.id);
+        this.storage.saveObject('role', this.cryptoService.encrypt(resp.data.role, 3));
+        this.navigateByRole(resp.data);
+      }
+    });
+  }
+
+  continueAsEducator(req:any){
+    this.educatorsService.SignUpWithGoogle(req).subscribe((resp: any) => {
+      if (!resp.succeeded) {
+        this.appMessageService.showTranslatedErrorMessage(
+          'The username or password is incorrect!',
+        );
+      } else {
+        this.storage.saveObject('authResponse', resp.data);
+        localStorage.setItem('userId', resp.data.id);
+        this.storage.saveObject('role', this.cryptoService.encrypt(resp.data.role, 3));
+        this.navigateByRole(resp.data);
+      }
+    });
   }
 }

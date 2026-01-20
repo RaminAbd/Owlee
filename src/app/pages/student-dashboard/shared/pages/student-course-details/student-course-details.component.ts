@@ -6,10 +6,10 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { StudentCourseDetailsService } from './student-course-details.service';
 import { CourseRequestModel } from '../../../../dashboard/shared/models/course-request.model';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { CourseDetailedResponseModel } from '../../models/course-detailed-response.model';
 import { KnownLanguagesResponseModel } from '../../../../known-languages/shared/models/known-languages-response.model';
@@ -24,10 +24,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import {
+  AssignmentsResponseModel
+} from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
 
 @Component({
   selector: 'app-student-course-details',
-  imports: [NgIf, TranslatePipe, NgClass, NgForOf, FormsModule],
+  imports: [NgIf, TranslatePipe, NgClass, NgForOf, FormsModule, DatePipe, RouterLink],
   templateUrl: './student-course-details.component.html',
   styleUrl: './student-course-details.component.scss',
   animations: [
@@ -68,9 +71,11 @@ export class StudentCourseDetailsComponent implements OnDestroy {
   filteredFiles: TopicMaterialModel[] = [];
   langSubscribtion: any;
   expanderStates: string[] = [];
+  assignments:AssignmentsResponseModel[]=[]
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
+    this.service.getAllAssignments();
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.service.getKnownLangs();
@@ -133,5 +138,9 @@ export class StudentCourseDetailsComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
+  }
+
+  getAssignment(item: AssignmentsResponseModel) {
+
   }
 }

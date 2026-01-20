@@ -20,17 +20,21 @@ import { AuthService } from '../../../../auth/sign-in/auth.service';
 import { filter, map, mergeMap } from 'rxjs';
 import { StudentNavigationBarComponent } from '../../navigation-bars/student-navigation-bar/student-navigation-bar.component';
 import {InvitationsService} from "../../../../pages/invitations/invitations.service";
+import {Notifications} from "../../header/shared/components/notifications/notifications";
+import {StudentHeaderService} from './student-header.service';
+import {NotificationsResponseModel} from '../../../../core/models/notifications-response.model';
 
 @Component({
   selector: 'app-student-header',
-  imports: [
-    NgForOf,
-    NgIf,
-    RouterLink,
-    TranslatePipe,
-    NgClass,
-    RouterLinkActive,
-  ],
+    imports: [
+        NgForOf,
+        NgIf,
+        RouterLink,
+        TranslatePipe,
+        NgClass,
+        RouterLinkActive,
+        Notifications,
+    ],
   templateUrl: './student-header.component.html',
   styleUrl: './student-header.component.scss',
   animations: [
@@ -55,6 +59,7 @@ import {InvitationsService} from "../../../../pages/invitations/invitations.serv
   ],
 })
 export class StudentHeaderComponent {
+  private service: StudentHeaderService = inject(StudentHeaderService);
   private titleService: Title = inject(Title);
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -74,11 +79,13 @@ export class StudentHeaderComponent {
     { name: 'Turkish', value: 'tr-Tr' },
   ];
   invitations:any[]=[]
+
   constructor(
     private sanitizer: DomSanitizer,
     private signInService: AuthService,
     private invitationService:InvitationsService
   ) {
+    this.service.component = this;
     this.selectedLang = this.translate.currentLang;
     console.log();
     this.setLangsToShow();

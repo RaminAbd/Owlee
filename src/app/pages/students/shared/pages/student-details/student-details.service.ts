@@ -48,6 +48,15 @@ export class StudentDetailsService {
         if (!resp.data.systemLanguages)
           this.component.request.systemLanguages = [];
         console.log(this.component.request);
+
+        const validLanguageIds = new Set(
+          this.component.knownLangs.map((l) => l.id),
+        );
+
+        this.component.request.systemLanguages =
+          this.component.request.systemLanguages.filter((id) =>
+            validLanguageIds.has(id),
+          );
       });
   }
 
@@ -72,16 +81,20 @@ export class StudentDetailsService {
   updatePersonalInfo() {
     this.component.request.phoneNumber =
       this.component.request.phoneNumber.toString();
-    this.service
-      .Update(this.service.serviceUrl, this.component.request)
-      .subscribe((resp) => {
+    this.service.EditPersonalInfo(this.component.request).subscribe(
+      (resp) => {
         if (resp.succeeded) {
           this.message.showTranslatedSuccessMessage('Successfully updated!');
           this.getStudentInfo();
           this.component.isSubmitted = false;
           this.component.mainLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.component.isSubmitted = false;
+        this.component.mainLoading = false;
+      },
+    );
   }
 
   validate() {

@@ -1,0 +1,136 @@
+<div class="notif-block" (click)="showNotifications = !showNotifications">
+  <div class="icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="17"
+      viewBox="0 0 15 17"
+      fill="none"
+    >
+      <path
+        d="M10.1251 12.9444V13.8333C10.1251 14.5406 9.84856 15.2189 9.35628 15.719C8.86399 16.219 8.19632 16.5 7.50012 16.5C6.80393 16.5 6.13625 16.219 5.64397 15.719C5.15168 15.2189 4.87512 14.5406 4.87512 13.8333V12.9444M10.1251 12.9444H4.87512M10.1251 12.9444H13.2664C13.6015 12.9444 13.7695 12.9444 13.9051 12.8982C14.0327 12.8543 14.1486 12.7811 14.2437 12.6843C14.3389 12.5875 14.4108 12.4697 14.4537 12.34C14.5001 12.2013 14.5001 12.0307 14.5001 11.6876C14.5001 11.5373 14.5001 11.4627 14.4879 11.3907C14.4663 11.2561 14.4145 11.1283 14.3365 11.0173C14.2945 10.9578 14.242 10.9044 14.1379 10.7987L13.7966 10.452C13.7422 10.3967 13.699 10.331 13.6696 10.2587C13.6402 10.1864 13.6251 10.1089 13.6251 10.0307V6.72222C13.6251 5.90511 13.4667 5.096 13.1589 4.34108C12.8511 3.58617 12.3999 2.90023 11.8312 2.32245C11.2624 1.74466 10.5872 1.28633 9.84406 0.973638C9.10094 0.660942 8.30447 0.5 7.50012 0.5C6.69578 0.5 5.8993 0.660942 5.15619 0.973638C4.41307 1.28633 3.73785 1.74466 3.16909 2.32245C2.60033 2.90023 2.14917 3.58617 1.84136 4.34108C1.53355 5.096 1.37512 5.90511 1.37512 6.72222V10.0307C1.37518 10.1089 1.36006 10.1864 1.33063 10.2587C1.30121 10.331 1.25805 10.3967 1.20362 10.452L0.862372 10.7987C0.757372 10.9053 0.705747 10.9578 0.664622 11.0164C0.585896 11.1275 0.533493 11.2556 0.511497 11.3907C0.500122 11.4618 0.500122 11.5373 0.500122 11.6876C0.500122 12.0307 0.500122 12.2013 0.545622 12.34C0.588788 12.4699 0.660927 12.5878 0.756403 12.6846C0.851879 12.7815 0.968105 12.8546 1.096 12.8982C1.23162 12.9444 1.39875 12.9444 1.73387 12.9444H4.87512"
+        stroke="#13170C"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    @if (unreadCount > 0){
+    <div class="count">
+      <p>{{ unreadCount }}</p>
+    </div>
+    }
+  </div>
+</div>
+
+<p-drawer
+  [(visible)]="showNotifications"
+  [closable]="false"
+  position="right"
+  [transitionOptions]="'280ms cubic-bezier(0, 0, 0.2, 1)'"
+>
+  <!--  <ng-template #header>-->
+
+  <!--  </ng-template>-->
+  <div class="drawer-content">
+    <div class="heading">
+      <div class="name-close">
+        <div class="close" (click)="showNotifications = false">
+          <i class="pi pi-times"></i>
+        </div>
+        <p>{{ 'Notifications' | translate }}</p>
+      </div>
+      <div class="mark" (click)="readAll()">
+        <p>{{ 'Mark as read' | translate }}</p>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.99967 15.1667H5.99967C2.37967 15.1667 0.833008 13.62 0.833008 10V6.00004C0.833008 2.38004 2.37967 0.833374 5.99967 0.833374H9.99967C13.6197 0.833374 15.1663 2.38004 15.1663 6.00004V10C15.1663 13.62 13.6197 15.1667 9.99967 15.1667ZM5.99967 1.83337C2.92634 1.83337 1.83301 2.92671 1.83301 6.00004V10C1.83301 13.0734 2.92634 14.1667 5.99967 14.1667H9.99967C13.073 14.1667 14.1663 13.0734 14.1663 10V6.00004C14.1663 2.92671 13.073 1.83337 9.99967 1.83337H5.99967Z"
+            fill="#EF3838"
+          />
+          <path
+            d="M7.05297 10.3866C6.91964 10.3866 6.79297 10.3333 6.69964 10.2399L4.81297 8.35328C4.61964 8.15994 4.61964 7.83994 4.81297 7.64661C5.0063 7.45328 5.3263 7.45328 5.51964 7.64661L7.05297 9.17994L10.4796 5.75328C10.673 5.55994 10.993 5.55994 11.1863 5.75328C11.3796 5.94661 11.3796 6.26661 11.1863 6.45994L7.4063 10.2399C7.31297 10.3333 7.1863 10.3866 7.05297 10.3866Z"
+            fill="#EF3838"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="tab-heading">
+      <div class="tabs">
+        <div
+          class="item"
+          (click)="selectTab(1)"
+          [ngClass]="{ selected: selectedTab === 1 }"
+        >
+          <p>{{ 'All' | translate }}</p>
+        </div>
+        <div
+          class="item"
+          (click)="selectTab(2)"
+          [ngClass]="{ selected: selectedTab === 2 }"
+        >
+          <p>{{ 'Unread' | translate }}</p>
+          <div class="count">
+            <span>{{ unreadCount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      @if (notifications.length > 0) {
+      <div class="items">
+        @for (item of notifications; track item.id) {
+        <div
+          class="item unread"
+          [ngClass]="{ unread: !item.seen }"
+          (click)="readMessage(item)"
+        >
+          <div class="date-dot">
+            <p
+              class="date"
+              style="align-items: center; display: flex; gap: 3px"
+            >
+              {{ item.createdAt | date : "dd/MM/yyyy" }}
+              <span
+                class="dot"
+                style="
+                  display: inline-block;
+                  width: 3px;
+                  min-width: 3px;
+                  height: 3px;
+                  background: #60616c;
+                  border-radius: 100%;
+                "
+              ></span>
+              {{ item.createdAt | date : "HH:mm" }}
+            </p>
+            @if (!item.seen) {
+            <div class="dot"></div>
+            }
+          </div>
+          <div class="txt">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="empty">
+        <img src="empty.svg" alt="" />
+        <div class="txt">
+          <p>{{ 'No Notifications Yet' | translate }}</p>
+          <span
+            >{{ 'You don’t have any unread notifications yet' | translate
+            }}</span
+          >
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</p-drawer>

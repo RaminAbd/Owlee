@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy} from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { MultiSelect } from 'primeng/multiselect';
@@ -10,12 +10,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {LangChangeEvent, TranslatePipe} from '@ngx-translate/core';
+import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { KnownLanguagesResponseModel } from '../../pages/known-languages/shared/models/known-languages-response.model';
 import { EducatorSignupRequestModel } from '../sign-up/shared/models/educator-signup-request.model';
 import { AnimationItem } from 'lottie-web';
 import { StudentSignUpService } from './student-sign-up.service';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentSignupRequestModel } from './shared/models/student-signup-request.model';
 
 @Component({
@@ -50,8 +50,8 @@ export class StudentSignUpComponent implements OnDestroy {
     firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     langs: [''],
-    userName: [
-      { value: '', disabled: true },
+    username: [
+      { value: '', disabled: this.groupMemberId },
       [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)],
     ],
     phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
@@ -60,14 +60,18 @@ export class StudentSignUpComponent implements OnDestroy {
     password: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
   });
-  langSubscribtion:any
+  langSubscribtion: any;
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
-    this.service.getGroupMember();
-    this.langSubscribtion = this.service.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.service.getLanguages();
-    });
+    if (this.groupMemberId) {
+      this.service.getGroupMember();
+    }
+    this.langSubscribtion = this.service.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => {
+        this.service.getLanguages();
+      },
+    );
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -102,6 +106,6 @@ export class StudentSignUpComponent implements OnDestroy {
     }
   }
   ngOnDestroy() {
-    this.langSubscribtion.unsubscribe()
+    this.langSubscribtion.unsubscribe();
   }
 }

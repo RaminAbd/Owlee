@@ -18,6 +18,12 @@ import {
 import {
   LecturerFaqsComponent
 } from '../../../../pages/lecturer-help/shared/pages/lecturer-faqs/lecturer-faqs.component';
+import {
+  CourseAssignmentsComponent
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/course-assignments.component';
+import {
+  AssignmentDetailsComponent
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/pages/assignment-details/assignment-details.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -49,6 +55,16 @@ export class EducatorChildrenRoutes {
         {
           path: 'materials',
           component: GroupMaterialsComponent,
+          data: { title: 'Dashboard' },
+        },
+        {
+          path: 'assignments',
+          component: CourseAssignmentsComponent,
+          data: { title: 'Dashboard' },
+        },
+        {
+          path: 'assignments/:id',
+          component: AssignmentDetailsComponent,
           data: { title: 'Dashboard' },
         },
         {

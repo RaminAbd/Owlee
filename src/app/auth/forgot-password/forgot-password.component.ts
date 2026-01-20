@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { EducatorSignupRequestModel } from '../sign-up/shared/models/educator-signup-request.model';
 import { ForgotPasswordService } from './forgot-password.service';
@@ -21,6 +21,8 @@ import { ForgotPasswordService } from './forgot-password.service';
 export class ForgotPasswordComponent {
   private service: ForgotPasswordService = inject(ForgotPasswordService);
   private fb: FormBuilder = inject(FormBuilder);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  role = this.route.snapshot.paramMap.get('role') as string;
   firstStepForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
     code: ['', [Validators.required, Validators.pattern(/^.{4,}$/)]],
@@ -39,6 +41,11 @@ export class ForgotPasswordComponent {
 
   constructor() {
     this.service.component = this;
+    this.service.service =
+      this.role === 'student'
+        ? this.service.studentsService
+        : this.service.educatorsService;
+    console.log(this.role);
   }
   sendCode() {
     if (!this.request.email) {
@@ -61,17 +68,13 @@ export class ForgotPasswordComponent {
   secondAction() {
     this.secondStepSubmitted = true;
     if (this.secondStepForm.valid) {
-      if (
-        this.request.password !==
-        this.request.confirmPassword
-      ) {
+      if (this.request.password !== this.request.confirmPassword) {
         this.service.message.showTranslatedWarningMessage('Password mismatch');
       } else {
         this.loading = true;
-        this.service.forgotPassword()
+        this.service.forgotPassword();
       }
-    }
-    else {
+    } else {
       this.service.message.showTranslatedWarningMessage('Form is not valid');
     }
   }

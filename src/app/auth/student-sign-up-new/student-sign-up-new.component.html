@@ -1,0 +1,300 @@
+<div class="sign-up-wrapper">
+  <div class="form-side">
+    <a routerLink="/"  class="logo">
+      <img src="text-logo.svg" alt="" />
+    </a>
+    <div class="txt">
+      <h4>{{ 'Join Our Teaching Community: Inspire, Educate, Empower!' | translate }}</h4>
+      <p>{{ 'Sign Up and Share Your Knowledge!' | translate }}</p>
+    </div>
+    <div>
+      <div class="tabs" style="margin-top: 32px">
+        <div class="tab selected">
+          <p>{{ "Student" | translate }}</p>
+        </div>
+        <div class="tab" routerLink="/sign-up">
+          <p>{{ "Educator" | translate }}</p>
+        </div>
+      </div>
+
+      <div class="expanders" style="margin-top: 8px">
+        <form [formGroup]="firstStepForm" class="item expander-container">
+          <div class="heading" (click)="toggleExpander(0)">
+            <img
+              [src]="firstStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Account Setup" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[0]">
+            <div class="row">
+              <div class="input-item">
+                <label for="firstName">{{ "First name" | translate }}</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  [(ngModel)]="request.firstName"
+                  [class.invalid]="
+                    firstStepForm.get('firstName')?.hasError('pattern') ||
+                    (!request.firstName && firstStepSubmitted)
+                  "
+                />
+              </div>
+              <div class="input-item">
+                <label for="lastName">{{ "Last name" | translate }}</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  [(ngModel)]="request.lastName"
+                  [class.invalid]="
+                    firstStepForm.get('lastName')?.hasError('pattern') ||
+                    (!request.lastName && firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="courier">{{ "Known languages" | translate }}</label>
+                <p-multiSelect
+                  id="courier"
+                  [style]="{ width: '100%', height: '40px' }"
+                  [options]="knownLangs"
+                  optionLabel="name"
+                  optionValue="id"
+                  formControlName="langs"
+                  [(ngModel)]="request.systemLanguages"
+                  [ngClass]="{
+                    invalid:
+                      request.systemLanguages.length === 0 &&
+                      firstStepSubmitted,
+                  }"
+                  [filter]="true"
+                ></p-multiSelect>
+              </div>
+
+              <div class="input-item">
+                <label for="location">{{ "Location" | translate }}</label>
+                <input
+                  type="text"
+                  id="location"
+                  formControlName="location"
+                  [(ngModel)]="request.location"
+                  [class.invalid]="
+                    firstStepForm.get('location')?.hasError('pattern') ||
+                    (!request.location && firstStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-item">
+                <label for="phoneNumber"
+                >{{ "Phone number" | translate }}
+                </label>
+                <div class="mask">
+                  <p>+995</p>
+                  <input
+                    type="number"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                    [(ngModel)]="request.phoneNumber"
+                    [class.invalid]="
+                      firstStepForm.get('phoneNumber')?.hasError('pattern') ||
+                      (!firstStepForm.get('phoneNumber')?.value &&
+                        firstStepSubmitted)
+                    "
+                    (keydown)="onKeyDown($event)"
+                  />
+                </div>
+              </div>
+              <div class="input-item">
+                <label for="username">{{ "Email" | translate }}</label>
+                <input
+                  type="text"
+                  id="username"
+                  formControlName="username"
+                  [(ngModel)]="request.username"
+                  [class.invalid]="
+                    firstStepForm.get('username')?.hasError('pattern') ||
+                    (!firstStepForm.get('username')?.value &&
+                      firstStepSubmitted) ||
+                    firstStepForm.get('username')?.hasError('incorrect')
+                  "
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="password">{{ "Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="passVisible ? 'text' : 'password'"
+                    id="password"
+                    formControlName="password"
+                    [(ngModel)]="request.password"
+                    [class.invalid]="
+                      firstStepForm.get('password')?.hasError('pattern') ||
+                      (!firstStepForm.get('password')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-item">
+                <label for="repeat">{{ "Confirm password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="repeatVisible ? 'text' : 'password'"
+                    id="repeat"
+                    formControlName="confirmPassword"
+                    [(ngModel)]="request.confirmPassword"
+                    [class.invalid]="
+                      firstStepForm
+                        .get('confirmPassword')
+                        ?.hasError('pattern') ||
+                      (!firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted) ||
+                      (firstStepForm.get('password')?.value !==
+                        firstStepForm.get('confirmPassword')?.value &&
+                        firstStepSubmitted)
+                    "
+                  />
+                  <span>
+                    <i
+                      *ngIf="!repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="repeatVisible"
+                      (click)="repeatVisible = !repeatVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+<!--            <div class="row">-->
+<!--              <div class="input-block" style="display: flex; align-items: center; gap: 6px">-->
+<!--                <input-->
+<!--                  type="checkbox"-->
+<!--                  [(ngModel)]="request.privacyAccepted"-->
+<!--                  style="width: 20px; height: 20px"-->
+<!--                  id="privacy"-->
+<!--                  formControlName="privacyAccepted"-->
+<!--                  [class.invalid]="!request.privacyAccepted && firstStepSubmitted"-->
+<!--                />-->
+<!--                <label-->
+<!--                  for="privacy"-->
+<!--                  style="cursor: pointer"-->
+<!--                  [class.invalidLabel]="-->
+<!--                    !request.privacyAccepted && firstStepSubmitted-->
+<!--                  "-->
+<!--                >-->
+<!--                  <a routerLink="/educator-privacy" target="_blank">{{-->
+<!--                      "I have read and agree to the Privacy Policy" | translate-->
+<!--                    }}</a>-->
+<!--                </label>-->
+<!--              </div>-->
+<!--            </div>-->
+            <button type="button" (click)="validateFirstStep()">
+              {{ "Next" | translate }}
+            </button>
+          </div>
+        </form>
+        <div class="item expander-container">
+          <div class="heading" (click)="toggleExpander(1)">
+            <img
+              [src]="fourthStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Confirm email" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[1]">
+            <div class="row" style="align-items: flex-end">
+              <div class="input-item">
+                <label for="code">{{ "Verification code" | translate }}</label>
+                <input
+                  type="number"
+                  id="code"
+                  [(ngModel)]="request.verificationCode"
+                  [class.invalid]="
+                    (!request.verificationCode && fourthStepSubmitted) ||
+                    (request.verificationCode &&
+                      request.verificationCode.toString().length !== 4)
+                  "
+                />
+              </div>
+              <button (click)="sendCode()" style="height: 40px">
+                {{ "Send code" | translate }}
+              </button>
+            </div>
+            <div class="row">
+              <div
+                class="input-block"
+                style="display: flex; align-items: center; gap: 6px"
+              >
+                <input
+                  type="checkbox"
+                  [(ngModel)]="request.privacyAccepted"
+                  style="width: 20px; height: 20px"
+                  id="privacy"
+                  [class.invalid]="
+                    !request.privacyAccepted && fourthStepSubmitted
+                  "
+                />
+                <label
+                  for="privacy"
+                  style="cursor: pointer"
+                  [class.invalidLabel]="
+                    !request.privacyAccepted && fourthStepSubmitted
+                  "
+                >
+                  <a routerLink="/educator-privacy" target="_blank">{{
+                      "I have read and agree to the Privacy Policy" | translate
+                    }}</a>
+                </label>
+              </div>
+            </div>
+
+            <button type="button" (click)="validateFourthStep()">
+              {{ "Next" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="image-side">
+    <img
+      src="https://owleeblob.blob.core.windows.net/images/83dbaad3-8b7d-4b4d-8c35-6eafe735c203-Registration%20%282%29%20%281%29.png"
+      alt=""
+    />
+  </div>
+</div>
+<div class="loading-back" *ngIf="mainLoading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

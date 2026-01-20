@@ -5,7 +5,7 @@ import { AdminNavigationBarComponent } from '../../navigation-bars/admin-navigat
 @Component({
   selector: 'app-admin-header',
   imports: [HeaderComponent],
-  template: ` <app-header [links]="links"></app-header> `,
+  template: ` <app-header [links]="links" [showNotifications]="false"></app-header> `,
   styles: ``,
 })
 export class AdminHeaderComponent extends AdminNavigationBarComponent {}

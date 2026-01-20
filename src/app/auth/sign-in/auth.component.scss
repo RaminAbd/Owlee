@@ -45,9 +45,40 @@
 
         .heading {
           display: flex;
-          gap: 7px;
+          gap: 24px;
           align-items: center;
           cursor: pointer;
+          flex-direction: column;
+          .tabs {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            width: 100%;
+            .tab {
+              display: flex;
+              padding-bottom: 8px;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              border-bottom: 2px solid transparent;
+              p {
+                color: #90928d;
+                font-family: Inter;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+              }
+
+              &.selected {
+                border-bottom: 2px solid #3b3199;
+                p {
+                  color: #3b3199;
+                }
+              }
+            }
+          }
+
         }
         .inputs {
           display: flex;
@@ -286,5 +317,37 @@
     line-height: 17px;
     color: #4b4b4b;
     cursor: pointer;
+  }
+}
+.google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  color: #13170c !important;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 8px !important;
+  border: 1px solid #e0e0df !important;
+  height: 34px;
+  background: none !important;
+}
+.or{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  p{
+    color: #90928D;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 }

@@ -1,0 +1,243 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    //height: 380px;
+    .input-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      label {
+        color: #90928d;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 12px;
+        color: var(--text-color) !important;
+        font-weight: 600;
+        font-size: 14px;
+        //border: 1px solid var(--p-select-border-color) !important;
+        height: 48px !important;
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    button {
+      width: 147px;
+      height: 41px;
+      border-radius: 12px;
+      background: #f6f6f6;
+      color: #656668;
+      font-size: 14px;
+      font-weight: 600;
+      @media (max-width: 400px) {
+        width: auto;
+        flex: 1;
+      }
+      &.save {
+        background: var(--primary-color);
+        color: #fff;
+      }
+    }
+  }
+}
+::ng-deep .p-select,
+::ng-deep .p-multiselect {
+  border-radius: 12px !important;
+  height: 48px !important;
+}
+.file-input {
+  label.file-label {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--netural-80, #4e4e4e);
+    margin-top: 8px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1.5px solid var(--input-border);
+    text-align: center;
+
+    p {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    i {
+      margin: 0 auto;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+label.file-label {
+  height: 100%;
+  span {
+    display: flex;
+    height: 117px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 12px;
+    border: 1px dashed #c6e7ff;
+    background: rgba(198, 231, 255, 0.2);
+    width: 100%;
+    p {
+      color: rgba(19, 23, 12, 0.5);
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    i {
+      color: rgba(19, 23, 12, 0.5);
+      font-size: 16px;
+    }
+  }
+  .w-img {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    img {
+      height: 388px;
+      align-self: stretch;
+      aspect-ratio: 1 / 1;
+      border-radius: 100%;
+    }
+    span {
+      height: 53px;
+    }
+  }
+}
+.images {
+  .image {
+    p {
+      color: #4c4c54;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    span {
+      width: 4px;
+      height: 4px;
+      border-radius: 100%;
+      background: #4c4c54;
+    }
+  }
+}
+.st {
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 41px;
+  background: #e3e3e2;
+  height: 3px;
+  .filled {
+    height: 3px;
+    border-radius: 41px;
+    background: #3b3199;
+  }
+}
+.total {
+  display: flex;
+  padding: 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  margin-top: 8px;
+  background: rgba(226, 226, 227, 0.05);
+  p {
+    color: #4c4c54;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  span {
+    color: #0094ff;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    cursor: pointer;
+  }
+}
+::ng-deep .p-datepicker {
+  .p-inputtext {
+    height: 48px !important;
+    border-radius: 12px !important;
+  }
+}
+.input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.icon {
+  position: absolute;
+  right: 16px;
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+.selection {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  label {
+    color: #90928d;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+input {
+  background: none !important;
+  border: 1px solid #e0e0df !important;
+}

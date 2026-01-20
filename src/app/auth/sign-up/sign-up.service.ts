@@ -18,7 +18,6 @@ import { AccountsApiService } from '../shared/services/accounts.api.service';
 export class SignUpService {
   component: SignUpComponent;
   private service: EducatorsApiService = inject(EducatorsApiService);
-  private accountsService: AccountsApiService = inject(AccountsApiService);
   private langService: LanguageService = inject(LanguageService);
   private blob = inject(BlobService);
   private knownLangService = inject(KnownLanguagesApiService);
@@ -79,7 +78,7 @@ export class SignUpService {
   }
 
   private checkMailExists() {
-    this.accountsService
+    this.service
       .Exists(this.component.request.email)
       .subscribe((resp) => {
         if (resp.data.exists) {
@@ -92,7 +91,7 @@ export class SignUpService {
       });
   }
   checkMail() {
-    this.accountsService
+    this.service
       .Exists(this.component.request.email)
       .subscribe((resp) => {
         if (resp.data.exists) {
@@ -213,16 +212,15 @@ export class SignUpService {
     this.component.mainLoading = true;
     this.component.request.phoneNumber =
       this.component.request.phoneNumber.toString();
-    const request:any = structuredClone(this.component.request);
-    if(!this.component.request.profileImage.fileUrl){
+    const request: any = structuredClone(this.component.request);
+    if (!this.component.request.profileImage.fileUrl) {
       delete request.profileImage;
     }
     console.log(request);
     this.service.SignUp(request).subscribe((resp: any) => {
       if (resp.succeeded) {
         this.signIn();
-      }
-      else{
+      } else {
         this.component.mainLoading = false;
         this.message.showTranslatedErrorMessage(resp.message);
       }
@@ -230,12 +228,12 @@ export class SignUpService {
   }
 
   private signIn() {
-    const req: AuthRequestModel = {
-      userName: this.component.request.email,
+    const req: any = {
+      username: this.component.request.email,
       password: this.component.request.password,
       remember: false,
     };
-    this.authApiService.SignIn(req).subscribe((resp: any) => {
+    this.service.SignIn(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.message.showTranslatedErrorMessage(
           'The username or password is incorrect!',

@@ -39,7 +39,13 @@
           "configurations": {
             "production": {
               "budgets": [],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/core/environments/environment.ts",
+                  "with": "src/app/core/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

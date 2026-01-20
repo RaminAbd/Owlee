@@ -68,17 +68,10 @@ export class MaterialUpsertComponent implements OnDestroy {
     const file: any = input.files[0];
     file.fileMB = (file.size / 1024 / 1024).toFixed(2);
     this.request.fakeFile = file;
-    console.log(this.request.fakeFile);
     let total = this.subscription.maxFileStorage;
     let mb = this.request.fakeFile.fileMB;
     this.subscription.used = this.subscription.fileStorage + Number(mb);
     this.subscription.usedPercentage = (this.subscription.used / total) * 100;
-    // this.service.getFile(e, (resp: any) => {
-    //   this.request.file = resp.data;
-    //   this.request.file.fileLoading = false;
-    //   this.request.file.fakeFile = null;
-    //   this.request.file.fileSize = (file.size / 1024 / 1024).toFixed(2);
-    // });
   }
 
   getFileName(fileName: string): string {
@@ -101,6 +94,10 @@ export class MaterialUpsertComponent implements OnDestroy {
     );
   }
 
+  removeFile() {
+    this.request.fakeFile = undefined;
+  }
+
   save() {
     this.loading = true;
     this.service.save();
@@ -110,7 +107,5 @@ export class MaterialUpsertComponent implements OnDestroy {
     this.langSubscribtion.unsubscribe();
   }
 
-  removeFile() {
-    this.request.fakeFile = undefined;
-  }
+
 }

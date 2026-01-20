@@ -258,3 +258,33 @@
     color: red !important;
   }
 }
+.tabs {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  .tab {
+    display: flex;
+    padding-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    p {
+      color: #90928d;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    &.selected {
+      border-bottom: 2px solid #3b3199;
+      p {
+        color: #3b3199;
+      }
+    }
+  }
+}

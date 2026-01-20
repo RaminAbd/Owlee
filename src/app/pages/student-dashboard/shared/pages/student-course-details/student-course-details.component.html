@@ -1,7 +1,7 @@
 <div class="course-info">
   <div class="inner">
     <div class="image">
-<!--      <i class="pi pi-chevron-left" (click)="back()"></i>-->
+      <!--      <i class="pi pi-chevron-left" (click)="back()"></i>-->
       <img class="main-image" [src]="response.image" alt="" />
     </div>
     <div class="back">
@@ -22,12 +22,23 @@
       >
         <p>{{ "Materials" | translate }}</p>
       </div>
+      <div
+        class="item"
+        [ngClass]="{ selected: selectedTab === 3 }"
+        (click)="selectedTab = 3"
+      >
+        <p>{{ "Assignments" | translate }}</p>
+      </div>
     </div>
     <div class="about-tabs-content" *ngIf="selectedTab === 1">
       <div class="lang-ed">
         <div class="language">
           <label>{{ "Educator" | translate }}</label>
-          <p class="ed-link" (click)="showEducator = true" *ngIf="response.educator.firstName">
+          <p
+            class="ed-link"
+            (click)="showEducator = true"
+            *ngIf="response.educator.firstName"
+          >
             {{ response.educator.firstName + " " + response.educator.lastName }}
             <i class="pi pi-angle-right"></i>
           </p>
@@ -63,10 +74,32 @@
         </div>
       </div>
     </div>
+    <div class="assignments" *ngIf="selectedTab === 3">
+      <div class="list">
+        <div class="item" *ngFor="let item of assignments">
+          <div class="col name">
+            <p>{{ item.title }}</p>
+          </div>
+          <div class="btn">
+            <p [ngClass]="{ past: item.isPast }">
+              {{
+                item.isPast ? ("Past due" | translate) : ("Due" | translate)
+              }}:
+              {{ item.availableTo | date: "d" }}
+              {{ (item.availableTo | date: "MMMM")! | translate }}
+              {{ item.availableTo | date: "HH:mm" }}
+            </p>
+            <button [disabled]="item.isPast" routerLink="{{ item.id }}">
+              <i class="pi pi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div
     class="right"
-    [ngClass]="{ notMaterial: selectedTab === 1, material: selectedTab === 2 }"
+    [ngClass]="{ notMaterial: (selectedTab === 1 || selectedTab === 3), material: selectedTab === 2 }"
   >
     <div class="educator-block" *ngIf="showEducator && selectedTab === 1">
       <div class="educator-info">
@@ -176,12 +209,36 @@
             class="topic"
             *ngFor="let topic of filteredTopics; let i = index"
           >
-            <div class="top-name" style="cursor: pointer" (click)="toggleExpander(i)">
-              <svg *ngIf="expanderStates[i] === 'collapsed'" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M9.77989 0.22944C9.6389 0.08253 9.44772 4.28555e-07 9.24837 4.11127e-07C9.04902 3.937e-07 8.85783 0.0825299 8.71685 0.22944L4.99546 4.10846L1.27408 0.229439C1.13229 0.0866925 0.94238 0.00770633 0.745263 0.00949159C0.548145 0.0112768 0.359584 0.0936915 0.220195 0.238985C0.0808063 0.384278 0.00174188 0.580825 2.9066e-05 0.786293C-0.00168375 0.991761 0.0740923 1.18971 0.211038 1.33751L4.46394 5.77056C4.60492 5.91747 4.79611 6 4.99546 6C5.19481 6 5.386 5.91747 5.52698 5.77056L9.77988 1.33751C9.92082 1.19055 10 0.991267 10 0.783473C10 0.57568 9.92082 0.376394 9.77989 0.22944Z" fill="#13170C"/>
+            <div
+              class="top-name"
+              style="cursor: pointer"
+              (click)="toggleExpander(i)"
+            >
+              <svg
+                *ngIf="expanderStates[i] === 'collapsed'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+              >
+                <path
+                  d="M9.77989 0.22944C9.6389 0.08253 9.44772 4.28555e-07 9.24837 4.11127e-07C9.04902 3.937e-07 8.85783 0.0825299 8.71685 0.22944L4.99546 4.10846L1.27408 0.229439C1.13229 0.0866925 0.94238 0.00770633 0.745263 0.00949159C0.548145 0.0112768 0.359584 0.0936915 0.220195 0.238985C0.0808063 0.384278 0.00174188 0.580825 2.9066e-05 0.786293C-0.00168375 0.991761 0.0740923 1.18971 0.211038 1.33751L4.46394 5.77056C4.60492 5.91747 4.79611 6 4.99546 6C5.19481 6 5.386 5.91747 5.52698 5.77056L9.77988 1.33751C9.92082 1.19055 10 0.991267 10 0.783473C10 0.57568 9.92082 0.376394 9.77989 0.22944Z"
+                  fill="#13170C"
+                />
               </svg>
-              <svg *ngIf="expanderStates[i] === 'expanded'" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M0.220114 5.77056C0.361097 5.91747 0.552284 6 0.751633 6C0.950982 6 1.14217 5.91747 1.28315 5.77056L5.00454 1.89154L8.72592 5.77056C8.86771 5.91331 9.05762 5.99229 9.25474 5.99051C9.45186 5.98872 9.64042 5.90631 9.7798 5.76102C9.91919 5.61572 9.99826 5.41918 9.99997 5.21371C10.0017 5.00824 9.92591 4.81029 9.78896 4.66249L5.53606 0.22944C5.39508 0.0825303 5.20389 9.09877e-07 5.00454 8.75021e-07C4.80519 8.40166e-07 4.614 0.0825301 4.47302 0.22944L0.220115 4.66249C0.0791748 4.80945 -8.75755e-07 5.00873 -9.12086e-07 5.21653C-9.48418e-07 5.42432 0.0791746 5.62361 0.220114 5.77056Z" fill="#13170C"/>
+              <svg
+                *ngIf="expanderStates[i] === 'expanded'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+              >
+                <path
+                  d="M0.220114 5.77056C0.361097 5.91747 0.552284 6 0.751633 6C0.950982 6 1.14217 5.91747 1.28315 5.77056L5.00454 1.89154L8.72592 5.77056C8.86771 5.91331 9.05762 5.99229 9.25474 5.99051C9.45186 5.98872 9.64042 5.90631 9.7798 5.76102C9.91919 5.61572 9.99826 5.41918 9.99997 5.21371C10.0017 5.00824 9.92591 4.81029 9.78896 4.66249L5.53606 0.22944C5.39508 0.0825303 5.20389 9.09877e-07 5.00454 8.75021e-07C4.80519 8.40166e-07 4.614 0.0825301 4.47302 0.22944L0.220115 4.66249C0.0791748 4.80945 -8.75755e-07 5.00873 -9.12086e-07 5.21653C-9.48418e-07 5.42432 0.0791746 5.62361 0.220114 5.77056Z"
+                  fill="#13170C"
+                />
               </svg>
               <p>{{ topic.name }}</p>
             </div>

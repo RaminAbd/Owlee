@@ -38,6 +38,9 @@ export class StudentsService {
 
   tableActionHandler(e: any) {
     switch (e.type) {
+      case 3:
+        this.delete(e.data.id);
+        break;
       case 4:
         this.router.navigate(['/main/admin/students/', e.data.id]);
         break;
@@ -46,6 +49,11 @@ export class StudentsService {
         break;
 
     }
+  }
+  delete(id: string) {
+    this.service.Delete(this.service.serviceUrl, id).subscribe((resp) => {
+      this.getAll();
+    })
   }
 
   private changeStatus(data:any) {

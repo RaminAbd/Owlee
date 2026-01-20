@@ -87,3 +87,12 @@ h3{
 ::ng-deep .p-inputtext:enabled:hover {
   height: 36px !important;
 }
+.students-actions{
+  display: flex;
+  align-items: center;
+  button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

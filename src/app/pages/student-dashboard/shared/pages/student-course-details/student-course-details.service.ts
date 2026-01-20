@@ -5,6 +5,12 @@ import { StudentCourseDetailsComponent } from './student-course-details.componen
 import { EducatorsApiService } from '../../../../educators/shared/services/educators.api.service';
 import { KnownLanguagesApiService } from '../../../../known-languages/shared/services/known-languages.api.service';
 import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-material.model';
+import {
+  HomeWorksApiService
+} from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/services/homeworks.api.service';
+import {
+  AssignmentsResponseModel
+} from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +19,7 @@ export class StudentCourseDetailsService {
   component: StudentCourseDetailsComponent;
   private service: CoursesApiService = inject(CoursesApiService);
   public translate: TranslateService = inject(TranslateService);
-  private educatorsService: EducatorsApiService = inject(EducatorsApiService);
+  private assignmentsService: HomeWorksApiService = inject(HomeWorksApiService);
   private langService: KnownLanguagesApiService = inject(
     KnownLanguagesApiService,
   );
@@ -66,5 +72,20 @@ export class StudentCourseDetailsService {
     );
 
     return finded ? finded.icon : '';
+  }
+
+
+  getAllAssignments(){
+    const req = {
+      CourseId: this.component.id,
+      studentId:localStorage.getItem('userId') as string,
+    }
+    this.assignmentsService.GetAllForStudent(req).subscribe((resp) => {
+      console.log(resp.data)
+      this.component.assignments = resp.data.map((item:AssignmentsResponseModel)=>({
+        ...item,
+        isPast: new Date(item.availableTo).getTime() < Date.now(),
+      }));
+    })
   }
 }

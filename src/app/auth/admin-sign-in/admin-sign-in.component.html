@@ -1,0 +1,87 @@
+<div class="sign-up-wrapper">
+  <div class="form-side">
+    <a routerLink="/" class="logo">
+      <img src="text-logo.svg" alt="" />
+    </a>
+    <div class="txt">
+      <h4>
+        {{
+          "Join Our Teaching Community: Inspire, Educate, Empower!" | translate
+        }}
+      </h4>
+      <p>{{ "Sign In and Share Your Knowledge!" | translate }}</p>
+    </div>
+    <div>
+      <div class="expanders">
+        <form
+          [formGroup]="requestForm"
+          (submit)="Action()"
+          class="item expander-container"
+        >
+          <div class="heading">
+            <p>{{ "Account" | translate }}</p>
+          </div>
+          <div class="inputs">
+            <div class="row">
+              <div class="input-item">
+                <label for="username">{{ "Username" | translate }}</label>
+                <input
+                  type="text"
+                  formControlName="userName"
+                  id="username"
+                  [class.invalid]="validateField('userName')"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-item">
+                <label for="password">{{ "Password" | translate }}</label>
+                <div class="block">
+                  <input
+                    [type]="passVisible ? 'text' : 'password'"
+                    id="password"
+                    formControlName="password"
+                    [class.invalid]="validateField('password')"
+                  />
+                  <span>
+                    <i
+                      *ngIf="!passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye"
+                    ></i>
+                    <i
+                      *ngIf="passVisible"
+                      (click)="passVisible = !passVisible"
+                      class="pi pi-eye-slash"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="remember" style="flex: 1">
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  name="rememberMe"
+                  formControlName="remember"
+                />
+                <label for="rememberMe">{{ "Remember me" | translate }}</label>
+              </div>
+            </div>
+            <button>
+              {{ "Login" | translate
+              }}<i class="pi pi-spin pi-spinner" *ngIf="signinLoading"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="image-side">
+    <img
+      src="https://owleeblob.blob.core.windows.net/images/83dbaad3-8b7d-4b4d-8c35-6eafe735c203-Registration%20%282%29%20%281%29.png"
+      alt=""
+    />
+  </div>
+</div>
