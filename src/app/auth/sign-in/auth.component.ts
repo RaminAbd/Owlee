@@ -45,7 +45,7 @@ export class AuthComponent {
   signInGoogle() {
     const role = this.selectedTab === 1 ? 'student' : 'educator';
     const clientId =
-      'http://572911678890-0s7ks10um64d2e6heb7e2ibra51r2i2j.apps.googleusercontent.com/';
+      '572911678890-0s7ks10um64d2e6heb7e2ibra51r2i2j.apps.googleusercontent.com';
     const redirectUri = environment.webUrl + 'auth/callback';
     const scope = 'openid email profile';
     const nonce = crypto.randomUUID(); // or Math.random().toString(36).substring(2)
