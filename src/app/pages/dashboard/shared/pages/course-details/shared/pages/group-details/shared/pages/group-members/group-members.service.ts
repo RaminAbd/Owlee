@@ -22,6 +22,7 @@ export class GroupMembersService {
     this.service.GetMembersByGroup(this.component.groupId).subscribe((resp) => {
       this.component.members = resp.data;
       this.component.filteredList = structuredClone(resp.data);
+      console.log(this.component.members, "members")
       this.checkSlots();
     });
   }

@@ -12,6 +12,12 @@
     </div>
     <div class="selection">
       <div class="left">
+        <p-checkbox
+          *ngIf="enableSelection"
+          [(ngModel)]="allSelected"
+          [binary]="true"
+          (ngModelChange)="allSelectionChange()"
+        />
         <p-toggleswitch
           [(ngModel)]="enableSelection"
           (ngModelChange)="changeSelectionState()"
@@ -44,9 +50,13 @@
       (cdkDropListDropped)="dropTopic($event)"
       style="display: flex; flex-direction: column; gap: 30px"
     >
-      <div class="item" *ngFor="let topic of topics" cdkDrag>
+      <div class="item" *ngFor="let topic of topics; let i = index" cdkDrag>
         <div class="heading">
-          <i class="pi pi-chevron-down"></i>
+          @if (expanderStates[i] === "collapsed") {
+            <i class="pi pi-chevron-down" (click)="toggleExpander(i)"></i>
+          } @else {
+            <i class="pi pi-chevron-up" (click)="toggleExpander(i)"></i>
+          }
           <div
             class="naming"
             *ngIf="enableSelection"
@@ -86,10 +96,12 @@
           </div>
         </div>
         <div
-          class="sub-topics"
+          class="sub-topics expander-content"
+          [ngClass]="{ hidden: expanderStates[i] === 'collapsed' }"
           cdkDropList
           [cdkDropListData]="topic.subtopics"
           (cdkDropListDropped)="dropSubTopic($event, topic)"
+          [@expanderAnimation]="expanderStates[i]"
         >
           <div class="sub-item" *ngFor="let sub of topic.subtopics" cdkDrag>
             <div class="sub-inner">
@@ -264,7 +276,9 @@
                     <div class="d-btns">
                       <button
                         class="menu-btn"
-                        (click)="op3.toggle($event); handleTopicMatTools(topic, mat)"
+                        (click)="
+                          op3.toggle($event); handleTopicMatTools(topic, mat)
+                        "
                       >
                         <img src="dots.svg" alt="" />
                       </button>
@@ -419,5 +433,15 @@
         </div>
       </div>
     </p-popover>
+  </div>
+</div>
+<div class="loading-back" *ngIf="loadingRemoval">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
   </div>
 </div>

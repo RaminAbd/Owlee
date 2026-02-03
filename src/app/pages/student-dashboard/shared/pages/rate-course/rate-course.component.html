@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <div class="inner">
+    <h3>{{ "What do you think about this course?" | translate }}</h3>
+    <p>
+      <span>{{
+        "Your feedback is essential in helping us better understand your needs, allowing the educators to tailor our services to suit you more effectively."
+          | translate
+      }}</span>
+      <span>{{ "Your rating is anonymous " | translate }}</span>
+    </p>
+    <div class="rating">
+      <p-rating [(ngModel)]="value" />
+    </div>
+    <p class="point">{{ "Good" | translate }}!</p>
+    <button (click)="submit()">{{ "Submit now" | translate }}</button>
+    <p class="skip" (click)="skip()">{{ "Skip" | translate }}</p>
+  </div>
+</div>

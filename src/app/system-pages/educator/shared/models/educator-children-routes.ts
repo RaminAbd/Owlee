@@ -18,6 +18,11 @@ import { CourseAssignmentsComponent } from '../../../../pages/dashboard/shared/p
 import { AssignmentDetailsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/pages/assignment-details/assignment-details.component';
 import { EducatorPlansComponent } from '../../../../pages/educator-plans/educator-plans.component';
 import { EducatorSubscriptionsComponent } from '../../../../pages/educator-plans/shared/pages/educator-subscriptions/educator-subscriptions.component';
+import { EducatorPackagesComponent } from '../../../../pages/educator-plans/shared/pages/educator-packages/educator-packages.component';
+import { EducatorPaymentsComponent } from '../../../../pages/educator-plans/shared/pages/educator-payments/educator-payments.component';
+import {
+  MemberDetailsComponent
+} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/pages/member-details/member-details.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -69,6 +74,11 @@ export class EducatorChildrenRoutes {
             {
               path: 'members',
               component: GroupMembersComponent,
+              data: { title: 'Dashboard' },
+            },
+            {
+              path: 'members/:id',
+              component: MemberDetailsComponent,
               data: { title: 'Dashboard' },
             },
             {
@@ -124,8 +134,17 @@ export class EducatorChildrenRoutes {
           component: EducatorSubscriptionsComponent,
           data: { title: 'Plans' },
         },
+        {
+          path: 'packages',
+          component: EducatorPackagesComponent,
+          data: { title: 'Plans' },
+        },
+        {
+          path: 'payments',
+          component: EducatorPaymentsComponent,
+          data: { title: 'Plans' },
+        },
         { path: '', redirectTo: 'subscriptions', pathMatch: 'full' },
-
       ],
     },
 

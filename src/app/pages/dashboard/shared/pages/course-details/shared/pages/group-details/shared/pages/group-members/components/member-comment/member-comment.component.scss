@@ -74,6 +74,10 @@
     .item{
       padding: 16px 0;
       border-bottom: 1px solid #E3E3E2;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap:6px;
       p{
         color: #13170C;
         font-family: Inter;
@@ -81,6 +85,11 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+      }
+      span{
+        color: #90928d;
+        font-size: 12px;
+        font-weight: 500;
       }
     }
   }

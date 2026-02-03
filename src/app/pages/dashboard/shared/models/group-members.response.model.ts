@@ -5,4 +5,5 @@ export class GroupMembersResponseModel {
   accepted: boolean;
   fullName: string;
   username:string;
+  studentId: string;
 }

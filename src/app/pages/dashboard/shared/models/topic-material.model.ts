@@ -14,4 +14,5 @@ export class TopicMaterialModel {
   fakeFile: any;
   availableFrom:any;
   availableTo:any
+  fileLoading:boolean
 }

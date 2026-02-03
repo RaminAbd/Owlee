@@ -4,7 +4,7 @@ import { GroupMembersResponseModel } from '../../../../../../../../models/group-
 import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Dialog} from 'primeng/dialog';
 
 @Component({
@@ -17,6 +17,7 @@ import {Dialog} from 'primeng/dialog';
     NgStyle,
     NgIf,
     Dialog,
+    RouterLink,
   ],
   templateUrl: './group-members.component.html',
   styleUrl: './group-members.component.scss',

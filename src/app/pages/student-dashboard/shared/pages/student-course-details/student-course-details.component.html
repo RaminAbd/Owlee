@@ -55,12 +55,67 @@
     <div class="materials-tabs-content" *ngIf="selectedTab === 2">
       <div class="topic" *ngFor="let topic of response.topics">
         <p class="top-name">{{ topic.name }}</p>
-        <div class="sub-topics">
+        <div class="sub-topics" *ngIf="topic.subtopics.length > 0">
           <div class="sub-item" *ngFor="let sub of topic.subtopics" #subTopic>
             <p class="sub-name">{{ sub.name }}</p>
             <div class="mats">
               <div class="mat-item" *ngFor="let mat of sub.files">
-                <a href="{{ mat.url }}" target="_blank" class="mat-name">
+                <div class="mat-name" *ngIf="mat.file.fileUrl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="19"
+                    viewBox="0 0 15 19"
+                    fill="none"
+                  >
+                    <path
+                      d="M8.0617 0.750488H4.32891C2.64145 0.750488 1.79862 0.750488 1.27431 1.30393C0.75 1.85738 0.75 2.74704 0.75 4.52827V13.9727C0.75 15.7539 0.75 16.6436 1.27431 17.197C1.79862 17.7505 2.64145 17.7505 4.32891 17.7505H9.69726C11.3847 17.7505 12.2276 17.7505 12.7519 17.197C13.2762 16.6436 13.2762 15.7539 13.2762 13.9727V6.25471C13.2762 5.86938 13.2762 5.67577 13.2082 5.50293C13.1402 5.3301 13.0113 5.19221 12.7519 4.91927L9.32685 1.30393C9.06738 1.03004 8.93854 0.894044 8.7748 0.822266C8.61017 0.750488 8.42675 0.750488 8.0617 0.750488Z"
+                      stroke="#5A4BEA"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M7.90771 0.750488V4.52827C7.90771 5.41888 7.90772 5.86371 8.16987 6.14043C8.43202 6.41715 8.85344 6.41715 9.69717 6.41715H13.2761"
+                      stroke="#5A4BEA"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+
+                  {{ mat.name }}
+                  <svg
+                    *ngIf="!mat.fileLoading"
+                    style="cursor: pointer"
+                    (click)="downloadFile(mat)"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="17"
+                    viewBox="0 0 14 17"
+                    fill="none"
+                  >
+                    <path
+                      d="M7 1H9V7H11.5L7 11.5M7 1H5V7H2.5L7 11.5"
+                      fill="#13170C"
+                      stroke="#13170C"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M1 16H13"
+                      stroke="#13170C"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <i class="pi pi-spin pi-spinner" *ngIf="mat.fileLoading"></i>
+                </div>
+
+                <a
+                  href="{{ mat.url }}"
+                  target="_blank"
+                  class="mat-name"
+                  *ngIf="!mat.file.fileUrl"
+                >
                   <img src="mat-link.svg" alt="" />
                   {{ mat.name }}
                 </a>
@@ -72,6 +127,109 @@
             </div>
           </div>
         </div>
+        <div class="sub-topics" *ngIf="topic.files.length > 0">
+          <div class="sub-item" #subTopic>
+            <div class="mats">
+              <div class="mat-item" *ngFor="let mat of topic.files">
+                <div class="mat-name" *ngIf="mat.file.fileUrl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="19"
+                    viewBox="0 0 15 19"
+                    fill="none"
+                  >
+                    <path
+                      d="M8.0617 0.750488H4.32891C2.64145 0.750488 1.79862 0.750488 1.27431 1.30393C0.75 1.85738 0.75 2.74704 0.75 4.52827V13.9727C0.75 15.7539 0.75 16.6436 1.27431 17.197C1.79862 17.7505 2.64145 17.7505 4.32891 17.7505H9.69726C11.3847 17.7505 12.2276 17.7505 12.7519 17.197C13.2762 16.6436 13.2762 15.7539 13.2762 13.9727V6.25471C13.2762 5.86938 13.2762 5.67577 13.2082 5.50293C13.1402 5.3301 13.0113 5.19221 12.7519 4.91927L9.32685 1.30393C9.06738 1.03004 8.93854 0.894044 8.7748 0.822266C8.61017 0.750488 8.42675 0.750488 8.0617 0.750488Z"
+                      stroke="#5A4BEA"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M7.90771 0.750488V4.52827C7.90771 5.41888 7.90772 5.86371 8.16987 6.14043C8.43202 6.41715 8.85344 6.41715 9.69717 6.41715H13.2761"
+                      stroke="#5A4BEA"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+
+                  {{ mat.name }}
+                  <svg
+                    *ngIf="!mat.fileLoading"
+                    style="cursor: pointer"
+                    (click)="downloadFile(mat)"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="17"
+                    viewBox="0 0 14 17"
+                    fill="none"
+                  >
+                    <path
+                      d="M7 1H9V7H11.5L7 11.5M7 1H5V7H2.5L7 11.5"
+                      fill="#13170C"
+                      stroke="#13170C"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M1 16H13"
+                      stroke="#13170C"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <i class="pi pi-spin pi-spinner" *ngIf="mat.fileLoading"></i>
+                </div>
+
+                <a
+                  href="{{ mat.url }}"
+                  target="_blank"
+                  class="mat-name"
+                  *ngIf="!mat.file.fileUrl"
+                >
+                  <img src="mat-link.svg" alt="" />
+                  {{ mat.name }}
+                </a>
+                <div class="mat-lang">
+                  <img [src]="mat.icon" alt="" />
+                  <p>{{ mat.language }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="topic">
+        <p class="top-name">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="14"
+            viewBox="0 0 15 14"
+            fill="none"
+          >
+            <path
+              d="M7.5 0.5C7.56649 0.500063 7.64001 0.517191 7.72656 0.56543C7.76464 0.586664 7.79692 0.614593 7.82422 0.65918L7.85059 0.711914L9.49316 4.52148L9.6123 4.7959L9.91016 4.82129L14.1377 5.18359C14.2752 5.20354 14.3354 5.24006 14.3584 5.25977C14.4049 5.29954 14.4461 5.3549 14.4775 5.43945C14.5022 5.50573 14.5068 5.56875 14.4912 5.63965C14.4839 5.6727 14.4667 5.71199 14.4258 5.75879L14.376 5.80859L11.1631 8.52148L10.9277 8.71973L10.999 9.01953L11.9629 13.0645C11.9838 13.1539 11.9715 13.2016 11.9561 13.2334C11.9171 13.3135 11.8645 13.3757 11.7969 13.4268C11.746 13.4652 11.6844 13.4916 11.5967 13.499C11.5526 13.5028 11.5071 13.4976 11.4551 13.4746L11.4004 13.4443L11.3887 13.4375L7.75293 11.2979L7.5 11.1484L7.24609 11.2979L3.61035 13.4375L3.59961 13.4443C3.52306 13.4918 3.46122 13.5038 3.40137 13.499C3.31481 13.492 3.25355 13.4661 3.20312 13.4277C3.13445 13.3755 3.08198 13.3123 3.04297 13.2324C3.02799 13.2017 3.01465 13.1538 3.03613 13.0625L4 9.01953L4.07129 8.71973L3.83594 8.52148L0.623047 5.80859C0.54513 5.73967 0.518645 5.68337 0.508789 5.63867C0.492988 5.56694 0.498216 5.50407 0.522461 5.43848C0.553118 5.35556 0.594085 5.30042 0.641602 5.25977C0.665328 5.23953 0.724424 5.203 0.858398 5.18359L5.08984 4.82129L5.3877 4.7959L5.50586 4.52148L7.14844 0.711914L7.1748 0.65918C7.20207 0.614603 7.23443 0.586669 7.27246 0.56543C7.35917 0.517101 7.43342 0.5 7.5 0.5Z"
+              stroke="#90928D"
+            />
+          </svg>
+          {{ "Course rating" | translate }}
+        </p>
+        <button routerLink="rate" class="rate-btn">
+          {{ "Rate this course" | translate }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="6"
+            height="10"
+            viewBox="0 0 6 10"
+            fill="none"
+          >
+            <path
+              d="M0.22944 0.220115C0.0825298 0.361098 4.52696e-07 0.552285 4.43982e-07 0.751634C4.35268e-07 0.950983 0.0825298 1.14217 0.22944 1.28315L4.10846 5.00454L0.229439 8.72592C0.0866929 8.86771 0.00770654 9.05762 0.00949199 9.25474C0.0112774 9.45186 0.0936918 9.64042 0.238985 9.7798C0.384278 9.91919 0.580826 9.99826 0.786294 9.99997C0.991762 10.0017 1.18971 9.92591 1.33751 9.78896L5.77056 5.53606C5.91747 5.39508 6 5.20389 6 5.00454C6 4.80519 5.91747 4.614 5.77056 4.47302L1.33751 0.220115C1.19055 0.0791754 0.991267 -2.18939e-07 0.783473 -2.28022e-07C0.57568 -2.37105e-07 0.376394 0.0791754 0.22944 0.220115Z"
+              fill="#13170C"
+            />
+          </svg>
+        </button>
       </div>
     </div>
     <div class="assignments" *ngIf="selectedTab === 3">
@@ -99,7 +257,10 @@
   </div>
   <div
     class="right"
-    [ngClass]="{ notMaterial: (selectedTab === 1 || selectedTab === 3), material: selectedTab === 2 }"
+    [ngClass]="{
+      notMaterial: selectedTab === 1 || selectedTab === 3,
+      material: selectedTab === 2,
+    }"
   >
     <div class="educator-block" *ngIf="showEducator && selectedTab === 1">
       <div class="educator-info">
@@ -249,6 +410,16 @@
                 (click)="goToSubTopic(sub)"
               >
                 <p class="sub-name">{{ sub.name }}</p>
+                <div class="sub-files">
+                  <div class="file" *ngFor="let file of sub.files">
+                    <p>{{ file.name }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="sub-files topic-files">
+                <div class="file" *ngFor="let file of topic.files">
+                  <p>{{ file.name }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -269,9 +440,70 @@
         </div>
         <div class="files">
           <div class="item" *ngFor="let file of filteredFiles">
-            <a href="{{ file.url }}" target="_blank" class="mat-name">
-              <img src="mat-link.svg" alt="" />
-              {{ file.name }}
+            <div
+              *ngIf="file.file.fileUrl"
+              class="mat-name"
+              (click)="downloadFile(file)"
+            >
+              <div class="name">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="19"
+                  viewBox="0 0 15 19"
+                  fill="none"
+                >
+                  <path
+                    d="M8.0617 0.750488H4.32891C2.64145 0.750488 1.79862 0.750488 1.27431 1.30393C0.75 1.85738 0.75 2.74704 0.75 4.52827V13.9727C0.75 15.7539 0.75 16.6436 1.27431 17.197C1.79862 17.7505 2.64145 17.7505 4.32891 17.7505H9.69726C11.3847 17.7505 12.2276 17.7505 12.7519 17.197C13.2762 16.6436 13.2762 15.7539 13.2762 13.9727V6.25471C13.2762 5.86938 13.2762 5.67577 13.2082 5.50293C13.1402 5.3301 13.0113 5.19221 12.7519 4.91927L9.32685 1.30393C9.06738 1.03004 8.93854 0.894044 8.7748 0.822266C8.61017 0.750488 8.42675 0.750488 8.0617 0.750488Z"
+                    stroke="#5A4BEA"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M7.90771 0.750488V4.52827C7.90771 5.41888 7.90772 5.86371 8.16987 6.14043C8.43202 6.41715 8.85344 6.41715 9.69717 6.41715H13.2761"
+                    stroke="#5A4BEA"
+                    stroke-width="1.5"
+                  />
+                </svg>
+                {{ file.name }}
+              </div>
+
+              <svg
+                *ngIf="!file.fileLoading"
+                style="cursor: pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="17"
+                viewBox="0 0 14 17"
+                fill="none"
+              >
+                <path
+                  d="M7 1H9V7H11.5L7 11.5M7 1H5V7H2.5L7 11.5"
+                  fill="#13170C"
+                  stroke="#13170C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1 16H13"
+                  stroke="#13170C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <i class="pi pi-spin pi-spinner" *ngIf="file.fileLoading"></i>
+            </div>
+            <a
+              *ngIf="!file.file.fileUrl"
+              href="{{ file.url }}"
+              target="_blank"
+              class="mat-name"
+            >
+              <span class="name">
+                <img src="mat-link.svg" alt="" />
+                {{ file.name }}
+              </span>
             </a>
           </div>
         </div>

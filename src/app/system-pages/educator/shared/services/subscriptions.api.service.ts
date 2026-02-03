@@ -30,4 +30,8 @@ export class SubscriptionsApiService extends BaseCrudApiService {
   getByEducatorId(id: string) {
     return this.get(this.serviceUrl + 'Get/', id);
   }
+
+  ApplySale(req: any) {
+    return this.post(this.serviceUrl + 'ApplySale', req);
+  }
 }

@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class EducatorsComponent {
   private service: EducatorsService = inject(EducatorsService);
-  private router: Router = inject(Router);
   educators: EducatorsResponseModel[] = [];
   cols: any[] = [];
   constructor() {
@@ -21,7 +20,8 @@ export class EducatorsComponent {
     this.service.setCols();
   }
 
-  getInfo(e: any) {
-    this.router.navigate(['/main/admin/educators/', e.data.id]);
+  tableActionHandler(e: any) {
+    this.service.tableActionHandler(e);
   }
+
 }

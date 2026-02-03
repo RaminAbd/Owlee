@@ -10,7 +10,9 @@ import { LanguageService } from '../../../../../core/services/language.service';
 import { EducatorSignupRequestModel } from '../../../../../auth/sign-up/shared/models/educator-signup-request.model';
 import { EducatorDetailsComponent } from './educator-details.component';
 import { CoursesApiService } from '../../../../admin-courses/shared/services/courses.api.service';
-import {FileModel} from '../../../../../core/models/File.model';
+import { FileModel } from '../../../../../core/models/File.model';
+import { SubscriptionPackageApiService } from '../../../../subscription-package/shared/services/subscription-package.api.service';
+import { SubscriptionsApiService } from '../../../../../system-pages/educator/shared/services/subscriptions.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +31,12 @@ export class EducatorDetailsService {
   private langService: LanguageService = inject(LanguageService);
   private coursesService: CoursesApiService = inject(CoursesApiService);
   constructor() {}
-
+  private packagesService: SubscriptionPackageApiService = inject(
+    SubscriptionPackageApiService,
+  );
+  private subsService: SubscriptionsApiService = inject(
+    SubscriptionsApiService,
+  );
   getDashboard() {
     const req = {
       educatorId: this.component.id,
@@ -260,5 +267,23 @@ export class EducatorDetailsService {
       password: this.component.request.password,
     };
     this.authService.ChangePassword(req).subscribe((resp: any) => {});
+  }
+
+  getSubscription() {
+    this.subsService.getByEducatorId(this.component.id).subscribe((resp) => {
+      console.log(resp.data);
+      this.component.subscription = resp.data;
+      this.component.subscription.usedPercentage =
+        (this.component.subscription.fileStorage /
+          this.component.subscription.maxFileStorage) *
+        100;
+    });
+  }
+
+  getActiveSubscription() {
+    this.packagesService.GetActive(this.component.id).subscribe((resp) => {
+      this.component.selectedPackage = resp.data;
+      console.log(resp.data);
+    });
   }
 }

@@ -3,11 +3,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MemberCommentService } from './member-comment.service';
-import {NgForOf} from '@angular/common';
+import {DatePipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-member-comment',
-  imports: [ReactiveFormsModule, TranslatePipe, FormsModule, NgForOf],
+  imports: [ReactiveFormsModule, TranslatePipe, FormsModule, NgForOf, DatePipe],
   templateUrl: './member-comment.component.html',
   styleUrl: './member-comment.component.scss',
 })

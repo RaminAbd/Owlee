@@ -251,4 +251,8 @@ export class CalendarComponent {
       }
     });
   }
+
+  getStudents(){
+
+  }
 }

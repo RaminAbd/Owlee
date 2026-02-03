@@ -1,0 +1,285 @@
+::ng-deep {
+  .p-dialog-header {
+    display: none !important;
+  }
+  .p-dialog-content,
+  .p-dialog .p-dialog-content:last-of-type {
+    padding: 32px 24px !important;
+  }
+}
+.wrapper {
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    h2 {
+      color: #0A0A0A;
+      text-align: center;
+      font-family: Inter;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px; /* 120% */
+      letter-spacing: 0.396px;
+    }
+    h3 {
+      color: #4A5565;
+      text-align: center;
+      font-family: Inter;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px; /* 155.556% */
+      letter-spacing: -0.439px;
+    }
+  }
+
+  .counts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
+  .items {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 25px;
+    width: 100%;
+    @media (max-width: 769px) {
+      flex-direction: column;
+      width: 100%;
+    }
+    .item {
+      display: flex;
+      max-width: 329px;
+      flex: 1;
+      padding: 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      //gap: 20px;
+      border-radius: 12px;
+      border: 1px solid #e3e3e2;
+      background: #fff;
+      box-shadow: 1px 6px 70.9px -16px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+      @media (max-width: 769px) {
+        width: 100%;
+        max-width: 100%;
+      }
+      .name {
+        width: 100%;
+        text-align: center;
+        p {
+          color: #0A0A0A;
+          text-align: center;
+          font-family: Inter;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 32px; /* 133.333% */
+          letter-spacing: 0.07px;
+        }
+      }
+      .descr {
+        margin-top: 8px;
+        width: 100%;
+        text-align: center;
+        p {
+          color: #4A5565;
+          text-align: center;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.15px;
+        }
+      }
+      .price {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        span{
+          color: #6A7282;
+          text-align: center;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.15px;
+        }
+        p{
+          color: #0A0A0A;
+          text-align: center;
+          font-family: Inter;
+          font-size: 36px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 40px; /* 111.111% */
+          letter-spacing: 0.369px;
+          span{
+            color: #4A5565;
+            text-align: center;
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px; /* 150% */
+            letter-spacing: -0.312px;
+          }
+        }
+
+      }
+      .features {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8.4px;
+        margin-top: 25px;
+        label{
+          margin-bottom: 6px;
+          color: #364153;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.15px;
+        }
+        .f-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          align-self: stretch;
+          p {
+            color: #364153;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.15px;
+          }
+        }
+      }
+      .btn {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 18px;
+        align-self: stretch;
+        width: 100%;
+        border-top: 1px solid #e3e3e2;
+        margin-top: 30px;
+
+        button {
+          display: flex;
+          padding: 14px 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          align-self: stretch;
+          border-radius: 12px;
+          border: 1px solid #e3e3e2;
+          color: #13170c;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+
+      &.selectedItem {
+        border-radius: 14px;
+        border: 1.875px solid #009245;
+        background: rgba(255, 255, 255, 0.00);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+
+      }
+    }
+  }
+  .switcher {
+    display: inline-flex;
+    background-color: #f3f3f3;
+    border-radius: 50px;
+    padding: 5px;
+    width: auto;
+    height: 50px;
+    .item {
+      border: none;
+      border-radius: 50px;
+      padding: 6px 20px;
+      //background-color: transparent;
+
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        color: #004c24;
+        font-size: 17px;
+      }
+      &.selected {
+        background-color: #009245;
+        p {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .btns{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 32px;
+    width: 100%;
+    button{
+      width: 147px;
+      height: 41px;
+      border-radius: 12px;
+      background: #F6F6F6;
+      color: #656668;
+      font-size: 14px;
+      font-weight: 600;
+      @media (max-width: 400px) {
+        width: auto;
+        flex: 1;
+      }
+      &.save{
+        background: var(--primary-color);
+        color: #FFF;
+      }
+    }
+  }
+}
+::ng-deep{
+
+}
+label.invalidLabel{
+  a{
+    color: red !important;
+  }
+}

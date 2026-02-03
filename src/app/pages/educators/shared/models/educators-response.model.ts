@@ -9,4 +9,5 @@ export class EducatorsResponseModel {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  createdAt: any;
 }

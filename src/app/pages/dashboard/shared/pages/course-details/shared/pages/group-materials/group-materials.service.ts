@@ -43,6 +43,10 @@ export class GroupMaterialsService {
     this.topicsService.GetAllByCourse(req).subscribe((resp) => {
       this.component.topics = resp.data;
       this.component.topics.forEach((x) => (x.subTopic = new SubtopicModel()));
+      this.component.expanderStates = Array.from(
+        { length: this.component.topics.length },
+        () => 'expanded',
+      );
     });
   }
 
@@ -205,17 +209,29 @@ export class GroupMaterialsService {
   removeItems() {
     let topics = this.component.topics.filter((item) => item.selected);
     if (topics.length > 0) {
-      this.removeTopics(topics);
+      this.removeTopics(topics, () => {
+        this.checkSubTopics();
+      });
+    } else {
+      this.checkSubTopics();
     }
+  }
 
+  checkSubTopics() {
     let subTopics: any[] = [];
     this.component.topics.forEach((item) => {
       subTopics.push(...item.subtopics.filter((item) => item.selected));
     });
     if (subTopics.length > 0) {
-      this.removeSubTopics(subTopics);
+      this.removeSubTopics(subTopics, () => {
+        this.checkMaterials();
+      });
+    } else {
+      this.checkMaterials();
     }
+  }
 
+  checkMaterials() {
     let materials: any[] = [];
     this.component.topics.forEach((item) => {
       item.subtopics.forEach((sub) => {
@@ -226,29 +242,49 @@ export class GroupMaterialsService {
 
     if (materials.length > 0) {
       this.removeMaterials(materials);
+    } else {
+      this.getAllTopics();
+      this.component.loadingRemoval = false;
+      this.component.allSelected = false;
+      this.component.enableSelection = false;
+      console.log('select yoxdu');
     }
   }
 
-  private removeTopics(topics: TopicRequestModel[]) {
+  private removeTopics(topics: TopicRequestModel[], callback: any) {
     const req = {
       educatorId: localStorage.getItem('userId') as string,
       ids: topics.map((x) => x.id),
     };
     console.log(req);
-    this.topicsService.DeleteTopics(req).subscribe((resp) => {
-      this.getAllTopics();
-    });
+    this.topicsService.DeleteTopics(req).subscribe(
+      (resp) => {
+        callback(resp);
+      },
+      (error) => {
+        this.component.loadingRemoval = false;
+        this.component.allSelected = false;
+        this.component.enableSelection = false;
+      },
+    );
   }
 
-  private removeSubTopics(subTopics: any[]) {
+  private removeSubTopics(subTopics: any[], callBack: any) {
     const req = {
       educatorId: localStorage.getItem('userId') as string,
       ids: subTopics.map((x) => x.id),
     };
     console.log(req, 'subs');
-    this.topicsService.DeleteSubtopics(req).subscribe((resp) => {
-      this.getAllTopics();
-    });
+    this.topicsService.DeleteSubtopics(req).subscribe(
+      (resp) => {
+        callBack(resp);
+      },
+      (error) => {
+        this.component.loadingRemoval = false;
+        this.component.allSelected = false;
+        this.component.enableSelection = false;
+      },
+    );
   }
 
   private removeMaterials(materials: any[]) {
@@ -257,8 +293,18 @@ export class GroupMaterialsService {
       ids: materials.map((x) => x.id),
     };
     console.log(req, 'mats');
-    this.topicsService.DeleteFiles(req).subscribe((resp) => {
-      this.getAllTopics();
-    });
+    this.topicsService.DeleteFiles(req).subscribe(
+      (resp) => {
+        this.getAllTopics();
+        this.component.loadingRemoval = false;
+        this.component.allSelected = false;
+        this.component.enableSelection = false;
+      },
+      (error) => {
+        this.component.loadingRemoval = false;
+        this.component.allSelected = false;
+        this.component.enableSelection = false;
+      },
+    );
   }
 }

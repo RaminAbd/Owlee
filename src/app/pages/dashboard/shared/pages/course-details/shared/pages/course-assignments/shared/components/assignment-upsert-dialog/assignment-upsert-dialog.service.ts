@@ -71,7 +71,6 @@ export class AssignmentUpsertDialogService {
     if (
       !this.component.request.title ||
       !this.component.request.description ||
-      this.component.request.files.length === 0 ||
       !this.component.request.availableFrom ||
       !this.component.request.availableTo
     ) {

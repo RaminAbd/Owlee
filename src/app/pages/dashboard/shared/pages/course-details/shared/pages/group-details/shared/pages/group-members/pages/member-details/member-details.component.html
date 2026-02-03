@@ -1,0 +1,92 @@
+<div class="wrapper">
+  <div class="personal row">
+    <div class="col">
+      <label>{{ "First name" | translate }}</label>
+      <p>{{ student.firstName }}</p>
+    </div>
+    <div class="col">
+      <label>{{ "Last name" | translate }}</label>
+      <p>{{ student.firstName }}</p>
+    </div>
+    <div class="col">
+      <label>{{ "Phone number" | translate }}</label>
+      <p>{{ student.phoneNumber }}</p>
+    </div>
+    <div class="col">
+      <label>{{ "Email" | translate }}</label>
+      <p>{{ student.username }}</p>
+    </div>
+  </div>
+  <div class="tabs">
+    <div
+      class="tab"
+      [ngClass]="{ selected: selectedTab === 1 }"
+      (click)="selectedTab = 1"
+    >
+      <p>{{ "Attendances" | translate }}</p>
+    </div>
+    <div
+      class="tab"
+      [ngClass]="{ selected: selectedTab === 2 }"
+      (click)="selectedTab = 2"
+    >
+      <p>{{ "Payments" | translate }}</p>
+    </div>
+  </div>
+  <div class="payment-content" *ngIf="selectedTab == 2">
+    <div class="heading">
+      <div class="search">
+        <p>{{ payments.length + " " + ("payments" | translate) }}</p>
+        <div class="search-block">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="{{ 'Search' | translate }}..."
+            (input)="searchByName()"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <div class="l-heading">
+        <div class="col">
+          <p>{{'Name' | translate}}</p>
+        </div>
+        <div class="col">
+          <p>{{'Student' | translate}}</p>
+        </div>
+        <div class="col">
+          <p>{{'Date' | translate}}</p>
+        </div>
+        <div class="col">
+          <p>{{'Status' | translate}}</p>
+        </div>
+      </div>
+      <div class="l-body">
+        <div
+          class="row"
+          *ngFor="let item of filteredList"
+        >
+          <div class="col name">
+            <p>{{ item.course }}</p>
+          </div>
+          <div class="col">
+            <p>{{item.student}}</p>
+          </div>
+          <div class="col">
+            <p>{{ (item.dueDate | date:'MMMM')! | translate }}
+              {{ item.dueDate | date: "d, yyyy" }}</p>
+          </div>
+          <div class="col btn">
+            <button *ngIf="!item.paid" [disabled]="item.loading" (click)="confirm(item)">
+              {{'Mark paid'}}
+            </button>
+            <p *ngIf="item.paid">{{'Paid' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

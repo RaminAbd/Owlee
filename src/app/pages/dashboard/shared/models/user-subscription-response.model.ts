@@ -9,4 +9,5 @@ export class UserSubscriptionResponseModel {
   maxFileStorage: number
   used: number;
   usedPercentage: number
+  adminSale:number
 }

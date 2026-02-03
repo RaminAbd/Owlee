@@ -10,9 +10,11 @@
     height: calc(100svh - 81px);
     overflow: auto;
     overflow-x: hidden;
-    padding-bottom: 50px;
+    //padding-bottom: 50px;
     //padding: 54px 74px 54px 65px;
-
+    @media (max-width: 1024px){
+      height: calc(100vh - 86px);
+    }
   }
 }
 .hasNavBar{

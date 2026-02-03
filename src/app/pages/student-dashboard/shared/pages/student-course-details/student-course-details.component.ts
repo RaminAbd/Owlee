@@ -143,4 +143,9 @@ export class StudentCourseDetailsComponent implements OnDestroy {
   getAssignment(item: AssignmentsResponseModel) {
 
   }
+
+  downloadFile(mat: any) {
+    mat.fileLoading = true
+    this.service.downloadFile(mat)
+  }
 }

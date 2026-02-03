@@ -136,10 +136,8 @@ export class MaterialUpsertService {
   addFiles(req: any) {
     this.service.AddFiles(req).subscribe(
       (resp) => {
-        if (resp.succeeded) {
-          this.component.ref.close(true);
-          this.component.loading = false;
-        }
+        this.component.ref.close(true);
+        this.component.loading = false;
       },
       (error) => {
         this.component.loading = false;

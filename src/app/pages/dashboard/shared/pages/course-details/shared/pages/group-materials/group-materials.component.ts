@@ -20,6 +20,15 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Checkbox } from 'primeng/checkbox';
 import { ToggleSwitch } from 'primeng/toggleswitch';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
 @Component({
   selector: 'app-group-materials',
   imports: [
@@ -31,9 +40,30 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
     Checkbox,
     ToggleSwitch,
     NgIf,
+    NgClass,
+    LottieComponent,
   ],
   templateUrl: './group-materials.component.html',
   styleUrl: './group-materials.component.scss',
+  animations: [
+    trigger('expanderAnimation', [
+      state(
+        'collapsed',
+        style({
+          maxHeight: '0px',
+          opacity: 0,
+        }),
+      ),
+      state(
+        'expanded',
+        style({
+          maxHeight: '*',
+          opacity: 1,
+        }),
+      ),
+      transition('collapsed <=> expanded', [animate('0.3s ease-out')]),
+    ]),
+  ],
 })
 export class GroupMaterialsComponent {
   private confirmationService: ConfirmationService =
@@ -51,6 +81,9 @@ export class GroupMaterialsComponent {
   selectedMaterial: TopicMaterialModel = new TopicMaterialModel();
   course: CourseRequestModel = new CourseRequestModel();
   enableSelection: boolean = false;
+  expanderStates: string[] = [];
+  allSelected: boolean = false;
+  loadingRemoval: boolean = false;
   constructor() {
     this.service.component = this;
     this.service.getAllTopics();
@@ -237,6 +270,7 @@ export class GroupMaterialsComponent {
         });
       });
     });
+    this.checkAllSelection();
   }
 
   topicSelectionChange(topic: TopicRequestModel) {
@@ -249,16 +283,23 @@ export class GroupMaterialsComponent {
     topic.files.forEach((file: any) => {
       file.selected = topic.selected;
     });
+    this.checkAllSelection();
   }
 
   subTopicSelectionChange(topic: TopicRequestModel, sub: SubtopicModel) {
     let selectedSubs = topic.subtopics.filter(
       (sub: SubtopicModel) => sub.selected,
     );
-    topic.selected = selectedSubs.length === topic.subtopics.length;
+    let selectedMaterials = topic.files.filter(
+      (sub: TopicMaterialModel) => sub.selected,
+    );
+    topic.selected =
+      selectedSubs.length === topic.subtopics.length &&
+      selectedMaterials.length === topic.files.length;
     sub.files.forEach((file) => {
       file.selected = sub.selected;
     });
+    this.checkAllSelection();
   }
 
   fileSelectionChange(
@@ -273,6 +314,7 @@ export class GroupMaterialsComponent {
     );
     sub.selected = selectedMaterials.length === sub.files.length;
     this.subTopicSelectionChange(topic, sub);
+    this.checkAllSelection();
   }
 
   topicFileSelectionChange(
@@ -285,11 +327,26 @@ export class GroupMaterialsComponent {
     let selectedMaterials = topic.files.filter(
       (sub: TopicMaterialModel) => sub.selected,
     );
-    topic.selected = selectedMaterials.length === topic.files.length;
-    // this.subTopicSelectionChange(topic, sub);
+
+    let selectedSubs = topic.subtopics.filter(
+      (sub: SubtopicModel) => sub.selected,
+    );
+    if (
+      selectedMaterials.length === topic.files.length &&
+      selectedSubs.length === topic.subtopics.length
+    )
+      topic.selected = true;
+    else topic.selected = false;
+    this.checkAllSelection();
+  }
+
+  checkAllSelection() {
+    let selectedTopics = this.topics.filter((topic: any) => topic.selected);
+    this.allSelected = this.topics.length == selectedTopics.length;
   }
 
   removeItems() {
+    this.loadingRemoval = true;
     this.service.removeItems();
   }
 
@@ -297,4 +354,38 @@ export class GroupMaterialsComponent {
     this.service.openTopicMaterialDialog(topic);
   }
 
+  toggleExpander(index: number) {
+    this.expanderStates[index] =
+      this.expanderStates[index] === 'collapsed' ? 'expanded' : 'collapsed';
+  }
+
+  allSelectionChange() {
+    this.topics.forEach((topic, index) => {
+      topic.selected = this.allSelected;
+      topic.files.forEach((file) => {
+        file.selected = this.allSelected;
+      });
+      topic.subtopics.forEach((sub: SubtopicModel) => {
+        sub.selected = this.allSelected;
+        sub.files.forEach((file) => {
+          file.selected = this.allSelected;
+        });
+      });
+    });
+  }
+
+  private animationItem: AnimationItem | undefined;
+  mainLoading: boolean = false;
+  options: AnimationOptions = {
+    path: 'Animation.json',
+    loop: true,
+    autoplay: false,
+  };
+
+  animationCreated(animationItem: AnimationItem): void {
+    this.animationItem = animationItem;
+    if (this.animationItem) {
+      this.animationItem.play();
+    }
+  }
 }

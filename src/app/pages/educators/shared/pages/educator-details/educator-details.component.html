@@ -14,6 +14,13 @@
     >
       <p>{{ "Change information" | translate }}</p>
     </div>
+    <div
+      class="item"
+      [ngClass]="{ selected: selectedTab === 3 }"
+      (click)="selectedTab = 3"
+    >
+      <p>{{ "Subscriptions" | translate }}</p>
+    </div>
   </div>
   <div class="courses-wrapper" *ngIf="selectedTab === 1">
     <div class="counts">
@@ -436,6 +443,99 @@
       <button type="button" (click)="validateFirstStep()">
         {{ "Save" | translate }}
       </button>
+    </div>
+  </div>
+
+  <div class="subs-wrapper" *ngIf="selectedTab === 3">
+    <div class="item">
+      <div class="icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="10"
+          viewBox="0 0 12 10"
+          fill="none"
+        >
+          <path
+            d="M10.1116 0.432883C10.29 0.193389 10.5457 0.0405836 10.8241 0.00699366C11.1025 -0.0265963 11.3818 0.0616821 11.6025 0.253037C11.7108 0.346114 11.8012 0.46234 11.8684 0.594844C11.9356 0.727348 11.9781 0.873442 11.9935 1.02449C12.0089 1.17554 11.9968 1.32848 11.958 1.47427C11.9192 1.62007 11.8545 1.75575 11.7676 1.87331L6.12265 9.5667C6.02818 9.69382 5.91095 9.7978 5.77839 9.87209C5.64582 9.94637 5.5008 9.98933 5.35249 9.99825C5.20419 10.0072 5.05583 9.98186 4.91679 9.92392C4.77776 9.86597 4.65108 9.77666 4.54477 9.66162L0.31106 5.04892L0.237496 4.96232C-0.101801 4.50938 -0.0777808 3.84162 0.31106 3.41865C0.699901 2.99568 1.31394 2.96904 1.7298 3.33872L1.80937 3.41865L5.21736 7.11547L10.1267 0.437878L10.1116 0.432883Z"
+            fill="white"
+          />
+        </svg>
+      </div>
+      <div class="cols">
+        <div class="col left">
+          <div class="row">
+            <div class="current">
+              <p>{{ "Current plan" | translate }}</p>
+            </div>
+            <div class="sale">
+              <p>{{'Sale' | translate}}: {{ subscription.adminSale }} %</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>{{ selectedPackage.name }}</p>
+          </div>
+          <div class="date">
+            <p>{{ "Next payment" | translate }}:</p>
+            <span>{{ subscription.expireDate | date: "dd/MM/yyyy" }}</span>
+          </div>
+        </div>
+        <div class="col right">
+          <div class="price">
+            <p>{{ selectedPackage.price }}₾</p>
+            <span>/ {{ "month" | translate }}</span>
+          </div>
+          <div class="items">
+            <div class="f-item">
+              <img src="d-check.svg" alt="" />
+              <p>
+                {{ selectedPackage.courseAmount }} {{ "Courses" | translate }}
+              </p>
+            </div>
+            <div class="f-item">
+              <img src="d-check.svg" alt="" />
+              <p>
+                {{ selectedPackage.groupPerCourse }}
+                {{ "Groups per course" | translate }}
+              </p>
+            </div>
+            <div class="f-item">
+              <img src="d-check.svg" alt="" />
+              <p>
+                {{ selectedPackage.peoplePerGroup }}
+                {{ "Students per group" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="statistics">
+        <div class="row">
+          <div class="left">
+            <p>{{ "Storage usage" | translate }}</p>
+            <span></span>
+            <p *ngIf="subscription.usedPercentage">
+              {{ subscription.usedPercentage.toFixed(2) }}
+            </p>
+          </div>
+          <div class="right">
+            <p>
+              {{ subscription.fileStorage }}GB /
+              {{ subscription.maxFileStorage }}GB
+            </p>
+            <span (click)="openSalesDialog()">
+              {{ "Apply sale" | translate }}</span
+            >
+          </div>
+        </div>
+        <div class="st">
+          <div
+            class="filled"
+            [ngStyle]="{ width: subscription.usedPercentage + '%' }"
+          ></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,1 +1,16 @@
-<p>educator-plans works!</p>
+<div class="wrapper">
+  <div class="content">
+    <div class="tabs">
+      <a class="item" routerLink="subscriptions" [routerLinkActive]="['selected']">
+        <p>{{ "Subscriptions" | translate }}</p>
+      </a>
+      <a class="item" routerLink="packages" [routerLinkActive]="['selected']">
+        <p>{{ "Packages" | translate }}</p>
+      </a>
+      <a class="item" routerLink="payments" [routerLinkActive]="['selected']">
+        <p>{{ "Payments" | translate }}</p>
+      </a>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

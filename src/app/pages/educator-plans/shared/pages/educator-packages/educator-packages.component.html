@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <div class="heading">
+    <h2>{{ "Upgrade plan" | translate }}</h2>
+    <h3>{{ "Upgrade to access" | translate }}</h3>
+  </div>
+
+  <div class="switcher">
+    <div
+      class="item"
+      (click)="selectedPackageType = 1"
+      [ngClass]="{ selected: selectedPackageType === 1 }"
+    >
+      <p>{{ "Monthly" | translate }}</p>
+    </div>
+    <div
+      class="item"
+      (click)="selectedPackageType = 2"
+      [ngClass]="{ selected: selectedPackageType === 2 }"
+    >
+      <p>{{ "Annually" | translate }}</p>
+    </div>
+  </div>
+  <div class="items">
+    <div
+      class="item"
+      *ngFor="let item of subscriptionPackages"
+      [ngClass]="{ selectedItem: item.id === selectedPackage.id }"
+    >
+      <div class="name">
+        <p>{{ item.name }}</p>
+      </div>
+      <div class="descr">
+        <p>
+          {{ "Ideal for" | translate }}
+          {{ item.maxCapacity }} {{ "students" | translate }}.
+        </p>
+      </div>
+      <div class="price">
+        <p>
+          {{ selectedPackageType === 1 ? item.price : item.annualPrice }}
+          <span>Gel</span>
+        </p>
+        <span>{{'per month' | translate}}</span>
+      </div>
+
+      <div class="features">
+        <label>{{'Private courses' | translate}}</label>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.groupPerCourse }} {{ "Groups per course" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>
+            {{ item.peoplePerGroup }} {{ "Students per group" | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="btn">
+        <button (click)="selectedPackage = item">
+          {{
+            item.id === activePackage.id
+              ? ("Current plan" | translate)
+              : ("Upgrade" | translate)
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="warning" *ngIf="errorMessage" style="width: 100%">
+    <p style="color: orange">* {{ errorMessage | translate }}</p>
+  </div>
+  <div class="row" style="display: flex; width: 100%; align-items: center">
+    <div
+      class="input-block"
+      style="display: flex; align-items: center; gap: 6px"
+    >
+      <input
+        type="checkbox"
+        [(ngModel)]="privacyAccepted"
+        style="width: 20px; height: 20px"
+        id="privacy"
+        [class.invalid]="!privacyAccepted && isSubmitted"
+      />
+      <label
+        for="privacy"
+        style="cursor: pointer"
+        [ngClass]="{ invalidLabel: !privacyAccepted && isSubmitted }"
+      >
+        <a routerLink="/educator-privacy" target="_blank">{{
+          "I have read and agree to the Privacy Policy" | translate
+        }}</a>
+      </label>
+    </div>
+  </div>
+  <div class="btns">
+    <!--    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>-->
+    <button class="save" (click)="upgrade()">
+      {{
+        selectedPackage.id === activePackage.id
+          ? ("Continue" | translate)
+          : ("Upgrade plan" | translate)
+      }}
+    </button>
+  </div>
+</div>
+<div class="loading-back" *ngIf="loading">
+  <div class="animation">
+    <ng-lottie
+      [options]="options"
+      width="500px"
+      height="500px"
+      (animationCreated)="animationCreated($event)"
+    />
+  </div>
+</div>

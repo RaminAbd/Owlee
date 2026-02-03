@@ -10,10 +10,18 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { EducatorDetailsService } from './educator-details.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelect } from 'primeng/multiselect';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardResponseModel } from '../../../../dashboard/shared/models/dashboard-response.model';
 import { DashboardCourseModel } from '../../../../dashboard/shared/models/dashboard-course.model';
+import { UserSubscriptionResponseModel } from '../../../../dashboard/shared/models/user-subscription-response.model';
+import { SubscriptionPackageModel } from '../../../../subscription-package/shared/models/subscription-package.model';
+import {
+  TopicUpsertComponent
+} from '../../../../dashboard/shared/pages/course-details/shared/pages/group-materials/shared/components/topic-upsert/topic-upsert.component';
+import {DialogService} from 'primeng/dynamicdialog';
+import {LanguageService} from '../../../../../core/services/language.service';
+import {ApplySaleDialogComponent} from '../../components/apply-sale-dialog/apply-sale-dialog.component';
 
 @Component({
   selector: 'app-educator-details',
@@ -27,13 +35,17 @@ import { DashboardCourseModel } from '../../../../dashboard/shared/models/dashbo
     TranslatePipe,
     NgClass,
     FormsModule,
+    DatePipe,
+    NgStyle,
   ],
   templateUrl: './educator-details.component.html',
   styleUrl: './educator-details.component.scss',
 })
 export class EducatorDetailsComponent {
   private service: EducatorDetailsService = inject(EducatorDetailsService);
+  public dialogService: DialogService = inject(DialogService);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private langService: LanguageService = inject(LanguageService);
   private router: Router = inject(Router);
   id: string = this.route.snapshot.paramMap.get('id') as string;
   private fb: FormBuilder = inject(FormBuilder);
@@ -57,13 +69,18 @@ export class EducatorDetailsComponent {
   langSubscribtion: any;
 
   response: DashboardResponseModel = new DashboardResponseModel();
+
+  subscription: UserSubscriptionResponseModel =
+    new UserSubscriptionResponseModel();
+  selectedPackage: SubscriptionPackageModel = new SubscriptionPackageModel();
   constructor() {
     this.service.component = this;
     this.service.getLanguages();
     this.service.getEducatorInfo();
     this.service.initMonths();
     this.service.getDashboard();
-
+    this.service.getSubscription();
+    this.service.getActiveSubscription();
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.service.getLanguages();
@@ -156,5 +173,22 @@ export class EducatorDetailsComponent {
   }
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
+  }
+
+  openSalesDialog() {
+    const ref = this.dialogService.open(ApplySaleDialogComponent, {
+      header: this.langService.getByKey('Sale'),
+      width: '460px',
+      data: this.id,
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.service.getSubscription();
+        this.service.getActiveSubscription();
+      }
+    });
   }
 }

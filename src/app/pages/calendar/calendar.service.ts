@@ -480,4 +480,10 @@ export class CalendarService {
         }
       });
   }
+
+  getStudentsByCourse(id:string){
+    this.coursesService.GetStudents(id).subscribe((resp) => {
+      console.log(resp.data)
+    })
+  }
 }

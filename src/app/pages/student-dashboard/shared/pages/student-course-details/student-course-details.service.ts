@@ -11,6 +11,7 @@ import {
 import {
   AssignmentsResponseModel
 } from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
+import {FileExporter} from '../../../../../core/extensions/download-zip';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class StudentCourseDetailsService {
       .GetAllByLang(this.langService.serviceUrl, this.translate.currentLang)
       .subscribe((resp) => {
         this.component.languages = resp.data;
+        console.log(this.component.languages, "languges");
         this.getCourse();
       });
   }
@@ -42,6 +44,7 @@ export class StudentCourseDetailsService {
     this.service.GetDetailed(req).subscribe((resp) => {
       this.component.filteredFiles = [];
       this.component.allFiles = [];
+
       this.component.response = resp.data;
       this.component.response.topics.forEach((topic) => {
         topic.subtopics.forEach((subtopic) => {
@@ -49,8 +52,14 @@ export class StudentCourseDetailsService {
             ...item,
             icon: this.getLanguageIcon(item),
           }));
+
           this.component.allFiles.push(...subtopic.files);
         });
+        topic.files = topic.files.map((item) => ({
+          ...item,
+          icon: this.getLanguageIcon(item),
+        }));
+        this.component.allFiles.push(...topic.files);
       });
 
       this.component.filteredTopics = structuredClone(
@@ -86,6 +95,12 @@ export class StudentCourseDetailsService {
         ...item,
         isPast: new Date(item.availableTo).getTime() < Date.now(),
       }));
+    })
+  }
+
+  downloadFile(mat: any) {
+    FileExporter.downloadFilesIndividually(mat.file.fileUrl).then(()=>{
+      mat.fileLoading = false;
     })
   }
 }

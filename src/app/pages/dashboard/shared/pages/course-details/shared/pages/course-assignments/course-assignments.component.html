@@ -131,6 +131,11 @@
         </div>
         <p>{{ "Details" | translate }}</p>
       </div>
+
+      <div class="item delete" (click)="delete(); op.toggle($event)">
+        <div class="icon"><img src="delete.svg" alt="" /></div>
+        <p>{{ "Delete" | translate }}</p>
+      </div>
     </div>
   </div>
 </p-popover>
