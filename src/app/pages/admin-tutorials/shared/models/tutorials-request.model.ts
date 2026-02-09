@@ -5,4 +5,5 @@ export class TutorialsRequestModel {
   title: MultilingualNameModel = new MultilingualNameModel();
   body: MultilingualNameModel = new MultilingualNameModel();
   url:string
+  type: any;
 }

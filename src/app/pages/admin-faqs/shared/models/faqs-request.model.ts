@@ -4,4 +4,5 @@ export class FaqsRequestModel {
   id: string;
   title: MultilingualNameModel = new MultilingualNameModel();
   body: MultilingualNameModel = new MultilingualNameModel();
+  faqType: number;
 }

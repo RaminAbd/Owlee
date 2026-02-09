@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="list">
+      <div class="item" *ngFor="let item of selectedStudents">
+        <p>{{item.firstName + ' ' + item.lastName}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="btns">
+    <button class="save" (click)="ref.close()">{{ "Close" | translate }}</button>
+  </div>
+</div>

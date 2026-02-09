@@ -412,20 +412,18 @@ button[disabled] {
   line-height: 56px; /* 280% */
 }
 .p-accordioncontent-content {
-  padding: 18px 0 0!important;
+  padding: 18px 0 0 !important;
   border: none !important;
-  p{
-    color: #90928D !important;
+  p {
+    color: #90928d !important;
     font-size: 14px !important;
     font-style: normal;
     font-weight: 500 !important;
     line-height: normal;
     white-space: pre-line !important;
-
   }
-
 }
-.p-accordionpanel:last-child > .p-accordionheader{
+.p-accordionpanel:last-child > .p-accordionheader {
   border-radius: 0 !important;
 }
 button.search-button {
@@ -531,38 +529,111 @@ p-calendar {
 }
 
 .p-toast-message-error {
+  border-radius: 10px !important;
+  border-top: 0.625px solid #DC2626 !important;
+  border-right: 0.625px solid #DC2626 !important;
+  border-bottom: 0.625px solid #DC2626 !important;
+  border-left: 5.5px solid #DC2626 !important;
+  background: #fff !important;
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.02) !important;
   .p-toast-close-button {
-    color: var(--p-toast-error-color) !important;
+    color: #9CA3AF;
   }
-  .p-toast-detail {
-    color: var(--p-toast-error-color) !important;
+  .p-toast-summary{
+    color: #171717 !important;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 21px; /* 150% */
+    letter-spacing: -0.29px;
+  }
+  .p-toast-detail{
+    color: #3F3F3F !important;
+    font-family: Inter;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 18.2px; /* 140% */
+    letter-spacing: -0.076px;
+  }
+  .p-toast-message-text{
+    gap:3px !important;
   }
 }
 
 .p-toast-message-success {
+  border-radius: 10px !important;
+  border-top: 0.625px solid #009245 !important;
+  border-right: 0.625px solid #009245 !important;
+  border-bottom: 0.625px solid #009245 !important;
+  border-left: 5.5px solid #009245 !important;
+  background: #fff !important;
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.02) !important;
   .p-toast-close-button {
-    color: var(--p-button-text-primary-color);
+    color: #9CA3AF;
   }
-  .p-toast-detail {
-    color: var(--p-button-text-primary-color) !important;
+  .p-toast-summary{
+    color: #171717 !important;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 21px; /* 150% */
+    letter-spacing: -0.29px;
+  }
+  .p-toast-detail{
+    color: #3F3F3F !important;
+    font-family: Inter;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 18.2px; /* 140% */
+    letter-spacing: -0.076px;
+  }
+  .p-toast-message-text{
+    gap:3px !important;
   }
 }
 
-.p-toast-message-info {
-  .p-toast-close-button {
-    color: var(--p-toast-info-color);
-  }
-  .p-toast-detail {
-    color: var(--p-toast-info-color) !important;
-  }
-}
 
 .p-toast-message-warn {
+  border-radius: 10px !important;
+  border-top: 0.625px solid #F59E0B !important;
+  border-right: 0.625px solid #F59E0B !important;
+  border-bottom: 0.625px solid #F59E0B !important;
+  border-left: 5.5px solid #F59E0B !important;
+  background: #fff !important;
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.02) !important;
   .p-toast-close-button {
-    color: var(--p-toast-warn-color);
+    color: #9CA3AF;
   }
-  .p-toast-detail {
-    color: var(--p-toast-warn-color) !important;
+  .p-toast-summary{
+    color: #171717 !important;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 21px; /* 150% */
+    letter-spacing: -0.29px;
+  }
+  .p-toast-detail{
+    color: #3F3F3F !important;
+    font-family: Inter;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 18.2px; /* 140% */
+    letter-spacing: -0.076px;
+  }
+  .p-toast-message-text{
+    gap:3px !important;
   }
 }
 .p-dialog-mask {

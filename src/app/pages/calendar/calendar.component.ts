@@ -25,6 +25,7 @@ import { CalendarMeetingsCreateComponent } from './shared/components/calendar-me
 import { Confirmation } from '../../core/extensions/confirmation';
 import { ConfirmationService } from 'primeng/api';
 import {CalendarMeetingEditComponent} from './shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
+import {ScheduleTaskModel} from './shared/models/schedule-task.model';
 
 @Component({
   selector: 'app-calendar',
@@ -252,7 +253,8 @@ export class CalendarComponent {
     });
   }
 
-  getStudents(){
 
+  openAttendanceDialog(task: ScheduleTaskModel) {
+    this.service.getStudentsByCourse(task)
   }
 }

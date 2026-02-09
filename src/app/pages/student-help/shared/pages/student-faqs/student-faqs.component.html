@@ -1,0 +1,17 @@
+<div class="cus-faqs-wrapper">
+  <h4>{{ "We answer you every questions and concerns" | translate }}</h4>
+  <div class="body">
+    <div class="card flex justify-center">
+      <p-accordion value="0">
+        <p-accordion-panel [value]="item.id" *ngFor="let item of FAQs">
+          <p-accordion-header>{{ item.title }}</p-accordion-header>
+          <p-accordion-content>
+            <p class="m-0">
+              {{ item.body }}
+            </p>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+  </div>
+</div>

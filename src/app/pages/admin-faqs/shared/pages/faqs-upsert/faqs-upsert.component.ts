@@ -1,16 +1,15 @@
-import {Component, inject} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {Location, NgClass, NgForOf, NgIf} from '@angular/common';
-import {TranslatePipe} from '@ngx-translate/core';
-import {UpsertHeadingComponent} from '../../../../../shared/components/upsert-heading/upsert-heading.component';
-import {
-  KnownLanguagesUpsertService
-} from '../../../../known-languages/shared/pages/known-languages-upsert/known-languages-upsert.service';
-import {ActivatedRoute} from '@angular/router';
-import {ApplicationMessageCenterService} from '../../../../../core/services/ApplicationMessageCenter.service';
-import {KnownLanguagesRequestModel} from '../../../../known-languages/shared/models/known-languages-request.model';
-import {FaqsUpsertService} from './faqs-upsert.service';
-import {FaqsRequestModel} from '../../models/faqs-request.model';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Location, NgClass, NgForOf, NgIf } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { UpsertHeadingComponent } from '../../../../../shared/components/upsert-heading/upsert-heading.component';
+import { KnownLanguagesUpsertService } from '../../../../known-languages/shared/pages/known-languages-upsert/known-languages-upsert.service';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
+import { KnownLanguagesRequestModel } from '../../../../known-languages/shared/models/known-languages-request.model';
+import { FaqsUpsertService } from './faqs-upsert.service';
+import { FaqsRequestModel } from '../../models/faqs-request.model';
+import {DropdownModule} from 'primeng/dropdown';
 
 @Component({
   selector: 'app-faqs-upsert',
@@ -20,15 +19,14 @@ import {FaqsRequestModel} from '../../models/faqs-request.model';
     NgIf,
     TranslatePipe,
     UpsertHeadingComponent,
-    NgClass
+    NgClass,
+    DropdownModule,
   ],
   templateUrl: './faqs-upsert.component.html',
-  styleUrl: './faqs-upsert.component.scss'
+  styleUrl: './faqs-upsert.component.scss',
 })
 export class FaqsUpsertComponent {
-  private service: FaqsUpsertService = inject(
-    FaqsUpsertService,
-  );
+  private service: FaqsUpsertService = inject(FaqsUpsertService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   public location: Location = inject(Location);
   public message: ApplicationMessageCenterService = inject(
@@ -37,6 +35,10 @@ export class FaqsUpsertComponent {
   id = this.route.snapshot.paramMap.get('id') as string;
   request: FaqsRequestModel = new FaqsRequestModel();
   isSubmitted: boolean = false;
+  types: any[] = [
+    { name: 'Educators', value: 1 },
+    { name: 'Students', value: 2 },
+  ];
   constructor() {
     this.service.component = this;
     this.service.getInfo();

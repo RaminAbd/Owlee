@@ -9,17 +9,19 @@ import {ApplicationMessageCenterService} from '../../../../../core/services/Appl
 import {FaqsRequestModel} from '../../../../admin-faqs/shared/models/faqs-request.model';
 import {TutorialsRequestModel} from '../../models/tutorials-request.model';
 import {TutorialsUpsertService} from './tutorials-upsert.service';
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'app-tutorials-upsert',
-  imports: [
-    NgForOf,
-    ReactiveFormsModule,
-    TranslatePipe,
-    UpsertHeadingComponent,
-    NgClass,
-    FormsModule
-  ],
+    imports: [
+        NgForOf,
+        ReactiveFormsModule,
+        TranslatePipe,
+        UpsertHeadingComponent,
+        NgClass,
+        FormsModule,
+        DropdownModule
+    ],
   templateUrl: './tutorials-upsert.component.html',
   styleUrl: './tutorials-upsert.component.scss'
 })
@@ -35,6 +37,10 @@ export class TutorialsUpsertComponent {
   id = this.route.snapshot.paramMap.get('id') as string;
   request: TutorialsRequestModel = new TutorialsRequestModel();
   isSubmitted: boolean = false;
+  types: any[] = [
+    { name: 'Educators', value: 1 },
+    { name: 'Students', value: 2 },
+  ];
   constructor() {
     this.service.component = this;
     this.service.getInfo();

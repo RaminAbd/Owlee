@@ -10,6 +10,18 @@ import { StudentAssignmentDetailsComponent } from '../../../../pages/student-das
 import { RateCourseComponent } from '../../../../pages/student-dashboard/shared/pages/rate-course/rate-course.component';
 import { EducatorPlansComponent } from '../../../../pages/educator-plans/educator-plans.component';
 import { StudentPlansComponent } from '../../../../pages/student-plans/student-plans.component';
+import {LecturerHelpComponent} from '../../../../pages/lecturer-help/lecturer-help.component';
+import {
+  LecturerTutorialsComponent
+} from '../../../../pages/lecturer-help/shared/pages/lecturer-tutorials/lecturer-tutorials.component';
+import {
+  LecturerFaqsComponent
+} from '../../../../pages/lecturer-help/shared/pages/lecturer-faqs/lecturer-faqs.component';
+import {StudentHelpComponent} from '../../../../pages/student-help/student-help.component';
+import {
+  StudentTutorialsComponent
+} from '../../../../pages/student-help/shared/pages/student-tutorials/student-tutorials.component';
+import {StudentFaqsComponent} from '../../../../pages/student-help/shared/pages/student-faqs/student-faqs.component';
 
 export class StudentChildrenRoutes {
   static children: Route[] = [
@@ -59,6 +71,24 @@ export class StudentChildrenRoutes {
       data: { title: 'Plans' },
     },
 
+    {
+      path: 'help',
+      component: StudentHelpComponent,
+      data: { title: 'Help' },
+      children: [
+        {
+          path: 'tutorials',
+          component: StudentTutorialsComponent,
+          data: { title: 'Help' },
+        },
+        {
+          path: 'faqs',
+          component: StudentFaqsComponent,
+          data: { title: 'Help' },
+        },
+        { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+      ],
+    },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
   ];

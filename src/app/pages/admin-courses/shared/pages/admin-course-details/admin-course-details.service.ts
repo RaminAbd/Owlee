@@ -5,6 +5,7 @@ import { EducatorsApiService } from '../../../../educators/shared/services/educa
 import { KnownLanguagesApiService } from '../../../../known-languages/shared/services/known-languages.api.service';
 import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-material.model';
 import { AdminCourseDetailsComponent } from './admin-course-details.component';
+import {RatingsApiService} from '../../../../student-dashboard/shared/services/ratings.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class AdminCourseDetailsService {
   private langService: KnownLanguagesApiService = inject(
     KnownLanguagesApiService,
   );
+  private ratingsService: RatingsApiService = inject(RatingsApiService);
   constructor() {}
 
   getKnownLangs() {
@@ -75,6 +77,23 @@ export class AdminCourseDetailsService {
         ...member,
         fullName:member.firstName + ' ' + member.lastName,
       }))
+    })
+  }
+
+  getRating(){
+    const req = {
+      courseId:this.component.id
+    }
+    this.ratingsService.GetOverview(req).subscribe((resp) => {
+      const totalCount = resp.data.reduce((sum:any, item:any) => sum + item.count, 0);
+      this.component.total = totalCount;
+      this.component.ratings = resp.data.map((item:any)=>({
+        ...item,
+        percentage: totalCount > 0
+          ? +(item.count / totalCount * 100).toFixed(2)
+          : 0
+      }))
+      console.log(this.component.ratings);
     })
   }
 }

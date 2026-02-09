@@ -20,9 +20,9 @@ import { EducatorPlansComponent } from '../../../../pages/educator-plans/educato
 import { EducatorSubscriptionsComponent } from '../../../../pages/educator-plans/shared/pages/educator-subscriptions/educator-subscriptions.component';
 import { EducatorPackagesComponent } from '../../../../pages/educator-plans/shared/pages/educator-packages/educator-packages.component';
 import { EducatorPaymentsComponent } from '../../../../pages/educator-plans/shared/pages/educator-payments/educator-payments.component';
-import {
-  MemberDetailsComponent
-} from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/group-details/shared/pages/group-members/pages/member-details/member-details.component';
+import { CourseRatingsComponent } from '../../../../pages/dashboard/shared/pages/course-details/shared/pages/course-ratings/course-ratings.component';
+import { EducatorStudentsComponent } from '../../../../pages/educator-students/educator-students.component';
+import { MemberDetailsComponent } from '../../../../pages/educator-students/shared/pages/member-details/member-details.component';
 
 export class EducatorChildrenRoutes {
   static children: Route[] = [
@@ -57,6 +57,11 @@ export class EducatorChildrenRoutes {
           data: { title: 'Dashboard' },
         },
         {
+          path: 'ratings',
+          component: CourseRatingsComponent,
+          data: { title: 'Dashboard' },
+        },
+        {
           path: 'assignments',
           component: CourseAssignmentsComponent,
           data: { title: 'Dashboard' },
@@ -77,11 +82,6 @@ export class EducatorChildrenRoutes {
               data: { title: 'Dashboard' },
             },
             {
-              path: 'members/:id',
-              component: MemberDetailsComponent,
-              data: { title: 'Dashboard' },
-            },
-            {
               path: 'meetings',
               component: GroupMeetingsComponent,
               data: { title: 'Dashboard' },
@@ -92,7 +92,16 @@ export class EducatorChildrenRoutes {
         { path: '', redirectTo: 'about', pathMatch: 'full' },
       ],
     },
-
+    {
+      path: 'students',
+      component: EducatorStudentsComponent,
+      data: { title: 'Dashboard' },
+    },
+    {
+      path: 'students/:id',
+      component: MemberDetailsComponent,
+      data: { title: 'Dashboard' },
+    },
     {
       path: 'calendar',
       component: CalendarComponent,

@@ -1,0 +1,289 @@
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 10px;
+  @media (max-width: 769px) {
+    width: 100%;
+  }
+  .back {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    width: 720px;
+    position: relative;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
+    i {
+      color: #656668;
+      position: absolute;
+      left: -43px;
+      top: 5px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+  .image {
+    display: flex;
+    gap: 20px;
+    @media (max-width: 769px) {
+      flex-direction: column;
+    }
+    .main-image {
+      width: 600px;
+      max-height: 185px;
+      border-radius: 8px;
+      object-fit: cover;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      @media (max-width: 769px) {
+        flex-direction: row;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        //width: 100px;
+        height: 32px;
+        border-radius: 8px;
+        gap: 11px;
+        background-color: #f6f6f6;
+        padding: 6px 8px;
+        cursor: pointer;
+        .icon{
+          width: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        p, i {
+          font-weight: 500;
+          font-size: 14px;
+          color: #656668;
+        }
+        &.edit {
+          background-color: #3b3199;
+          p {
+            color: #fff;
+          }
+        }
+        &.delete {
+          p {
+            color: #ef3838;
+          }
+        }
+      }
+    }
+  }
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 46px;
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #90928d;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+  }
+  .description {
+    width: 600px;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      color: #90928d;
+      line-height: 16.94px;
+    }
+  }
+}
+::ng-deep {
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content {
+    background: transparent !important;
+  }
+  .confirm-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    i{
+      font-size: 60px;
+      color: orange;
+    }
+    p{
+      width: 70%;
+      text-align: center;
+      color: orange;
+      margin-bottom: 21px !important;
+    }
+  }
+  .p-dialog-footer{
+    .p-button{
+      padding: 0px 20px !important;
+      height: 40px;
+      background: #F6F6F6 !important;
+      border: none !important;
+      color: #656668 !important;
+      &.p-confirmdialog-accept-button{
+        background: var(--primary-color) !important;
+        border: none !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+}
+.cnt{
+  display: flex;
+  width: 100%;
+  //height: 352px;
+  padding: 21px;
+  gap: 31.992px;
+  border-radius: 16px;
+  border: 0.625px solid #F3F4F6;
+  background: #FFF;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  .total{
+    display: flex;
+    flex:1;
+    height: 227.969px;
+    padding-bottom: 0.01px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7.998px;
+    border-radius: 14px;
+    background: #F9FAFB;
+    h4{
+      color: #101828;
+      font-family: Inter;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 48px; /* 100% */
+      letter-spacing: 0.352px;
+    }
+    p{
+      color: #4A5565;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 142.857% */
+      letter-spacing: -0.15px;
+    }
+  }
+  .items{
+    flex:1;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    gap: 11.992px;
+    .item{
+      display: flex;
+      height: 40px;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+      align-self: stretch;
+      .star{
+        display: flex;
+        height: 20px;
+        align-items: center;
+        gap: 3.994px;
+        span{
+          color: #364153;
+          font-family: Inter;
+          font-size: 14px;
+          width: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.15px;
+        }
+      }
+      .st{
+        display: flex;
+        height: 7.998px;
+        //padding-right: 117.441px;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1 0 0;
+        border-radius: 20971500px;
+        background: #E5E7EB;
+        .filled{
+          height: 7.998px;
+          border-radius: 20971500px;
+          background: #009245;
+        }
+      }
+      .nums{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        //span{
+        //  width: 12px;
+        //  display: block;
+        //  color: #4A5565;
+        //  text-align: right;
+        //  font-family: Inter;
+        //  font-size: 14px;
+        //  font-style: normal;
+        //  font-weight: 400;
+        //  line-height: 20px; /* 142.857% */
+        //  letter-spacing: -0.15px;
+        //}
+        p{
+          span{
+            width: 12px;
+            display: inline-block;
+          }
+          color: #4A5565;
+          text-align: right;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.15px;
+        }
+      }
+    }
+  }
+}
+::ng-deep{
+  .rating{
+    //margin: 15px 0;
+    .p-rating{
+      gap:8px;
+    }
+    .p-rating-icon{
+      width: 16px;
+      height: 16px;
+    }
+    .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-option:hover .p-rating-icon{
+      color: #009245;
+    }
+    .p-rating-option-active .p-rating-icon{
+      color: #009245;
+    }
+  }
+}

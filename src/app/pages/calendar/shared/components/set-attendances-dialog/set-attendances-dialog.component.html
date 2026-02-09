@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="inputs">
+    <div class="input-item">
+      <label for="enable">{{ "Students" | translate }}</label>
+      <p-multiSelect
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="students"
+        optionLabel="name"
+        optionValue="id"
+        appendTo="body"
+        [(ngModel)]="selectedStudents"
+        id="enable"
+      ></p-multiSelect>
+    </div>
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button
+      class="save"
+      (click)="save()"
+      style="position: relative"
+      [disabled]="loading"
+    >
+      {{ "Save" | translate }}
+      <i
+        class="pi pi-spin pi-spinner"
+        style="position: absolute; right: 10px"
+        *ngIf="loading"
+      ></i>
+    </button>
+  </div>
+</div>

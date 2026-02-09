@@ -26,7 +26,7 @@ export class LecturerFaqsService {
     this._service
       .GetAllByLang(this._service.serviceUrl, this.translate.currentLang)
       .subscribe((resp) => {
-        this.component.FAQs = resp.data;
+        this.component.FAQs = resp.data.filter((x: any) => x.faqType === 1);
       });
   }
 }

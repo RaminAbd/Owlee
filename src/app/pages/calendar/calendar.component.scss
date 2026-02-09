@@ -318,9 +318,11 @@
           width: 100%;
           .block {
             display: flex;
-            align-items: center;
+            /* align-items: center; */
             justify-content: space-between;
             width: 100%;
+            flex-direction: column;
+            gap: 13px;
             .info {
               display: flex;
               flex-direction: column;
@@ -338,6 +340,41 @@
                 color: #90928d;
                 font-size: 14px;
                 font-weight: 500;
+              }
+            }
+            .attendance{
+              display: flex;
+              gap:10px;
+              justify-content: space-between;
+              align-items: center;
+              .st-info{
+                display: flex;
+                align-items: center;
+                gap:10px;
+                p{
+                  color: #605F71;
+                  font-family: Inter;
+                  font-size: 12px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: normal;
+                }
+              }
+              .record{
+                display: flex;
+                padding-bottom: 3px;
+                align-items: center;
+                gap: 10px;
+                border-bottom: 1px solid #605F71;
+                cursor: pointer;
+                p{
+                  color: #605F71;
+                  font-family: Inter;
+                  font-size: 14px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: normal;
+                }
               }
             }
           }

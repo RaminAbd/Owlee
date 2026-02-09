@@ -1,11 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { CalendarComponent } from './calendar.component';
 import { MeetingsApiService } from './shared/services/meetings.api.service';
-import {CoursesApiService} from '../admin-courses/shared/services/courses.api.service';
-import {StorageService} from '../../core/services/storage.service';
-import {TranslateService} from '@ngx-translate/core';
-import {SubtopicModel} from '../dashboard/shared/models/subtopic.model';
-import {ApplicationMessageCenterService} from '../../core/services/ApplicationMessageCenter.service';
+import { CoursesApiService } from '../admin-courses/shared/services/courses.api.service';
+import { StorageService } from '../../core/services/storage.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SubtopicModel } from '../dashboard/shared/models/subtopic.model';
+import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
+import { ScheduleTaskModel } from './shared/models/schedule-task.model';
+import { CalendarMeetingEditComponent } from './shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { StudentsResponseModel } from '../students/shared/models/students-response.model';
+import { SetAttendancesDialogComponent } from './shared/components/set-attendances-dialog/set-attendances-dialog.component';
+import { AttendancesApiService } from './shared/services/attendances.api.service';
+import {
+  MeetingAttendancesDialogComponent
+} from './shared/components/meeting-attendances-dialog/meeting-attendances-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +22,16 @@ import {ApplicationMessageCenterService} from '../../core/services/ApplicationMe
 export class CalendarService {
   component: CalendarComponent;
   private service: MeetingsApiService = inject(MeetingsApiService);
+  private attendancesService: AttendancesApiService = inject(
+    AttendancesApiService,
+  );
   private coursesService: CoursesApiService = inject(CoursesApiService);
   private storage: StorageService = inject(StorageService);
+  public dialogService: DialogService = inject(DialogService);
   private translate: TranslateService = inject(TranslateService);
-  private message: ApplicationMessageCenterService = inject(ApplicationMessageCenterService);
+  private message: ApplicationMessageCenterService = inject(
+    ApplicationMessageCenterService,
+  );
   constructor() {}
 
   getCourses() {
@@ -29,7 +44,6 @@ export class CalendarService {
       this.component.courses = structuredClone(resp.data.courses);
     });
   }
-
 
   getMeetings() {
     this.service
@@ -53,7 +67,6 @@ export class CalendarService {
           this.component.currentDate,
           resp.data,
         );
-
       });
   }
 
@@ -69,17 +82,23 @@ export class CalendarService {
     return `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`;
   }
 
-
-
   buildDateRequest(date: Date, viewMode: 'month' | 'week' | 'day'): void {
     let from: Date, to: Date;
     if (viewMode === 'month') {
       const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
       const firstDayOfGrid = new Date(firstDayOfMonth);
-      firstDayOfGrid.setDate(firstDayOfGrid.getDate() - (firstDayOfGrid.getDay() || 7) + 1);
-      const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      firstDayOfGrid.setDate(
+        firstDayOfGrid.getDate() - (firstDayOfGrid.getDay() || 7) + 1,
+      );
+      const lastDayOfMonth = new Date(
+        date.getFullYear(),
+        date.getMonth() + 1,
+        0,
+      );
       const lastDayOfGrid = new Date(lastDayOfMonth);
-      lastDayOfGrid.setDate(lastDayOfGrid.getDate() + (7 - (lastDayOfGrid.getDay() || 7)));
+      lastDayOfGrid.setDate(
+        lastDayOfGrid.getDate() + (7 - (lastDayOfGrid.getDay() || 7)),
+      );
       from = firstDayOfGrid;
       to = lastDayOfGrid;
     } else if (viewMode === 'week') {
@@ -89,8 +108,22 @@ export class CalendarService {
       to = new Date(startOfWeek);
       to.setDate(startOfWeek.getDate() + 6);
     } else {
-      from = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0); // 00:00:00
-      to = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59); // 23:59:59
+      from = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        0,
+        0,
+        0,
+      ); // 00:00:00
+      to = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        23,
+        59,
+        59,
+      ); // 23:59:59
     }
     this.component.meetingsRequest.from = from.toISOString();
     this.component.meetingsRequest.to = to.toISOString();
@@ -191,12 +224,16 @@ export class CalendarService {
       for (const entry of sample) {
         if (!entry.date) continue;
         const parsed = new Date(entry.date);
-        const timeText = typeof entry.time === 'string' ? entry.time.split(' - ')[0] : null;
+        const timeText =
+          typeof entry.time === 'string' ? entry.time.split(' - ')[0] : null;
         if (!timeText) continue;
         const hourFromText = Number(timeText.split(':')[0]);
         if (Number.isNaN(hourFromText)) continue;
 
-        if (hourFromText === parsed.getUTCHours() && hourFromText !== parsed.getHours()) {
+        if (
+          hourFromText === parsed.getUTCHours() &&
+          hourFromText !== parsed.getHours()
+        ) {
           // time string matches UTC hour, but actual Date() local hour differs:
           // this suggests the ISO had +00:00 but the server meant "20:00 local".
           return true;
@@ -206,7 +243,9 @@ export class CalendarService {
     })();
 
     const normalizedSchedule = (scheduleData || []).map((x: any) => {
-      const parsed = x.date ? new Date(shouldTreatAsLocal ? stripTZ(x.date) : x.date) : null;
+      const parsed = x.date
+        ? new Date(shouldTreatAsLocal ? stripTZ(x.date) : x.date)
+        : null;
       return {
         ...x,
         _parsed: parsed,
@@ -411,14 +450,16 @@ export class CalendarService {
           }
         });
         dayItem.hours.forEach((hourObj: any) => {
-          hourObj.tasks.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          hourObj.tasks.sort(
+            (a: any, b: any) =>
+              new Date(a.date).getTime() - new Date(b.date).getTime(),
+          );
         });
       }
       days.push(dayItem);
     }
     return { startDate: startOfWeek, days };
   }
-
 
   updateDayData(date: Date, scheduleData?: any): any {
     const dayItem = {
@@ -464,26 +505,99 @@ export class CalendarService {
         }
       });
       dayItem.hours.forEach((hourObj: any) => {
-        hourObj.tasks.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        hourObj.tasks.sort(
+          (a: any, b: any) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime(),
+        );
       });
     }
     return dayItem;
   }
 
-  delete(id:string) {
-    this.service
-      .Delete(this.service.serviceUrl, id)
-      .subscribe((resp) => {
-        if (resp.succeeded) {
-          this.message.showTranslatedSuccessMessage('Deleted successfully.');
-          this.getMeetings()
-        }
-      });
+  delete(id: string) {
+    this.service.Delete(this.service.serviceUrl, id).subscribe((resp) => {
+      if (resp.succeeded) {
+        this.message.showTranslatedSuccessMessage('Deleted successfully.');
+        this.getMeetings();
+      }
+    });
   }
 
-  getStudentsByCourse(id:string){
-    this.coursesService.GetStudents(id).subscribe((resp) => {
-      console.log(resp.data)
-    })
+  getStudentsByCourse(task: ScheduleTaskModel) {
+    console.log(task);
+    this.coursesService.GetStudents(task.courseId).subscribe((resp) => {
+      console.log(resp.data);
+      resp.data = resp.data.map((item: any) => ({
+        ...item,
+        name:
+          item.firstName + ' ' + item.lastName + ' (' + item.phoneNumber + ')',
+      }));
+      this.getAttendances(task, resp.data);
+    });
+  }
+  getAttendances(task: ScheduleTaskModel, students: StudentsResponseModel[]) {
+    const req = {
+      meetingId: task.id,
+    };
+    this.attendancesService.Filter(req).subscribe((resp) => {
+      const selected = resp.data.map((x: any) => x.id);
+      if (this.isExpired(task.date)) {
+        this.openAttendanceDetailsDialog(task, students, resp.data);
+      } else {
+        this.openAttendanceDialog(task, students, selected);
+      }
+    });
+  }
+
+  isExpired(date: string): boolean {
+    return new Date() > new Date(date);
+  }
+
+  private openAttendanceDialog(
+    task: ScheduleTaskModel,
+    students: StudentsResponseModel[],
+    selectedStudents: string[],
+  ) {
+    const ref = this.dialogService.open(SetAttendancesDialogComponent, {
+      header: this.translate.instant('Attendance'),
+      width: '416px',
+      data: {
+        meeting: task,
+        students: students,
+        selectedStudents: selectedStudents,
+      },
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.getMeetings();
+      }
+    });
+  }
+
+  private openAttendanceDetailsDialog(
+    task: ScheduleTaskModel,
+    students: StudentsResponseModel[],
+    selectedStudents: any[],
+  ) {
+    const ref = this.dialogService.open(MeetingAttendancesDialogComponent, {
+      header: this.translate.instant('Attendance'),
+      width: '416px',
+      data: {
+        meeting: task,
+        students: students,
+        selectedStudents: selectedStudents,
+      },
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.getMeetings();
+      }
+    });
   }
 }

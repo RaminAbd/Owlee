@@ -128,148 +128,206 @@
         </div>
       </div>
     </section>
-    <section id="fourth">
-      <div class="heading">
-        <h2>{{ "Services" | translate }}</h2>
-        <p>
-          {{
-            "Enhancing the overall learning experience for both educators and students."
-              | translate
-          }}
-        </p>
-      </div>
-      <div class="items">
-        <div class="item r">
-          <div class="txt">
-            <h4>
-              {{ "Lecture Scheduling & Calendar Integration" | translate }}
-            </h4>
-            <p>
-              {{
-                "Plan and organize lessons with an intuitive scheduling system, ensuring students stay updated with class timings."
-                  | translate
-              }}
-            </p>
-          </div>
-          <div class="image">
-            <img
-              src="https://owleeblob.blob.core.windows.net/images/75f2a411-2d3f-47fc-8af1-e429e264ea4a-Lecture%20Scheduling%20%26%20Calendar%20Integration%20%281%29.jpg"
-              alt=""
-            />
-          </div>
-          <button class="join" routerLink="auth">
-            {{ "Join us" | translate }}
-          </button>
-        </div>
-        <div class="item l">
-          <div class="txt">
-            <h4>{{ "Student Management" | translate }}</h4>
-            <p>
-              {{
-                "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students."
-                  | translate
-              }}
-            </p>
-          </div>
-          <div class="image">
-            <img
-              src="https://owleeblob.blob.core.windows.net/images/8ac8afd7-c618-4936-9346-9537b5f82d94-Student%20Management%20%281%29.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="item r">
-          <div class="txt">
-            <h4>{{ "Material Management" | translate }}</h4>
-            <p>
-              {{
-                "Upload, organize, and distribute learning resources, including PDFs, videos, and interactive content."
-                  | translate
-              }}
-            </p>
-          </div>
-          <div class="image">
-            <img
-              src="https://owleeblob.blob.core.windows.net/images/b711233c-1464-4359-b95c-365a6f07329a-Material%20Management%20%281%29.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+    <!--    <section id="fourth">-->
+    <!--      <div class="heading">-->
+    <!--        <h2>{{ "Services" | translate }}</h2>-->
+    <!--        <p>-->
+    <!--          {{-->
+    <!--            "Enhancing the overall learning experience for both educators and students."-->
+    <!--              | translate-->
+    <!--          }}-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <div class="items">-->
+    <!--        <div class="item r">-->
+    <!--          <div class="txt">-->
+    <!--            <h4>-->
+    <!--              {{ "Lecture Scheduling & Calendar Integration" | translate }}-->
+    <!--            </h4>-->
+    <!--            <p>-->
+    <!--              {{-->
+    <!--                "Plan and organize lessons with an intuitive scheduling system, ensuring students stay updated with class timings."-->
+    <!--                  | translate-->
+    <!--              }}-->
+    <!--            </p>-->
+    <!--          </div>-->
+    <!--          <div class="image">-->
+    <!--            <img-->
+    <!--              src="https://owleeblob.blob.core.windows.net/images/75f2a411-2d3f-47fc-8af1-e429e264ea4a-Lecture%20Scheduling%20%26%20Calendar%20Integration%20%281%29.jpg"-->
+    <!--              alt=""-->
+    <!--            />-->
+    <!--          </div>-->
+    <!--          <button class="join" routerLink="auth">-->
+    <!--            {{ "Join us" | translate }}-->
+    <!--          </button>-->
+    <!--        </div>-->
+    <!--        <div class="item l">-->
+    <!--          <div class="txt">-->
+    <!--            <h4>{{ "Student Management" | translate }}</h4>-->
+    <!--            <p>-->
+    <!--              {{-->
+    <!--                "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students."-->
+    <!--                  | translate-->
+    <!--              }}-->
+    <!--            </p>-->
+    <!--          </div>-->
+    <!--          <div class="image">-->
+    <!--            <img-->
+    <!--              src="https://owleeblob.blob.core.windows.net/images/8ac8afd7-c618-4936-9346-9537b5f82d94-Student%20Management%20%281%29.jpg"-->
+    <!--              alt=""-->
+    <!--            />-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="item r">-->
+    <!--          <div class="txt">-->
+    <!--            <h4>{{ "Material Management" | translate }}</h4>-->
+    <!--            <p>-->
+    <!--              {{-->
+    <!--                "Upload, organize, and distribute learning resources, including PDFs, videos, and interactive content."-->
+    <!--                  | translate-->
+    <!--              }}-->
+    <!--            </p>-->
+    <!--          </div>-->
+    <!--          <div class="image">-->
+    <!--            <img-->
+    <!--              src="https://owleeblob.blob.core.windows.net/images/b711233c-1464-4359-b95c-365a6f07329a-Material%20Management%20%281%29.jpg"-->
+    <!--              alt=""-->
+    <!--            />-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
+    <!--    <section id="fifth">-->
+    <!--      <div class="heading">-->
+    <!--        <h2>{{ "Start your free trial!" | translate }}</h2>-->
+    <!--        <p>-->
+    <!--          {{-->
+    <!--            "Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!"-->
+    <!--              | translate-->
+    <!--          }}-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <div class="switcher">-->
+    <!--        <div-->
+    <!--          class="item"-->
+    <!--          (click)="selectedPackageType = 1"-->
+    <!--          [ngClass]="{ selected: selectedPackageType === 1 }"-->
+    <!--        >-->
+    <!--          <p>{{ "Monthly" | translate }}</p>-->
+    <!--        </div>-->
+    <!--        <div-->
+    <!--          class="item"-->
+    <!--          (click)="selectedPackageType = 2"-->
+    <!--          [ngClass]="{ selected: selectedPackageType === 2 }"-->
+    <!--        >-->
+    <!--          <p>{{ "Annually" | translate }}</p>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="items">-->
+    <!--        <div class="item" *ngFor="let item of subscriptionPackages">-->
+    <!--          <div class="pop">-->
+    <!--            <p>{{ "Most popular" | translate }}</p>-->
+    <!--          </div>-->
+    <!--          <div class="name">-->
+    <!--            <p>{{ item.name }}</p>-->
+    <!--          </div>-->
+    <!--          <div class="descr">-->
+    <!--            <p>-->
+    <!--              {{ "Recommended for those who’ve got" | translate }}-->
+    <!--              {{ item.maxCapacity }} {{ "students" | translate }}.-->
+    <!--            </p>-->
+    <!--          </div>-->
+    <!--          <div class="price">-->
+    <!--            <p>-->
+    <!--              <span-->
+    <!--                >{{-->
+    <!--                  selectedPackageType === 1 ? item.price : item.annualPrice-->
+    <!--                }}₾</span-->
+    <!--              >-->
+    <!--              / {{ "month" | translate }}-->
+    <!--            </p>-->
+    <!--          </div>-->
+    <!--          <div class="features">-->
+    <!--            <div class="f-item">-->
+    <!--              <img src="d-check.svg" alt="" />-->
+    <!--              <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>-->
+    <!--            </div>-->
+    <!--            <div class="f-item">-->
+    <!--              <img src="d-check.svg" alt="" />-->
+    <!--              <p>-->
+    <!--                {{ item.groupPerCourse }} {{ "Groups per course" | translate }}-->
+    <!--              </p>-->
+    <!--            </div>-->
+    <!--            <div class="f-item">-->
+    <!--              <img src="d-check.svg" alt="" />-->
+    <!--              <p>-->
+    <!--                {{ item.peoplePerGroup }} {{ "Students per group" | translate }}-->
+    <!--              </p>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--          <div class="btn">-->
+    <!--            <button routerLink="student-sign-up">-->
+    <!--              {{ "Get started" | translate }}-->
+    <!--            </button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
     <section id="fifth">
       <div class="heading">
-        <h2>{{ "Start your free trial!" | translate }}</h2>
+        <h2>{{ "Frequently asked questions" | translate }}</h2>
         <p>
-          {{
-            "Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!"
-              | translate
-          }}
+          {{ "Fill in the form to get your answer" | translate }}
         </p>
       </div>
       <div class="switcher">
         <div
           class="item"
-          (click)="selectedPackageType = 1"
-          [ngClass]="{ selected: selectedPackageType === 1 }"
+          (click)="selectedFAQsTab = 1"
+          [ngClass]="{ selected: selectedFAQsTab === 1 }"
         >
-          <p>{{ "Monthly" | translate }}</p>
+          <p>{{ "Students" | translate }}</p>
         </div>
         <div
           class="item"
-          (click)="selectedPackageType = 2"
-          [ngClass]="{ selected: selectedPackageType === 2 }"
+          (click)="selectedFAQsTab = 2"
+          [ngClass]="{ selected: selectedFAQsTab === 2 }"
         >
-          <p>{{ "Annually" | translate }}</p>
+          <p>{{ "Educators" | translate }}</p>
         </div>
       </div>
-      <div class="items">
-        <div class="item" *ngFor="let item of subscriptionPackages">
-          <div class="pop">
-            <p>{{ "Most popular" | translate }}</p>
-          </div>
-          <div class="name">
-            <p>{{ item.name }}</p>
-          </div>
-          <div class="descr">
-            <p>
-              {{ "Recommended for those who’ve got" | translate }}
-              {{ item.maxCapacity }} {{ "students" | translate }}.
-            </p>
-          </div>
-          <div class="price">
-            <p>
-              <span
-                >{{
-                  selectedPackageType === 1 ? item.price : item.annualPrice
-                }}₾</span
-              >
-              / {{ "month" | translate }}
-            </p>
-          </div>
-          <div class="features">
-            <div class="f-item">
-              <img src="d-check.svg" alt="" />
-              <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
-            </div>
-            <div class="f-item">
-              <img src="d-check.svg" alt="" />
-              <p>
-                {{ item.groupPerCourse }} {{ "Groups per course" | translate }}
-              </p>
-            </div>
-            <div class="f-item">
-              <img src="d-check.svg" alt="" />
-              <p>
-                {{ item.peoplePerGroup }} {{ "Students per group" | translate }}
-              </p>
-            </div>
-          </div>
-          <div class="btn">
-            <button routerLink="student-sign-up">
-              {{ "Get started" | translate }}
-            </button>
-          </div>
+      <div class="body" style="max-width: 900px;width: 100%;" *ngIf="selectedFAQsTab === 1">
+        <div class="card flex justify-center">
+          <p-accordion value="0">
+            <p-accordion-panel
+              [value]="item.id"
+              *ngFor="let item of studentsFAQs"
+            >
+              <p-accordion-header>{{ item.title }}</p-accordion-header>
+              <p-accordion-content>
+                <p class="m-0">
+                  {{ item.body }}
+                </p>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
+        </div>
+      </div>
+      <div class="body" style="max-width: 900px;width: 100%;" *ngIf="selectedFAQsTab === 2">
+        <div class="card flex justify-center">
+          <p-accordion value="0">
+            <p-accordion-panel
+              [value]="item.id"
+              *ngFor="let item of educatorsFAQs"
+            >
+              <p-accordion-header>{{ item.title }}</p-accordion-header>
+              <p-accordion-content>
+                <p class="m-0">
+                  {{ item.body }}
+                </p>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
         </div>
       </div>
     </section>
@@ -387,10 +445,10 @@
       <div class="items">
         <div class="item">
           <div class="image">
-            <!--            <img-->
-            <!--              src="https://metagroupblob.blob.core.windows.net/delivery-container/725a643d-f0f6-43c5-a1ef-888e09da152c-image%2035.png"-->
-            <!--              alt=""-->
-            <!--            />-->
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/62dc8005-b6ff-4059-b849-b07b835f4971-1.%20Iusip%20Nasibov%20%20%281%29.webp"
+              alt=""
+            />
           </div>
           <div class="txt">
             <a href="https://www.linkedin.com/in/nasibov-yusif" target="_blank"
@@ -401,15 +459,13 @@
         </div>
         <div class="item">
           <div class="image">
-            <!--            <img-->
-            <!--              src="https://metagroupblob.blob.core.windows.net/delivery-container/725a643d-f0f6-43c5-a1ef-888e09da152c-image%2035.png"-->
-            <!--              alt=""-->
-            <!--            />-->
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/de208f1c-2826-4a12-90ed-9a8bd8755fa5-2.%20Pharid%20Asker%20%20%281%29.webp"
+              alt=""
+            />
           </div>
           <div class="txt">
-            <a
-              href="https://www.linkedin.com/in/pharid-askerov/"
-              target="_blank"
+            <a href="https://www.linkedin.com/in/pharid-askerov" target="_blank"
               >Pharid Asker</a
             >
             <p>COO</p>
@@ -417,10 +473,10 @@
         </div>
         <div class="item">
           <div class="image">
-            <!--            <img-->
-            <!--              src="https://metagroupblob.blob.core.windows.net/delivery-container/725a643d-f0f6-43c5-a1ef-888e09da152c-image%2035.png"-->
-            <!--              alt=""-->
-            <!--            />-->
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/10379321-a221-4e19-85c8-8f7e7c893262-Aitaj%20Khalilli%20%281%29.webp"
+              alt=""
+            />
           </div>
           <div class="txt">
             <a
@@ -428,7 +484,79 @@
               target="_blank"
               >Aitaj Khalilli</a
             >
+            <p>CXO</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="image">
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/62023148-e4dd-4557-9f20-07816635e4ff-Omar%20Ibragimovi%20%281%29.webp"
+              alt=""
+            />
+          </div>
+          <div class="txt">
+            <a>Omar Ibragimovi</a>
             <p>CMO</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="image">
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"
+              alt=""
+            />
+          </div>
+          <div class="txt">
+            <a
+              href="https://www.linkedin.com/in/aslan-gurbanov-0a17a312a/"
+              target="_blank"
+              >Aslan Gurbanov</a
+            >
+            <p>CTO</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="image">
+            <!--            <img-->
+            <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
+            <!--              alt=""-->
+            <!--            />-->
+          </div>
+          <div class="txt">
+            <a
+              href="https://www.linkedin.com/in/nigar-rustamova-aba229272/"
+              target="_blank"
+              >Nigar Rustamova</a
+            >
+            <p>SMM</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="image">
+            <!--            <img-->
+            <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
+            <!--              alt=""-->
+            <!--            />-->
+          </div>
+          <div class="txt">
+            <a
+              href="https://www.linkedin.com/in/sabina-kazimovi-2baa76205/"
+              target="_blank"
+              >Sabina Kazimovi</a
+            >
+            <p>Academic Director</p>
+          </div>
+        </div>
+        <div class="item">
+          <!--          <div class="image">-->
+          <!--            <img-->
+          <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
+          <!--              alt=""-->
+          <!--            />-->
+          <!--          </div>-->
+          <div class="txt">
+            <a>Ayhan Hasanli</a>
+            <p>Legal Adviser</p>
           </div>
         </div>
       </div>
@@ -501,17 +629,21 @@
 
         <div class="copy">
           <div class="links">
-<!--            <p>-->
-<!--              2025 © All Rights Reserved-->
-<!--            </p>-->
-            <a style="text-decoration: underline;" href="https://butterflyeffect.ge" target="_blank">Crafted by ButterflyEffect</a>
+            <!--            <p>-->
+            <!--              2025 © All Rights Reserved-->
+            <!--            </p>-->
+            <a
+              style="text-decoration: underline"
+              href="https://butterflyeffect.ge"
+              target="_blank"
+              >Crafted by ButterflyEffect</a
+            >
           </div>
           <div class="terms">
             <a routerLink="/terms-conditions">Terms and Conditions</a
             ><span> / </span>
             <a routerLink="/privacy">Privacy policy</a>
           </div>
-
         </div>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FaqsResponseModel} from '../../../../admin-faqs/shared/models/faqs-response.model';
 import {LecturerFaqsService} from './lecturer-faqs.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTab} from 'primeng/accordion';
@@ -21,7 +21,7 @@ import {PrimeTemplate} from 'primeng/api';
   templateUrl: './lecturer-faqs.component.html',
   styleUrl: './lecturer-faqs.component.scss'
 })
-export class LecturerFaqsComponent {
+export class LecturerFaqsComponent implements OnDestroy{
   FAQs: FaqsResponseModel[] = []
 
   constructor(private service: LecturerFaqsService) {

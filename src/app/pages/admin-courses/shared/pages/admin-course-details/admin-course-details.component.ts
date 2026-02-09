@@ -24,10 +24,12 @@ import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-ma
 import { TopicRequestModel } from '../../../../dashboard/shared/models/topic-request.model';
 import { AdminCourseDetailsService } from './admin-course-details.service';
 import {GroupMembersResponseModel} from '../../../../dashboard/shared/models/group-members.response.model';
+import {RatingsOverviewModel} from '../../../../dashboard/shared/models/ratings-overview.model';
+import {Rating} from 'primeng/rating';
 
 @Component({
   selector: 'app-admin-course-details',
-  imports: [FormsModule, NgForOf, NgIf, TranslatePipe, NgClass, NgStyle],
+  imports: [FormsModule, NgForOf, NgIf, TranslatePipe, NgClass, NgStyle, Rating],
   templateUrl: './admin-course-details.component.html',
   styleUrl: './admin-course-details.component.scss',
   animations: [
@@ -69,10 +71,13 @@ export class AdminCourseDetailsComponent implements OnDestroy {
   langSubscribtion: any;
   expanderStates: string[] = [];
   members: GroupMembersResponseModel[] = [];
+  ratings:RatingsOverviewModel[]=[]
+  total:number = 0
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
     this.service.getAllMembers()
+    this.service.getRating()
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.service.getKnownLangs();

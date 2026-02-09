@@ -19,9 +19,11 @@ export class DashboardComponent {
   private service: DashboardService = inject(DashboardService);
   private router: Router = inject(Router);
   searchText: string;
+  rating:number = 0
   constructor() {
     this.service.component = this;
     this.service.getDashboard();
+    this.service.getEducator();
   }
   create() {
     this.service.checkSlots()

@@ -14,6 +14,9 @@ export class GroupMembersApiService extends BaseCrudApiService {
   GetMembersByGroup(groupId: string) {
     return this.get(this.serviceUrl + 'GetMembersByGroup/', groupId);
   }
+  GetMembersByEducator(educatorId: string) {
+    return this.get(this.serviceUrl + 'GetAll/', educatorId);
+  }
   GetAvailableSlots(educatorId: string) {
     return this.get(this.serviceUrl + 'GetAvailableSlots/', educatorId);
   }

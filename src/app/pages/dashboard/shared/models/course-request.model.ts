@@ -9,4 +9,5 @@ export class CourseRequestModel {
   name: string;
   description: string;
   educator:string
+  rating: any;
 }

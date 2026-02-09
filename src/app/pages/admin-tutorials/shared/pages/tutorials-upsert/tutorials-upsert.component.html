@@ -1,11 +1,22 @@
 <div class="wrapper">
-  <app-upsert-heading
-    [name]="'Tutorials'"
-    (save)="save()"
-  ></app-upsert-heading>
+  <app-upsert-heading [name]="'Tutorials'" (save)="save()"></app-upsert-heading>
   <div class="content">
+<!--    <div class="row">-->
+<!--      <div class="input-item" style="max-width: calc((100% - 20px) / 2)">-->
+<!--        <label>{{ "Type" | translate }} </label>-->
+
+<!--        <p-dropdown-->
+<!--          [style]="{ width: '100%', height: '40px' }"-->
+<!--          [options]="types"-->
+<!--          optionLabel="name"-->
+<!--          optionValue="value"-->
+<!--          [(ngModel)]="request.type"-->
+<!--          id="implementationType"-->
+<!--        ></p-dropdown>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="row">
-      <div class="input-item" >
+      <div class="input-item">
         <label>{{ "Url" | translate }} </label>
         <input
           type="text"

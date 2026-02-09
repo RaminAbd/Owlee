@@ -19,4 +19,8 @@ export class RatingsApiService extends BaseCrudApiService {
   GetRating(req: any) {
     return this.get(this.serviceUrl + 'Get', null, req);
   }
+
+  GetOverview(req: any) {
+    return this.get(this.serviceUrl + 'GetOverview', null, req);
+  }
 }

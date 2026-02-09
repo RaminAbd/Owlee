@@ -1,8 +1,8 @@
-import { Component, ElementRef, inject, OnInit } from '@angular/core';
+import {Component, ElementRef, inject, OnDestroy, OnInit} from '@angular/core';
 import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
 import { SubscriptionPackageModel } from '../subscription-package/shared/models/subscription-package.model';
 import { HomeService } from './home.service';
-import {NgClass, NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -12,6 +12,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { FaqsResponseModel } from '../admin-faqs/shared/models/faqs-response.model';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 
 @Component({
   selector: 'app-home',
@@ -23,11 +25,16 @@ import {
     FormsModule,
     ReactiveFormsModule,
     NgClass,
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
+    NgIf,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private service: HomeService = inject(HomeService);
   private elementRef: ElementRef = inject(ElementRef);
   subscriptionPackages: SubscriptionPackageModel[] = [];
@@ -38,9 +45,14 @@ export class HomeComponent implements OnInit {
     email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
     message: ['', [Validators.required]],
   });
-  selectedPackageType:number = 1
+  selectedPackageType: number = 1;
+  selectedFAQsTab: number = 1;
+  studentsFAQs: FaqsResponseModel[] = [];
+  educatorsFAQs: FaqsResponseModel[] = [];
+
   constructor() {
     this.service.component = this;
+    this.service.subscribeToLangEvent();
     this.service.getAllPackages();
   }
   ngOnInit(): void {
@@ -62,6 +74,10 @@ export class HomeComponent implements OnInit {
 
   send() {
     this.isSubmitted = true;
-    this.service.send()
+    this.service.send();
+  }
+
+  ngOnDestroy() {
+    this.service.subscribe.unsubscribe();
   }
 }

@@ -11,4 +11,5 @@ export class CourseDetailedResponseModel {
   language: string
   educator: EducatorsResponseModel = new EducatorsResponseModel()
   topics: TopicRequestModel[]=[]
+  rating: any;
 }

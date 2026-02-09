@@ -3,6 +3,8 @@ import { HomeComponent } from './home.component';
 import { SubscriptionPackageApiService } from '../subscription-package/shared/services/subscription-package.api.service';
 import { EmailsApiService } from './shared/services/emails.api.service';
 import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
+import {FaqsApiService} from '../admin-faqs/shared/services/faqs.api.service';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,18 @@ export class HomeService {
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
+  protected _service: FaqsApiService = inject(FaqsApiService);
+  protected translate: TranslateService = inject(TranslateService);
+  subscribe: any;
+
+  subscribeToLangEvent() {
+    this.subscribe = this.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => {
+        this.getAllFAQs();
+      },
+    );
+  }
+
   getAllPackages() {
     this.service.GetAll(this.service.serviceUrl).subscribe((resp) => {
       this.component.subscriptionPackages = resp.data;
@@ -31,6 +45,15 @@ export class HomeService {
           this.component.form.reset();
           this.component.isSubmitted = false;
         }
+      });
+  }
+
+  getAllFAQs() {
+    this._service
+      .GetAllByLang(this._service.serviceUrl, this.translate.currentLang)
+      .subscribe((resp) => {
+        this.component.studentsFAQs = resp.data.filter((x: any) => x.faqType === 2);
+        this.component.educatorsFAQs = resp.data.filter((x: any) => x.faqType === 1);
       });
   }
 }

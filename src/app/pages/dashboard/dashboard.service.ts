@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
 import {UpgradePlanComponent} from '../../shared/components/upgrade-plan/upgrade-plan.component';
 import {DialogService} from 'primeng/dynamicdialog';
+import {EducatorsApiService} from '../educators/shared/services/educators.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import {DialogService} from 'primeng/dynamicdialog';
 export class DashboardService {
   component: DashboardComponent;
   private service: CoursesApiService = inject(CoursesApiService);
+  private educatorsService: EducatorsApiService = inject(EducatorsApiService);
   private storage: StorageService = inject(StorageService);
   private translate: TranslateService = inject(TranslateService);
   private router: Router = inject(Router);
@@ -22,6 +24,13 @@ export class DashboardService {
   );
   public dialogService: DialogService = inject(DialogService);
   constructor() {}
+
+  getEducator(){
+    this.educatorsService.GetById(this.educatorsService.serviceUrl, localStorage.getItem('userId') as string).subscribe(resp=>{
+      console.log(resp.data, 'educator')
+      this.component.rating = resp.data.rating;
+    })
+  }
 
   getDashboard() {
     let authResp = this.storage.getObject('authResponse');

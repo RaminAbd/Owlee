@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="list">
-      <div class="item" *ngFor="let item of filteredList" routerLink="{{item.id}}" style="cursor: pointer">
+      <div class="item" *ngFor="let item of filteredList" >
         <div class="col">
           <label>{{ "Name" | translate }}</label>
           <p>{{ item.fullName }}</p>

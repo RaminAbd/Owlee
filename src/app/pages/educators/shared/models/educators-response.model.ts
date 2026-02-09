@@ -10,4 +10,5 @@ export class EducatorsResponseModel {
   lastName: string;
   phoneNumber: string;
   createdAt: any;
+  rating: any;
 }
