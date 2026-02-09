@@ -11,19 +11,21 @@ import {StudentSignUpNewService} from './student-sign-up-new.service';
 import {MultiSelect} from 'primeng/multiselect';
 import {NgClass, NgIf} from '@angular/common';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'app-student-sign-up-new',
-  imports: [
-    LottieComponent,
-    MultiSelect,
-    NgIf,
-    ReactiveFormsModule,
-    RouterLink,
-    TranslatePipe,
-    NgClass,
-    FormsModule
-  ],
+    imports: [
+        LottieComponent,
+        MultiSelect,
+        NgIf,
+        ReactiveFormsModule,
+        RouterLink,
+        TranslatePipe,
+        NgClass,
+        FormsModule,
+        DropdownModule
+    ],
   templateUrl: './student-sign-up-new.component.html',
   styleUrl: './student-sign-up-new.component.scss',
   animations: [
@@ -64,27 +66,48 @@ export class StudentSignUpNewComponent implements OnDestroy {
   firstStepForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
-    langs: [''],
     username: [
       { value: '', disabled: this.groupMemberId },
       [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)],
     ],
     phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
-    location: ['', [Validators.required]],
     privacyAccepted: [false, [Validators.required]],
     password: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/^.{6,}$/)]],
   });
+  secondStepForm: FormGroup = this.fb.group({
+    day: ['', [Validators.required]],
+    month: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    location: ['', [Validators.required]],
+    langs: [''],
+  });
+
+  days: { name: string }[] = Array.from({ length: 31 }, (_, index) => ({
+    name: (index + 1).toString(),
+  }));
+  months: { name: string; value: number }[] = [];
+  years: { name: string }[] = Array.from({ length: 100 }, (_, index) => ({
+    name: (new Date().getFullYear() - 18 - index).toString(),
+  }));
+  selectedDay: any;
+  selectedMonth: any;
+  selectedYear: any;
+  dateInvalid = false;
+
   langSubscribtion: any;
   expanderStates: string[] = [];
+  secondStepSubmitted = false;
+  secondStepPassed: boolean = false;
   fourthStepSubmitted = false;
   fourthStepPassed: boolean = false;
   constructor() {
     this.service.component = this;
-    this.expanderStates = Array.from({ length: 2 }, () => 'collapsed');
+    this.expanderStates = Array.from({ length: 3 }, () => 'collapsed');
     this.toggleExpander(0);
 
     this.service.getLanguages();
+    this.service.initMonths();
 
     if (this.groupMemberId) {
       this.service.getGroupMember();
@@ -132,6 +155,16 @@ export class StudentSignUpNewComponent implements OnDestroy {
     this.animationItem = animationItem;
     if (this.animationItem) {
       this.animationItem.play();
+    }
+  }
+
+  validateSecondStep() {
+    this.secondStepSubmitted = true;
+    if (this.secondStepForm.valid && this.request.systemLanguages.length > 0 &&  this.request.location ) {
+      this.service.validateAge();
+    } else {
+      this.secondStepPassed = false;
+      this.service.message.showTranslatedWarningMessage('Fields are not valid');
     }
   }
 

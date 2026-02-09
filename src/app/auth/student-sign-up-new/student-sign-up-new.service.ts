@@ -9,6 +9,7 @@ import { AuthService } from '../sign-in/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StudentSignUpNewComponent } from './student-sign-up-new.component';
 import {VerificationApiService} from '../shared/services/verification.api.service';
+import {LanguageService} from '../../core/services/language.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class StudentSignUpNewService {
   private groupMembersService: GroupMembersApiService = inject(
     GroupMembersApiService,
   );
+  private langService: LanguageService = inject(LanguageService);
   private authApiService: AuthApiService = inject(AuthApiService);
   private authService: AuthService = inject(AuthService);
   public translate = inject(TranslateService);
@@ -62,7 +64,6 @@ export class StudentSignUpNewService {
       !this.component.request.phoneNumber ||
       !this.component.request.username ||
       !this.component.request.password ||
-      !this.component.request.location ||
       !this.component.request.confirmPassword
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
@@ -112,6 +113,81 @@ export class StudentSignUpNewService {
     this.verificationService.SendVerification(req).subscribe((resp) => {
       this.message.showTranslatedSuccessMessage('Verification code sent');
     });
+  }
+
+  initMonths() {
+    this.component.months = [
+      { name: this.langService.getByKey('January'), value: 1 },
+      { name: this.langService.getByKey('February'), value: 2 },
+      { name: this.langService.getByKey('March'), value: 3 },
+      { name: this.langService.getByKey('April'), value: 4 },
+      { name: this.langService.getByKey('May'), value: 5 },
+      { name: this.langService.getByKey('June'), value: 6 },
+      { name: this.langService.getByKey('July'), value: 7 },
+      { name: this.langService.getByKey('August'), value: 8 },
+      { name: this.langService.getByKey('September'), value: 9 },
+      { name: this.langService.getByKey('October'), value: 10 },
+      { name: this.langService.getByKey('November'), value: 11 },
+      { name: this.langService.getByKey('December'), value: 12 },
+    ];
+  }
+
+
+  minimumAge: number = 18;
+  ageValid: boolean = false;
+  validateAge(): void {
+    const combinedDate = new Date(
+      Number(this.component.selectedYear.name),
+      Number(this.component.selectedMonth.value) - 1,
+      Number(this.component.selectedDay.name),
+    );
+    if (!combinedDate) {
+      this.ageValid = false;
+      return;
+    }
+
+    const today = new Date();
+    const ageDifference = today.getFullYear() - combinedDate.getFullYear();
+
+    if (ageDifference > this.minimumAge) {
+      this.ageValid = true;
+    } else if (ageDifference === this.minimumAge) {
+      if (
+        today.getMonth() > combinedDate.getMonth() ||
+        (today.getMonth() === combinedDate.getMonth() &&
+          today.getDate() >= combinedDate.getDate())
+      ) {
+        this.ageValid = true;
+      } else {
+        this.ageValid = false;
+      }
+    } else {
+      this.ageValid = false;
+    }
+    if (this.ageValid) {
+      this.component.dateInvalid = false;
+      this.combineDateTime();
+      this.component.secondStepPassed = true;
+      this.component.toggleExpander(2);
+    } else {
+      this.component.dateInvalid = true;
+      this.component.secondStepPassed = false;
+      this.message.showTranslatedWarningMessage(
+        'You must be at least 18 years old.',
+      );
+    }
+  }
+
+  combineDateTime() {
+    const combinedDate = new Date(
+      Number(this.component.selectedYear.name),
+      Number(this.component.selectedMonth.value) - 1,
+      Number(this.component.selectedDay.name),
+    );
+    var date = new Date(
+      combinedDate.setHours(combinedDate.getHours() + 10),
+    ).toISOString();
+    this.component.request.dateOfBirth = date;
   }
 
 

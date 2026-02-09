@@ -12,4 +12,5 @@ export class StudentSignupRequestModel {
   groupMemberId: string;
   privacyAccepted: boolean = false;
   verificationCode: any;
+  dateOfBirth: any;
 }

@@ -57,41 +57,6 @@
             </div>
             <div class="row">
               <div class="input-item">
-                <label for="courier">{{ "Known languages" | translate }}</label>
-                <p-multiSelect
-                  id="courier"
-                  [style]="{ width: '100%', height: '40px' }"
-                  [options]="knownLangs"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="langs"
-                  [(ngModel)]="request.systemLanguages"
-                  [ngClass]="{
-                    invalid:
-                      request.systemLanguages.length === 0 &&
-                      firstStepSubmitted,
-                  }"
-                  [filter]="true"
-                ></p-multiSelect>
-              </div>
-
-              <div class="input-item">
-                <label for="location">{{ "Location" | translate }}</label>
-                <input
-                  type="text"
-                  id="location"
-                  formControlName="location"
-                  [(ngModel)]="request.location"
-                  [class.invalid]="
-                    firstStepForm.get('location')?.hasError('pattern') ||
-                    (!request.location && firstStepSubmitted)
-                  "
-                />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-item">
                 <label for="phoneNumber"
                 >{{ "Phone number" | translate }}
                 </label>
@@ -218,15 +183,106 @@
             </button>
           </div>
         </form>
-        <div class="item expander-container">
+        <form [formGroup]="secondStepForm" class="item expander-container">
           <div class="heading" (click)="toggleExpander(1)">
+            <img
+              [src]="secondStepPassed ? 'green-check.svg' : 'grey-check.svg'"
+              alt=""
+            />
+            <p>{{ "Personal Information" | translate }}</p>
+          </div>
+          <div class="inputs" [@expanderAnimation]="expanderStates[1]">
+            <div class="row">
+              <div class="input-item" style="width: 100%">
+                <label class="label">{{ "Date of birth" | translate }}</label>
+                <div class="date-inputs" style="display: flex; gap: 5px">
+                  <div class="input-block" style="flex: 1">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="days"
+                      [(ngModel)]="selectedDay"
+                      optionLabel="name"
+                      formControlName="day"
+                      [class.invalid]="
+                        (!selectedDay && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                  <div class="input-block" style="flex: 3">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="months"
+                      [(ngModel)]="selectedMonth"
+                      optionLabel="name"
+                      formControlName="month"
+                      [class.invalid]="
+                        (!selectedMonth && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                  <div class="input-block" style="flex: 2">
+                    <p-dropdown
+                      [style]="{ width: '100%', height: '40px' }"
+                      [options]="years"
+                      [(ngModel)]="selectedYear"
+                      optionLabel="name"
+                      formControlName="year"
+                      [class.invalid]="
+                        (!selectedYear && secondStepSubmitted) || dateInvalid
+                      "
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="input-item">
+                <label for="courier">{{ "Known languages" | translate }}</label>
+                <p-multiSelect
+                  id="courier"
+                  [style]="{ width: '100%', height: '40px' }"
+                  [options]="knownLangs"
+                  optionLabel="name"
+                  optionValue="id"
+                  formControlName="langs"
+                  [(ngModel)]="request.systemLanguages"
+                  [ngClass]="{
+                    invalid:
+                      request.systemLanguages.length === 0 &&
+                      secondStepSubmitted,
+                  }"
+                  [filter]="true"
+                ></p-multiSelect>
+              </div>
+              <div class="input-item">
+                <label for="location">{{ "Location" | translate }}</label>
+                <input
+                  type="text"
+                  id="location"
+                  formControlName="location"
+                  [(ngModel)]="request.location"
+                  [class.invalid]="
+                    firstStepForm.get('location')?.hasError('pattern') ||
+                    (!request.location && secondStepSubmitted)
+                  "
+                />
+              </div>
+            </div>
+            <button type="button" (click)="validateSecondStep()">
+              {{ "Next" | translate }}
+            </button>
+          </div>
+        </form>
+        <div class="item expander-container">
+          <div class="heading" (click)="toggleExpander(2)">
             <img
               [src]="fourthStepPassed ? 'green-check.svg' : 'grey-check.svg'"
               alt=""
             />
             <p>{{ "Confirm email" | translate }}</p>
           </div>
-          <div class="inputs" [@expanderAnimation]="expanderStates[1]">
+          <div class="inputs" [@expanderAnimation]="expanderStates[2]">
             <div class="row" style="align-items: flex-end">
               <div class="input-item">
                 <label for="code">{{ "Verification code" | translate }}</label>

@@ -78,11 +78,24 @@ export class SignUpService {
   }
 
   private checkMailExists() {
+    this.service.Exists(this.component.request.email).subscribe((resp) => {
+      if (resp.data.exists) {
+        this.message.showTranslatedWarningMessage('Email already exists');
+        this.component.firstStepPassed = false;
+      } else {
+        this.checkPersonalIdExists();
+      }
+    });
+  }
+
+  checkPersonalIdExists() {
     this.service
-      .Exists(this.component.request.email)
+      .ExistsByPersonalId(this.component.request.personalId)
       .subscribe((resp) => {
         if (resp.data.exists) {
-          this.message.showTranslatedWarningMessage('Email already exists');
+          this.message.showTranslatedWarningMessage(
+            'Personal id already exists',
+          );
           this.component.firstStepPassed = false;
         } else {
           this.component.firstStepPassed = true;
@@ -91,15 +104,13 @@ export class SignUpService {
       });
   }
   checkMail() {
-    this.service
-      .Exists(this.component.request.email)
-      .subscribe((resp) => {
-        if (resp.data.exists) {
-          this.message.showTranslatedWarningMessage('Email already exists');
-        } else {
-          this.sendVerificationCode();
-        }
-      });
+    this.service.Exists(this.component.request.email).subscribe((resp) => {
+      if (resp.data.exists) {
+        this.message.showTranslatedWarningMessage('Email already exists');
+      } else {
+        this.sendVerificationCode();
+      }
+    });
   }
 
   initMonths() {

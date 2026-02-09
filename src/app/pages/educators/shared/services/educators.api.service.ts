@@ -31,4 +31,8 @@ export class EducatorsApiService extends BaseCrudApiService {
   ForgotPassword(req: any) {
     return this.post(this.serviceUrl + 'ForgotPassword', req)
   }
+
+  ExistsByPersonalId(personalId:string){
+    return this.get(this.serviceUrl + 'ExistsByPersonalId/', personalId);
+  }
 }

@@ -24,7 +24,7 @@ export class ApplicationMessageCenterService {
       severity: 'success',
       summary: header,
       detail: message,
-      sticky: true,
+      sticky: false,
     });
   }
 
@@ -33,7 +33,7 @@ export class ApplicationMessageCenterService {
       severity: 'error',
       summary: header,
       detail: message,
-      sticky:true,
+      sticky:false,
       life: 5000,
     });
   }
@@ -44,7 +44,7 @@ export class ApplicationMessageCenterService {
       summary: header,
       detail: message,
       life: 5000,
-      sticky: true,
+      sticky: false,
     });
   }
 
