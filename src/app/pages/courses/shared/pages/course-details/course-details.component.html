@@ -111,57 +111,59 @@
           </div>
         </div>
       </div>
-      <div class="ratings">
-        <label>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_1850_55420)">
-              <path
-                d="M9.99655 2.49883L11.9347 7.47434C12.0686 7.84356 12.4152 8.09123 12.81 8.11513L18.0877 8.49198C18.6599 8.52527 18.9027 9.23029 18.4705 9.63001L14.3812 13.4588C14.0829 13.7404 13.9533 14.1614 14.0446 14.5612L15.1603 19.7159C15.2778 20.2794 14.6805 20.7168 14.1903 20.4377L9.68531 17.9304C9.34264 17.7367 8.9178 17.7367 8.57514 17.9304L4.07023 20.4377C3.57989 20.7168 2.98262 20.2794 3.10008 19.7159L4.21584 14.5612C4.30711 14.1614 4.17761 13.7404 3.87922 13.4588L-0.210098 9.63001C-0.642262 9.23029 -0.399524 8.52527 0.172586 8.49198L5.45027 8.11513C5.84511 8.09123 6.19165 7.84356 6.32577 7.47434L8.2639 2.49883C8.49408 1.9763 9.23018 1.9763 9.46037 2.49883H9.99655Z"
-                fill="#EDCA1D"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_1850_55420">
-                <rect width="19.9922" height="19.9922" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-          {{ total }}
-          {{ "course rating" | translate }}
-          <span>{{ ratings.length }} {{ "ratings" | translate }}</span>
-        </label>
-        <div class="items">
-          <div class="item" *ngFor="let item of ratings">
-            <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="13"
-                viewBox="0 0 14 13"
-                fill="none"
-              >
+      @if (ratings.length > 0) {
+        <div class="ratings">
+          <label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_1850_55420)">
                 <path
-                  d="M6.75 6C8.4069 6 9.75 4.6569 9.75 3C9.75 1.34315 8.4069 0 6.75 0C5.0931 0 3.75 1.34315 3.75 3C3.75 4.6569 5.0931 6 6.75 6ZM6.75 7.5C4.37009 7.5 0 8.691 0 11.25V12.75H13.5V11.25C13.5 8.691 9.1299 7.5 6.75 7.5Z"
-                  fill="white"
+                  d="M9.99655 2.49883L11.9347 7.47434C12.0686 7.84356 12.4152 8.09123 12.81 8.11513L18.0877 8.49198C18.6599 8.52527 18.9027 9.23029 18.4705 9.63001L14.3812 13.4588C14.0829 13.7404 13.9533 14.1614 14.0446 14.5612L15.1603 19.7159C15.2778 20.2794 14.6805 20.7168 14.1903 20.4377L9.68531 17.9304C9.34264 17.7367 8.9178 17.7367 8.57514 17.9304L4.07023 20.4377C3.57989 20.7168 2.98262 20.2794 3.10008 19.7159L4.21584 14.5612C4.30711 14.1614 4.17761 13.7404 3.87922 13.4588L-0.210098 9.63001C-0.642262 9.23029 -0.399524 8.52527 0.172586 8.49198L5.45027 8.11513C5.84511 8.09123 6.19165 7.84356 6.32577 7.47434L8.2639 2.49883C8.49408 1.9763 9.23018 1.9763 9.46037 2.49883H9.99655Z"
+                  fill="#EDCA1D"
                 />
-              </svg>
-            </div>
-            <div class="info">
-              <p class="name">{{ "Anonymous" | translate }}</p>
-              <p-rating [(ngModel)]="item.value" [disabled]="true" />
-              <p class="comment">
-                {{ item.comment }}
-              </p>
+              </g>
+              <defs>
+                <clipPath id="clip0_1850_55420">
+                  <rect width="19.9922" height="19.9922" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            {{ total }}
+            {{ "course rating" | translate }}
+            <span>{{ ratings.length }} {{ "ratings" | translate }}</span>
+          </label>
+          <div class="items">
+            <div class="item" *ngFor="let item of ratings">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="13"
+                  viewBox="0 0 14 13"
+                  fill="none"
+                >
+                  <path
+                    d="M6.75 6C8.4069 6 9.75 4.6569 9.75 3C9.75 1.34315 8.4069 0 6.75 0C5.0931 0 3.75 1.34315 3.75 3C3.75 4.6569 5.0931 6 6.75 6ZM6.75 7.5C4.37009 7.5 0 8.691 0 11.25V12.75H13.5V11.25C13.5 8.691 9.1299 7.5 6.75 7.5Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+              <div class="info">
+                <p class="name">{{ "Anonymous" | translate }}</p>
+                <p-rating [(ngModel)]="item.value" [disabled]="true" />
+                <p class="comment">
+                  {{ item.comment }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     </div>
     <div class="right">
       <div class="heading">
