@@ -23,8 +23,8 @@ import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-cours
 import { CalendarMeetingsCreateComponent } from './shared/components/calendar-meetings-create/calendar-meetings-create.component';
 import { Confirmation } from '../../core/extensions/confirmation';
 import { ConfirmationService } from 'primeng/api';
-import {CalendarMeetingEditComponent} from './shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
-import {ScheduleTaskModel} from './shared/models/schedule-task.model';
+import { CalendarMeetingEditComponent } from './shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
+import { ScheduleTaskModel } from './shared/models/schedule-task.model';
 
 @Component({
   selector: 'app-calendar',
@@ -156,7 +156,7 @@ export class CalendarComponent {
 
   handleSetDateInfo(day: any): void {
     day.dateString = this.service.formatDate(day.date);
-    console.log(this.activeDateInfo)
+    console.log(this.activeDateInfo);
     this.activeDateInfo = day;
     this.showActivities = true;
   }
@@ -246,13 +246,12 @@ export class CalendarComponent {
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
-        // this.service.getAllMeetings();
+        this.service.getMeetings();
       }
     });
   }
 
-
   openAttendanceDialog(task: ScheduleTaskModel) {
-    this.service.getStudentsByCourse(task)
+    this.service.getStudentsByCourse(task);
   }
 }
