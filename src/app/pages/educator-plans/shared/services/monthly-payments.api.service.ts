@@ -19,4 +19,8 @@ export class MonthlyPaymentsApiService extends BaseCrudApiService {
   MarkAsPaid(req: any) {
     return this.post(this.serviceUrl + 'MarkAsPaid', req);
   }
+
+  Pay(req: any) {
+    return this.post(this.serviceUrl + 'Pay', req);
+  }
 }

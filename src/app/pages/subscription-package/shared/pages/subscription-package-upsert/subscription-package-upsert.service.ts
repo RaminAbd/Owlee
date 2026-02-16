@@ -39,9 +39,13 @@ export class SubscriptionPackageUpsertService {
       !this.component.request.price ||
       !this.component.request.annualPrice ||
       !this.component.request.maxCapacity ||
+      !this.component.request.openMaxCapacity ||
       !this.component.request.courseAmount ||
-      !this.component.request.groupPerCourse ||
-      !this.component.request.peoplePerGroup
+      !this.component.request.openCourseAmount ||
+      !this.component.request.fileStorage ||
+      !this.component.request.openFileStorage
+      // !this.component.request.groupPerCourse ||
+      // !this.component.request.peoplePerGroup
     ) {
       result = false;
     }

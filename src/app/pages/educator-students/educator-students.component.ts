@@ -14,7 +14,6 @@ import {TranslatePipe} from '@ngx-translate/core';
   imports: [
     FormsModule,
     NgForOf,
-    NgIf,
     RouterLink,
     TranslatePipe,
     NgStyle

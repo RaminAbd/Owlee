@@ -1,12 +1,11 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePipe, Location, NgForOf, NgIf } from '@angular/common';
+import { DatePipe, Location, NgForOf } from '@angular/common';
 import {
   LangChangeEvent,
   TranslatePipe,
   TranslateService,
 } from '@ngx-translate/core';
-import { CourseGroupsService } from '../course-groups/course-groups.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
@@ -14,7 +13,6 @@ import { GroupsResponseModel } from '../../../../../models/groups-response.model
 import { CourseAssignmentsService } from './course-assignments.service';
 import { AssignmentsRequestModel } from './shared/models/assignments-request.model';
 import { Popover } from 'primeng/popover';
-import { TopicRequestModel } from '../../../../../models/topic-request.model';
 import { AssignmentsResponseModel } from './shared/models/assignments-response.model';
 
 @Component({
@@ -22,7 +20,6 @@ import { AssignmentsResponseModel } from './shared/models/assignments-response.m
   imports: [
     FormsModule,
     NgForOf,
-    NgIf,
     TranslatePipe,
     Popover,
     DatePipe,

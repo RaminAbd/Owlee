@@ -5,13 +5,9 @@ import { StudentCourseDetailsComponent } from './student-course-details.componen
 import { EducatorsApiService } from '../../../../educators/shared/services/educators.api.service';
 import { KnownLanguagesApiService } from '../../../../known-languages/shared/services/known-languages.api.service';
 import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-material.model';
-import {
-  HomeWorksApiService
-} from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/services/homeworks.api.service';
-import {
-  AssignmentsResponseModel
-} from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
-import {FileExporter} from '../../../../../core/extensions/download-zip';
+import { HomeWorksApiService } from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/services/homeworks.api.service';
+import { AssignmentsResponseModel } from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
+import { FileExporter } from '../../../../../core/extensions/download-zip';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +27,7 @@ export class StudentCourseDetailsService {
       .GetAllByLang(this.langService.serviceUrl, this.translate.currentLang)
       .subscribe((resp) => {
         this.component.languages = resp.data;
-        console.log(this.component.languages, "languges");
+        console.log(this.component.languages, 'languges');
         this.getCourse();
       });
   }
@@ -72,6 +68,23 @@ export class StudentCourseDetailsService {
         () => 'collapsed',
       );
       console.log(this.component.response);
+
+      const now = new Date();
+      if (this.component.response.startDate) {
+        const startDate = new Date(this.component.response.startDate);
+        const twoWeeksAfterStart = new Date(startDate);
+        twoWeeksAfterStart.setDate(startDate.getDate() + 10);
+        this.component.showRating = now >= twoWeeksAfterStart;
+      } else {
+        this.component.showRating = false;
+      }
+
+      if (this.component.response.endDate) {
+        this.component.showCertificate =
+          now >= new Date(this.component.response.endDate);
+      } else {
+        this.component.showCertificate = false;
+      }
     });
   }
 
@@ -83,24 +96,25 @@ export class StudentCourseDetailsService {
     return finded ? finded.icon : '';
   }
 
-
-  getAllAssignments(){
+  getAllAssignments() {
     const req = {
       CourseId: this.component.id,
-      studentId:localStorage.getItem('userId') as string,
-    }
+      studentId: localStorage.getItem('userId') as string,
+    };
     this.assignmentsService.GetAllForStudent(req).subscribe((resp) => {
-      console.log(resp.data)
-      this.component.assignments = resp.data.map((item:AssignmentsResponseModel)=>({
-        ...item,
-        isPast: new Date(item.availableTo).getTime() < Date.now(),
-      }));
-    })
+      console.log(resp.data);
+      this.component.assignments = resp.data.map(
+        (item: AssignmentsResponseModel) => ({
+          ...item,
+          isPast: new Date(item.availableTo).getTime() < Date.now(),
+        }),
+      );
+    });
   }
 
   downloadFile(mat: any) {
-    FileExporter.downloadFilesIndividually(mat.file.fileUrl).then(()=>{
+    FileExporter.downloadFilesIndividually(mat.file.fileUrl).then(() => {
       mat.fileLoading = false;
-    })
+    });
   }
 }

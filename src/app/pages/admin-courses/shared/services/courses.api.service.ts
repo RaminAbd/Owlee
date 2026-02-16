@@ -16,8 +16,8 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.get(this.serviceUrl + 'GetByEducator/', null, req);
   }
 
-  GetAvailableCourseSlots(educatorId: string) {
-    return this.get(this.serviceUrl + 'GetAvailableCourseSlots/', educatorId);
+  GetAvailableCourseSlots(req: any) {
+    return this.get(this.serviceUrl + 'GetAvailableCourseSlots', null, req);
   }
 
   Copy(req: any) {
@@ -38,5 +38,13 @@ export class CoursesApiService extends BaseCrudApiService {
 
   GetStudents(id: string) {
     return this.get(this.serviceUrl + 'GetStudents/', id);
+  }
+
+  GetOpenCourses(lang: string) {
+    return this.get(this.serviceUrl + 'GetOpenCourses/', lang);
+  }
+
+  Subscribe(req: any) {
+    return this.post(this.serviceUrl + 'Subscribe', req);
   }
 }

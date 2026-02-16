@@ -50,8 +50,9 @@
             <button *ngIf="item.paid">
               {{ "Paid" }}
             </button>
-            <button class="unpaid" *ngIf="!item.paid">
-              {{ "Unpaid" }}
+            <button class="unpaid" *ngIf="!item.paid" (click)="pay(item)" [disabled]="item.loading">
+              <span *ngIf="!item.loading">{{ "Pay" }}</span>
+              <i class="pi pi-spin pi-spinner" *ngIf="item.loading"></i>
             </button>
           </div>
         </div>

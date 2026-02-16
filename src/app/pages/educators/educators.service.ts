@@ -40,6 +40,7 @@ export class EducatorsService {
       { field: 'dateOfBirth', header: 'Date of birth' },
       { field: 'location', header: 'Location' },
       { field: 'createdAt', header: 'Created date' },
+      { field: 'rating', header: 'Rating' },
       { field: 'educatorsActions', header: 'Actions' },
     ];
   }

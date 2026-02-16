@@ -1,7 +1,4 @@
 <div class="home-wrapper" xmlns="http://www.w3.org/1999/html">
-  <div class="header">
-    <app-home-header></app-home-header>
-  </div>
   <div class="home-content">
     <section id="first">
       <div class="heading">
@@ -128,151 +125,55 @@
         </div>
       </div>
     </section>
-    <!--    <section id="fourth">-->
-    <!--      <div class="heading">-->
-    <!--        <h2>{{ "Services" | translate }}</h2>-->
-    <!--        <p>-->
-    <!--          {{-->
-    <!--            "Enhancing the overall learning experience for both educators and students."-->
-    <!--              | translate-->
-    <!--          }}-->
-    <!--        </p>-->
-    <!--      </div>-->
-    <!--      <div class="items">-->
-    <!--        <div class="item r">-->
-    <!--          <div class="txt">-->
-    <!--            <h4>-->
-    <!--              {{ "Lecture Scheduling & Calendar Integration" | translate }}-->
-    <!--            </h4>-->
-    <!--            <p>-->
-    <!--              {{-->
-    <!--                "Plan and organize lessons with an intuitive scheduling system, ensuring students stay updated with class timings."-->
-    <!--                  | translate-->
-    <!--              }}-->
-    <!--            </p>-->
-    <!--          </div>-->
-    <!--          <div class="image">-->
-    <!--            <img-->
-    <!--              src="https://owleeblob.blob.core.windows.net/images/75f2a411-2d3f-47fc-8af1-e429e264ea4a-Lecture%20Scheduling%20%26%20Calendar%20Integration%20%281%29.jpg"-->
-    <!--              alt=""-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--          <button class="join" routerLink="auth">-->
-    <!--            {{ "Join us" | translate }}-->
-    <!--          </button>-->
-    <!--        </div>-->
-    <!--        <div class="item l">-->
-    <!--          <div class="txt">-->
-    <!--            <h4>{{ "Student Management" | translate }}</h4>-->
-    <!--            <p>-->
-    <!--              {{-->
-    <!--                "Managing the teaching process has never been easier. On the Owlee platform, you can create a digital space for all your groups and share learning materials, class meetings, and manage communication with students."-->
-    <!--                  | translate-->
-    <!--              }}-->
-    <!--            </p>-->
-    <!--          </div>-->
-    <!--          <div class="image">-->
-    <!--            <img-->
-    <!--              src="https://owleeblob.blob.core.windows.net/images/8ac8afd7-c618-4936-9346-9537b5f82d94-Student%20Management%20%281%29.jpg"-->
-    <!--              alt=""-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="item r">-->
-    <!--          <div class="txt">-->
-    <!--            <h4>{{ "Material Management" | translate }}</h4>-->
-    <!--            <p>-->
-    <!--              {{-->
-    <!--                "Upload, organize, and distribute learning resources, including PDFs, videos, and interactive content."-->
-    <!--                  | translate-->
-    <!--              }}-->
-    <!--            </p>-->
-    <!--          </div>-->
-    <!--          <div class="image">-->
-    <!--            <img-->
-    <!--              src="https://owleeblob.blob.core.windows.net/images/b711233c-1464-4359-b95c-365a6f07329a-Material%20Management%20%281%29.jpg"-->
-    <!--              alt=""-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </section>-->
-    <!--    <section id="fifth">-->
-    <!--      <div class="heading">-->
-    <!--        <h2>{{ "Start your free trial!" | translate }}</h2>-->
-    <!--        <p>-->
-    <!--          {{-->
-    <!--            "Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!"-->
-    <!--              | translate-->
-    <!--          }}-->
-    <!--        </p>-->
-    <!--      </div>-->
-    <!--      <div class="switcher">-->
-    <!--        <div-->
-    <!--          class="item"-->
-    <!--          (click)="selectedPackageType = 1"-->
-    <!--          [ngClass]="{ selected: selectedPackageType === 1 }"-->
-    <!--        >-->
-    <!--          <p>{{ "Monthly" | translate }}</p>-->
-    <!--        </div>-->
-    <!--        <div-->
-    <!--          class="item"-->
-    <!--          (click)="selectedPackageType = 2"-->
-    <!--          [ngClass]="{ selected: selectedPackageType === 2 }"-->
-    <!--        >-->
-    <!--          <p>{{ "Annually" | translate }}</p>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="items">-->
-    <!--        <div class="item" *ngFor="let item of subscriptionPackages">-->
-    <!--          <div class="pop">-->
-    <!--            <p>{{ "Most popular" | translate }}</p>-->
-    <!--          </div>-->
-    <!--          <div class="name">-->
-    <!--            <p>{{ item.name }}</p>-->
-    <!--          </div>-->
-    <!--          <div class="descr">-->
-    <!--            <p>-->
-    <!--              {{ "Recommended for those who’ve got" | translate }}-->
-    <!--              {{ item.maxCapacity }} {{ "students" | translate }}.-->
-    <!--            </p>-->
-    <!--          </div>-->
-    <!--          <div class="price">-->
-    <!--            <p>-->
-    <!--              <span-->
-    <!--                >{{-->
-    <!--                  selectedPackageType === 1 ? item.price : item.annualPrice-->
-    <!--                }}₾</span-->
-    <!--              >-->
-    <!--              / {{ "month" | translate }}-->
-    <!--            </p>-->
-    <!--          </div>-->
-    <!--          <div class="features">-->
-    <!--            <div class="f-item">-->
-    <!--              <img src="d-check.svg" alt="" />-->
-    <!--              <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>-->
-    <!--            </div>-->
-    <!--            <div class="f-item">-->
-    <!--              <img src="d-check.svg" alt="" />-->
-    <!--              <p>-->
-    <!--                {{ item.groupPerCourse }} {{ "Groups per course" | translate }}-->
-    <!--              </p>-->
-    <!--            </div>-->
-    <!--            <div class="f-item">-->
-    <!--              <img src="d-check.svg" alt="" />-->
-    <!--              <p>-->
-    <!--                {{ item.peoplePerGroup }} {{ "Students per group" | translate }}-->
-    <!--              </p>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--          <div class="btn">-->
-    <!--            <button routerLink="student-sign-up">-->
-    <!--              {{ "Get started" | translate }}-->
-    <!--            </button>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </section>-->
+    <section id="fourth">
+      <div class="heading">
+        <h2>{{ "Courses" | translate }}</h2>
+        <p>
+          {{
+            "From critical skills to technical topics, We support your professional development"
+              | translate
+          }}
+        </p>
+      </div>
+      <div class="items">
+        <div
+          class="item"
+          *ngFor="let item of courses"
+          routerLink="/courses/{{ item.id }}"
+        >
+          <div class="image">
+            <img [src]="item.image" alt="" />
+          </div>
+          <div class="info">
+            <div class="name">
+              <p>{{ item.name }}</p>
+            </div>
+            <div class="price-info">
+              <p class="price">${{ item.price }}</p>
+              <span
+                >{{ "Starts" | translate }}
+                {{ item.startDate | date: "dd/MM/yyyy" }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <button routerLink="/courses">
+        {{ "See more" | translate }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="13"
+          viewBox="0 0 12 13"
+          fill="none"
+        >
+          <path
+            d="M6.7101 11.7141L11.7101 6.71409C11.8011 6.61899 11.8725 6.50684 11.9201 6.38409C12.0201 6.14063 12.0201 5.86755 11.9201 5.62409C11.8725 5.50134 11.8011 5.3892 11.7101 5.29409L6.7101 0.294091C6.61687 0.200853 6.50618 0.126892 6.38435 0.076432C6.26253 0.0259717 6.13196 -2.56287e-07 6.0001 -2.6205e-07C5.7338 -2.73691e-07 5.47841 0.105788 5.2901 0.294091C5.1018 0.482395 4.99601 0.73779 4.99601 1.00409C4.99601 1.27039 5.1018 1.52579 5.2901 1.71409L8.5901 5.00409L1.0001 5.00409C0.734887 5.00409 0.480532 5.10945 0.292996 5.29698C0.10546 5.48452 0.0001037 5.73887 0.000103688 6.00409C0.000103676 6.26931 0.10546 6.52366 0.292996 6.7112C0.480532 6.89873 0.734887 7.00409 1.0001 7.00409L8.5901 7.00409L5.2901 10.2941C5.19637 10.3871 5.12198 10.4977 5.07121 10.6195C5.02044 10.7414 4.9943 10.8721 4.9943 11.0041C4.9943 11.1361 5.02044 11.2668 5.07121 11.3887C5.12198 11.5105 5.19637 11.6211 5.2901 11.7141C5.38307 11.8078 5.49367 11.8822 5.61553 11.933C5.73739 11.9838 5.86809 12.0099 6.0001 12.0099C6.13211 12.0099 6.26282 11.9838 6.38468 11.933C6.50654 11.8822 6.61714 11.8078 6.7101 11.7141Z"
+            fill="white"
+          />
+        </svg>
+      </button>
+    </section>
     <section id="fifth">
       <div class="heading">
         <h2>{{ "Frequently asked questions" | translate }}</h2>
@@ -296,7 +197,11 @@
           <p>{{ "Educators" | translate }}</p>
         </div>
       </div>
-      <div class="body" style="max-width: 900px;width: 100%;" *ngIf="selectedFAQsTab === 1">
+      <div
+        class="body"
+        style="max-width: 900px; width: 100%"
+        *ngIf="selectedFAQsTab === 1"
+      >
         <div class="card flex justify-center">
           <p-accordion value="0">
             <p-accordion-panel
@@ -313,7 +218,11 @@
           </p-accordion>
         </div>
       </div>
-      <div class="body" style="max-width: 900px;width: 100%;" *ngIf="selectedFAQsTab === 2">
+      <div
+        class="body"
+        style="max-width: 900px; width: 100%"
+        *ngIf="selectedFAQsTab === 2"
+      >
         <div class="card flex justify-center">
           <p-accordion value="0">
             <p-accordion-panel
@@ -588,64 +497,5 @@
         </div>
       </div>
     </section>
-    <footer>
-      <div class="bottom">
-        <div class="row2">
-          <div class="left">
-            <div class="logo">
-              <img src="logo.svg" alt="" />
-            </div>
-            <div class="name">
-              <p>Owlee</p>
-            </div>
-          </div>
-          <div class="right">
-            <nav>
-              <ul>
-                <li>
-                  <a href="#first" aria-label="home">{{
-                    "Home" | translate
-                  }}</a>
-                </li>
-                <li>
-                  <a href="#fourth" aria-label="services">{{
-                    "Services" | translate
-                  }}</a>
-                </li>
-                <li>
-                  <a href="#fifth" aria-label="packages">{{
-                    "Packages" | translate
-                  }}</a>
-                </li>
-                <li>
-                  <a href="#sixth" aria-label="contact">{{
-                    "Contact Us" | translate
-                  }}</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-
-        <div class="copy">
-          <div class="links">
-            <!--            <p>-->
-            <!--              2025 © All Rights Reserved-->
-            <!--            </p>-->
-            <a
-              style="text-decoration: underline"
-              href="https://butterflyeffect.ge"
-              target="_blank"
-              >Crafted by ButterflyEffect</a
-            >
-          </div>
-          <div class="terms">
-            <a routerLink="/terms-conditions">Terms and Conditions</a
-            ><span> / </span>
-            <a routerLink="/privacy">Privacy policy</a>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </div>

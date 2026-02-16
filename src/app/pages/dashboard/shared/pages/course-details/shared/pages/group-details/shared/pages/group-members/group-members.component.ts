@@ -4,8 +4,8 @@ import { GroupMembersResponseModel } from '../../../../../../../../models/group-
 import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
-import {Dialog} from 'primeng/dialog';
+import {ActivatedRoute} from '@angular/router';
+import {CourseRequestModel} from '../../../../../../../../models/course-request.model';
 
 @Component({
   selector: 'app-group-members',
@@ -16,8 +16,6 @@ import {Dialog} from 'primeng/dialog';
     FormsModule,
     NgStyle,
     NgIf,
-    Dialog,
-    RouterLink,
   ],
   templateUrl: './group-members.component.html',
   styleUrl: './group-members.component.scss',
@@ -26,15 +24,19 @@ export class GroupMembersComponent {
   private service: GroupMembersService = inject(GroupMembersService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   groupId = this.route.parent?.snapshot.paramMap.get('groupId') as string;
+  courseId = this.route.parent?.parent?.snapshot.paramMap.get('id') as string;
   members: GroupMembersResponseModel[] = [];
   searchText: string;
+  course: CourseRequestModel = new CourseRequestModel();
   filteredList: GroupMembersResponseModel[] = [];
   allowedToAddGroup: boolean = true;
   showEditComment:boolean = false;
   showComments:boolean = false;
   constructor() {
+    console.log(this.courseId, "courseId")
     this.service.component = this;
     this.service.getAll();
+    this.service.getCourse();
   }
 
   searchByName() {

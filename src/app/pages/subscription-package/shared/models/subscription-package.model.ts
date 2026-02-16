@@ -7,4 +7,8 @@ export class SubscriptionPackageModel {
   peoplePerGroup: number;
   price: number;
   annualPrice:number;
+  openMaxCapacity: any;
+  openCourseAmount: any;
+  fileStorage: any;
+  openFileStorage: boolean;
 }

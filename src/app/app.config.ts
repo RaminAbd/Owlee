@@ -4,7 +4,7 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {provideRouter, RouterModule} from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -67,6 +67,8 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient],
         },
       }),
+      RouterModule.forRoot(routes, { anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
+
     ]),
 
 

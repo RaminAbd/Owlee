@@ -12,6 +12,10 @@ import { SizeRequestModel } from '../../../../../../../../models/size-request.mo
 import { NgIf, NgStyle } from '@angular/common';
 import { Checkbox } from 'primeng/checkbox';
 import { DatePicker } from 'primeng/datepicker';
+import { CourseRequestModel } from '../../../../../../../../models/course-request.model';
+import {
+  ApplicationMessageCenterService
+} from '../../../../../../../../../../../core/services/ApplicationMessageCenter.service';
 
 @Component({
   selector: 'app-material-upsert',
@@ -40,16 +44,20 @@ export class MaterialUpsertComponent implements OnDestroy {
   startDate: any;
   endDate: any;
   courseId: string;
-  loading:boolean = false;
+  loading: boolean = false;
+  course: CourseRequestModel = new CourseRequestModel();
+
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private service: MaterialUpsertService,
+    private message: ApplicationMessageCenterService,
   ) {
     this.service.component = this;
     this.request = structuredClone(config.data.material);
     this.subtopic = structuredClone(config.data.subTopic);
     this.courseId = this.config.data.courseId;
+    this.course = this.config.data.course;
     this.service.getKnownLangs();
 
     this.service.getSubscription();
@@ -65,13 +73,22 @@ export class MaterialUpsertComponent implements OnDestroy {
     if (!input.files || input.files.length === 0) {
       return;
     }
+    let total = this.course.isOpen
+      ? this.subscription.openMaxFileStorage
+      : this.subscription.maxFileStorage;
+
     const file: any = input.files[0];
     file.fileMB = (file.size / 1024 / 1024).toFixed(2);
-    this.request.fakeFile = file;
-    let total = this.subscription.maxFileStorage;
-    let mb = this.request.fakeFile.fileMB;
+    let mb = file.fileMB;
     this.subscription.used = this.subscription.fileStorage + Number(mb);
     this.subscription.usedPercentage = (this.subscription.used / total) * 100;
+    if(this.subscription.used > total){
+      this.message.showTranslatedWarningMessage('Not enough storage space')
+      return;
+    }
+    this.request.fakeFile = file;
+
+
   }
 
   getFileName(fileName: string): string {
@@ -100,12 +117,15 @@ export class MaterialUpsertComponent implements OnDestroy {
 
   save() {
     this.loading = true;
+    console.log(this.request)
     this.service.save();
+  }
+
+  upgradePlan(){
+    this.service.upgradePlan()
   }
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
   }
-
-
 }

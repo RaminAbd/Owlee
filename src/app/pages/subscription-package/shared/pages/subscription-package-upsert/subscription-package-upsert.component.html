@@ -27,18 +27,18 @@
           [(ngModel)]="request.annualPrice"
         />
       </div>
-      <div class="input-item">
-        <label>{{ "Max Capacity" | translate }}</label>
-        <input
-          type="number"
-          [ngClass]="{ invalid: !request.maxCapacity && isSubmitted }"
-          [(ngModel)]="request.maxCapacity"
-        />
-      </div>
+<!--      <div class="input-item">-->
+<!--        <label>{{ "People Per Group" | translate }}</label>-->
+<!--        <input-->
+<!--          type="number"-->
+<!--          [ngClass]="{ invalid: !request.peoplePerGroup && isSubmitted }"-->
+<!--          [(ngModel)]="request.peoplePerGroup"-->
+<!--        />-->
+<!--      </div>-->
     </div>
     <div class="row">
       <div class="input-item">
-        <label>{{ "Course Amount" | translate }}</label>
+        <label>{{ "Private Course Amount" | translate }}</label>
         <input
           type="number"
           [ngClass]="{ invalid: !request.courseAmount && isSubmitted }"
@@ -46,19 +46,58 @@
         />
       </div>
       <div class="input-item">
-        <label>{{ "Group Per Course" | translate }}</label>
+        <label>{{ "Public Course Amount" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.groupPerCourse && isSubmitted }"
-          [(ngModel)]="request.groupPerCourse"
+          [ngClass]="{ invalid: !request.openCourseAmount && isSubmitted }"
+          [(ngModel)]="request.openCourseAmount"
+        />
+      </div>
+<!--      <div class="input-item">-->
+<!--        <label>{{ "Group Per Course" | translate }}</label>-->
+<!--        <input-->
+<!--          type="number"-->
+<!--          [ngClass]="{ invalid: !request.groupPerCourse && isSubmitted }"-->
+<!--          [(ngModel)]="request.groupPerCourse"-->
+<!--        />-->
+<!--      </div>-->
+
+    </div>
+    <div class="row">
+      <div class="input-item">
+        <label>{{ "Private Max Capacity" | translate }}</label>
+        <input
+          type="number"
+          [ngClass]="{ invalid: !request.maxCapacity && isSubmitted }"
+          [(ngModel)]="request.maxCapacity"
         />
       </div>
       <div class="input-item">
-        <label>{{ "People Per Group" | translate }}</label>
+        <label>{{ "Public Max Capacity" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.peoplePerGroup && isSubmitted }"
-          [(ngModel)]="request.peoplePerGroup"
+          [ngClass]="{ invalid: !request.openMaxCapacity && isSubmitted }"
+          [(ngModel)]="request.openMaxCapacity"
+        />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="input-item">
+        <label>{{ "Private Storage Capacity" | translate }}</label>
+        <input
+          type="number"
+          [ngClass]="{ invalid: !request.fileStorage && isSubmitted }"
+          [(ngModel)]="request.fileStorage"
+        />
+      </div>
+      <div class="input-item">
+        <label>{{ "Public Storage Capacity" | translate }}</label>
+        <input
+          type="number"
+          [ngClass]="{ invalid: !request.openFileStorage && isSubmitted }"
+          [(ngModel)]="request.openFileStorage"
         />
       </div>
     </div>

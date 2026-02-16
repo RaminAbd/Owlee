@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <section id="fourth">
+    <div class="heading">
+      <h2>{{ "Courses" | translate }}</h2>
+    </div>
+    <div class="items">
+      <div
+        class="item"
+        *ngFor="let item of courses"
+        routerLink="/courses/{{ item.id }}"
+      >
+        <div class="image">
+          <img [src]="item.image" alt="" />
+        </div>
+        <div class="info">
+          <div class="name">
+            <p>{{ item.name }}</p>
+          </div>
+          <div class="price-info">
+            <p class="price">${{ item.price }}</p>
+            <span
+              >{{ "Starts" | translate }}
+              {{ item.startDate | date: "dd/MM/yyyy" }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="eighth">
+    <div class="heading">
+      <h2>{{ "Partners" | translate }}</h2>
+      <p>
+        {{
+          "All great partnerships are built on trust, respect, and the willingness to grow together."
+            | translate
+        }}
+      </p>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div class="image">
+          <img src="partner-logos/gita.png" alt="" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="image">
+          <img style="height: 90px" src="partner-logos/butterfly.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

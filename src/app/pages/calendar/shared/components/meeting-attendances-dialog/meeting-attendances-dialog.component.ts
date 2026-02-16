@@ -1,17 +1,13 @@
 import {Component, inject} from '@angular/core';
-import {MultiSelect} from 'primeng/multiselect';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {SetAttendancesDialogService} from '../set-attendances-dialog/set-attendances-dialog.service';
 import {StudentsResponseModel} from '../../../../students/shared/models/students-response.model';
 import {ScheduleTaskModel} from '../../models/schedule-task.model';
 
 @Component({
   selector: 'app-meeting-attendances-dialog',
   imports: [
-    MultiSelect,
-    NgIf,
     TranslatePipe,
     NgForOf
   ],

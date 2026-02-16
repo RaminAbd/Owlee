@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AssignmentsRequestModel } from '../../models/assignments-request.model';
 import { AssignmentDetailsService } from './assignment-details.service';
-import { DatePipe, Location, NgForOf, NgIf } from '@angular/common';
+import { DatePipe, Location, NgForOf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SubmittedStudentModel } from '../../models/submitted-student.model';
 import { FileExporter } from '../../../../../../../../../../../core/extensions/download-zip';
 
 @Component({
   selector: 'app-assignment-details',
-  imports: [TranslatePipe, DatePipe, NgForOf, NgIf, RouterLink],
+  imports: [TranslatePipe, DatePipe, NgForOf, ],
   templateUrl: './assignment-details.component.html',
   styleUrl: './assignment-details.component.scss',
 })

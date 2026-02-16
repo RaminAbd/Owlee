@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { AuthRequestModel } from '../shared/models/auth-request.model';
 import { NgClass, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { environment } from '../../core/environments/environment';
 
 @Component({
@@ -14,6 +14,7 @@ import { environment } from '../../core/environments/environment';
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
+
   selectedTab: number = 1;
   isSubmitted: boolean = false;
   passVisible: boolean = false;
@@ -21,7 +22,8 @@ export class AuthComponent {
   signinLoading: boolean = false;
   private fb: FormBuilder = inject(FormBuilder);
   private service: AuthService = inject(AuthService);
-
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  id:string = this.route.snapshot.paramMap.get('id') as string;
   constructor() {
     this.service.component = this;
     this.service.checkRememberMe();

@@ -3,10 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Location, NgClass, NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UpsertHeadingComponent } from '../../../../../shared/components/upsert-heading/upsert-heading.component';
-import { KnownLanguagesUpsertService } from '../../../../known-languages/shared/pages/known-languages-upsert/known-languages-upsert.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
-import { KnownLanguagesRequestModel } from '../../../../known-languages/shared/models/known-languages-request.model';
 import { FaqsUpsertService } from './faqs-upsert.service';
 import { FaqsRequestModel } from '../../models/faqs-request.model';
 import {DropdownModule} from 'primeng/dropdown';
@@ -16,7 +14,6 @@ import {DropdownModule} from 'primeng/dropdown';
   imports: [
     FormsModule,
     NgForOf,
-    NgIf,
     TranslatePipe,
     UpsertHeadingComponent,
     NgClass,

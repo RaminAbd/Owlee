@@ -19,11 +19,14 @@ import {TransactionResultComponent} from './pages/transaction-result/transaction
 import {AdminSignInComponent} from './auth/admin-sign-in/admin-sign-in.component';
 import {GoogleAuthCallbackComponent} from './auth/google-auth-callback/google-auth-callback.component';
 import {StudentSignUpNewComponent} from './auth/student-sign-up-new/student-sign-up-new.component';
+import {CoursesComponent} from './pages/courses/courses.component';
+import {GuestChildrenRoutes} from './system-pages/guest/models/guest-children-routes';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, data: { title: 'Home' } },
+
   { path: 'admin-access', component: AdminSignInComponent, data: { title: 'Sign in' } },
   { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
+  { path: 'auth/:id', component: AuthComponent, data: { title: 'Sign in' } },
   { path: 'auth/callback', component: GoogleAuthCallbackComponent },
 
   { path: 'forgot/:role', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
@@ -54,7 +57,6 @@ export const routes: Routes = [
     data: { title: 'Privacy' },
   },
 
-
   { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign up' } },
   {
     path: 'student-sign-up/:id',
@@ -66,6 +68,15 @@ export const routes: Routes = [
     component: StudentSignUpNewComponent,
     data: { title: 'Sign up' },
   },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./system-pages/guest/guest.component').then(
+        (m) => m.GuestComponent
+      ),
+    children: GuestChildrenRoutes.children,
+  },
+
   {
     path: 'main',
     canActivate: [MainPageGuard],

@@ -3,8 +3,9 @@ import { HomeComponent } from './home.component';
 import { SubscriptionPackageApiService } from '../subscription-package/shared/services/subscription-package.api.service';
 import { EmailsApiService } from './shared/services/emails.api.service';
 import { ApplicationMessageCenterService } from '../../core/services/ApplicationMessageCenter.service';
-import {FaqsApiService} from '../admin-faqs/shared/services/faqs.api.service';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import { FaqsApiService } from '../admin-faqs/shared/services/faqs.api.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { CoursesApiService } from '../admin-courses/shared/services/courses.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +21,25 @@ export class HomeService {
   );
   protected _service: FaqsApiService = inject(FaqsApiService);
   protected translate: TranslateService = inject(TranslateService);
+  protected coursesService: CoursesApiService = inject(CoursesApiService);
   subscribe: any;
 
   subscribeToLangEvent() {
     this.subscribe = this.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.getAllFAQs();
+        this.getAllCourses();
       },
     );
+  }
+
+  getAllCourses() {
+    this.coursesService
+      .GetOpenCourses(this.translate.currentLang)
+      .subscribe((resp) => {
+        console.log(resp.data);
+        this.component.courses = resp.data.splice(0, 4);
+      });
   }
 
   getAllPackages() {
@@ -52,8 +64,12 @@ export class HomeService {
     this._service
       .GetAllByLang(this._service.serviceUrl, this.translate.currentLang)
       .subscribe((resp) => {
-        this.component.studentsFAQs = resp.data.filter((x: any) => x.faqType === 2);
-        this.component.educatorsFAQs = resp.data.filter((x: any) => x.faqType === 1);
+        this.component.studentsFAQs = resp.data.filter(
+          (x: any) => x.faqType === 2,
+        );
+        this.component.educatorsFAQs = resp.data.filter(
+          (x: any) => x.faqType === 1,
+        );
       });
   }
 }

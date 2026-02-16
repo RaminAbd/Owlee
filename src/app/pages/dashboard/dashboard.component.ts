@@ -19,17 +19,15 @@ export class DashboardComponent {
   private service: DashboardService = inject(DashboardService);
   private router: Router = inject(Router);
   searchText: string;
-  rating:number = 0
+  rating: number = 0;
   constructor() {
     this.service.component = this;
     this.service.getDashboard();
     this.service.getEducator();
   }
   create() {
-    this.service.checkSlots()
+    this.router.navigate(['/main/educator/dashboard/course/upsert', 'create']);
   }
-
-
 
   getInfo(item: DashboardCourseModel) {
     this.router.navigate([

@@ -10,10 +10,8 @@ import {PrimeTemplate} from 'primeng/api';
   selector: 'app-lecturer-faqs',
   imports: [
     Accordion,
-    AccordionTab,
     TranslatePipe,
     NgForOf,
-    PrimeTemplate,
     AccordionPanel,
     AccordionHeader,
     AccordionContent

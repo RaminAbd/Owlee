@@ -29,7 +29,7 @@ export class SubscriptionPackageService {
       { field: 'name', header: 'Name' },
       { field: 'maxCapacity', header: 'Max Capacity' },
       { field: 'courseAmount', header: 'Course Amount' },
-      { field: 'groupPerCourse', header: 'Group Per Course' },
+      // { field: 'groupPerCourse', header: 'Group Per Course' },
       { field: 'peoplePerGroup', header: 'People Per Group' },
       { field: 'price', header: 'Price' },
       { field: 'annualPrice', header: 'Annual' },

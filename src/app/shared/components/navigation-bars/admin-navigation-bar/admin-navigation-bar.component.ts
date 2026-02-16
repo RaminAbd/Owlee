@@ -4,7 +4,7 @@ import { NavigationBarComponent } from '../../navigation-bar/navigation-bar.comp
 @Component({
   selector: 'app-admin-navigation-bar',
   imports: [NavigationBarComponent],
-  template: `<app-navigation-bar [links]="links"></app-navigation-bar>`,
+  template: `<app-navigation-bar [links]="links" [logoUrl]="links[0].url"></app-navigation-bar>`,
   styleUrl: 'admin-navigation-bar.component',
 })
 export class AdminNavigationBarComponent {

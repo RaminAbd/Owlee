@@ -1,25 +1,27 @@
 <div class="header-wrapper">
-  <a routerLink="/"  class="logo">
+  <a routerLink="/" class="logo">
     <img src="text-logo.svg" alt="" />
   </a>
   <div class="lang-info">
     <nav>
       <ul>
         <li>
-          <a href="#first" aria-label="home">{{ "Home" | translate }}</a>
+          <a routerLink="/about" routerLinkActive="active" aria-label="about">{{
+            "About us" | translate
+          }}</a>
         </li>
-<!--        <li>-->
-<!--          <a href="#fourth" aria-label="services">{{-->
-<!--            "Services" | translate-->
-<!--          }}</a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <a href="#fifth" aria-label="packages">{{-->
-<!--            "Packages" | translate-->
-<!--          }}</a>-->
-<!--        </li>-->
         <li>
-          <a href="#sixth" aria-label="contact">{{
+          <a routerLink="/courses" routerLinkActive="active" aria-label="courses">{{
+            "Courses" | translate
+          }}</a>
+        </li>
+        <li>
+          <a (click)="navigateAndScroll('fifth')" aria-label="faq">{{
+              "FAQ" | translate
+            }}</a>
+        </li>
+        <li>
+          <a (click)="navigateAndScroll('sixth')" aria-label="contact">{{
             "Contact Us" | translate
           }}</a>
         </li>
@@ -48,16 +50,25 @@
         </span>
       </span>
     </span>
-    <div class="auth">
-      <button class="signUp" [routerLink]="'/student-sign-up'">{{ 'Start For Free'  | translate}}</button>
-      <button class="signIn" (click)="signin()">{{ 'Log in'  |translate}}</button>
+    <div class="auth" *ngIf="!userId">
+      <button class="signUp" [routerLink]="'/student-sign-up'">
+        {{ "Start For Free" | translate }}
+      </button>
+      <button class="signIn" (click)="signin()">
+        {{ "Log in" | translate }}
+      </button>
+    </div>
+    <div class="auth" *ngIf="userId">
+      <button class="signIn" (click)="signin()">
+        {{ "Dashboard" | translate }}
+      </button>
     </div>
   </div>
 </div>
 <div class="back" *ngIf="langOpen" (click)="langOpen = false"></div>
 <div class="mobile-header" id="mob">
   <div class="row">
-    <a routerLink="/"  class="logo">
+    <a routerLink="/" class="logo">
       <img src="text-logo.svg" alt="" />
     </a>
     <div class="menu-burger burger" (click)="toggleMenu()">
@@ -66,8 +77,11 @@
       <span></span>
     </div>
   </div>
-  <nav (@menuExpand.done)="onAnimationDone()"
-       [ngClass]="{ hidden: isHidden }"  [@menuExpand]="showMenu ? 'open' : 'closed'">
+  <nav
+    (@menuExpand.done)="onAnimationDone()"
+    [ngClass]="{ hidden: isHidden }"
+    [@menuExpand]="showMenu ? 'open' : 'closed'"
+  >
     <div class="nav-links">
       <div class="nav">
         <ul>
@@ -76,16 +90,16 @@
               "Home" | translate
             }}</a>
           </li>
-<!--          <li>-->
-<!--            <a href="#fourth" aria-label="services" (click)="closeBurger()">{{-->
-<!--              "Services" | translate-->
-<!--            }}</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="#fifth" aria-label="packages" (click)="closeBurger()">{{-->
-<!--              "Packages" | translate-->
-<!--            }}</a>-->
-<!--          </li>-->
+          <!--          <li>-->
+          <!--            <a href="#fourth" aria-label="services" (click)="closeBurger()">{{-->
+          <!--              "Services" | translate-->
+          <!--            }}</a>-->
+          <!--          </li>-->
+          <!--          <li>-->
+          <!--            <a href="#fifth" aria-label="packages" (click)="closeBurger()">{{-->
+          <!--              "Packages" | translate-->
+          <!--            }}</a>-->
+          <!--          </li>-->
           <li>
             <a href="#sixth" aria-label="contact" (click)="closeBurger()">{{
               "Contact Us" | translate
@@ -130,8 +144,12 @@
       </div>
     </div>
     <div class="auth">
-      <button class="signUp" [routerLink]="'/student-sign-up'">{{ 'Sign up'  | translate}}</button>
-      <button class="signIn" [routerLink]="'/auth'">{{ 'Log in'  |translate}}</button>
+      <button class="signUp" [routerLink]="'/student-sign-up'">
+        {{ "Sign up" | translate }}
+      </button>
+      <button class="signIn" [routerLink]="'/auth'">
+        {{ "Log in" | translate }}
+      </button>
     </div>
   </nav>
 </div>

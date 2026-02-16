@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { Location, NgForOf, NgIf, NgStyle } from '@angular/common';
+import { Location, NgForOf, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CourseRequestModel } from '../../../../../models/course-request.model';
@@ -7,11 +7,10 @@ import { CourseGroupsService } from './course-groups.service';
 import { GroupsResponseModel } from '../../../../../models/groups-response.model';
 import { FormsModule } from '@angular/forms';
 import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
-import { UpgradePlanComponent } from '../../../../../../../../shared/components/upgrade-plan/upgrade-plan.component';
 
 @Component({
   selector: 'app-course-groups',
-  imports: [FormsModule, TranslatePipe, NgForOf, NgStyle, NgIf],
+  imports: [FormsModule, TranslatePipe, NgForOf, NgIf],
   templateUrl: './course-groups.component.html',
   styleUrl: './course-groups.component.scss',
 })

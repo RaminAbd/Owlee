@@ -20,7 +20,6 @@ import { EducatorMeetingsRequestModel } from './shared/models/educator-meetings-
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-course.model';
-import { MeetingUpsertComponent } from '../dashboard/shared/pages/course-details/shared/components/meeting-upsert/meeting-upsert.component';
 import { CalendarMeetingsCreateComponent } from './shared/components/calendar-meetings-create/calendar-meetings-create.component';
 import { Confirmation } from '../../core/extensions/confirmation';
 import { ConfirmationService } from 'primeng/api';
@@ -36,7 +35,6 @@ import {ScheduleTaskModel} from './shared/models/schedule-task.model';
     NgIf,
     SlicePipe,
     DatePipe,
-    NgStyle,
     DropdownModule,
     ReactiveFormsModule,
     FormsModule,

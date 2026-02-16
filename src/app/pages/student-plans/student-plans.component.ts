@@ -49,5 +49,32 @@ export class StudentPlansComponent {
     console.log(this.filteredList);
   }
 
+  confirm(message: string, success: any) {
+    this.confirmationService.confirm({
+      header: this.translate.instant('Confirmation'),
+      message: this.translate.instant(message),
+      icon: 'pi pi-exclamation-circle',
+      rejectButtonProps: {
+        label: this.translate.instant('Cancel'),
+        icon: 'pi pi-times',
+        outlined: true,
+        size: 'small',
+      },
+      acceptButtonProps: {
+        label: this.translate.instant('Confirm'),
+        icon: 'pi pi-check',
+        size: 'small',
+      },
+      accept: () => {
+        success();
+      },
+      reject: () => {},
+    });
+  }
 
+  pay(item: PaymentsResponseModel) {
+    this.confirm('Are you sure ?', () => {
+      this.service.pay(item);
+    });
+  }
 }

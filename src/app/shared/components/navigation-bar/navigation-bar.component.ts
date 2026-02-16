@@ -13,6 +13,7 @@ import { NgForOf } from '@angular/common';
 })
 export class NavigationBarComponent {
   @Input() links: any[] = [];
+  @Input() logoUrl:string;
   constructor(
     private sanitizer: DomSanitizer,
     private signInService: AuthService,

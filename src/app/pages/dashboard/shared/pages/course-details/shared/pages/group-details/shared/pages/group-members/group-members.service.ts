@@ -5,25 +5,39 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { InviteStudentDialogComponent } from '../../../../../components/invite-student-dialog/invite-student-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { UpgradePlanComponent } from '../../../../../../../../../../../shared/components/upgrade-plan/upgrade-plan.component';
-import {NotesApiService} from '../../../../../../../../services/notes.api.service';
-import {MemberCommentComponent} from './components/member-comment/member-comment.component';
+import { NotesApiService } from '../../../../../../../../services/notes.api.service';
+import { MemberCommentComponent } from './components/member-comment/member-comment.component';
+import { CoursesApiService } from '../../../../../../../../../../admin-courses/shared/services/courses.api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupMembersService {
   private service: GroupMembersApiService = inject(GroupMembersApiService);
+  private coursesService: CoursesApiService = inject(CoursesApiService);
   component: GroupMembersComponent;
   public dialogService: DialogService = inject(DialogService);
   public translate: TranslateService = inject(TranslateService);
   constructor() {}
 
+  getCourse() {
+    const req = {
+      id: this.component.courseId,
+      lang: this.translate.currentLang,
+    };
+    this.coursesService
+      .GetByIdByLang(this.coursesService.serviceUrl, req)
+      .subscribe((resp) => {
+        this.component.course = resp.data;
+        this.checkSlots();
+      });
+  }
+
   getAll() {
     this.service.GetMembersByGroup(this.component.groupId).subscribe((resp) => {
       this.component.members = resp.data;
       this.component.filteredList = structuredClone(resp.data);
-      console.log(this.component.members, "members")
-      this.checkSlots();
+      console.log(this.component.members, 'members');
     });
   }
 
@@ -58,7 +72,7 @@ export class GroupMembersService {
       style: {
         maxWidth: '95%',
       },
-      data:2
+      data: 2,
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {
@@ -68,7 +82,11 @@ export class GroupMembersService {
   }
 
   checkSlots() {
-    this.service.GetAvailableSlots(this.component.groupId).subscribe((resp) => {
+    const req = {
+      EducatorId: localStorage.getItem('userId'),
+      isOpen: this.component.course.isOpen,
+    };
+    this.service.GetAvailableSlots(req).subscribe((resp) => {
       console.log(resp.data);
       if (resp.data !== 0) {
         this.component.allowedToAddGroup = true;
@@ -80,20 +98,20 @@ export class GroupMembersService {
 
   getComments(id: string) {
     const req = {
-      EducatorId:localStorage.getItem('userId') as string,
-      StudentId:id
-    }
-    console.log(req)
+      EducatorId: localStorage.getItem('userId') as string,
+      StudentId: id,
+    };
+    console.log(req);
     const ref = this.dialogService.open(MemberCommentComponent, {
       width: '456px',
       header: this.translate.instant('Notes'),
-      closable:true,
+      closable: true,
       style: {
         maxWidth: '95%',
       },
       data: {
-        request:req
-      }
+        request: req,
+      },
     });
     ref.onClose.subscribe((e: any) => {
       if (e) {

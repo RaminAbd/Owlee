@@ -1,0 +1,283 @@
+.wrapper {
+  #fourth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 55px;
+    padding: 0 80px;
+    @media (max-width: 1300px) {
+      gap: 50px;
+    }
+    @media (max-width: 769px) {
+      margin-top: 48px;
+      padding: 0 20px;
+      gap: 40px;
+    }
+    .heading {
+      display: flex;
+
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
+      h2 {
+        color: #13170c;
+        text-align: center;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 56px; /* 140% */
+        @media (max-width: 769px) {
+          font-size: 18px;
+          line-height: normal;
+        }
+      }
+      p {
+        color: #656668;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 150% */
+        @media (max-width: 769px) {
+          font-size: 14px;
+          line-height: normal;
+        }
+      }
+    }
+
+    .items {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      max-width: 1292px;
+      .item {
+        cursor: pointer;
+        flex: 1;
+        height: 280px;
+        border-radius: 16px;
+        background: #f6f6f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 14px;
+        max-width: 290px;
+        @media (max-width: 480px) {
+          width: 100%;
+        }
+        &.add {
+          gap: 32px;
+          p {
+            font-size: 18px;
+            font-weight: 600;
+          }
+        }
+        .image {
+          height: 150px;
+          width: 100%;
+          position: relative;
+          display: flex;
+          img {
+            border-radius: 16px;
+            width: 99%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0 auto;
+          }
+          .lang-icon {
+            display: flex;
+            padding: 4px;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            left: 9px;
+            top: 11px;
+            border-radius: 37px;
+            background: #fff;
+            img {
+              width: 29px;
+              height: 29px;
+              border-radius: 37px;
+              object-fit: cover;
+            }
+          }
+        }
+        .info {
+          padding: 0 16px 22px 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 20px;
+          width: 100%;
+          height: calc(100% - 165px);
+          .name {
+            p {
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 21.78px;
+            }
+          }
+          .price-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            align-self: stretch;
+            p {
+              color: #13170c;
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+            }
+            span {
+              color: #13170c;
+              font-family: Inter;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+          }
+        }
+      }
+    }
+    button {
+      border-radius: 12px;
+      outline: 4px solid rgba(0, 146, 69, 0.2);
+      background: #009245;
+      display: flex;
+      width: 237px;
+      padding: 16px 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-top: 40px;
+    }
+  }
+  #eighth {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    padding: 0 50px;
+    @media (max-width: 769px) {
+      margin-top: 48px;
+      padding: 0 20px;
+      gap: 27px;
+    }
+    .heading {
+      display: flex;
+      width: 461px;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
+      h2 {
+        color: #13170c;
+        text-align: center;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 56px; /* 140% */
+        @media (max-width: 769px) {
+          font-size: 18px;
+          line-height: normal;
+        }
+      }
+      p {
+        color: #656668;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 150% */
+        @media (max-width: 769px) {
+          font-size: 14px;
+          line-height: normal;
+        }
+      }
+    }
+    .items {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      //align-self: stretch;
+      max-width: 1200px;
+      flex-wrap: wrap;
+      justify-content: center;
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        @media (max-width: 769px) {
+          width: 100%;
+        }
+        .image {
+          width: 100%;
+          @media (max-width: 769px) {
+            display: flex;
+            justify-content: center;
+          }
+          img {
+            //width: 100%;
+            height: 120px;
+            border-radius: 12px;
+            object-fit: cover;
+            @media (max-width: 769px) {
+              height: 90px;
+            }
+          }
+        }
+        .txt {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          //gap: 6px;
+          text-align: center;
+          a {
+            color: #13170c;
+            text-align: center;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 56px; /* 233.333% */
+            text-decoration: none;
+          }
+          p {
+            color: #656668;
+            text-align: center;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px; /* 150% */
+          }
+        }
+        &:last-child {
+          .image {
+            img {
+              @media (max-width: 769px) {
+                height: 70px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

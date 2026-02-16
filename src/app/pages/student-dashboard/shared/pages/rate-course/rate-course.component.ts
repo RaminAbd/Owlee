@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {Location} from '@angular/common';
+import {Location, NgIf} from '@angular/common';
 import {
   CourseInfoService
 } from '../../../../dashboard/shared/pages/course-details/shared/pages/course-info/course-info.service';
@@ -15,7 +15,8 @@ import {FormsModule} from '@angular/forms';
   imports: [
     TranslatePipe,
     Rating,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './rate-course.component.html',
   styleUrl: './rate-course.component.scss'
@@ -27,7 +28,8 @@ export class RateCourseComponent {
   private router: Router = inject(Router);
   courseId = this.route.snapshot.paramMap.get('id') as string;
   response: CourseDetailedResponseModel = new CourseDetailedResponseModel();
-  value:any
+  value:any = 0
+  comment:string=''
   constructor() {
     this.service.component = this;
     console.log(this.courseId)

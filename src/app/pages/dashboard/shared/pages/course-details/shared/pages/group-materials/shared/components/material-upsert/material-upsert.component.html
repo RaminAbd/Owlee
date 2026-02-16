@@ -89,8 +89,16 @@
           ></div>
         </div>
         <div class="total">
-          <p>{{ subscription.used.toFixed(2) }}MB/{{ subscription.maxFileStorage }}MB</p>
-          <span>{{ "See plans that offer more" | translate }}</span>
+          <p>
+            {{ subscription.used.toFixed(2) }}MB/{{
+              course.isOpen
+                ? subscription.openMaxFileStorage
+                : subscription.maxFileStorage
+            }}MB
+          </p>
+          <span (click)="upgradePlan()">{{
+            "See plans that offer more" | translate
+          }}</span>
         </div>
       }
     </div>
@@ -112,10 +120,19 @@
     </div>
     <div class="dates">
       <div class="selection">
-        <p-checkbox [(ngModel)]="enableSelection" [binary]="true" id="enableSelection"/>
-        <label style="cursor: pointer" for="enableSelection" (click)="enableSelection = !enableSelection">Schedule availability </label>
+        <p-checkbox
+          [(ngModel)]="enableSelection"
+          [binary]="true"
+          id="enableSelection"
+        />
+        <label
+          style="cursor: pointer"
+          for="enableSelection"
+          (click)="enableSelection = !enableSelection"
+          >Schedule availability
+        </label>
       </div>
-      <div class="row" style="margin-top: 18px;" *ngIf="enableSelection">
+      <div class="row" style="margin-top: 18px" *ngIf="enableSelection">
         <div class="input-item">
           <label>{{ "Start date" | translate }}</label>
           <div class="input">
@@ -189,13 +206,13 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
-    <button class="save" (click)="save()" [disabled]="loading">{{ "Save" | translate }}
-    <i class="pi pi-spin pi-spinner" *ngIf="loading"></i>
+    <button class="save" (click)="save()" [disabled]="loading">
+      {{ "Save" | translate }}
+      <i class="pi pi-spin pi-spinner" *ngIf="loading"></i>
     </button>
   </div>
 </div>

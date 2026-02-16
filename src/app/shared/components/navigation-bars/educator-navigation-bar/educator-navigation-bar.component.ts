@@ -4,7 +4,7 @@ import { NavigationBarComponent } from '../../navigation-bar/navigation-bar.comp
 @Component({
   selector: 'app-educator-navigation-bar',
   imports: [NavigationBarComponent],
-  template: ` <app-navigation-bar [links]="links"></app-navigation-bar> `,
+  template: ` <app-navigation-bar [links]="links" [logoUrl]="'/'"></app-navigation-bar> `,
   styles: ``,
 })
 export class EducatorNavigationBarComponent {

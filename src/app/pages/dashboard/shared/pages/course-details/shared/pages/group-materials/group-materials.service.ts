@@ -135,6 +135,7 @@ export class GroupMaterialsService {
         subTopic: sub,
         material: material,
         courseId: this.component.courseId,
+        course:this.component.course
       },
       style: {
         maxWidth: '95%',
@@ -157,6 +158,7 @@ export class GroupMaterialsService {
         subTopic: sub,
         material: new TopicMaterialModel(),
         courseId: this.component.courseId,
+        course:this.component.course
       },
       style: {
         maxWidth: '95%',

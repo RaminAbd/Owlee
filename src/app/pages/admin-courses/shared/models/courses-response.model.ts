@@ -6,4 +6,11 @@ export class CoursesResponseModel {
   name: string;
   description: string;
   language: string;
+  takenSeats:any;
+  startDate:any;
+  endDate:any;
+  price:any;
+  minimumSeats:any;
+  maximumSeats:any;
+  lastSubscriptionDate:any;
 }

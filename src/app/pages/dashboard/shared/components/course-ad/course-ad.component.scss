@@ -1,0 +1,110 @@
+.wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  .image {
+    position: relative;
+    img {
+      width: 100%;
+      height: 200px;
+      background-color: lightgray;
+      background-position: 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      object-fit: cover;
+    }
+    .info {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      p {
+        color: #fff;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px; /* 150% */
+        letter-spacing: -0.449px;
+      }
+      span {
+        color: rgba(255, 255, 255, 0.9);
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px; /* 150% */
+        letter-spacing: -0.15px;
+      }
+    }
+  }
+  .block {
+    display: flex;
+    height: 220.477px;
+    padding: 24px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19.992px;
+    flex-shrink: 0;
+    align-self: stretch;
+    p{
+      color: #13170C;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px; /* 150% */
+      letter-spacing: -0.15px;
+    }
+    .btns{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      flex-shrink: 0;
+      align-self: stretch;
+      button{
+        display: flex;
+        width: 451.992px;
+        padding: 13.75px 0 13.25px 0;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+        border: 1.5px solid #E3E3E2;
+        color: #656668;
+        text-align: center;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px; /* 150% */
+        letter-spacing: -0.15px;
+        &.reserve{
+          display: flex;
+          //padding: 13.242px 128.758px 14.242px 130.234px;
+          justify-content: center;
+          align-items: center;
+          flex: 1 0 0;
+          border-radius: 12px;
+          background: #009245;
+          color: #FFF;
+          text-align: center;
+          font-family: Inter;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 22.5px; /* 150% */
+          letter-spacing: -0.234px;
+        }
+      }
+    }
+  }
+}

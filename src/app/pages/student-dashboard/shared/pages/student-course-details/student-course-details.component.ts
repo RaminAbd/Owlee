@@ -72,6 +72,8 @@ export class StudentCourseDetailsComponent implements OnDestroy {
   langSubscribtion: any;
   expanderStates: string[] = [];
   assignments:AssignmentsResponseModel[]=[]
+  showRating:boolean = false
+  showCertificate:boolean = false
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();

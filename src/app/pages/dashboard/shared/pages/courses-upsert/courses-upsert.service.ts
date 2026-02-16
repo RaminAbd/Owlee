@@ -6,6 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { BlobService } from '../../../../../core/services/blob.service';
 import { StorageService } from '../../../../../core/services/storage.service';
 import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
+import { UpgradePlanComponent } from '../../../../../shared/components/upgrade-plan/upgrade-plan.component';
+import { Router } from '@angular/router';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +24,8 @@ export class CoursesUpsertService {
   private blob = inject(BlobService);
   public translate: TranslateService = inject(TranslateService);
   private storage: StorageService = inject(StorageService);
+  private router: Router = inject(Router);
+  public dialogService: DialogService = inject(DialogService);
   component: CoursesUpsertComponent;
   constructor() {}
 
@@ -61,16 +66,30 @@ export class CoursesUpsertService {
   save() {
     let authResp = this.storage.getObject('authResponse');
     this.component.request.educatorId = authResp.id;
+    this.buildRequest();
+    console.log(this.component.request);
     if (
       !this.component.request.name ||
       !this.component.request.description ||
+      !this.component.request.startDate ||
+      !this.component.request.endDate ||
       !this.component.request.image.fileUrl ||
       !this.component.request.systemLanguageId
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
     } else {
-      this.component.id === 'create' ? this.create() : this.update();
+      this.component.id === 'create' ? this.checkSlots() : this.update();
     }
+  }
+  buildRequest() {
+    if (this.component.startDate)
+      this.component.request.startDate = this.component.startDate.toISOString();
+    if (this.component.endDate)
+      this.component.request.endDate = this.component.endDate.toISOString();
+    if (this.component.lastDay)
+      this.component.request.lastSubscriptionDate =
+        this.component.lastDay.toISOString();
+    this.component.request.learningPoints = this.component.request.learningPoints.filter(x=>x.value)
   }
 
   private create() {
@@ -93,5 +112,35 @@ export class CoursesUpsertService {
           this.component.location.back();
         }
       });
+  }
+
+  checkSlots() {
+    let educatorId = localStorage.getItem('userId') as string;
+    const req = {
+      EducatorId: educatorId,
+      isOpen: this.component.request.isOpen,
+    };
+    this.service.GetAvailableCourseSlots(req).subscribe((resp) => {
+      if (resp.data !== 0) {
+        this.component.id === 'create' ? this.create() : this.update();
+      } else {
+        this.upgradePlan();
+      }
+    });
+  }
+
+  upgradePlan() {
+    const ref = this.dialogService.open(UpgradePlanComponent, {
+      width: '960px',
+      style: {
+        maxWidth: '95%',
+      },
+      data: 2,
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.checkSlots();
+      }
+    });
   }
 }

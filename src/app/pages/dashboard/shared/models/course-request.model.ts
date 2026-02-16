@@ -10,4 +10,12 @@ export class CourseRequestModel {
   description: string;
   educator:string
   rating: any;
+  maximumSeats: any;
+  minimumSeats: any;
+  price: any;
+  startDate: any;
+  endDate: any;
+  lastSubscriptionDate: any;
+  isOpen: boolean = false;
+  learningPoints: any[]=[];
 }

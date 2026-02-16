@@ -13,3 +13,19 @@
     font-size: 25px;
   }
 }
+::ng-deep{
+  .p-dialog-footer{
+    p-button{
+      flex:1 !important;
+      button{
+        width:100% !important;
+        border-radius: 12px !important;
+        .p-button-icon{
+          display: none !important;
+        }
+      }
+    }
+  }
+  .p-confirmdialog-reject-button, .p-confirmdialog-accept-button{
+  }
+}

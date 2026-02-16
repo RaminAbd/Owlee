@@ -3,7 +3,6 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SetAttendancesDialogService } from './set-attendances-dialog.service';
 import { StudentsResponseModel } from '../../../../students/shared/models/students-response.model';
 import {ScheduleTaskModel} from '../../models/schedule-task.model';
-import {DatePicker} from 'primeng/datepicker';
 import {MultiSelect} from 'primeng/multiselect';
 import {NgIf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -12,7 +11,6 @@ import {TranslatePipe} from '@ngx-translate/core';
 @Component({
   selector: 'app-set-attendances-dialog',
   imports: [
-    DatePicker,
     MultiSelect,
     NgIf,
     ReactiveFormsModule,

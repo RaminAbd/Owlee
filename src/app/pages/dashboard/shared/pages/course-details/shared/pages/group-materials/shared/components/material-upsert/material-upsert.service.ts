@@ -6,6 +6,9 @@ import { KnownLanguagesApiService } from '../../../../../../../../../../known-la
 import { TranslateService } from '@ngx-translate/core';
 import { BlobService } from '../../../../../../../../../../../core/services/blob.service';
 import { SubscriptionsApiService } from '../../../../../../../../../../../system-pages/educator/shared/services/subscriptions.api.service';
+import { UpgradePlanComponent } from '../../../../../../../../../../../shared/components/upgrade-plan/upgrade-plan.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { TopicMaterialModel } from '../../../../../../../../models/topic-material.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +16,7 @@ import { SubscriptionsApiService } from '../../../../../../../../../../../system
 export class MaterialUpsertService {
   component: MaterialUpsertComponent;
   private service: TopicApiService = inject(TopicApiService);
+  private dialogService: DialogService = inject(DialogService);
   private blob: BlobService = inject(BlobService);
   private subsService: SubscriptionsApiService = inject(
     SubscriptionsApiService,
@@ -51,7 +55,6 @@ export class MaterialUpsertService {
       if (this.component.request.fakeFile) {
         this.getFile((resp: any) => {
           this.component.request.file = resp.data;
-
           this.setSize();
         });
       } else {
@@ -150,6 +153,22 @@ export class MaterialUpsertService {
     fd.append('file', this.component.request.fakeFile);
     this.blob.UploadFile(fd).subscribe((resp: any) => {
       callback(resp);
+    });
+  }
+
+  upgradePlan() {
+    const ref = this.dialogService.open(UpgradePlanComponent, {
+      width: '960px',
+      style: {
+        maxWidth: '95%',
+      },
+      data: 2,
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.getSubscription();
+        this.component.request = new TopicMaterialModel();
+      }
     });
   }
 }

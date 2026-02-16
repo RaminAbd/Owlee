@@ -38,12 +38,13 @@ export class RateCourseService {
   }
 
   rate() {
-    const req = {
+    const req:any = {
       studentId: localStorage.getItem('userId') as string,
       educatorId: this.component.response.educatorId,
       courseId: this.component.response.id,
       rating: this.component.value,
     };
+    if(this.component.comment) req.comment = this.component.comment;
     this.ratingsService.Rate(req).subscribe((resp) => {
       this.router.navigate([
         'main/student/dashboard/course/info/',

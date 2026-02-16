@@ -39,6 +39,8 @@ export class AuthService {
     this.storage.removeObject('authResponse');
     this.storage.removeObject('authRequest');
     this.storage.removeObject('userInfo');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userRole');
   }
 
   SignInAsStudent(req: AuthRequestModel) {
@@ -51,7 +53,11 @@ export class AuthService {
         this.appMessageService.showTranslatedErrorMessage(resp.error);
       } else {
         this.setToStorage(resp.data, req);
-        this.navigateByRole(resp.data);
+        if (this.component.id) {
+          this.router.navigate(['/courses', this.component.id]);
+        } else {
+          this.navigateByRole(resp.data);
+        }
       }
     });
   }
@@ -93,11 +99,10 @@ export class AuthService {
     this.storage.removeObject('authResponse');
     this.storage.removeObject('role');
     this.storage.removeObject('token');
+    this.clearStorage();
   }
 
-
-
-  continueAsStudent(req:any){
+  continueAsStudent(req: any) {
     this.studentsService.SignUpWithGoogle(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.appMessageService.showTranslatedErrorMessage(
@@ -106,13 +111,16 @@ export class AuthService {
       } else {
         this.storage.saveObject('authResponse', resp.data);
         localStorage.setItem('userId', resp.data.id);
-        this.storage.saveObject('role', this.cryptoService.encrypt(resp.data.role, 3));
+        this.storage.saveObject(
+          'role',
+          this.cryptoService.encrypt(resp.data.role, 3),
+        );
         this.navigateByRole(resp.data);
       }
     });
   }
 
-  continueAsEducator(req:any){
+  continueAsEducator(req: any) {
     this.educatorsService.SignUpWithGoogle(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.appMessageService.showTranslatedErrorMessage(
@@ -121,7 +129,10 @@ export class AuthService {
       } else {
         this.storage.saveObject('authResponse', resp.data);
         localStorage.setItem('userId', resp.data.id);
-        this.storage.saveObject('role', this.cryptoService.encrypt(resp.data.role, 3));
+        this.storage.saveObject(
+          'role',
+          this.cryptoService.encrypt(resp.data.role, 3),
+        );
         this.navigateByRole(resp.data);
       }
     });

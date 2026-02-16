@@ -18,11 +18,7 @@ export class DashboardService {
   private educatorsService: EducatorsApiService = inject(EducatorsApiService);
   private storage: StorageService = inject(StorageService);
   private translate: TranslateService = inject(TranslateService);
-  private router: Router = inject(Router);
-  private message: ApplicationMessageCenterService = inject(
-    ApplicationMessageCenterService,
-  );
-  public dialogService: DialogService = inject(DialogService);
+
   constructor() {}
 
   getEducator(){
@@ -44,34 +40,7 @@ export class DashboardService {
     });
   }
 
-  checkSlots() {
-    let educatorId = localStorage.getItem('userId') as string;
-    this.service.GetAvailableCourseSlots(educatorId).subscribe((resp) => {
-      if (resp.data !== 0) {
-        this.router.navigate([
-          '/main/educator/dashboard/course/upsert',
-          'create',
-        ]);
-      } else {
-        this.upgradePlan()
-      }
-    });
-  }
 
-  upgradePlan() {
-    const ref = this.dialogService.open(UpgradePlanComponent, {
-      width: '960px',
-      style: {
-        maxWidth: '95%',
-      },
-      data:2
-    });
-    ref.onClose.subscribe((e: any) => {
-      if (e) {
-        this.checkSlots()
-      }
-    });
-  }
 }
 /*
  * type 1 - group

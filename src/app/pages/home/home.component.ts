@@ -1,10 +1,15 @@
-import {Component, ElementRef, inject, OnDestroy, OnInit} from '@angular/core';
-import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnDestroy
+} from '@angular/core';
 import { SubscriptionPackageModel } from '../subscription-package/shared/models/subscription-package.model';
 import { HomeService } from './home.service';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -13,12 +18,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { FaqsResponseModel } from '../admin-faqs/shared/models/faqs-response.model';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionPanel,
+} from 'primeng/accordion';
+import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
 
 @Component({
   selector: 'app-home',
   imports: [
-    HomeHeaderComponent,
     NgForOf,
     TranslatePipe,
     RouterLink,
@@ -30,11 +40,12 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
     AccordionHeader,
     AccordionPanel,
     NgIf,
+    DatePipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnDestroy, AfterViewInit  {
   private service: HomeService = inject(HomeService);
   private elementRef: ElementRef = inject(ElementRef);
   subscriptionPackages: SubscriptionPackageModel[] = [];
@@ -49,27 +60,37 @@ export class HomeComponent implements OnInit, OnDestroy {
   selectedFAQsTab: number = 1;
   studentsFAQs: FaqsResponseModel[] = [];
   educatorsFAQs: FaqsResponseModel[] = [];
-
-  constructor() {
+  courses: CoursesResponseModel[] = [];
+  constructor(private elRef: ElementRef,private route: ActivatedRoute) {
     this.service.component = this;
     this.service.subscribeToLangEvent();
     this.service.getAllPackages();
+    this.service.getAllCourses();
   }
-  ngOnInit(): void {
-    this.elementRef.nativeElement
-      .querySelectorAll('a[href^="#"]')
-      .forEach((anchor: any) => {
-        anchor.addEventListener('click', (e: any) => {
-          e.preventDefault();
 
-          const targetId = anchor.getAttribute('href').substring(1);
-          const targetElement = document.getElementById(targetId);
+  ngAfterViewInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const sectionId = params['scrollTo'];
+      if (sectionId) {
+        setTimeout(() => {
+          this.scrollToElement(sectionId);
+        }, 0);
+      }
+    });
+  }
 
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
+  scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    const headerOffset = 80; // your fixed header height
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
   }
 
   send() {

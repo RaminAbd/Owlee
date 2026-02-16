@@ -11,7 +11,12 @@
     <div class="rating">
       <p-rating [(ngModel)]="value" />
     </div>
-    <p class="point">{{ "Good" | translate }}!</p>
+    <p class="point" *ngIf="value === 1">{{ "Very Poor" | translate }}!</p>
+    <p class="point" *ngIf="value === 2">{{ "Needs Improvement" | translate }}!</p>
+    <p class="point" *ngIf="value === 3">{{ "Fair" | translate }}!</p>
+    <p class="point" *ngIf="value === 4">{{ "Good" | translate }}!</p>
+    <p class="point" *ngIf="value === 5">{{ "Excellent" | translate }}!</p>
+    <textarea [(ngModel)]="comment" placeholder="{{'Tell us more about your experience... (optional)' | translate}}"></textarea>
     <button (click)="submit()">{{ "Submit now" | translate }}</button>
     <p class="skip" (click)="skip()">{{ "Skip" | translate }}</p>
   </div>

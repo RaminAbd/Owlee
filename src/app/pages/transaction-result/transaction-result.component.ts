@@ -3,12 +3,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionResultService } from './transaction-result.service';
-import {AnimationOptions, LottieComponent} from "ngx-lottie";
-import {AnimationItem} from 'lottie-web';
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
+import { AuthService } from '../../auth/sign-in/auth.service';
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-transaction-result',
-    imports: [TranslatePipe, NgIf, LottieComponent],
+  imports: [TranslatePipe, NgIf, LottieComponent],
   templateUrl: './transaction-result.component.html',
   styleUrl: './transaction-result.component.scss',
 })
@@ -16,15 +18,19 @@ export class TransactionResultComponent {
   private service: TransactionResultService = inject(TransactionResultService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private authService: AuthService = inject(AuthService);
+  private storage: StorageService = inject(StorageService);
   id = this.route.snapshot.paramMap.get('id') as string;
   success: boolean = false;
-  loading:boolean = true;
+  loading: boolean = true;
   constructor() {
     this.service.component = this;
     this.service.checkStatus();
   }
   goToDashboard() {
-    this.router.navigateByUrl('main/educator/dashboard');
+    // this.router.navigateByUrl('main/educator/dashboard');
+    let st = this.storage.getObject('authResponse');
+    this.authService.navigateByRole(st).then();
   }
 
   private animationItem: AnimationItem | undefined;

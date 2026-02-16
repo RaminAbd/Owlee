@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="image">
+    <img
+      src="https://owleeblob.blob.core.windows.net/images/c0fdbcfb-04be-4ccc-bd05-604a09dc8c09-7d359afb52fef605e3d40af0e683cbadc2063a7f.jpg"
+      alt=""
+    />
+    <div class="info">
+      <p>{{ "Need a Space to Teach?" | translate }}</p>
+      <span>{{ "Partner with our co-working space" | translate }}</span>
+    </div>
+  </div>
+  <div class="block">
+    <p>
+      🎉
+      {{
+        "Special Partnership Offer: Book a room for your course and get 15 % off for the first month!"
+          | translate
+      }}
+    </p>
+    <div class="btns">
+      <button class="reserve" (click)="ref.close(true)">
+        {{ "Reserve Co-working Space" | translate }}
+      </button>
+      <button (click)="ref.close()">{{ "Maybe Later" | translate }}</button>
+    </div>
+  </div>
+</div>

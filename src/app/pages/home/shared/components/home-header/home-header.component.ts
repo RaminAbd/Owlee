@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ import { StorageService } from '../../../../../core/services/storage.service';
 
 @Component({
   selector: 'app-home-header',
-  imports: [NgIf, TranslatePipe, RouterLink, NgClass],
+  imports: [NgIf, TranslatePipe, RouterLink, NgClass, RouterLinkActive],
   templateUrl: './home-header.component.html',
   styleUrl: './home-header.component.scss',
   animations: [
@@ -46,7 +46,7 @@ import { StorageService } from '../../../../../core/services/storage.service';
     ]),
   ],
 })
-export class HomeHeaderComponent {
+export class HomeHeaderComponent implements OnInit {
   private authService: AuthService = inject(AuthService);
   private storage: StorageService = inject(StorageService);
   private titleService: Title = inject(Title);
@@ -65,10 +65,11 @@ export class HomeHeaderComponent {
     { name: 'Russian', value: 'ru-Ru' },
     { name: 'Turkish', value: 'tr-Tr' },
   ];
-
+  userId:string = localStorage.getItem('userId') as string;
   constructor(
     private sanitizer: DomSanitizer,
     private signInService: AuthService,
+    private route: ActivatedRoute
   ) {
     this.selectedLang = this.translate.currentLang;
     console.log();
@@ -90,6 +91,44 @@ export class HomeHeaderComponent {
         this.titleService.setTitle(title);
       });
   }
+
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const sectionId = this.route.snapshot.queryParamMap.get('scrollTo');
+        if (sectionId) {
+          this.scrollToElement(sectionId);
+        }
+      });
+  }
+
+  navigateAndScroll(sectionId: string): void {
+    const isHome = this.router.url.split('?')[0] === '/home';
+
+    if (isHome) {
+      this.scrollToElement(sectionId);
+    } else {
+      this.router.navigate(['/home'], {
+        queryParams: { scrollTo: sectionId }
+      });
+    }
+  }
+
+  scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    const headerOffset = 80; // adjust to your header height
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+
 
   setLangsToShow() {
     this.langsToShow = this.langs.filter((x) => x.value !== this.selectedLang);
@@ -141,4 +180,34 @@ export class HomeHeaderComponent {
       this.router.navigate(['/auth']);
     }
   }
+
+  // navigateAndScroll(sectionId: string): void {
+  //   this.router
+  //     .navigate(['/home'], { queryParams: { scrollTo: sectionId } })
+  //     .then(() => {
+  //       this.scrollToElement(sectionId);
+  //     });
+  // }
+  //
+  // scrollToElement(elementId: string): void {
+  //   const checkInterval = 100;
+  //   const maxAttempts = 10;
+  //   let attempts = 0;
+  //
+  //   const interval = setInterval(() => {
+  //     const element = document.getElementById(elementId);
+  //     if (element) {
+  //       clearInterval(interval);
+  //       setTimeout(() => {
+  //         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  //       }, 0);
+  //     } else {
+  //       attempts++;
+  //       if (attempts >= maxAttempts) {
+  //         clearInterval(interval);
+  //         console.warn(`Element with ID "${elementId}" not found.`);
+  //       }
+  //     }
+  //   }, checkInterval);
+  // }
 }
