@@ -102,7 +102,7 @@ export class AuthService {
     this.clearStorage();
   }
 
-  continueAsStudent(req: any) {
+  continueAsStudent(req: any, courseId: string) {
     this.studentsService.SignUpWithGoogle(req).subscribe((resp: any) => {
       if (!resp.succeeded) {
         this.appMessageService.showTranslatedErrorMessage(
@@ -115,7 +115,11 @@ export class AuthService {
           'role',
           this.cryptoService.encrypt(resp.data.role, 3),
         );
-        this.navigateByRole(resp.data);
+        if (courseId) {
+          this.router.navigate(['/courses', courseId]);
+        } else {
+          this.navigateByRole(resp.data);
+        }
       }
     });
   }

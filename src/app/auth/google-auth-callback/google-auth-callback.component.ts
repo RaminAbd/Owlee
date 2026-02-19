@@ -22,15 +22,31 @@ export class GoogleAuthCallbackComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   loading: boolean = true;
   role: any;
+  courseId: any;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   ngOnInit(): void {
     const hash = window.location.hash;
     const params = new URLSearchParams(hash.slice(1));
+
     const token = params.get('id_token');
-    this.role = params.get('state');
+    const stateParam = params.get('state');
+
+    if (stateParam) {
+      try {
+        const parsedState = JSON.parse(stateParam);
+        this.role = parsedState.role ?? null;
+        this.courseId = parsedState.courseId ?? null;
+
+        console.log('Role:', this.role);
+        console.log('CourseId:', this.courseId);
+      } catch (e) {
+        console.error('Invalid state parameter');
+      }
+    }
+
     if (token) {
-      console.log('Google Access Token:', token);
+      console.log('Google ID Token:', token);
       this.handleCredentialResponse(token);
     } else {
       console.error('Google login failed or cancelled');
@@ -47,7 +63,7 @@ export class GoogleAuthCallbackComponent implements OnInit {
         idToken: token,
       };
       this.role === 'student'
-        ? this.signInService.continueAsStudent(req)
+        ? this.signInService.continueAsStudent(req, this.courseId)
         : this.signInService.continueAsEducator(req);
     } else {
       this.message.showTranslatedWarningMessage('Something went wrong!');

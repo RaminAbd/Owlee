@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { AuthRequestModel } from '../shared/models/auth-request.model';
 import { NgClass, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { environment } from '../../core/environments/environment';
 
 @Component({
@@ -14,7 +14,6 @@ import { environment } from '../../core/environments/environment';
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
-
   selectedTab: number = 1;
   isSubmitted: boolean = false;
   passVisible: boolean = false;
@@ -23,7 +22,7 @@ export class AuthComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private service: AuthService = inject(AuthService);
   private route: ActivatedRoute = inject(ActivatedRoute);
-  id:string = this.route.snapshot.paramMap.get('id') as string;
+  id: string = this.route.snapshot.paramMap.get('id') as string;
   constructor() {
     this.service.component = this;
     this.service.checkRememberMe();
@@ -51,7 +50,10 @@ export class AuthComponent {
     const redirectUri = environment.webUrl + 'auth/callback';
     const scope = 'openid email profile';
     const nonce = crypto.randomUUID(); // or Math.random().toString(36).substring(2)
-
+    const statePayload = {
+      role,
+      courseId: this.id ?? null
+    };
     const authUrl =
       'https://accounts.google.com/o/oauth2/v2/auth?' +
       `client_id=${clientId}` +
@@ -60,7 +62,7 @@ export class AuthComponent {
       `&scope=${encodeURIComponent(scope)}` +
       `&nonce=${nonce}` +
       `&include_granted_scopes=true` +
-      `&state=${role}`;
+      `&state=${encodeURIComponent(JSON.stringify(statePayload))}`;
     window.location.href = authUrl;
   }
 

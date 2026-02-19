@@ -79,10 +79,10 @@ export class CourseDetailsComponent {
       if (st.role === 'Student') {
         this.goToPay();
       } else {
-        this.router.navigate(['/auth', this.response.id]);
+        this.router.navigate(['/auth/redirect/', this.response.id]);
       }
     } else {
-      this.router.navigate(['/auth', this.response.id]);
+      this.router.navigate(['/auth/redirect/', this.response.id]);
     }
   }
 

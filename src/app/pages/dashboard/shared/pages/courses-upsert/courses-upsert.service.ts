@@ -38,6 +38,9 @@ export class CoursesUpsertService {
       .GetByIdByLang(this.service.serviceUrl, req)
       .subscribe((resp) => {
         this.component.request = resp.data;
+        if(resp.data.startDate) this.component.startDate = new Date(resp.data.startDate);
+        if(resp.data.endDate) this.component.endDate = new Date(resp.data.endDate);
+        if(resp.data.lastSubscriptionDate) this.component.lastDay = new Date(resp.data.lastSubscriptionDate);
       });
   }
 

@@ -26,7 +26,7 @@ export const routes: Routes = [
 
   { path: 'admin-access', component: AdminSignInComponent, data: { title: 'Sign in' } },
   { path: 'auth', component: AuthComponent, data: { title: 'Sign in' } },
-  { path: 'auth/:id', component: AuthComponent, data: { title: 'Sign in' } },
+  { path: 'auth/redirect/:id', component: AuthComponent, data: { title: 'Sign in' } },
   { path: 'auth/callback', component: GoogleAuthCallbackComponent },
 
   { path: 'forgot/:role', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
