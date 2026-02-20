@@ -23,17 +23,15 @@
   <div class="items">
     <div
       class="item"
+      (click)="selectedPackage = item"
       *ngFor="let item of subscriptionPackages"
       [ngClass]="{ selectedItem: item.id === selectedPackage.id }"
     >
+      <div class="is-current"  *ngIf="item.id === activePackage.id">
+        <p>{{'Current plan' | translate }}</p>
+      </div>
       <div class="name">
         <p>{{ item.name }}</p>
-      </div>
-      <div class="descr">
-        <p>
-          {{ "Ideal for" | translate }}
-          {{ item.maxCapacity }} {{ "students" | translate }}.
-        </p>
       </div>
       <div class="price">
         <p>
@@ -55,32 +53,55 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
             <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <p>{{ item.groupPerCourse }} {{ "Groups per course" | translate }}</p>
+          <p>{{ item.maxCapacity }} {{ "Students" | translate }}</p>
         </div>
         <div class="f-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
             <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <p>
-            {{ item.peoplePerGroup }} {{ "Students per group" | translate }}
+            {{ item.peoplePerGroup }} GB {{ "storage" | translate }}
           </p>
         </div>
       </div>
-      <div class="btn">
-        <button (click)="selectedPackage = item">
-          {{
-            item.id === activePackage.id
-              ? ("Current plan" | translate)
-              : ("Upgrade" | translate)
-          }}
-        </button>
+      <div class="features">
+        <label>{{'Public courses' | translate}}</label>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.openCourseAmount }} {{ "Courses" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.openMaxCapacity }} {{ "Students" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>
+            {{ item.openFileStorage }} GB {{ "storage" | translate }}
+          </p>
+        </div>
       </div>
+<!--      <div class="btn">-->
+<!--        <button (click)="selectedPackage = item">-->
+<!--          {{-->
+<!--            item.id === activePackage.id-->
+<!--              ? ("Current plan" | translate)-->
+<!--              : ("Upgrade" | translate)-->
+<!--          }}-->
+<!--        </button>-->
+<!--      </div>-->
     </div>
   </div>
   <div class="warning" *ngIf="errorMessage" style="width: 100%">
     <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
-  <div class="row" style="display: flex; width: 100%; align-items: center">
+  <div class="privacy" style="display: flex; width: 100%; align-items: center;justify-content: center;">
     <div
       class="input-block"
       style="display: flex; align-items: center; gap: 6px"
@@ -104,7 +125,6 @@
     </div>
   </div>
   <div class="btns">
-    <!--    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>-->
     <button class="save" (click)="upgrade()">
       {{
         selectedPackage.id === activePackage.id

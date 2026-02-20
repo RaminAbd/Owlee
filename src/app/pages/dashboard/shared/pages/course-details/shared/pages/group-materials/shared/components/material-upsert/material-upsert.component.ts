@@ -46,7 +46,7 @@ export class MaterialUpsertComponent implements OnDestroy {
   courseId: string;
   loading: boolean = false;
   course: CourseRequestModel = new CourseRequestModel();
-
+  showUpload: boolean = true;
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -58,6 +58,13 @@ export class MaterialUpsertComponent implements OnDestroy {
     this.subtopic = structuredClone(config.data.subTopic);
     this.courseId = this.config.data.courseId;
     this.course = this.config.data.course;
+
+    const storageLimit = this.course.isOpen
+      ? this.subscription.openMaxFileStorage
+      : this.subscription.maxFileStorage;
+
+    this.showUpload = storageLimit !== 0;
+
     this.service.getKnownLangs();
 
     this.service.getSubscription();

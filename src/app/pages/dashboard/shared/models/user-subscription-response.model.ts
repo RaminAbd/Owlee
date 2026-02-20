@@ -11,4 +11,6 @@ export class UserSubscriptionResponseModel {
   usedPercentage: number
   adminSale:number
   openMaxFileStorage: any;
+  usedPublicPercentage: number;
+  openFileStorage: any;
 }

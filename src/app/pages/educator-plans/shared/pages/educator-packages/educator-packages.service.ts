@@ -1,14 +1,12 @@
-import {inject, Injectable} from '@angular/core';
-import {UpgradePlanComponent} from '../../../../../shared/components/upgrade-plan/upgrade-plan.component';
-import {
-  SubscriptionPackageApiService
-} from '../../../../subscription-package/shared/services/subscription-package.api.service';
-import {ApplicationMessageCenterService} from '../../../../../core/services/ApplicationMessageCenter.service';
-import {SubscriptionsApiService} from '../../../../../system-pages/educator/shared/services/subscriptions.api.service';
-import {EducatorPackagesComponent} from './educator-packages.component';
+import { inject, Injectable } from '@angular/core';
+import { UpgradePlanComponent } from '../../../../../shared/components/upgrade-plan/upgrade-plan.component';
+import { SubscriptionPackageApiService } from '../../../../subscription-package/shared/services/subscription-package.api.service';
+import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
+import { SubscriptionsApiService } from '../../../../../system-pages/educator/shared/services/subscriptions.api.service';
+import { EducatorPackagesComponent } from './educator-packages.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EducatorPackagesService {
   component: EducatorPackagesComponent;
@@ -41,19 +39,6 @@ export class EducatorPackagesService {
     });
   }
 
-  renew() {
-    let userId: string = localStorage.getItem('userId') as string;
-    const req = {
-      educatorId: userId,
-      packageId: this.component.selectedPackage.id,
-      type: this.component.selectedPackageType,
-    };
-    this.subsService.Renew(req).subscribe((resp) => {
-      this.component.loading = false;
-      this.component.openExternalUrl(resp.data.url);
-    });
-  }
-
   canChange() {
     this.component.loading = true;
     let userId: string = localStorage.getItem('userId') as string;
@@ -72,20 +57,16 @@ export class EducatorPackagesService {
     });
   }
 
-  canUpdate() {
-    this.component.loading = true;
+  renew() {
     let userId: string = localStorage.getItem('userId') as string;
     const req = {
       educatorId: userId,
-      SubscriptionId: this.component.selectedPackage.id,
+      packageId: this.component.selectedPackage.id,
+      type: this.component.selectedPackageType,
     };
-    this.subsService.CanUpdate(req).subscribe((resp) => {
-      if (resp.data.canChange) {
-        this.renew();
-      } else {
-        this.component.loading = false;
-        this.component.errorMessage = 'Please select higher package';
-      }
+    this.subsService.Renew(req).subscribe((resp) => {
+      this.component.loading = false;
+      this.component.openExternalUrl(resp.data.url);
     });
   }
 }

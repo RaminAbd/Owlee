@@ -5,7 +5,7 @@
       <input type="text" id="name" [(ngModel)]="request.name" />
     </div>
 
-    <div class="input-item file-input" style="width: 100%; position: relative">
+    <div class="input-item file-input" style="width: 100%; position: relative" *ngIf="showUpload">
       <label>{{ "Upload file" | translate }}</label>
       <label class="file-label" for="file1">
         @if (!request.file.fileLoading) {

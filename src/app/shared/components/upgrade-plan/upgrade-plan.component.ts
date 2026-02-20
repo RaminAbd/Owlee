@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SubscriptionPackageModel } from '../../../pages/subscription-package/shared/models/subscription-package.model';
 import { UpgradePlanService } from './upgrade-plan.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
@@ -21,6 +21,8 @@ import { MessageService } from 'primeng/api';
     RouterLink,
     FormsModule,
     ReactiveFormsModule,
+    DatePipe,
+    NgStyle,
   ],
   templateUrl: './upgrade-plan.component.html',
   styleUrl: './upgrade-plan.component.scss',

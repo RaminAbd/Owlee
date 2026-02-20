@@ -3,50 +3,7 @@
     <h2>{{ "Upgrade plan" | translate }}</h2>
     <h3>{{ "Upgrade to access" | translate }}</h3>
   </div>
-  <!--  <div class="counts">-->
-  <!--    <div class="item">-->
-  <!--      <img src="d-check.svg" alt="" />-->
-  <!--      <p>{{ selectedPackage.maxCapacity }} Max students</p>-->
-  <!--    </div>-->
-  <!--    <div class="item">-->
-  <!--      <img src="d-check.svg" alt="" />-->
-  <!--      <p>{{ selectedPackage.courseAmount }} Courses</p>-->
-  <!--    </div>-->
-  <!--    <div class="item">-->
-  <!--      <img src="d-check.svg" alt="" />-->
-  <!--      <p>{{ selectedPackage.groupPerCourse }} Groups per course</p>-->
-  <!--    </div>-->
-  <!--    <div class="item">-->
-  <!--      <img src="d-check.svg" alt="" />-->
-  <!--      <p>{{ selectedPackage.peoplePerGroup }} Students per group</p>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div class="items">-->
-  <!--    <div-->
-  <!--      class="item"-->
-  <!--      *ngFor="let item of subscriptionPackages"-->
-  <!--      [ngClass]="{ selected: item.id === selectedPackage.id }"-->
-  <!--      (click)="selectedPackage = item"-->
-  <!--    >-->
-  <!--      <div class="name">-->
-  <!--        <p>{{ item.name }}</p>-->
-  <!--      </div>-->
-  <!--      <div class="price">-->
-  <!--        <p>-->
-  <!--          <span>{{ item.price }}₾</span> / {{ "month" | translate }}-->
-  <!--        </p>-->
-  <!--      </div>-->
-  <!--      <div class="btn">-->
-  <!--        <button (click)="selectedPackage = item">-->
-  <!--          {{-->
-  <!--            item.id === activePackage.id-->
-  <!--              ? ("Current plan" | translate)-->
-  <!--              : ("Upgrade" | translate)-->
-  <!--          }}-->
-  <!--        </button>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
+
   <div class="switcher">
     <div
       class="item"
@@ -66,59 +23,85 @@
   <div class="items">
     <div
       class="item"
+      (click)="selectedPackage = item"
       *ngFor="let item of subscriptionPackages"
       [ngClass]="{ selectedItem: item.id === selectedPackage.id }"
     >
+      <div class="is-current"  *ngIf="item.id === activePackage.id">
+        <p>{{'Current plan' | translate }}</p>
+      </div>
       <div class="name">
         <p>{{ item.name }}</p>
       </div>
-      <div class="descr">
-        <p>
-          {{ "Recommended for those who’ve got" | translate }}
-          {{ item.maxCapacity }} {{ "students" | translate }}.
-        </p>
-      </div>
       <div class="price">
         <p>
-          <span
-            >{{
-              selectedPackageType === 1 ? item.price : item.annualPrice
-            }}₾</span
-          >
-          / {{ "month" | translate }}
+          {{ selectedPackageType === 1 ? item.price : item.annualPrice }}
+          <span>Gel</span>
         </p>
+        <span>{{'per month' | translate}}</span>
       </div>
+
       <div class="features">
+        <label>{{'Private courses' | translate}}</label>
         <div class="f-item">
-          <img src="d-check.svg" alt="" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
         </div>
         <div class="f-item">
-          <img src="d-check.svg" alt="" />
-          <p>{{ item.groupPerCourse }} {{ "Groups per course" | translate }}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.maxCapacity }} {{ "Students" | translate }}</p>
         </div>
         <div class="f-item">
-          <img src="d-check.svg" alt="" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <p>
-            {{ item.peoplePerGroup }} {{ "Students per group" | translate }}
+            {{ item.peoplePerGroup }} GB {{ "storage" | translate }}
           </p>
         </div>
       </div>
-      <div class="btn">
-        <button (click)="selectedPackage = item">
-          {{
-            item.id === activePackage.id
-              ? ("Current plan" | translate)
-              : ("Upgrade" | translate)
-          }}
-        </button>
+      <div class="features">
+        <label>{{'Public courses' | translate}}</label>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.openCourseAmount }} {{ "Courses" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>{{ item.openMaxCapacity }} {{ "Students" | translate }}</p>
+        </div>
+        <div class="f-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>
+            {{ item.openFileStorage }} GB {{ "storage" | translate }}
+          </p>
+        </div>
       </div>
+      <!--      <div class="btn">-->
+      <!--        <button (click)="selectedPackage = item">-->
+      <!--          {{-->
+      <!--            item.id === activePackage.id-->
+      <!--              ? ("Current plan" | translate)-->
+      <!--              : ("Upgrade" | translate)-->
+      <!--          }}-->
+      <!--        </button>-->
+      <!--      </div>-->
     </div>
   </div>
   <div class="warning" *ngIf="errorMessage" style="width: 100%">
     <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
-  <div class="row" style="display: flex; width: 100%; align-items: center">
+  <div class="privacy" style="display: flex; width: 100%; align-items: center;justify-content: center;">
     <div
       class="input-block"
       style="display: flex; align-items: center; gap: 6px"
@@ -133,16 +116,15 @@
       <label
         for="privacy"
         style="cursor: pointer"
-        [ngClass]="{'invalidLabel':!privacyAccepted && isSubmitted}"
+        [ngClass]="{ invalidLabel: !privacyAccepted && isSubmitted }"
       >
         <a routerLink="/educator-privacy" target="_blank">{{
-          "I have read and agree to the Privacy Policy" | translate
-        }}</a>
+            "I have read and agree to the Privacy Policy" | translate
+          }}</a>
       </label>
     </div>
   </div>
   <div class="btns">
-    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
     <button class="save" (click)="upgrade()">
       {{
         selectedPackage.id === activePackage.id

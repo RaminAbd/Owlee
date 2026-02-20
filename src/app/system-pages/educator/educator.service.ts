@@ -49,7 +49,7 @@ export class EducatorService {
 
   upgradePlan(forceToUpgrade: boolean) {
     const ref = this.dialogService.open(UpgradePlanComponent, {
-      width: '960px',
+      width: '1100px',
       style: {
         maxWidth: '95%',
       },
