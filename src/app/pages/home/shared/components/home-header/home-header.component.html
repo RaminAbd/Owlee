@@ -11,19 +11,28 @@
           }}</a>
         </li>
         <li>
-          <a routerLink="/courses" routerLinkActive="active" aria-label="courses">{{
-            "Courses" | translate
-          }}</a>
+          <a
+            routerLink="/courses"
+            routerLinkActive="active"
+            aria-label="courses"
+            >{{ "Courses" | translate }}</a
+          >
         </li>
         <li>
-          <a (click)="navigateAndScroll('fifth')" aria-label="faq">{{
-              "FAQ" | translate
-            }}</a>
+          <a
+            style="cursor: pointer"
+            (click)="navigateAndScroll('fifth')"
+            aria-label="faq"
+            >{{ "FAQ" | translate }}</a
+          >
         </li>
         <li>
-          <a (click)="navigateAndScroll('sixth')" aria-label="contact">{{
-            "Contact Us" | translate
-          }}</a>
+          <a
+            style="cursor: pointer"
+            (click)="navigateAndScroll('sixth')"
+            aria-label="contact"
+            >{{ "Contact Us" | translate }}</a
+          >
         </li>
       </ul>
     </nav>
@@ -86,24 +95,38 @@
       <div class="nav">
         <ul>
           <li>
-            <a href="#first" aria-label="home" (click)="closeBurger()">{{
-              "Home" | translate
-            }}</a>
+            <a
+              routerLink="/about"
+              (click)="closeBurger()"
+              routerLinkActive="active"
+              aria-label="about"
+              >{{ "About us" | translate }}</a
+            >
           </li>
-          <!--          <li>-->
-          <!--            <a href="#fourth" aria-label="services" (click)="closeBurger()">{{-->
-          <!--              "Services" | translate-->
-          <!--            }}</a>-->
-          <!--          </li>-->
-          <!--          <li>-->
-          <!--            <a href="#fifth" aria-label="packages" (click)="closeBurger()">{{-->
-          <!--              "Packages" | translate-->
-          <!--            }}</a>-->
-          <!--          </li>-->
           <li>
-            <a href="#sixth" aria-label="contact" (click)="closeBurger()">{{
-              "Contact Us" | translate
-            }}</a>
+            <a
+              routerLink="/courses"
+              (click)="closeBurger()"
+              routerLinkActive="active"
+              aria-label="courses"
+              >{{ "Courses" | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              style="cursor: pointer"
+              (click)="closeBurger(); navigateAndScroll('fifth')"
+              aria-label="faq"
+              >{{ "FAQ" | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              style="cursor: pointer"
+              (click)="closeBurger(); navigateAndScroll('sixth')"
+              aria-label="contact"
+              >{{ "Contact Us" | translate }}</a
+            >
           </li>
         </ul>
       </div>

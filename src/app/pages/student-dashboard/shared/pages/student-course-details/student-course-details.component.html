@@ -263,7 +263,7 @@
           </svg>
           {{ "Completion certificate" | translate }}
         </p>
-        <div class="certificate-button"  *ngIf="showCertificate">
+        <div class="certificate-button"  *ngIf="showCertificate" (click)="handleDownloadPDF()">
           <div class="left">
             <div class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">

@@ -25,6 +25,7 @@ import {
   AccordionPanel,
 } from 'primeng/accordion';
 import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
+import {StorageService} from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -49,6 +50,7 @@ export class HomeComponent implements OnDestroy, AfterViewInit  {
   private service: HomeService = inject(HomeService);
   private elementRef: ElementRef = inject(ElementRef);
   subscriptionPackages: SubscriptionPackageModel[] = [];
+  private storage: StorageService = inject(StorageService);
   private fb: FormBuilder = inject(FormBuilder);
   isSubmitted: boolean = false;
   form: FormGroup = this.fb.group({
@@ -61,8 +63,11 @@ export class HomeComponent implements OnDestroy, AfterViewInit  {
   studentsFAQs: FaqsResponseModel[] = [];
   educatorsFAQs: FaqsResponseModel[] = [];
   courses: CoursesResponseModel[] = [];
+  userSignedIn:boolean = !!localStorage.getItem('userId');
   constructor(private elRef: ElementRef,private route: ActivatedRoute) {
     this.service.component = this;
+    let st = this.storage.getObject('authResponse');
+    this.userSignedIn = !!(st && st.role === 'Student');
     this.service.subscribeToLangEvent();
     this.service.getAllPackages();
     this.service.getAllCourses();
@@ -100,5 +105,9 @@ export class HomeComponent implements OnDestroy, AfterViewInit  {
 
   ngOnDestroy() {
     this.service.subscribe.unsubscribe();
+  }
+
+  makeFavorite(item: CoursesResponseModel) {
+    this.service.addToFavorite(item);
   }
 }

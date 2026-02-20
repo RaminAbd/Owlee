@@ -4,6 +4,7 @@ import { CourseDetailsComponent } from './course-details.component';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../../../../core/services/storage.service';
 import { RatingsApiService } from '../../../../student-dashboard/shared/services/ratings.api.service';
+import {CoursesResponseModel} from '../../../../admin-courses/shared/models/courses-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -82,5 +83,16 @@ export class CourseDetailsService {
 
   openExternalUrl(url: string) {
     window.location.href = url;
+  }
+
+
+  addToFavorite() {
+    const req = {
+      courseId: this.component.response.id,
+      studentId:localStorage.getItem('userId') as string
+    }
+    this.service.AddToFavorite(req).subscribe((resp) => {
+      this.getCourse()
+    })
   }
 }

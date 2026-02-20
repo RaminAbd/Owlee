@@ -13,24 +13,33 @@
         <nav>
           <ul>
             <li>
-              <a href="#first" aria-label="home">{{
-                  "Home" | translate
+              <a routerLink="/about" routerLinkActive="active" aria-label="about">{{
+                  "About us" | translate
                 }}</a>
             </li>
             <li>
-              <a href="#fourth" aria-label="services">{{
-                  "Services" | translate
-                }}</a>
+              <a
+                routerLink="/courses"
+                routerLinkActive="active"
+                aria-label="courses"
+              >{{ "Courses" | translate }}</a
+              >
             </li>
             <li>
-              <a href="#fifth" aria-label="packages">{{
-                  "Packages" | translate
-                }}</a>
+              <a
+                style="cursor: pointer"
+                (click)="navigateAndScroll('fifth')"
+                aria-label="faq"
+              >{{ "FAQ" | translate }}</a
+              >
             </li>
             <li>
-              <a href="#sixth" aria-label="contact">{{
-                  "Contact Us" | translate
-                }}</a>
+              <a
+                style="cursor: pointer"
+                (click)="navigateAndScroll('sixth')"
+                aria-label="contact"
+              >{{ "Contact Us" | translate }}</a
+              >
             </li>
           </ul>
         </nav>

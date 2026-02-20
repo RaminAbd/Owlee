@@ -20,4 +20,5 @@ export class CourseDetailedResponseModel {
   takenSeatsPercentage: any;
   price: any;
   learningPoints: any[]=[];
+  isFavorite: boolean;
 }

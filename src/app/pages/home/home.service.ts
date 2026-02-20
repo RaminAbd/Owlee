@@ -6,6 +6,7 @@ import { ApplicationMessageCenterService } from '../../core/services/Application
 import { FaqsApiService } from '../admin-faqs/shared/services/faqs.api.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { CoursesApiService } from '../admin-courses/shared/services/courses.api.service';
+import {CoursesResponseModel} from '../admin-courses/shared/models/courses-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -71,5 +72,15 @@ export class HomeService {
           (x: any) => x.faqType === 1,
         );
       });
+  }
+
+  addToFavorite(item: CoursesResponseModel) {
+    const req = {
+      courseId: item.id,
+      studentId:localStorage.getItem('userId') as string
+    }
+    this.coursesService.AddToFavorite(req).subscribe((resp) => {
+      this.getAllCourses()
+    })
   }
 }

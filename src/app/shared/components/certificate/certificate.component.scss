@@ -1,0 +1,231 @@
+// Variables
+$cert-green: #10b981;
+$cert-indigo: #4338ca;
+$cert-gold: #d4af37;
+$text-muted: #6b7280;
+$bg-white: #ffffff;
+
+.page-wrapper {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.download-btn {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: $cert-indigo;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.9; }
+  .icon { width: 1.25rem; height: 1.25rem; }
+}
+
+.certificate-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 1.414 / 1;
+  background: $bg-white;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// Borders & Ornaments
+.border-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  .outer-border {
+    position: absolute;
+    inset: 0.75rem;
+    border: 3px solid $cert-green;
+    border-radius: 2px;
+  }
+
+  .inner-border {
+    position: absolute;
+    inset: 1.25rem;
+    border: 1.5px solid rgba($cert-indigo, 0.4);
+    border-radius: 2px;
+  }
+}
+
+.ornament {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M4 4 C4 4, 4 20, 4 24 C4 28, 8 28, 12 24 C16 20, 16 12, 20 8 C24 4, 28 4, 24 4 L4 4Z' fill='%2310b981' fill-opacity='0.15'/%3E%3Cpath d='M4 4 L24 4 M4 4 L4 24' stroke='%2310b981' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='4' cy='4' r='2.5' fill='%2310b981'/%3E%3C/svg%3E");
+  background-size: contain;
+
+  &.top-left { top: 1.5rem; left: 1.5rem; }
+  &.top-right { top: 1.5rem; right: 1.5rem; transform: rotate(90deg); }
+  &.bottom-right { bottom: 1.5rem; right: 1.5rem; transform: rotate(180deg); }
+  &.bottom-left { bottom: 1.5rem; left: 1.5rem; transform: rotate(-90deg); }
+}
+
+// Content Layout
+.content-layer {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 5rem;
+  text-align: center;
+}
+
+header {
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+
+    .logo-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(to bottom right, $cert-green, $cert-indigo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .award-icon { color: white; width: 1.25rem; }
+    }
+
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 0.025em;
+      color: $cert-indigo;
+    }
+  }
+
+  .divider-gradient {
+    width: 6rem;
+    height: 2px;
+    background: linear-gradient(to right, transparent, $cert-green, transparent);
+    margin: 0.25rem 0;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: $text-muted;
+    font-weight: 500;
+  }
+}
+
+main {
+  margin-top: -1rem;
+
+  .intro-text { color: $text-muted; font-size: 0.875rem; margin-bottom: 0.5rem; }
+
+  .recipient-name {
+    font-family: 'Dancing Script', cursive; // Ensure this is imported in your index.html
+    font-size: 3.5rem;
+    color: $cert-indigo;
+    margin-bottom: 0.5rem;
+  }
+
+  .name-underline {
+    width: 16rem;
+    height: 1px;
+    background-color: rgba($cert-green, 0.3);
+    margin: 0 auto 0.75rem;
+  }
+
+  .course-intro { color: $text-muted; font-size: 0.875rem; margin-bottom: 1rem; }
+  .course-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .issue-date { font-size: 0.75rem; color: $text-muted; }
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 2rem;
+
+  .signature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+
+    .signature-font { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: $cert-green; }
+    .sig-line { width: 8rem; height: 1px; background-color: rgba(0,0,0,0.2); }
+    .label { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.1em; color: $text-muted; }
+  }
+
+  .seal-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -0.5rem;
+
+    .seal-outer {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      border: 2px solid $cert-gold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .seal-inner {
+      text-align: center;
+      .seal-icon { color: $cert-gold; width: 1.25rem; height: 1.25rem; margin: 0 auto; }
+      .seal-text { font-size: 7px; font-weight: bold; text-transform: uppercase; color: $cert-gold; display: block; }
+    }
+
+    .cert-id { font-size: 9px; color: $text-muted; margin-top: 0.25rem; }
+  }
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+
+  &.shape-top {
+    top: 0; right: 0; width: 12rem; height: 12rem;
+    background-color: rgba($cert-green, 0.05);
+    transform: translate(50%, -50%);
+  }
+
+  &.shape-bottom {
+    bottom: 0; left: 0; width: 16rem; height: 16rem;
+    background-color: rgba($cert-indigo, 0.05);
+    transform: translate(-50%, 50%);
+  }
+}
+
+// Print logic
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+  .page-wrapper { padding: 0; }
+  .certificate-container { box-shadow: none; border: none; }
+}

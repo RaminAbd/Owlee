@@ -1,25 +1,26 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { CoursesService } from './courses.service';
-import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
+import {Component, inject} from '@angular/core';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {TranslatePipe} from '@ngx-translate/core';
+import {CoursesService} from '../courses/courses.service';
 import {StorageService} from '../../core/services/storage.service';
+import {CoursesResponseModel} from '../admin-courses/shared/models/courses-response.model';
+import {FavoriteCoursesService} from './favorite-courses.service';
 
 @Component({
-  selector: 'app-courses',
-    imports: [
-        DatePipe,
-        NgForOf,
-        RouterLink,
-        TranslatePipe,
-        NgIf,
-    ],
-  templateUrl: './courses.component.html',
-  styleUrl: './courses.component.scss',
+  selector: 'app-favorite-courses',
+  imports: [
+    DatePipe,
+    NgForOf,
+    NgIf,
+    RouterLink,
+    TranslatePipe
+  ],
+  templateUrl: './favorite-courses.component.html',
+  styleUrl: './favorite-courses.component.scss'
 })
-export class CoursesComponent implements OnDestroy {
-  private service: CoursesService = inject(CoursesService);
+export class FavoriteCoursesComponent {
+  private service: FavoriteCoursesService = inject(FavoriteCoursesService);
   private storage: StorageService = inject(StorageService);
   courses: CoursesResponseModel[] = [];
   userSignedIn:boolean = !!localStorage.getItem('userId');

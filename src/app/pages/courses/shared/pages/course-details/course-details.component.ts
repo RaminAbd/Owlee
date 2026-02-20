@@ -15,6 +15,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {RatingsOverviewModel} from '../../../../dashboard/shared/models/ratings-overview.model';
 import {Rating} from 'primeng/rating';
 import {FormsModule} from '@angular/forms';
+import {CoursesResponseModel} from '../../../../admin-courses/shared/models/courses-response.model';
 
 @Component({
   selector: 'app-course-details',
@@ -57,8 +58,11 @@ export class CourseDetailsComponent {
   loading:boolean = false;
   expanderStates: string[] = [];
   ratings:RatingsOverviewModel[]=[]
+  userSignedIn:boolean = !!localStorage.getItem('userId');
   total:number = 0
   constructor() {
+    let st = this.storage.getObject('authResponse');
+    this.userSignedIn = !!(st && st.role === 'Student');
     this.service.component = this;
     this.service.getCourse();
     this.service.getRatings();
@@ -101,5 +105,7 @@ export class CourseDetailsComponent {
       ? (this.expanderStates[index] = 'collapsed')
       : (this.expanderStates[index] = 'expanded');
   }
-
+  makeFavorite() {
+    this.service.addToFavorite();
+  }
 }

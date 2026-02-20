@@ -22,6 +22,7 @@ import {
   StudentTutorialsComponent
 } from '../../../../pages/student-help/shared/pages/student-tutorials/student-tutorials.component';
 import {StudentFaqsComponent} from '../../../../pages/student-help/shared/pages/student-faqs/student-faqs.component';
+import {FavoriteCoursesComponent} from '../../../../pages/favorite-courses/favorite-courses.component';
 
 export class StudentChildrenRoutes {
   static children: Route[] = [
@@ -69,6 +70,11 @@ export class StudentChildrenRoutes {
       path: 'plans',
       component: StudentPlansComponent,
       data: { title: 'Plans' },
+    },
+    {
+      path: 'favorites',
+      component: FavoriteCoursesComponent,
+      data: { title: 'Favorites' },
     },
 
     {

@@ -112,6 +112,10 @@
       border-radius: 12px;
       border: 1px solid #e3e3e2;
       .heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
         p {
           color: #13170c;
           font-family: Inter;
@@ -119,6 +123,20 @@
           font-style: normal;
           font-weight: 600;
           line-height: normal;
+        }
+        .favorite{
+          display: flex;
+          height: 36px;
+          width: 36px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 22369600px;
+          background: #F6F6F6;
+          cursor: pointer;
+          //position: absolute;
+          z-index: 2;
+          top: 12px;
+          right: 12px;
         }
       }
       .row {

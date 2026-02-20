@@ -13,4 +13,5 @@ export class CoursesResponseModel {
   minimumSeats:any;
   maximumSeats:any;
   lastSubscriptionDate:any;
+    isFavorite: boolean;
 }

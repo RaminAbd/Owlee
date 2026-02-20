@@ -1,0 +1,72 @@
+<div class="page-wrapper">
+  <button (click)="handleDownloadPDF()" class="download-btn no-print">
+    Download as PDF
+  </button>
+
+  <div class="certificate-container" #certificateRef>
+
+    <div class="border-overlay">
+      <div class="outer-border"></div>
+      <div class="inner-border"></div>
+
+      <div class="ornament top-left"></div>
+      <div class="ornament top-right"></div>
+      <div class="ornament bottom-right"></div>
+      <div class="ornament bottom-left"></div>
+    </div>
+
+    <div class="content-layer">
+      <header>
+        <div class="logo-area">
+          <div class="logo-icon">
+          </div>
+          <span class="brand-name">Owlee</span>
+        </div>
+        <div class="divider-gradient"></div>
+        <h2 class="subtitle">Certificate of Completion</h2>
+      </header>
+
+      <main>
+        <p class="intro-text">This is to certify that</p>
+        <h1 class="recipient-name">{{ userName }}</h1>
+        <div class="name-underline"></div>
+        <p class="course-intro">has successfully completed the course</p>
+        <h3 class="course-title">{{ courseName }}</h3>
+        <p class="issue-date">
+          Issued on <strong>{{ issueDate }}</strong>
+        </p>
+      </main>
+
+      <footer>
+        <div class="signature-block">
+          <span class="signature-font">Sarah Mitchell</span>
+          <div class="sig-line"></div>
+          <span class="label">Course Instructor</span>
+        </div>
+
+        <div class="seal-area">
+          <div class="seal-outer">
+            <div class="seal-inner">
+<!--              <i-lucide name="award" class="seal-icon"></i-lucide>-->
+              <span class="seal-text">Verified</span>
+            </div>
+          </div>
+          <span class="cert-id">ID: {{ certificateId }}</span>
+        </div>
+
+        <div class="signature-block">
+          <span class="signature-font">James Cooper</span>
+          <div class="sig-line"></div>
+          <span class="label">CEO, Owlee</span>
+        </div>
+      </footer>
+    </div>
+
+    <div class="bg-shape shape-top"></div>
+    <div class="bg-shape shape-bottom"></div>
+  </div>
+
+  <p class="print-hint no-print">
+    Use your browser's print dialog to save as PDF (Ctrl+P / ⌘+P)
+  </p>
+</div>

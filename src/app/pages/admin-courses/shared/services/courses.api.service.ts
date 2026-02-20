@@ -44,7 +44,15 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.get(this.serviceUrl + 'GetOpenCourses/', lang);
   }
 
+  GetFavoriteCourses(lang: string) {
+    return this.get(this.serviceUrl + 'GetFavoriteCourses/', lang);
+  }
+
   Subscribe(req: any) {
     return this.post(this.serviceUrl + 'Subscribe', req);
+  }
+
+  AddToFavorite(req: any) {
+    return this.post(this.serviceUrl + 'AddToFavorite', req);
   }
 }

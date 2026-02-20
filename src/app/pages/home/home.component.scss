@@ -393,6 +393,7 @@
           flex-direction: column;
           gap: 14px;
           max-width: 290px;
+          position: relative;
           @media (max-width: 480px) {
             width: 100%;
           }
@@ -402,6 +403,20 @@
               font-size: 18px;
               font-weight: 600;
             }
+          }
+          .favorite{
+            display: flex;
+            height: 36px;
+            width: 36px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 22369600px;
+            background: rgba(255, 255, 255, 0.95);
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+            top: 12px;
+            right: 12px;
           }
           .image {
             height: 150px;
