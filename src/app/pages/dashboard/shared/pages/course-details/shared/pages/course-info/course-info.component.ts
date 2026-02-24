@@ -82,4 +82,8 @@ export class CourseInfoComponent  implements OnDestroy{
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe()
   }
+
+  sendForConfirmation() {
+    this.service.sendToAdmin()
+  }
 }

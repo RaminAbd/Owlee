@@ -14,6 +14,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {DropdownModule} from 'primeng/dropdown';
 import {TopicRequestModel} from '../../../../dashboard/shared/models/topic-request.model';
 import {SubtopicModel} from '../../../../dashboard/shared/models/subtopic.model';
+import {LanguageService} from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-calendar-meeting-edit',
@@ -30,6 +31,7 @@ import {SubtopicModel} from '../../../../dashboard/shared/models/subtopic.model'
 })
 export class CalendarMeetingEditComponent {
   private service: CalendarMeetingEditService = inject(CalendarMeetingEditService);
+  private language:LanguageService = inject(LanguageService)
   request: MeetingRequestModel = new MeetingRequestModel();
   id: string;
   isSubmitted = false;
@@ -38,6 +40,10 @@ export class CalendarMeetingEditComponent {
   topics: TopicRequestModel[] = [];
   subTopics: SubtopicModel[] = [];
   loading: boolean = false;
+  colors:any[]=[
+    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
+    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+  ]
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,

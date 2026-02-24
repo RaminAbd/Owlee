@@ -30,10 +30,37 @@
     cursor: pointer;
     width: 100%;
     position: relative;
+    justify-content: space-between;
 
     p {
       font-size: 20px;
       font-weight: 700;
+    }
+    .btns{
+      display: flex;
+      align-items: center;
+      gap:10px;
+      button{
+        border-radius: 10px;
+        background: #F0FDF4;
+        color: #009245;
+        display: flex;
+        padding: 7px 50px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -0.15px;
+        height: 40px;
+        &.reject{
+          background: #FEF2F2;
+          color: #E7000B;
+        }
+      }
     }
   }
 

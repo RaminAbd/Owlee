@@ -37,7 +37,7 @@
     <div class="items">
       <div class="add item" (click)="create()">
         <img src="plus.svg" alt="" />
-        <p>{{ 'Add new' | translate }}</p>
+        <p>{{ "Add new" | translate }}</p>
       </div>
       <div
         class="item"
@@ -46,11 +46,32 @@
       >
         <div class="image">
           <div class="lang-icon">
-            <img [src]="item.icon" alt="">
+            <img [src]="item.icon" alt="" />
           </div>
           <img [src]="item.image" alt="" />
         </div>
         <div class="info">
+          <div
+            *ngIf="item.isOpen"
+            class="status"
+            [ngClass]="{
+              draft: item.status === 0,
+              waiting: item.status === 1,
+              rejected: item.status === 2,
+              pending: item.status === 3,
+              active: item.status === 4,
+              completed: item.status === 5,
+              canceled: item.status === 6,
+            }"
+          >
+            <p *ngIf="item.status === 0">{{ "Draft" | translate }}</p>
+            <p *ngIf="item.status === 1">{{ "Waiting" | translate }}</p>
+            <p *ngIf="item.status === 2">{{ "Rejected" | translate }}</p>
+            <p *ngIf="item.status === 3">{{ "Pending" | translate }}</p>
+            <p *ngIf="item.status === 4">{{ "Active" | translate }}</p>
+            <p *ngIf="item.status === 5">{{ "Completed" | translate }}</p>
+            <p *ngIf="item.status === 6">{{ "Canceled" | translate }}</p>
+          </div>
           <div class="name">
             <p>{{ item.name }}</p>
           </div>

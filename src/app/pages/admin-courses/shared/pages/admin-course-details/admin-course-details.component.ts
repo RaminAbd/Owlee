@@ -7,8 +7,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
-import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
+import {Location, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
+import {LangChangeEvent, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {
   animate,
   state,
@@ -26,6 +26,7 @@ import { AdminCourseDetailsService } from './admin-course-details.service';
 import {GroupMembersResponseModel} from '../../../../dashboard/shared/models/group-members.response.model';
 import {RatingsOverviewModel} from '../../../../dashboard/shared/models/ratings-overview.model';
 import {Rating} from 'primeng/rating';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-admin-course-details',
@@ -60,6 +61,10 @@ export class AdminCourseDetailsComponent implements OnDestroy {
   private service: AdminCourseDetailsService = inject(
     AdminCourseDetailsService,
   );
+  private translate: TranslateService = inject(TranslateService);
+  public location: Location = inject(Location);
+  private confirmationService: ConfirmationService =
+    inject(ConfirmationService);
   id = this.route.snapshot.paramMap.get('id') as string;
   response: CourseDetailedResponseModel = new CourseDetailedResponseModel();
   selectedTab: number = 1;
@@ -140,5 +145,38 @@ export class AdminCourseDetailsComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();
+  }
+
+  accept() {
+    this.confirm('Are you sure you want to accept this course?', () => {
+      this.service.accept();
+    });
+  }
+
+  confirm(message: string, success: any) {
+    this.confirmationService.confirm({
+      header: this.translate.instant('Confirmation'),
+      message: this.translate.instant(message),
+      icon: 'pi pi-exclamation-circle',
+      rejectButtonProps: {
+        label: this.translate.instant('Cancel'),
+        icon: 'pi pi-times',
+        outlined: true,
+        size: 'small',
+      },
+      acceptButtonProps: {
+        label: this.translate.instant('Confirm'),
+        icon: 'pi pi-check',
+        size: 'small',
+      },
+      accept: () => {
+        success();
+      },
+      reject: () => {},
+    });
+  }
+
+  reject() {
+    this.service.openRejectionDialog()
   }
 }

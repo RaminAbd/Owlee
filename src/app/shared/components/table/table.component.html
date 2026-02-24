@@ -60,6 +60,13 @@
             {{ rowData[col.field] }}
           </p>
 
+          <div class="status" *ngIf="col.field === 'status'">
+            <div class="pending">
+              <span></span>
+              <p>{{'Pending' | translate}}</p>
+            </div>
+          </div>
+
           <div class="d-flex crud-actions" *ngIf="col.field === 'showActions'">
             <button class="edit" (click)="tableAction(rowData, 4, $event)">
               <img src="table/eye.svg" alt="" />

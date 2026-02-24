@@ -1,0 +1,69 @@
+<div class="wrapper">
+  <div class="courses">
+    <div class="heading">
+      <h4>{{ "Certificates earned" | translate }}</h4>
+      <div class="search">
+        <p>{{ certificates.length + (" contents" | translate) }}</p>
+        <div class="search-block">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="{{ 'Search' | translate }}..."
+            (input)="searchByName()"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="items komp">
+      <div class="item" *ngFor="let item of filteredList">
+        <div class="image">
+          <img [src]="item.imageUrl" alt="" />
+        </div>
+        <div class="info">
+          <div class="name">
+            <p>{{ item.courseName }}</p>
+            <p class="lecturer">
+              {{ item.issueDate | date: "dd/MM/yyyy" }}
+            </p>
+          </div>
+          <div class="btns">
+            <button
+              routerLink="/main/student/dashboard/course/info/{{
+                item.courseId
+              }}"
+            >
+              See course
+            </button>
+            <button class="download" (click)="printCertificate(item)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="14"
+                viewBox="0 0 12 14"
+                fill="none"
+              >
+                <path
+                  d="M5.79983 1H7.39983V5.8H9.39983L5.79983 9.4M5.79983 1H4.19983V5.8H2.19983L5.79983 9.4"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1 13H10.6"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

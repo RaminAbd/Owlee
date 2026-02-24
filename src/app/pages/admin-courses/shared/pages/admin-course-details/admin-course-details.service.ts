@@ -5,7 +5,11 @@ import { EducatorsApiService } from '../../../../educators/shared/services/educa
 import { KnownLanguagesApiService } from '../../../../known-languages/shared/services/known-languages.api.service';
 import { TopicMaterialModel } from '../../../../dashboard/shared/models/topic-material.model';
 import { AdminCourseDetailsComponent } from './admin-course-details.component';
-import {RatingsApiService} from '../../../../student-dashboard/shared/services/ratings.api.service';
+import { RatingsApiService } from '../../../../student-dashboard/shared/services/ratings.api.service';
+import { ApplicationMessageCenterService } from '../../../../../core/services/ApplicationMessageCenter.service';
+import { CalendarMeetingsCreateComponent } from '../../../../calendar/shared/components/calendar-meetings-create/calendar-meetings-create.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CourseRejectionDialogComponent } from '../../components/course-rejection-dialog/course-rejection-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +23,10 @@ export class AdminCourseDetailsService {
     KnownLanguagesApiService,
   );
   private ratingsService: RatingsApiService = inject(RatingsApiService);
+  private dialogService: DialogService = inject(DialogService);
+  private message: ApplicationMessageCenterService = inject(
+    ApplicationMessageCenterService,
+  );
   constructor() {}
 
   getKnownLangs() {
@@ -71,29 +79,71 @@ export class AdminCourseDetailsService {
   }
 
   getAllMembers() {
-    this.service.GetStudents(this.component.id).subscribe(resp=>{
+    this.service.GetStudents(this.component.id).subscribe((resp) => {
       console.log(resp.data);
-      this.component.members = resp.data.map((member:any) => ({
+      this.component.members = resp.data.map((member: any) => ({
         ...member,
-        fullName:member.firstName + ' ' + member.lastName,
-      }))
-    })
+        fullName: member.firstName + ' ' + member.lastName,
+      }));
+    });
   }
 
-  getRating(){
+  getRating() {
     const req = {
-      courseId:this.component.id
-    }
+      courseId: this.component.id,
+    };
     this.ratingsService.GetOverview(req).subscribe((resp) => {
-      const totalCount = resp.data.reduce((sum:any, item:any) => sum + item.count, 0);
+      const totalCount = resp.data.reduce(
+        (sum: any, item: any) => sum + item.count,
+        0,
+      );
       this.component.total = totalCount;
-      this.component.ratings = resp.data.map((item:any)=>({
+      this.component.ratings = resp.data.map((item: any) => ({
         ...item,
-        percentage: totalCount > 0
-          ? +(item.count / totalCount * 100).toFixed(2)
-          : 0
-      }))
+        percentage:
+          totalCount > 0 ? +((item.count / totalCount) * 100).toFixed(2) : 0,
+      }));
       console.log(this.component.ratings);
-    })
+    });
+  }
+
+  accept() {
+    const req = {
+      id: this.component.response.id,
+    };
+    this.service.Accept(req).subscribe((resp) => {
+      if (resp.succeeded) {
+        this.component.location.back();
+        this.message.showTranslatedSuccessMessage('Course Accepted');
+      }
+    });
+  }
+
+  openRejectionDialog() {
+    const ref = this.dialogService.open(CourseRejectionDialogComponent, {
+      header: this.translate.instant('Reject reason'),
+      width: '500px',
+      style: {
+        maxWidth: '95%',
+      },
+    });
+    ref.onClose.subscribe((e: any) => {
+      if (e) {
+        this.reject(e);
+      }
+    });
+  }
+
+  reject(reason: string) {
+    const req = {
+      id: this.component.response.id,
+      adminRejectionComment: reason,
+    };
+    this.service.Reject(req).subscribe((resp) => {
+      if (resp.succeeded) {
+        this.component.location.back();
+        this.message.showTranslatedSuccessMessage('Course Rejected');
+      }
+    });
   }
 }

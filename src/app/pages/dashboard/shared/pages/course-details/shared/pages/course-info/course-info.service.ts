@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { KnownLanguagesApiService } from '../../../../../../../known-languages/shared/services/known-languages.api.service';
 import { MessageService } from 'primeng/api';
 import { ApplicationMessageCenterService } from '../../../../../../../../core/services/ApplicationMessageCenter.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -78,7 +78,7 @@ export class CourseInfoService {
     this.service.GetAvailableCourseSlots(educatorId).subscribe((resp) => {
       this.component.copyLoading = false;
       if (resp.data !== 0) {
-        console.log('geldi')
+        console.log('geldi');
         this.component.confirm(
           'Are you sure you want to copy this course?',
           () => {
@@ -102,5 +102,16 @@ export class CourseInfoService {
           this.component.location.back();
         }
       });
+  }
+
+  sendToAdmin() {
+    const req = {
+      id: this.component.id,
+    };
+    this.service.SendToAdmin(req).subscribe((resp) => {
+      if (resp.succeeded) {
+        this.getCourse();
+      }
+    });
   }
 }

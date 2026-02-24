@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {DatePipe, NgClass, NgForOf, NgIf, SlicePipe} from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf, NgStyle, SlicePipe} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import { CalendarService } from '../calendar/calendar.service';
 import { MonthModel } from '../calendar/shared/models/month.model';
@@ -13,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-student-calendar',
   imports: [NgClass, NgForOf, TranslatePipe, NgIf, SlicePipe, DropdownModule, ReactiveFormsModule,
-    FormsModule, DatePipe,],
+    FormsModule, DatePipe, NgStyle,],
   templateUrl: './student-calendar.component.html',
   styleUrl: './student-calendar.component.scss',
 })

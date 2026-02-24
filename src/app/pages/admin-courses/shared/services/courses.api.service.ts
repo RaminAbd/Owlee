@@ -55,4 +55,27 @@ export class CoursesApiService extends BaseCrudApiService {
   AddToFavorite(req: any) {
     return this.post(this.serviceUrl + 'AddToFavorite', req);
   }
+
+  GetCertificate(req: any) {
+    return this.get(this.serviceUrl + 'GetCertificate/', null, req);
+  }
+
+  GetCertificates(studentId: any) {
+    return this.get(this.serviceUrl + 'GetCertificates/', studentId);
+  }
+
+  SendToAdmin(req: any) {
+    return this.post(this.serviceUrl + 'SendToAdmin', req);
+  }
+
+  Accept(req: any) {
+    return this.post(this.serviceUrl + 'Accept', req);
+  }
+  Reject(req: any) {
+    return this.post(this.serviceUrl + 'Reject', req);
+  }
+
+  GetToConfirm(lang: string) {
+    return this.get(this.serviceUrl + 'GetToConfirm/', lang);
+  }
 }

@@ -129,8 +129,8 @@
     </div>
 
     <div class="switcher">
-      <p-toggleswitch [(ngModel)]="request.isOpen" />
-      <p (click)="request.isOpen = !request.isOpen">
+      <p-toggleswitch [(ngModel)]="request.isOpen" [disabled]="id !=='create'"/>
+      <p (click)="id ==='create' ?  request.isOpen = !request.isOpen : ''">
         {{ "Make it public" | translate }}
       </p>
     </div>

@@ -21,4 +21,5 @@ export class CourseDetailedResponseModel {
   price: any;
   learningPoints: any[]=[];
   isFavorite: boolean;
+    status: number;
 }

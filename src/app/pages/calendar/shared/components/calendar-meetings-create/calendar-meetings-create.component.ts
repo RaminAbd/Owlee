@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { GroupRequestModel } from '../../../../dashboard/shared/models/group-request.model';
 import { TopicRequestModel } from '../../../../dashboard/shared/models/topic-request.model';
+import {LanguageService} from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-calendar-meetings-create',
@@ -34,6 +35,7 @@ export class CalendarMeetingsCreateComponent {
   private service: CalendarMeetingsCreateService = inject(
     CalendarMeetingsCreateService,
   );
+  private language:LanguageService = inject(LanguageService)
   request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
   date: any;
   dates: any[] = [];
@@ -47,6 +49,11 @@ export class CalendarMeetingsCreateComponent {
   topics: TopicRequestModel[] = [];
   subTopics: SubtopicModel[] = [];
   duration: number = 0;
+  colors:any[]=[
+    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
+    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+  ]
+  color:any
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -79,6 +86,8 @@ export class CalendarMeetingsCreateComponent {
               new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
             ).toISOString(),
             duration: this.duration,
+            color:this.color ? this.color : '#c6e7ff'
+
           };
           this.request.meetings.push(item);
           this.selectedTopics = [];

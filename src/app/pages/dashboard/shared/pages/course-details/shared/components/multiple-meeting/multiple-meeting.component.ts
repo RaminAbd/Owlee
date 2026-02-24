@@ -9,15 +9,18 @@ import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormatDate } from '../../../../../../../../core/extensions/format-date';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
+import {LanguageService} from '../../../../../../../../core/services/language.service';
+import {DropdownModule} from 'primeng/dropdown';
 
 @Component({
   selector: 'app-multiple-meeting',
-  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf],
+  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf, DropdownModule],
   templateUrl: './multiple-meeting.component.html',
   styleUrl: './multiple-meeting.component.scss',
 })
 export class MultipleMeetingComponent {
   private service: MultipleMeetingService = inject(MultipleMeetingService);
+  private language: LanguageService = inject(LanguageService);
   request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
   date: any;
   dates: any[] = [];
@@ -25,6 +28,11 @@ export class MultipleMeetingComponent {
   subtopics: SubtopicModel[] = [];
   selectedTopics: string[] = [];
   duration: number = 0;
+  colors:any[]=[
+    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
+    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+  ]
+  color:string='';
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -56,6 +64,7 @@ export class MultipleMeetingComponent {
             new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
           ).toISOString(),
           duration: this.duration,
+          color:this.color ? this.color : '#c6e7ff'
         };
         this.request.meetings.push(item);
         this.selectedTopics = [];

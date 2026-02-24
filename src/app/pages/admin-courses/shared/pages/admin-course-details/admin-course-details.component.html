@@ -1,11 +1,21 @@
-<div class="course-info" >
-  <div class="inner" [ngClass]="{ materalsNotActive: selectedTab === 1 || selectedTab === 3 || selectedTab === 4 }">
+<div class="course-info">
+  <div
+    class="inner"
+    [ngClass]="{
+      materalsNotActive:
+        selectedTab === 1 || selectedTab === 3 || selectedTab === 4,
+    }"
+  >
     <div class="image">
       <!--      <i class="pi pi-chevron-left" (click)="back()"></i>-->
       <img class="main-image" [src]="response.image" alt="" />
     </div>
     <div class="back">
       <p>{{ response.name }}</p>
+      <div class="btns" *ngIf="response.status === 1">
+        <button (click)="accept()">{{ "Accept" | translate }}</button>
+        <button class="reject" (click)="reject()">{{ "Reject" | translate }}</button>
+      </div>
     </div>
     <div class="tabs">
       <div
@@ -99,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class="rating-wrapper" *ngIf="selectedTab===4">
+    <div class="rating-wrapper" *ngIf="selectedTab === 4">
       <div class="total">
         <h4>{{ response.rating }}</h4>
         <p-rating [(ngModel)]="response.rating" [disabled]="true" />
@@ -127,10 +137,15 @@
             </svg>
           </div>
           <div class="st">
-            <div class="filled" [ngStyle]="{ width: item.percentage + '%'}"></div>
+            <div
+              class="filled"
+              [ngStyle]="{ width: item.percentage + '%' }"
+            ></div>
           </div>
           <div class="nums">
-            <p><span>{{ item.count }}</span> {{ "students" | translate }}</p>
+            <p>
+              <span>{{ item.count }}</span> {{ "students" | translate }}
+            </p>
           </div>
         </div>
       </div>
@@ -138,9 +153,12 @@
   </div>
   <div
     class="right"
-    [ngClass]="{ notMaterial: selectedTab === 1 || selectedTab === 3 || selectedTab === 4, material: selectedTab === 2 }"
+    [ngClass]="{
+      notMaterial: selectedTab === 1 || selectedTab === 3 || selectedTab === 4,
+      material: selectedTab === 2,
+    }"
   >
-    <div class="educator-block" *ngIf="showEducator && selectedTab === 1 ">
+    <div class="educator-block" *ngIf="showEducator && selectedTab === 1">
       <div class="educator-info">
         <div class="item">
           <div class="row">

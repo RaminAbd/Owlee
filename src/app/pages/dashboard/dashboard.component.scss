@@ -86,13 +86,14 @@
       .item {
         cursor: pointer;
         width: 250px;
-        height: 292px;
+        min-height: 292px;
         border-radius: 16px;
         background: #f6f6f6;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
         gap: 16px;
         @media (max-width: 480px) {
           width: 100%;
@@ -102,6 +103,43 @@
           p {
             font-size: 18px;
             font-weight: 600;
+          }
+        }
+        .status{
+          display: flex;
+          padding: 3px 10px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          border-radius: 3px;
+          p{
+            color: #FFF;
+            font-family: Inter;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
+          &.draft{
+            background: #3B3199;
+          }
+          &.waiting{
+            background: #A65F00;
+          }
+          &.rejected{
+            background: #FB2C36;
+          }
+          &.pending{
+            background: #FF9300;
+          }
+          &.active{
+            background: #009245;
+          }
+          &.completed{
+            background: #009245;
+          }
+          &.canceled{
+            background: #D62828;
           }
         }
         .image {
@@ -140,6 +178,7 @@
           gap: 20px;
           width: 100%;
           height: calc(100% - 165px);
+          align-items: flex-start;
           .name {
             p {
               font-weight: 600;

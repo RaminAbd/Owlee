@@ -1,0 +1,9 @@
+<div class="admins-wrapper">
+  <app-table
+    [Array]="courses"
+    [cols]="cols"
+    [TableName]="'Courses'"
+    [showCreate]="false"
+    (Action)="getInfo($event)"
+  ></app-table>
+</div>

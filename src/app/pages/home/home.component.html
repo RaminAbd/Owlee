@@ -141,7 +141,15 @@
           *ngFor="let item of courses"
           routerLink="/courses/{{ item.id }}"
         >
-          <div class="favorite" *ngIf="userSignedIn" (click)="$event.preventDefault();$event.stopPropagation(); makeFavorite(item)">
+          <div
+            class="favorite"
+            *ngIf="userSignedIn"
+            (click)="
+              $event.preventDefault();
+              $event.stopPropagation();
+              makeFavorite(item)
+            "
+          >
             <svg
               *ngIf="!item.isFavorite"
               xmlns="http://www.w3.org/2000/svg"
@@ -397,7 +405,7 @@
         <div class="item">
           <div class="image">
             <img
-              src="https://owleeblob.blob.core.windows.net/images/62dc8005-b6ff-4059-b849-b07b835f4971-1.%20Iusip%20Nasibov%20%20%281%29.webp"
+              src="https://owleeblob.blob.core.windows.net/images/448f40cf-ce77-4e07-a0cf-760e31dd0882-1.%20Iusip.png"
               alt=""
             />
           </div>
@@ -411,7 +419,7 @@
         <div class="item">
           <div class="image">
             <img
-              src="https://owleeblob.blob.core.windows.net/images/de208f1c-2826-4a12-90ed-9a8bd8755fa5-2.%20Pharid%20Asker%20%20%281%29.webp"
+              src="https://owleeblob.blob.core.windows.net/images/80a5a7fe-7875-40ed-af69-e7a419b171fa-2.%20Pharid.png"
               alt=""
             />
           </div>
@@ -425,7 +433,7 @@
         <div class="item">
           <div class="image">
             <img
-              src="https://owleeblob.blob.core.windows.net/images/10379321-a221-4e19-85c8-8f7e7c893262-Aitaj%20Khalilli%20%281%29.webp"
+              src="https://owleeblob.blob.core.windows.net/images/b7f5ba8d-9bba-49b6-8b19-03fe46ba92c6-3.%20Aitaj.png"
               alt=""
             />
           </div>
@@ -441,7 +449,7 @@
         <div class="item">
           <div class="image">
             <img
-              src="https://owleeblob.blob.core.windows.net/images/62023148-e4dd-4557-9f20-07816635e4ff-Omar%20Ibragimovi%20%281%29.webp"
+              src="https://owleeblob.blob.core.windows.net/images/1c7096c6-ac2c-488f-905b-4ab2cf26b087-4.%20Omar.png"
               alt=""
             />
           </div>
@@ -453,7 +461,7 @@
         <div class="item">
           <div class="image">
             <img
-              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"
+              src="https://owleeblob.blob.core.windows.net/images/62e1d280-6dc6-4294-a08a-b94cd6d16bf1-5.%20Aslan.png"
               alt=""
             />
           </div>
@@ -468,10 +476,10 @@
         </div>
         <div class="item">
           <div class="image">
-            <!--            <img-->
-            <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
-            <!--              alt=""-->
-            <!--            />-->
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/ff3eecf8-3e05-4600-9c7d-ccd1b7b11bdc-6.%20Nigar.png"
+              alt=""
+            />
           </div>
           <div class="txt">
             <a
@@ -484,27 +492,23 @@
         </div>
         <div class="item">
           <div class="image">
-            <!--            <img-->
-            <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
-            <!--              alt=""-->
-            <!--            />-->
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/c373fc6b-92e1-4aee-8d2a-16fef47ea085-7.%20Anano.png"
+              alt=""
+            />
           </div>
           <div class="txt">
-            <a
-              href="https://www.linkedin.com/in/sabina-kazimovi-2baa76205/"
-              target="_blank"
-              >Sabina Kazimovi</a
-            >
+            <a>Anano Saginashvili</a>
             <p>Academic Director</p>
           </div>
         </div>
         <div class="item">
-          <!--          <div class="image">-->
-          <!--            <img-->
-          <!--              src="https://owleeblob.blob.core.windows.net/images/91aef2ab-a4a1-4666-91d3-7a18a34aa2b0-5.%20Aslan%20Gurbanov%20CTO%20%281%29.webp"-->
-          <!--              alt=""-->
-          <!--            />-->
-          <!--          </div>-->
+          <div class="image">
+            <img
+              src="https://owleeblob.blob.core.windows.net/images/08e5dced-3678-4469-a5a4-9e915e3fad49-8.%20Ayhan.png"
+              alt=""
+            />
+          </div>
           <div class="txt">
             <a>Ayhan Hasanli</a>
             <p>Legal Adviser</p>

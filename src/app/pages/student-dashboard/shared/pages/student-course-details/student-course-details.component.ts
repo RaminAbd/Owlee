@@ -27,11 +27,9 @@ import {
 import {
   AssignmentsResponseModel
 } from '../../../../dashboard/shared/pages/course-details/shared/pages/course-assignments/shared/models/assignments-response.model';
-import {
-  CalendarMeetingsCreateComponent
-} from '../../../../calendar/shared/components/calendar-meetings-create/calendar-meetings-create.component';
 import {DialogService} from 'primeng/dynamicdialog';
-import {CertificateComponent} from '../../../../../shared/components/certificate/certificate.component';
+import {CertificateResponseModel} from '../../models/certificate-response.model';
+import {FormatDate} from '../../../../../core/extensions/format-date';
 
 @Component({
   selector: 'app-student-course-details',
@@ -84,6 +82,7 @@ export class StudentCourseDetailsComponent implements OnDestroy {
     this.service.component = this;
     this.service.getKnownLangs();
     this.service.getAllAssignments();
+    this.service.getCertificate()
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.service.getKnownLangs();
@@ -157,40 +156,15 @@ export class StudentCourseDetailsComponent implements OnDestroy {
     this.service.downloadFile(mat)
   }
 
-  openCertificate() {
-    const ref = this.dialogService.open(CertificateComponent, {
-      width: '1020px',
-      // height: '630px',
-      // data: {
-      //   courses: this.courses,
-      // },
-      style: {
-        maxWidth: '95%',
-      },
-    });
-    ref.onClose.subscribe((e: any) => {
-      if (e) {
-        // this.service.getMeetings();
-      }
-    });
+  formatDate(date: any) {
+    return new FormatDate(new Date(date), false).formattedDate;
   }
 
+  certData:CertificateResponseModel = new CertificateResponseModel();
+  printCertificate() {
 
-  certData = {
-    userName: 'Marian Anderson',
-    courseName: 'Advanced UI/UX Design Masterclass',
-    issueDate: 'February 12, 2026',
-    certificateId: 'OWL-2026-04821',
-    instructor: 'Sarah Mitchell',
-    ceo: 'James Cooper'
-  };
-
-  handleDownloadPDF() {
-    this.printCertificate(this.certData);
-  }
-
-  printCertificate(data: any) {
-    // Note: We use the exact CSS logic from your design but optimized for A4 Landscape
+    const data = structuredClone(this.certData);
+    data.issueDate = this.formatDate(this.certData.issueDate)
     const printContent = `
     <html>
       <head>
@@ -321,7 +295,7 @@ export class StudentCourseDetailsComponent implements OnDestroy {
             </div>
 
             <div class="sig-block">
-              <div class="sig-name">${data.ceo}</div>
+              <div class="sig-name">Iusip Nasibov</div>
               <div class="sig-line"></div>
               <div class="sig-label">CEO, Owlee</div>
             </div>

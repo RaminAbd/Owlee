@@ -15,7 +15,7 @@
         <label>{{ "Monthly price" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.price && isSubmitted }"
+          [ngClass]="{ invalid: (request.price === null || request.price === undefined) && isSubmitted }"
           [(ngModel)]="request.price"
         />
       </div>
@@ -23,7 +23,7 @@
         <label>{{ "Annual price" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.annualPrice && isSubmitted }"
+          [ngClass]="{ invalid: (request.annualPrice === null || request.annualPrice === undefined ) && isSubmitted }"
           [(ngModel)]="request.annualPrice"
         />
       </div>
@@ -41,7 +41,7 @@
         <label>{{ "Private Course Amount" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.courseAmount && isSubmitted }"
+          [ngClass]="{ invalid: (request.courseAmount === null || request.courseAmount === undefined ) && isSubmitted }"
           [(ngModel)]="request.courseAmount"
         />
       </div>
@@ -49,7 +49,7 @@
         <label>{{ "Public Course Amount" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.openCourseAmount && isSubmitted }"
+          [ngClass]="{ invalid: (request.openCourseAmount === null || request.openCourseAmount === undefined ) && isSubmitted }"
           [(ngModel)]="request.openCourseAmount"
         />
       </div>
@@ -68,7 +68,7 @@
         <label>{{ "Private Max Capacity" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.maxCapacity && isSubmitted }"
+          [ngClass]="{ invalid: (request.maxCapacity === null || request.maxCapacity === undefined ) && isSubmitted }"
           [(ngModel)]="request.maxCapacity"
         />
       </div>
@@ -76,7 +76,7 @@
         <label>{{ "Public Max Capacity" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.openMaxCapacity && isSubmitted }"
+          [ngClass]="{ invalid: (request.openMaxCapacity === null || request.openMaxCapacity === undefined ) && isSubmitted }"
           [(ngModel)]="request.openMaxCapacity"
         />
       </div>
@@ -88,7 +88,7 @@
         <label>{{ "Private Storage Capacity" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.fileStorage && isSubmitted }"
+          [ngClass]="{ invalid: (request.fileStorage === null || request.fileStorage === undefined ) && isSubmitted }"
           [(ngModel)]="request.fileStorage"
         />
       </div>
@@ -96,7 +96,7 @@
         <label>{{ "Public Storage Capacity" | translate }}</label>
         <input
           type="number"
-          [ngClass]="{ invalid: !request.openFileStorage && isSubmitted }"
+          [ngClass]="{ invalid: (request.openFileStorage === null || request.openFileStorage === undefined ) && isSubmitted }"
           [(ngModel)]="request.openFileStorage"
         />
       </div>

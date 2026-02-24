@@ -36,16 +36,14 @@ export class SubscriptionPackageUpsertService {
     let result: boolean = true;
     if (
       !this.component.request.name ||
-      !this.component.request.price ||
-      !this.component.request.annualPrice ||
-      !this.component.request.maxCapacity ||
-      !this.component.request.openMaxCapacity ||
-      !this.component.request.courseAmount ||
-      !this.component.request.openCourseAmount ||
-      !this.component.request.fileStorage ||
-      !this.component.request.openFileStorage
-      // !this.component.request.groupPerCourse ||
-      // !this.component.request.peoplePerGroup
+      this.component.request.price == null ||
+      this.component.request.annualPrice == null ||
+      this.component.request.maxCapacity == null ||
+      this.component.request.openMaxCapacity == null ||
+      this.component.request.courseAmount == null ||
+      this.component.request.openCourseAmount == null ||
+      this.component.request.fileStorage == null ||
+      this.component.request.openFileStorage == null
     ) {
       result = false;
     }

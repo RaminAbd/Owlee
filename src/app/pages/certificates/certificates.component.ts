@@ -1,31 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CertificateResponseModel } from '../student-dashboard/shared/models/certificate-response.model';
+import { CertificatesService } from './certificates.service';
+import {FormatDate} from '../../core/extensions/format-date';
+import {DatePipe, NgForOf} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TranslatePipe} from '@ngx-translate/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
-  selector: 'app-certificate',
-  imports: [],
-  templateUrl: './certificate.component.html',
-  styleUrl: './certificate.component.scss'
+  selector: 'app-certificates',
+  imports: [
+    NgForOf,
+    ReactiveFormsModule,
+    TranslatePipe,
+    FormsModule,
+    DatePipe,
+    RouterLink
+  ],
+  templateUrl: './certificates.component.html',
+  styleUrl: './certificates.component.scss',
 })
-export class CertificateComponent {
-  userName = 'Marian Anderson';
-  courseName = 'Advanced UI/UX Design Masterclass';
-  issueDate = 'February 12, 2026';
-  certificateId = 'OWL-2026-04821';
-  certData = {
-    userName: 'Marian Anderson',
-    courseName: 'Advanced UI/UX Design Masterclass',
-    issueDate: 'February 12, 2026',
-    certificateId: 'OWL-2026-04821',
-    instructor: 'Sarah Mitchell',
-    ceo: 'James Cooper'
-  };
-
-  handleDownloadPDF() {
-    this.printCertificate(this.certData);
+export class CertificatesComponent {
+  private service: CertificatesService = inject(CertificatesService);
+  certificates: CertificateResponseModel[] = [];
+  filteredList: CertificateResponseModel[] = [];
+  searchText:string='';
+  constructor() {
+    this.service.component = this;
+    this.service.getCertificates();
   }
 
-  printCertificate(data: any) {
-    // Note: We use the exact CSS logic from your design but optimized for A4 Landscape
+  searchByName() {
+    this.filteredList = this.certificates.filter((obj) =>
+      obj.courseName.toLowerCase().includes(this.searchText.toLowerCase()),
+    );
+    console.log(this.filteredList);
+  }
+
+  formatDate(date: any) {
+    return new FormatDate(new Date(date), false).formattedDate;
+  }
+
+  printCertificate(certData: CertificateResponseModel) {
+    const data = structuredClone(certData);
+    data.issueDate = this.formatDate(certData.issueDate)
     const printContent = `
     <html>
       <head>
@@ -156,7 +174,7 @@ export class CertificateComponent {
             </div>
 
             <div class="sig-block">
-              <div class="sig-name">${data.ceo}</div>
+              <div class="sig-name">Iusip Nasibov</div>
               <div class="sig-line"></div>
               <div class="sig-label">CEO, Owlee</div>
             </div>

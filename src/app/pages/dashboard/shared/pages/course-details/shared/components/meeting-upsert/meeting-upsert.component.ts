@@ -9,6 +9,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { SubtopicModel } from '../../../../../models/subtopic.model';
 import { MultiSelect } from 'primeng/multiselect';
 import {NgIf} from "@angular/common";
+import {LanguageService} from '../../../../../../../../core/services/language.service';
 @Component({
   selector: 'app-meeting-upsert',
     imports: [
@@ -24,11 +25,16 @@ import {NgIf} from "@angular/common";
 })
 export class MeetingUpsertComponent {
   private service: MeetingUpsertService = inject(MeetingUpsertService);
+  private language: LanguageService = inject(LanguageService);
   request: MeetingRequestModel = new MeetingRequestModel();
   id: string;
   date: any;
   subtopics: SubtopicModel[] = [];
   isSubmitted = false;
+  colors:any[]=[
+    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
+    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+  ]
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,

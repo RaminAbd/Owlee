@@ -49,6 +49,7 @@ export class CalendarService {
     this.service
       .GetMeetingsByEducator(this.component.meetingsRequest)
       .subscribe((resp) => {
+        console.log(resp.data, "meetings")
         resp.data = resp.data.map((item: any) => ({
           ...item,
           time: this.extractTime(item),
@@ -148,6 +149,7 @@ export class CalendarService {
     date: Date,
     scheduleData?: any,
   ): { monthName: string; weeks: any[] } {
+    console.log(scheduleData, "schedule data")
     const year = date.getFullYear();
     const month = date.getMonth();
     const monthName = date.toLocaleString('default', { month: 'long' });

@@ -8,6 +8,7 @@ import { RangeMeetingService } from './range-meeting.service';
 import { RangeRequestModel } from '../../../../../models/range-request.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationMessageCenterService } from '../../../../../../../../core/services/ApplicationMessageCenter.service';
+import {LanguageService} from '../../../../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-range-meeting',
@@ -24,6 +25,7 @@ import { ApplicationMessageCenterService } from '../../../../../../../../core/se
 })
 export class RangeMeetingComponent {
   private service: RangeMeetingService = inject(RangeMeetingService);
+  private language: LanguageService = inject(LanguageService);
   public message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
@@ -56,6 +58,7 @@ export class RangeMeetingComponent {
       hour: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Tuesday',
@@ -64,6 +67,7 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Wednesday',
@@ -72,6 +76,7 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Thursday',
@@ -80,6 +85,7 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Friday',
@@ -88,6 +94,7 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Saturday',
@@ -96,6 +103,7 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
     {
       name: 'Sunday',
@@ -104,10 +112,14 @@ export class RangeMeetingComponent {
       hourName: 0,
       minute: 0,
       duration: 0,
+      color: '',
     },
   ];
   deletedItems: { item: any; index: number }[] = [];
-
+  colors:any[]=[
+    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
+    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+  ]
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,

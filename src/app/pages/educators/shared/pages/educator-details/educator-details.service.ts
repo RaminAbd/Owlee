@@ -277,6 +277,11 @@ export class EducatorDetailsService {
         (this.component.subscription.fileStorage /
           this.component.subscription.maxFileStorage) *
         100;
+
+      this.component.subscription.usedPublicPercentage =
+        ((this.component.subscription.openFileStorage) /
+          this.component.subscription.openMaxFileStorage) *
+        100;
     });
   }
 

@@ -1,4 +1,5 @@
 .wrapper {
+  min-height: calc(100svh - 505px);
   #fourth {
     display: flex;
     flex-direction: column;

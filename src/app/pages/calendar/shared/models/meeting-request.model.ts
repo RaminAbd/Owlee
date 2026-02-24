@@ -6,4 +6,5 @@ export class MeetingRequestModel {
   link?: string;
   duration: number;
   courseId: string;
+  color: any;
 }

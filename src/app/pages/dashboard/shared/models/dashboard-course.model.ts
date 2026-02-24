@@ -11,4 +11,6 @@ export class DashboardCourseModel {
   groupMemberCount: number;
   educatorFullName:string;
   id:string;
+  status: number;
+  isOpen: boolean;
 }

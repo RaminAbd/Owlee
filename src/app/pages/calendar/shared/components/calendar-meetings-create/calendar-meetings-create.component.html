@@ -80,6 +80,16 @@
           >
           <input type="number" [(ngModel)]="duration" />
         </div>
+        <div class="input-item">
+          <label for="enable">{{ "Color" | translate }}</label>
+          <p-dropdown
+            [style]="{ width: '100%', height: '40px' }"
+            [options]="colors"
+            [(ngModel)]="color"
+            optionLabel="name"
+            optionValue="value"
+          ></p-dropdown>
+        </div>
         <button (click)="addMeeting()">{{ "Add" | translate }}</button>
       </div>
     </div>

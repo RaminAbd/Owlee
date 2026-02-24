@@ -96,3 +96,28 @@ h3{
     justify-content: center;
   }
 }
+.status{
+  .pending{
+    display: flex;
+    padding: 6.667px 12.24px 5.333px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 22369600px;
+    background: #F3F4F6;
+    span{
+      width: 8px;
+      height: 8px;
+      border-radius: 22369600px;
+      background: #6A7282;
+    }
+    p{
+      color: #364153;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px; /* 133.333% */
+    }
+  }
+}

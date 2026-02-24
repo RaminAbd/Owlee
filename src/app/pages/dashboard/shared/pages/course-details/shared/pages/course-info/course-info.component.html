@@ -1,34 +1,263 @@
 <div class="course-info">
-  <div class="back" (click)="back()">
-    <i class="pi pi-chevron-left"></i>
-    <p>{{ request.name }}</p>
+  <div class="left">
+    <div class="back" (click)="back()">
+      <i class="pi pi-chevron-left"></i>
+      <p>{{ request.name }}</p>
+    </div>
+    <div class="image">
+      <img class="main-image" [src]="request.image.fileUrl" alt="" />
+    </div>
+    <div class="language">
+      <label>{{ "Language" | translate }}</label>
+      <p>{{ request.systemLanguageName }}</p>
+    </div>
+    <div class="description">
+      <p>{{ request.description }}</p>
+    </div>
   </div>
-  <div class="image">
-    <img class="main-image" [src]="request.image.fileUrl" alt="" />
-    <div class="actions">
-      <div class="item edit" (click)="edit()">
-        <div class="icon"><img src="pen.svg" alt="" /></div>
-        <p>{{ "Edit" | translate }}</p>
-      </div>
-      <div class="item copy" (click)="copy()">
-        <div class="icon">
-          <img *ngIf="!copyLoading" src="copy.svg" alt="" />
-          <i class="pi pi-spin pi-spinner" *ngIf="copyLoading"></i>
+  <div class="right">
+    <div class="status draft" *ngIf="request.isOpen && request.status === 0">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Draft" | translate }}
         </div>
-        <p>{{ "Copy" | translate }}</p>
       </div>
-      <div class="item delete" (click)="delete()">
-        <div class="icon"><img src="delete.svg" alt="" /></div>
+      <div class="description">
+        <p>
+          {{ 'Your course is currently in draft mode.Complete all required sections and submit it for admin review.' | translate }}
+        </p>
+      </div>
+      <button (click)="sendForConfirmation()">Send for Confirmation</button>
+    </div>
 
-        <p>{{ "Delete" | translate }}</p>
+    <div class="status waiting" *ngIf="request.isOpen && request.status === 1">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Pending Approval" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{ 'Your course has been submitted and is awaiting admin approval. You will be notified once it has been reviewed.' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="status rejected" *ngIf="request.isOpen && request.status === 2">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Rejected" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{'Your course submission was rejected by the admin. Please review the feedback below and make the necessary changes.' | translate}}
+        </p>
+      </div>
+      <div class="reason">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M9.99984 18.3332C14.6022 18.3332 18.3332 14.6022 18.3332 9.99984C18.3332 5.39746 14.6022 1.6665 9.99984 1.6665C5.39746 1.6665 1.6665 5.39746 1.6665 9.99984C1.6665 14.6022 5.39746 18.3332 9.99984 18.3332Z" stroke="#E7000B" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 6.6665V9.99984" stroke="#E7000B" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 13.3335H10.0083" stroke="#E7000B" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="info">
+          <h4>{{'Admin Feedback' | translate}}</h4>
+          <p>{{request.adminRejectionComment}}</p>
+        </div>
+      </div>
+      <button (click)="sendForConfirmation()">Resubmit Course</button>
+    </div>
+
+
+    <div class="status active" *ngIf="request.isOpen && request.status === 4">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Active" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{ 'Your course is live and available to students. Monitor your progress and engage with your learners.' | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="status completed" *ngIf="request.isOpen && request.status === 5">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Completed" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{ 'This course has been completed. All materials and student data remain accessible for reference.' | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="status canceled" *ngIf="request.isOpen && request.status === 6">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Canceled" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{ 'This course has been canceled and is no longer available to students.' | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="heading">
+        <p>{{ "Course actions" | translate }}</p>
+      </div>
+      <div class="btns">
+        <button class="edit" (click)="edit()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_1914_12595)">
+              <path
+                d="M8.66675 14H14.0001"
+                stroke="white"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14.1161 4.54126C14.4686 4.18888 14.6666 3.71091 14.6667 3.2125C14.6668 2.71409 14.4688 2.23607 14.1165 1.8836C13.7641 1.53112 13.2861 1.33307 12.7877 1.33301C12.2893 1.33295 11.8113 1.53088 11.4588 1.88326L2.56145 10.7826C2.40667 10.9369 2.29219 11.127 2.22812 11.3359L1.34745 14.2373C1.33022 14.2949 1.32892 14.3562 1.34369 14.4145C1.35845 14.4728 1.38873 14.5261 1.43132 14.5686C1.4739 14.6111 1.5272 14.6413 1.58556 14.656C1.64392 14.6707 1.70516 14.6693 1.76279 14.6519L4.66479 13.7719C4.87357 13.7084 5.06357 13.5947 5.21812 13.4406L14.1161 4.54126Z"
+                stroke="white"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1914_12595">
+                <rect width="16" height="16" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          {{ "Edit Course" | translate }}
+        </button>
+        <button class="duplicate" (click)="copy()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_1914_12600)">
+              <path
+                d="M13.3333 5.3335H6.66659C5.93021 5.3335 5.33325 5.93045 5.33325 6.66683V13.3335C5.33325 14.0699 5.93021 14.6668 6.66659 14.6668H13.3333C14.0696 14.6668 14.6666 14.0699 14.6666 13.3335V6.66683C14.6666 5.93045 14.0696 5.3335 13.3333 5.3335Z"
+                stroke="#13170C"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.66659 10.6668C1.93325 10.6668 1.33325 10.0668 1.33325 9.3335V2.66683C1.33325 1.9335 1.93325 1.3335 2.66659 1.3335H9.33325C10.0666 1.3335 10.6666 1.9335 10.6666 2.66683"
+                stroke="#13170C"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1914_12600">
+                <rect width="16" height="16" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          {{ "Duplicate Course" | translate }}
+        </button>
+        <button class="delete" (click)="delete()" *ngIf="request.status === 0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_1914_12605)">
+              <path
+                d="M6.66675 7.3335V11.3335"
+                stroke="#E7000B"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.33325 7.3335V11.3335"
+                stroke="#E7000B"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12.6666 4V13.3333C12.6666 13.687 12.5261 14.0261 12.2761 14.2761C12.026 14.5262 11.6869 14.6667 11.3333 14.6667H4.66659C4.31296 14.6667 3.97382 14.5262 3.72378 14.2761C3.47373 14.0261 3.33325 13.687 3.33325 13.3333V4"
+                stroke="#E7000B"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 4H14"
+                stroke="#E7000B"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5.33325 4.00016V2.66683C5.33325 2.31321 5.47373 1.97407 5.72378 1.72402C5.97383 1.47397 6.31296 1.3335 6.66659 1.3335H9.33325C9.68687 1.3335 10.026 1.47397 10.2761 1.72402C10.5261 1.97407 10.6666 2.31321 10.6666 2.66683V4.00016"
+                stroke="#E7000B"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1914_12605">
+                <rect width="16" height="16" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          {{ "Delete Course" | translate }}
+        </button>
       </div>
     </div>
   </div>
-  <div class="language">
-    <label>{{ "Language" | translate }}</label>
-    <p>{{ request.systemLanguageName }}</p>
-  </div>
-  <div class="description">
-    <p>{{ request.description }}</p>
-  </div>
 </div>
+<!--    <div class="actions">-->
+<!--      <div class="item edit" (click)="edit()">-->
+<!--        <div class="icon"><img src="pen.svg" alt="" /></div>-->
+<!--        <p>{{ "Edit" | translate }}</p>-->
+<!--      </div>-->
+<!--      <div class="item copy" >-->
+<!--        <div class="icon">-->
+<!--          <img *ngIf="!copyLoading" src="copy.svg" alt="" />-->
+<!--          <i class="pi pi-spin pi-spinner" *ngIf="copyLoading"></i>-->
+<!--        </div>-->
+<!--        <p>{{ "Copy" | translate }}</p>-->
+<!--      </div>-->
+<!--      <div class="item delete" (click)="delete()">-->
+<!--        <div class="icon"><img src="delete.svg" alt="" /></div>-->
+
+<!--        <p>{{ "Delete" | translate }}</p>-->
+<!--      </div>-->
+<!--    </div>-->

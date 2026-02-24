@@ -83,7 +83,7 @@
                   <p class="day-number">{{ day.dayNumber }}</p>
                 </div>
                 <div class="komp tasks" *ngIf="day.tasks.length <= 2">
-                  <div class="task" *ngFor="let task of day.tasks">
+                  <div class="task" *ngFor="let task of day.tasks" [ngStyle]="{'background' : task.color}">
                     <p>{{ task.courseName }}</p>
                   </div>
                 </div>
@@ -92,6 +92,7 @@
                   <div
                     class="task"
                     *ngFor="let task of day.tasks | slice: 0 : 2"
+                    [ngStyle]="{'background' : task.color}"
                   >
                     <p>{{ task.courseName }}</p>
                   </div>
@@ -101,7 +102,7 @@
                 </div>
 
                 <div class="mobile tasks" *ngIf="day.tasks.length === 1">
-                  <div class="task" *ngFor="let task of day.tasks">
+                  <div class="task" *ngFor="let task of day.tasks" [ngStyle]="{'background' : task.color}">
                     <p>{{ task.courseName }}</p>
                   </div>
                 </div>

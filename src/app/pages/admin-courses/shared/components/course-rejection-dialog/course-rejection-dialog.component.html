@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div class="input-item">
+    <textarea [(ngModel)]="reason"></textarea>
+  </div>
+  <div class="btns">
+    <button (click)="ref.close()">{{ "Cancel" | translate }}</button>
+    <button class="save" (click)="save()" style="position: relative">
+      {{ "Save" | translate }}
+    </button>
+  </div>
+</div>

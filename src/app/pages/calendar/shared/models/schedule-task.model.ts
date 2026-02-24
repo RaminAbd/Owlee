@@ -11,4 +11,5 @@ export class ScheduleTaskModel {
   attendedStudents: number;
   courseId: any;
   totalAmountOfStudents: number;
+  color: any;
 }

@@ -52,6 +52,16 @@
         id="enable"
       ></p-multiSelect>
     </div>
+    <div class="input-item">
+      <label for="enable">{{ "Color" | translate }}</label>
+      <p-dropdown
+        [style]="{ width: '100%', height: '40px' }"
+        [options]="colors"
+        [(ngModel)]="request.color"
+        optionLabel="name"
+        optionValue="value"
+      ></p-dropdown>
+    </div>
   </div>
   <div class="btns">
     <button (click)="ref.close()">{{ "Cancel" | translate }}</button>

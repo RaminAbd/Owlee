@@ -38,6 +38,7 @@ import { ScheduleTaskModel } from './shared/models/schedule-task.model';
     DropdownModule,
     ReactiveFormsModule,
     FormsModule,
+    NgStyle,
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',

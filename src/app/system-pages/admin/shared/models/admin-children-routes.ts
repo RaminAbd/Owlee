@@ -20,9 +20,15 @@ import {AdminTutorialsComponent} from '../../../../pages/admin-tutorials/admin-t
 import {
   TutorialsUpsertComponent
 } from '../../../../pages/admin-tutorials/shared/pages/tutorials-upsert/tutorials-upsert.component';
+import {ConfirmationCoursesComponent} from '../../../../pages/confirmation-courses/confirmation-courses.component';
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
+    {
+      path: 'confirmations',
+      component: ConfirmationCoursesComponent,
+      data: { title: 'Confirmation Courses' },
+    },
     {
       path: 'subscription-packages',
       component: SubscriptionPackageComponent,

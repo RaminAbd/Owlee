@@ -5,12 +5,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
-import { NgForOf } from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { DashboardCourseModel } from './shared/models/dashboard-course.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [TranslatePipe, FormsModule, NgForOf],
+  imports: [TranslatePipe, FormsModule, NgForOf, NgClass, NgIf],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

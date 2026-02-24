@@ -78,13 +78,6 @@ export class StudentCourseDetailsService {
       } else {
         this.component.showRating = false;
       }
-
-      if (this.component.response.endDate) {
-        this.component.showCertificate =
-          now >= new Date(this.component.response.endDate);
-      } else {
-        this.component.showCertificate = false;
-      }
     });
   }
 
@@ -115,6 +108,21 @@ export class StudentCourseDetailsService {
   downloadFile(mat: any) {
     FileExporter.downloadFilesIndividually(mat.file.fileUrl).then(() => {
       mat.fileLoading = false;
+    });
+  }
+
+  getCertificate() {
+    const req = {
+      CourseId: this.component.id,
+      StudentId: localStorage.getItem('userId') as string,
+    }
+    this.service.GetCertificate(req).subscribe((resp) => {
+      this.component.certData = resp.data;
+      if (resp.data.id) {
+        this.component.showCertificate = true;
+      } else {
+        this.component.showCertificate = false;
+      }
     });
   }
 }

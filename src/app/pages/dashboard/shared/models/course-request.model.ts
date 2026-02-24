@@ -18,4 +18,6 @@ export class CourseRequestModel {
   lastSubscriptionDate: any;
   isOpen: boolean = false;
   learningPoints: any[]=[];
+  status: any;
+  adminRejectionComment: string;
 }
