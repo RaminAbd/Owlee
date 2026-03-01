@@ -44,6 +44,7 @@ export class CourseGroupsComponent implements OnDestroy {
   }
 
   filteredList: GroupsResponseModel[] = [];
+  showAddButton: boolean = false;
 
   searchByName() {
     this.filteredList = this.groups.filter((obj) =>

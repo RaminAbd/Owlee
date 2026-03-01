@@ -13,7 +13,7 @@
           />
         </div>
       </div>
-      <div class="btn">
+      <div class="btn" *ngIf="showAddButton">
         <button *ngIf="allowedToAddGroup" class="allowed" (click)="openInvitation()">
           {{ "Add new" | translate }}
         </button>

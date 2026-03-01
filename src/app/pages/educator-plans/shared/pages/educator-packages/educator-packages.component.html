@@ -27,81 +27,160 @@
       *ngFor="let item of subscriptionPackages"
       [ngClass]="{ selectedItem: item.id === selectedPackage.id }"
     >
-      <div class="is-current"  *ngIf="item.id === activePackage.id">
-        <p>{{'Current plan' | translate }}</p>
+      <div class="is-current" *ngIf="item.id === activePackage.id">
+        <p>{{ "Current plan" | translate }}</p>
       </div>
       <div class="name">
         <p>{{ item.name }}</p>
       </div>
       <div class="price">
+        <span class="total" *ngIf="selectedPackageType === 2 && item.name !=='Free'">
+          {{ item.annualPrice ? (item.annualPrice * 12).toFixed(2) : 0 }} Gel
+        </span>
         <p>
           {{ selectedPackageType === 1 ? item.price : item.annualPrice }}
           <span>Gel</span>
         </p>
-        <span>{{'per month' | translate}}</span>
+        <span>{{ "per month" | translate }}</span>
       </div>
 
       <div class="features">
-        <label>{{'Private courses' | translate}}</label>
+        <label>{{ "Private courses" | translate }}</label>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
         </div>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <p>{{ item.maxCapacity }} {{ "Students" | translate }}</p>
         </div>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
-          <p>
-            {{ item.peoplePerGroup }} GB {{ "storage" | translate }}
-          </p>
+          <p>{{ item.peoplePerGroup }} GB {{ "storage" | translate }}</p>
         </div>
       </div>
-      <div class="features">
-        <label>{{'Public courses' | translate}}</label>
+      <div class="features" *ngIf="item.name !=='Free'">
+        <label>{{ "Public courses" | translate }}</label>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <p>{{ item.openCourseAmount }} {{ "Courses" | translate }}</p>
         </div>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <p>{{ item.openMaxCapacity }} {{ "Students" | translate }}</p>
         </div>
         <div class="f-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path d="M17.5 5.25L7.875 14.875L3.5 10.5" stroke="#009245" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+          >
+            <path
+              d="M17.5 5.25L7.875 14.875L3.5 10.5"
+              stroke="#009245"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
-          <p>
-            {{ item.openFileStorage }} GB {{ "storage" | translate }}
-          </p>
+          <p>{{ item.openFileStorage }} GB {{ "storage" | translate }}</p>
         </div>
       </div>
-<!--      <div class="btn">-->
-<!--        <button (click)="selectedPackage = item">-->
-<!--          {{-->
-<!--            item.id === activePackage.id-->
-<!--              ? ("Current plan" | translate)-->
-<!--              : ("Upgrade" | translate)-->
-<!--          }}-->
-<!--        </button>-->
-<!--      </div>-->
+      <!--      <div class="btn">-->
+      <!--        <button (click)="selectedPackage = item">-->
+      <!--          {{-->
+      <!--            item.id === activePackage.id-->
+      <!--              ? ("Current plan" | translate)-->
+      <!--              : ("Upgrade" | translate)-->
+      <!--          }}-->
+      <!--        </button>-->
+      <!--      </div>-->
     </div>
   </div>
   <div class="warning" *ngIf="errorMessage" style="width: 100%">
     <p style="color: orange">* {{ errorMessage | translate }}</p>
   </div>
-  <div class="privacy" style="display: flex; width: 100%; align-items: center;justify-content: center;">
+  <div
+    class="privacy"
+    style="
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    "
+  >
     <div
       class="input-block"
       style="display: flex; align-items: center; gap: 6px"

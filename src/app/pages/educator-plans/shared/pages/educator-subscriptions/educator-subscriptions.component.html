@@ -8,7 +8,7 @@
     <div class="cols">
       <div class="col left">
         <div class="type">
-          <p>{{ selectedPackage.name }}</p>
+          <p>{{ subscription.name }}</p>
         </div>
         <div class="date">
           <p>{{ "Next payment" | translate }}</p>
@@ -17,7 +17,8 @@
         <div class="price">
           <label>{{ "Current Price" | translate }}</label>
           <p>
-            {{ selectedPackage.price }}₾
+            <span class="old">{{subscription.price}}₾</span>
+            {{ subscription.newPrice}}₾
             <span>/ {{ "month" | translate }}</span>
           </p>
         </div>
@@ -28,20 +29,20 @@
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.courseAmount }} {{ "Courses" | translate }}
+              {{ subscription.courseAmount }} {{ "Courses" | translate }}
             </p>
           </div>
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.maxCapacity }}
+              {{ subscription.maxCapacity }}
               {{ "Students" | translate }}
             </p>
           </div>
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.fileStorage }} GB
+              {{ subscription.fileStorage }} GB
               {{ "storage" | translate }}
             </p>
           </div>
@@ -51,20 +52,20 @@
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.openCourseAmount }} {{ "Courses" | translate }}
+              {{ subscription.openCourseAmount }} {{ "Courses" | translate }}
             </p>
           </div>
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.openMaxCapacity }}
+              {{ subscription.openMaxCapacity }}
               {{ "Students" | translate }}
             </p>
           </div>
           <div class="f-item">
             <img src="d-check.svg" alt="" />
             <p>
-              {{ selectedPackage.openFileStorage }} GB
+              {{ subscription.openFileStorage }} GB
               {{ "storage" | translate }}
             </p>
           </div>
@@ -99,7 +100,7 @@
       <div class="st-item">
         <div class="row">
           <div class="left">
-            <p>{{ "Private courses storage" | translate }}</p>
+            <p>{{ "Public courses storage" | translate }}</p>
             <div class="percentage" >
               <p style="color:#009245;">{{ subscription.usedPublicPercentage ?  subscription.usedPublicPercentage.toFixed(2) : 0 }} %</p>
             </div>

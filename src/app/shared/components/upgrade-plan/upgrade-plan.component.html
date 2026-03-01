@@ -34,6 +34,9 @@
         <p>{{ item.name }}</p>
       </div>
       <div class="price">
+        <span class="total" *ngIf="selectedPackageType === 2 && item.name !=='Free'">
+          {{ item.annualPrice ? (item.annualPrice * 12).toFixed(2) : 0 }} Gel
+        </span>
         <p>
           {{ selectedPackageType === 1 ? item.price : item.annualPrice }}
           <span>Gel</span>
@@ -64,7 +67,7 @@
           </p>
         </div>
       </div>
-      <div class="features">
+      <div class="features" *ngIf="item.name !=='Free'">
         <label>{{'Public courses' | translate}}</label>
         <div class="f-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">

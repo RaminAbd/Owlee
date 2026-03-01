@@ -29,6 +29,7 @@ export class GroupMembersService {
       .GetByIdByLang(this.coursesService.serviceUrl, req)
       .subscribe((resp) => {
         this.component.course = resp.data;
+        this.component.showAddButton = !this.component.course.isOpen;
         this.checkSlots();
       });
   }

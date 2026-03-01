@@ -32,6 +32,7 @@ export class GroupMembersComponent {
   allowedToAddGroup: boolean = true;
   showEditComment:boolean = false;
   showComments:boolean = false;
+  showAddButton:boolean = false;
   constructor() {
     console.log(this.courseId, "courseId")
     this.service.component = this;

@@ -23,22 +23,20 @@ export class EducatorSubscriptionsService {
         console.log(resp.data);
         this.component.subscription = resp.data;
         this.component.subscription.usedPercentage =
-          ((this.component.subscription.fileStorage) /
+          (this.component.subscription.fileStorage /
             this.component.subscription.maxFileStorage) *
           100;
         this.component.subscription.usedPublicPercentage =
-          ((this.component.subscription.openFileStorage) /
+          (this.component.subscription.openFileStorage /
             this.component.subscription.openMaxFileStorage) *
           100;
+        this.component.subscription.newPrice =
+          (this.component.subscription.price -
+          (this.component.subscription.price *
+            this.component.subscription.adminSale) /
+            100).toFixed(1) ;
       });
   }
 
-  getActiveSubscription() {
-    this.service
-      .GetActive(localStorage.getItem('userId') as string)
-      .subscribe((resp) => {
-        this.component.selectedPackage = resp.data;
-        console.log(resp.data);
-      });
-  }
+
 }

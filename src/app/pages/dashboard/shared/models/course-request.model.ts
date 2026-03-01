@@ -20,4 +20,5 @@ export class CourseRequestModel {
   learningPoints: any[]=[];
   status: any;
   adminRejectionComment: string;
+  implementationType: any;
 }

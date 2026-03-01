@@ -31,6 +31,7 @@ export class CourseGroupsService {
       .GetByIdByLang(this.coursesService.serviceUrl, req)
       .subscribe((resp) => {
         this.component.request = resp.data;
+        this.component.showAddButton = !this.component.request.isOpen;
       });
   }
 
@@ -40,7 +41,6 @@ export class CourseGroupsService {
       this.component.filteredList = structuredClone(resp.data);
     });
   }
-
 
   openDialog() {
     const ref = this.dialogService.open(GroupUpsertComponent, {

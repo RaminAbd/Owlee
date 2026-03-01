@@ -11,6 +11,8 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
 import { CalendarMeetingEditComponent } from '../../../../calendar/shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CourseAdComponent } from '../../components/course-ad/course-ad.component';
+import {LanguageService} from '../../../../../core/services/language.service';
+import {DropdownModule} from 'primeng/dropdown';
 
 @Component({
   selector: 'app-courses-upsert',
@@ -23,6 +25,7 @@ import { CourseAdComponent } from '../../components/course-ad/course-ad.componen
     DatePicker,
     ToggleSwitch,
     RouterLink,
+    DropdownModule,
   ],
   templateUrl: './courses-upsert.component.html',
   styleUrl: './courses-upsert.component.scss',
@@ -31,6 +34,7 @@ export class CoursesUpsertComponent implements OnDestroy {
   private service: CoursesUpsertService = inject(CoursesUpsertService);
   private dialogService: DialogService = inject(DialogService);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private language: LanguageService = inject(LanguageService);
   public location: Location = inject(Location);
   id = this.route.snapshot.paramMap.get('id') as string;
   languages: KnownLanguagesResponseModel[] = [];
@@ -41,6 +45,12 @@ export class CoursesUpsertComponent implements OnDestroy {
   startDate: any;
   lastDay: any;
   privacyAccepted: boolean = false;
+
+  implementationTypes: any[] = [
+    { name: this.language.getByKey('Online'), value: 1 },
+    { name: this.language.getByKey('Offline'), value: 2 },
+    { name: this.language.getByKey('Hybrid'), value: 3 },
+  ];
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
@@ -79,12 +89,13 @@ export class CoursesUpsertComponent implements OnDestroy {
 
   save() {
     this.isSubmitted = true;
-    if (this.request.isOpen) {
+    if (this.request.implementationType === 2) {
+      this.showAd();
+
+    } else {
       if (this.privacyAccepted) {
         this.service.save();
       }
-    } else {
-      this.showAd();
     }
   }
 

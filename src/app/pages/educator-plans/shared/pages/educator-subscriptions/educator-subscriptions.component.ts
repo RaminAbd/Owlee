@@ -20,12 +20,10 @@ export class EducatorSubscriptionsComponent {
   private dialogService: DialogService = inject(DialogService);
   subscription: UserSubscriptionResponseModel =
     new UserSubscriptionResponseModel();
-  selectedPackage: SubscriptionPackageModel = new SubscriptionPackageModel();
 
   constructor() {
     this.service.component = this;
     this.service.getSubscription();
-    this.service.getActiveSubscription();
   }
 
   upgradePlan() {
@@ -39,7 +37,6 @@ export class EducatorSubscriptionsComponent {
     ref.onClose.subscribe((e: any) => {
       if (e) {
         this.service.getSubscription();
-        this.service.getActiveSubscription();
       }
     });
   }

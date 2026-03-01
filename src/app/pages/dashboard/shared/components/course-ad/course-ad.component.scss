@@ -87,23 +87,26 @@
         font-weight: 500;
         line-height: 21px; /* 150% */
         letter-spacing: -0.15px;
-        &.reserve{
-          display: flex;
-          //padding: 13.242px 128.758px 14.242px 130.234px;
-          justify-content: center;
-          align-items: center;
-          flex: 1 0 0;
-          border-radius: 12px;
-          background: #009245;
-          color: #FFF;
-          text-align: center;
-          font-family: Inter;
-          font-size: 15px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 22.5px; /* 150% */
-          letter-spacing: -0.234px;
-        }
+
+      }
+      .reserve{
+        display: flex;
+        //padding: 13.242px 128.758px 14.242px 130.234px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        border-radius: 12px;
+        background: #009245;
+        color: #FFF;
+        text-align: center;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22.5px; /* 150% */
+        letter-spacing: -0.234px;
+        height: 48px;
+        text-decoration: none;
       }
     }
   }

@@ -13,4 +13,7 @@ export class UserSubscriptionResponseModel {
   openMaxFileStorage: any;
   usedPublicPercentage: number;
   openFileStorage: any;
+  openMaxCapacity: any;
+  openCourseAmount: any;
+  newPrice: any;
 }
