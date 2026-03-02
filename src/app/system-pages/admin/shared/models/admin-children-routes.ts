@@ -10,20 +10,30 @@ import { AdminCoursesComponent } from '../../../../pages/admin-courses/admin-cou
 import { StudentCourseDetailsComponent } from '../../../../pages/student-dashboard/shared/pages/student-course-details/student-course-details.component';
 import { StudentDetailsComponent } from '../../../../pages/students/shared/pages/student-details/student-details.component';
 import { EducatorDetailsComponent } from '../../../../pages/educators/shared/pages/educator-details/educator-details.component';
+import { AdminCourseDetailsComponent } from '../../../../pages/admin-courses/shared/pages/admin-course-details/admin-course-details.component';
+import { AdminFaqsService } from '../../../../pages/admin-faqs/admin-faqs.service';
+import { AdminFaqsComponent } from '../../../../pages/admin-faqs/admin-faqs.component';
+import { FaqsUpsertComponent } from '../../../../pages/admin-faqs/shared/pages/faqs-upsert/faqs-upsert.component';
+import { AdminTutorialsComponent } from '../../../../pages/admin-tutorials/admin-tutorials.component';
+import { TutorialsUpsertComponent } from '../../../../pages/admin-tutorials/shared/pages/tutorials-upsert/tutorials-upsert.component';
+import { ConfirmationCoursesComponent } from '../../../../pages/confirmation-courses/confirmation-courses.component';
+import { CategoriesComponent } from '../../../../pages/categories/categories.component';
 import {
-  AdminCourseDetailsComponent
-} from '../../../../pages/admin-courses/shared/pages/admin-course-details/admin-course-details.component';
-import {AdminFaqsService} from '../../../../pages/admin-faqs/admin-faqs.service';
-import {AdminFaqsComponent} from '../../../../pages/admin-faqs/admin-faqs.component';
-import {FaqsUpsertComponent} from '../../../../pages/admin-faqs/shared/pages/faqs-upsert/faqs-upsert.component';
-import {AdminTutorialsComponent} from '../../../../pages/admin-tutorials/admin-tutorials.component';
-import {
-  TutorialsUpsertComponent
-} from '../../../../pages/admin-tutorials/shared/pages/tutorials-upsert/tutorials-upsert.component';
-import {ConfirmationCoursesComponent} from '../../../../pages/confirmation-courses/confirmation-courses.component';
+  CategoriesUpsertComponent
+} from '../../../../pages/categories/shared/pages/categories-upsert/categories-upsert.component';
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
+    {
+      path: 'categories',
+      component: CategoriesComponent,
+      data: { title: 'Categories' },
+    },
+    {
+      path: 'categories/:id',
+      component: CategoriesUpsertComponent,
+      data: { title: 'Categories' },
+    },
     {
       path: 'confirmations',
       component: ConfirmationCoursesComponent,

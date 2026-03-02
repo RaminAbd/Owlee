@@ -255,40 +255,105 @@
             {{ "Rate this Course" | translate }}
           </button>
         </div>
-        <p class="top-name" *ngIf="showCertificate">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M9 9.94442C9 10.6959 9.29851 11.4165 9.82986 11.9479C10.3612 12.4792 11.0819 12.7778 11.8333 12.7778C12.5848 12.7778 13.3054 12.4792 13.8368 11.9479C14.3682 11.4165 14.6667 10.6959 14.6667 9.94442C14.6667 9.19297 14.3682 8.4723 13.8368 7.94095C13.3054 7.40959 12.5848 7.11108 11.8333 7.11108C11.0819 7.11108 10.3612 7.40959 9.82986 7.94095C9.29851 8.4723 9 9.19297 9 9.94442Z" stroke="#90928D" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9.94434 12.3055V16.5555L11.8332 15.1389L13.7221 16.5555V12.3055" stroke="#90928D" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M7.11111 13.7222H2.38889C1.88792 13.7222 1.40748 13.5232 1.05324 13.169C0.699007 12.8147 0.5 12.3343 0.5 11.8333V2.38889C0.5 1.35 1.35 0.5 2.38889 0.5H15.6111C16.1121 0.5 16.5925 0.699007 16.9468 1.05324C17.301 1.40748 17.5 1.88792 17.5 2.38889V11.8333C17.4997 12.1646 17.4122 12.4899 17.2465 12.7767C17.0807 13.0635 16.8424 13.3016 16.5556 13.4672M3.33333 4.27778H14.6667M3.33333 7.11111H6.16667M3.33333 9.94444H5.22222" stroke="#90928D" stroke-linecap="round" stroke-linejoin="round"/>
+        <p class="top-name">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M9 9.94442C9 10.6959 9.29851 11.4165 9.82986 11.9479C10.3612 12.4792 11.0819 12.7778 11.8333 12.7778C12.5848 12.7778 13.3054 12.4792 13.8368 11.9479C14.3682 11.4165 14.6667 10.6959 14.6667 9.94442C14.6667 9.19297 14.3682 8.4723 13.8368 7.94095C13.3054 7.40959 12.5848 7.11108 11.8333 7.11108C11.0819 7.11108 10.3612 7.40959 9.82986 7.94095C9.29851 8.4723 9 9.19297 9 9.94442Z"
+              stroke="#90928D"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9.94434 12.3055V16.5555L11.8332 15.1389L13.7221 16.5555V12.3055"
+              stroke="#90928D"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7.11111 13.7222H2.38889C1.88792 13.7222 1.40748 13.5232 1.05324 13.169C0.699007 12.8147 0.5 12.3343 0.5 11.8333V2.38889C0.5 1.35 1.35 0.5 2.38889 0.5H15.6111C16.1121 0.5 16.5925 0.699007 16.9468 1.05324C17.301 1.40748 17.5 1.88792 17.5 2.38889V11.8333C17.4997 12.1646 17.4122 12.4899 17.2465 12.7767C17.0807 13.0635 16.8424 13.3016 16.5556 13.4672M3.33333 4.27778H14.6667M3.33333 7.11111H6.16667M3.33333 9.94444H5.22222"
+              stroke="#90928D"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           {{ "Completion certificate" | translate }}
         </p>
-        <div class="certificate-button"  *ngIf="showCertificate" (click)="printCertificate()">
+        <div
+          class="certificate-button"
+          [ngClass]="{ disabled: !showCertificate }"
+          (click)="showCertificate ? printCertificate() : ''"
+        >
           <div class="left">
             <div class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                <path d="M18.0553 15.0374L19.8227 24.9837C19.8424 25.1008 19.826 25.2212 19.7756 25.3287C19.7251 25.4362 19.643 25.5258 19.5403 25.5854C19.4375 25.645 19.319 25.6718 19.2006 25.6623C19.0822 25.6527 18.9696 25.6073 18.8777 25.532L14.7013 22.3973C14.4997 22.2467 14.2548 22.1653 14.0031 22.1653C13.7515 22.1653 13.5066 22.2467 13.3049 22.3973L9.12157 25.5308C9.02978 25.606 8.91725 25.6514 8.799 25.6609C8.68075 25.6705 8.56239 25.6437 8.45972 25.5843C8.35705 25.5248 8.27495 25.4355 8.22437 25.3282C8.17379 25.2209 8.15714 25.1007 8.17663 24.9837L9.94284 15.0374" stroke="white" stroke-width="2.33317" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.999 16.3323C17.8647 16.3323 20.9985 13.1985 20.9985 9.33276C20.9985 5.46704 17.8647 2.33325 13.999 2.33325C10.1333 2.33325 6.99951 5.46704 6.99951 9.33276C6.99951 13.1985 10.1333 16.3323 13.999 16.3323Z" stroke="white" stroke-width="2.33317" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
+                <path
+                  d="M18.0553 15.0374L19.8227 24.9837C19.8424 25.1008 19.826 25.2212 19.7756 25.3287C19.7251 25.4362 19.643 25.5258 19.5403 25.5854C19.4375 25.645 19.319 25.6718 19.2006 25.6623C19.0822 25.6527 18.9696 25.6073 18.8777 25.532L14.7013 22.3973C14.4997 22.2467 14.2548 22.1653 14.0031 22.1653C13.7515 22.1653 13.5066 22.2467 13.3049 22.3973L9.12157 25.5308C9.02978 25.606 8.91725 25.6514 8.799 25.6609C8.68075 25.6705 8.56239 25.6437 8.45972 25.5843C8.35705 25.5248 8.27495 25.4355 8.22437 25.3282C8.17379 25.2209 8.15714 25.1007 8.17663 24.9837L9.94284 15.0374"
+                  stroke="white"
+                  stroke-width="2.33317"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M13.999 16.3323C17.8647 16.3323 20.9985 13.1985 20.9985 9.33276C20.9985 5.46704 17.8647 2.33325 13.999 2.33325C10.1333 2.33325 6.99951 5.46704 6.99951 9.33276C6.99951 13.1985 10.1333 16.3323 13.999 16.3323Z"
+                  stroke="white"
+                  stroke-width="2.33317"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </div>
             <div class="txt">
-              <p>{{ 'Course Completion Certificate' | translate }}</p>
-              <span>{{'Get your certificate' | translate}}</span>
+              <p>{{ "Course Completion Certificate" | translate }}</p>
+              <span>{{ "Get your certificate" | translate }}</span>
             </div>
           </div>
           <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M7.99805 9.99756V1.99951" stroke="#FFF" stroke-width="1.33301" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M13.9966 9.99756V12.6636C13.9966 13.0171 13.8561 13.3562 13.6062 13.6062C13.3562 13.8561 13.0171 13.9966 12.6636 13.9966H3.33252C2.97898 13.9966 2.63993 13.8561 2.38994 13.6062C2.13995 13.3562 1.99951 13.0171 1.99951 12.6636V9.99756" stroke="#FFF" stroke-width="1.33301" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4.66553 6.66504L7.99805 9.99756L11.3306 6.66504" stroke="#FFF" stroke-width="1.33301" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M7.99805 9.99756V1.99951"
+                stroke="#FFF"
+                stroke-width="1.33301"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.9966 9.99756V12.6636C13.9966 13.0171 13.8561 13.3562 13.6062 13.6062C13.3562 13.8561 13.0171 13.9966 12.6636 13.9966H3.33252C2.97898 13.9966 2.63993 13.8561 2.38994 13.6062C2.13995 13.3562 1.99951 13.0171 1.99951 12.6636V9.99756"
+                stroke="#FFF"
+                stroke-width="1.33301"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4.66553 6.66504L7.99805 9.99756L11.3306 6.66504"
+                stroke="#FFF"
+                stroke-width="1.33301"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
-            {{'Get Certificate' | translate}}
+            {{ "Get Certificate" | translate }}
           </button>
         </div>
       </div>
-      <div class="topic">
-
-      </div>
+      <div class="topic"></div>
     </div>
     <div class="assignments" *ngIf="selectedTab === 3">
       <div class="list">
@@ -589,6 +654,3 @@
     </div>
   </div>
 </div>
-
-
-

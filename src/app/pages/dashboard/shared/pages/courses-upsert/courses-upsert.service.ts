@@ -9,6 +9,7 @@ import { ApplicationMessageCenterService } from '../../../../../core/services/Ap
 import { UpgradePlanComponent } from '../../../../../shared/components/upgrade-plan/upgrade-plan.component';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
+import { CategoriesApiService } from '../../../../categories/shared/services/categories.api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class CoursesUpsertService {
   private storage: StorageService = inject(StorageService);
   private router: Router = inject(Router);
   public dialogService: DialogService = inject(DialogService);
+  public categoriesService: CategoriesApiService = inject(CategoriesApiService);
   component: CoursesUpsertComponent;
   constructor() {}
 
@@ -38,9 +40,12 @@ export class CoursesUpsertService {
       .GetByIdByLang(this.service.serviceUrl, req)
       .subscribe((resp) => {
         this.component.request = resp.data;
-        if(resp.data.startDate) this.component.startDate = new Date(resp.data.startDate);
-        if(resp.data.endDate) this.component.endDate = new Date(resp.data.endDate);
-        if(resp.data.lastSubscriptionDate) this.component.lastDay = new Date(resp.data.lastSubscriptionDate);
+        if (resp.data.startDate)
+          this.component.startDate = new Date(resp.data.startDate);
+        if (resp.data.endDate)
+          this.component.endDate = new Date(resp.data.endDate);
+        if (resp.data.lastSubscriptionDate)
+          this.component.lastDay = new Date(resp.data.lastSubscriptionDate);
       });
   }
 
@@ -50,6 +55,17 @@ export class CoursesUpsertService {
       .subscribe((resp) => {
         this.component.languages = resp.data;
         if (this.component.id !== 'create') this.getCourse();
+      });
+  }
+
+  getCategories() {
+    this.categoriesService
+      .GetAllByLang(
+        this.categoriesService.serviceUrl,
+        this.translate.currentLang,
+      )
+      .subscribe((resp) => {
+        this.component.categories = resp.data;
       });
   }
 
@@ -92,7 +108,8 @@ export class CoursesUpsertService {
     if (this.component.lastDay)
       this.component.request.lastSubscriptionDate =
         this.component.lastDay.toISOString();
-    this.component.request.learningPoints = this.component.request.learningPoints.filter(x=>x.value)
+    this.component.request.learningPoints =
+      this.component.request.learningPoints.filter((x) => x.value);
   }
 
   private create() {

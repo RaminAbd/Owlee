@@ -11,4 +11,5 @@ export class EducatorsResponseModel {
   phoneNumber: string;
   createdAt: any;
   rating: any;
+  totalRatingCount: any;
 }

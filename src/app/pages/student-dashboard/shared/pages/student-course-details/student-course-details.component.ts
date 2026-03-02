@@ -9,7 +9,7 @@ import {
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { StudentCourseDetailsService } from './student-course-details.service';
 import { CourseRequestModel } from '../../../../dashboard/shared/models/course-request.model';
-import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import { LangChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { CourseDetailedResponseModel } from '../../models/course-detailed-response.model';
 import { KnownLanguagesResponseModel } from '../../../../known-languages/shared/models/known-languages-response.model';
@@ -33,7 +33,7 @@ import {FormatDate} from '../../../../../core/extensions/format-date';
 
 @Component({
   selector: 'app-student-course-details',
-  imports: [NgIf, TranslatePipe, NgClass, NgForOf, FormsModule, DatePipe, RouterLink],
+  imports: [NgIf, TranslatePipe, NgClass, NgForOf, FormsModule, DatePipe, RouterLink, NgStyle],
   templateUrl: './student-course-details.component.html',
   styleUrl: './student-course-details.component.scss',
   animations: [

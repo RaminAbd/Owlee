@@ -30,32 +30,7 @@ export const routes: Routes = [
   { path: 'auth/callback', component: GoogleAuthCallbackComponent },
 
   { path: 'forgot/:role', component: ForgotPasswordComponent, data: { title: 'Forgot password' } },
-  {
-    path: 'terms-conditions',
-    component: TermsComponent,
-    data: { title: 'Terms' },
-  },
-  {
-    path: 'privacy',
-    component: HomePrivacyComponent,
-    data: { title: 'Privacy' },
-  },
 
-  {
-    path: 'educator-privacy',
-    component: EducatorSignupPolicyComponent,
-    data: { title: 'Privacy' },
-  },
-  {
-    path: 'student-privacy',
-    component: StudentSignupPolicyComponent,
-    data: { title: 'Privacy' },
-  },
-  {
-    path: 'payment-policy',
-    component: EducatorPaymentPolicyComponent,
-    data: { title: 'Privacy' },
-  },
 
   { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign up' } },
   {

@@ -13,4 +13,5 @@ export class DashboardCourseModel {
   id:string;
   status: number;
   isOpen: boolean;
+  categoryId: string;
 }

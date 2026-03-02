@@ -22,4 +22,8 @@ export class CourseDetailedResponseModel {
   learningPoints: any[]=[];
   isFavorite: boolean;
     status: number;
+  implementationType: number;
+  implementationTypeName: string;
+  category: string;
+  newPrice: number;
 }

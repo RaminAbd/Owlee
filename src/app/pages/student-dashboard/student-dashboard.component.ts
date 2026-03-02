@@ -8,6 +8,8 @@ import { StudentDashboardResponseModel } from './shared/models/student-dashboard
 import {NgForOf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
+import {DropdownModule} from 'primeng/dropdown';
+import {CategoriesResponseModel} from '../categories/shared/models/categories-response.model';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -15,7 +17,8 @@ import {TranslatePipe} from '@ngx-translate/core';
     NgForOf,
     ReactiveFormsModule,
     TranslatePipe,
-    FormsModule
+    FormsModule,
+    DropdownModule
   ],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.scss',
@@ -24,10 +27,13 @@ export class StudentDashboardComponent {
   response: StudentDashboardResponseModel = new StudentDashboardResponseModel();
   private service: StudentDashboardService = inject(StudentDashboardService);
   private router: Router = inject(Router);
+  categoryId: string;
+  categories: CategoriesResponseModel[] = [];
   searchText: string;
   constructor() {
     this.service.component = this;
     this.service.getDashboard();
+    this.service.getCategories();
   }
 
   getInfo(item: DashboardCourseModel) {
@@ -40,10 +46,22 @@ export class StudentDashboardComponent {
 
   filteredList: DashboardCourseModel[] = [];
 
-  searchByName() {
-    this.filteredList = this.response.courses.filter((obj) =>
-      obj.name.toLowerCase().includes(this.searchText.toLowerCase()),
-    );
-    console.log(this.filteredList);
+  search() {
+    const text = this.searchText?.trim().toLowerCase() || '';
+
+    this.filteredList = this.response.courses.filter((item) => {
+      const matchesText =
+        !text ||
+        String(item.name || '')
+          .toLowerCase()
+          .includes(text);
+
+      const matchesCategory =
+        !this.categoryId ||               // null / undefined
+        this.categoryId === 'all' ||      // "All" selected
+        item.categoryId === this.categoryId;
+
+      return matchesText && matchesCategory;
+    });
   }
 }

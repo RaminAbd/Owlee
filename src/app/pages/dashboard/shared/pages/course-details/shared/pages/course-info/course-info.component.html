@@ -154,7 +154,7 @@
           </svg>
           {{ "Edit Course" | translate }}
         </button>
-        <button class="duplicate" (click)="copy()">
+        <button class="duplicate" *ngIf="!request.isOpen" (click)="copy()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

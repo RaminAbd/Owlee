@@ -1,20 +1,18 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {TranslatePipe} from '@ngx-translate/core';
-import {StorageService} from '../../core/services/storage.service';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { StorageService } from '../../core/services/storage.service';
+import { CategoriesResponseModel } from '../categories/shared/models/categories-response.model';
+import { DashboardCourseModel } from '../dashboard/shared/models/dashboard-course.model';
+import {FormsModule} from '@angular/forms';
+import {DropdownModule} from 'primeng/dropdown';
 
 @Component({
   selector: 'app-courses',
-    imports: [
-        DatePipe,
-        NgForOf,
-        RouterLink,
-        TranslatePipe,
-        NgIf,
-    ],
+  imports: [DatePipe, NgForOf, RouterLink, TranslatePipe, NgIf, FormsModule, DropdownModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
 })
@@ -22,7 +20,12 @@ export class CoursesComponent implements OnDestroy {
   private service: CoursesService = inject(CoursesService);
   private storage: StorageService = inject(StorageService);
   courses: CoursesResponseModel[] = [];
-  userSignedIn:boolean = !!localStorage.getItem('userId');
+  filteredList: CoursesResponseModel[] = [];
+
+  userSignedIn: boolean = !!localStorage.getItem('userId');
+  categories: CategoriesResponseModel[] = [];
+  categoryId: string;
+  searchText: string;
 
   constructor() {
     this.service.component = this;
@@ -30,6 +33,7 @@ export class CoursesComponent implements OnDestroy {
     this.userSignedIn = !!(st && st.role === 'Student');
     this.service.subscribeToLangEvent();
     this.service.getAllCourses();
+    this.service.getCategories();
   }
 
   ngOnDestroy() {
@@ -38,5 +42,24 @@ export class CoursesComponent implements OnDestroy {
 
   makeFavorite(item: CoursesResponseModel) {
     this.service.addToFavorite(item);
+  }
+
+  search() {
+    const text = this.searchText?.trim().toLowerCase() || '';
+
+    this.filteredList = this.courses.filter((item) => {
+      const matchesText =
+        !text ||
+        String(item.name || '')
+          .toLowerCase()
+          .includes(text);
+
+      const matchesCategory =
+        !this.categoryId || // null / undefined
+        this.categoryId === 'all' || // "All" selected
+        item.categoryId === this.categoryId;
+
+      return matchesText && matchesCategory;
+    });
   }
 }

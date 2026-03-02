@@ -74,9 +74,14 @@ export class CourseInfoService {
   }
 
   checkSlots() {
+    // let educatorId = localStorage.getItem('userId') as string;
+
     let educatorId = localStorage.getItem('userId') as string;
-    this.service.GetAvailableCourseSlots(educatorId).subscribe((resp) => {
-      this.component.copyLoading = false;
+    const req = {
+      EducatorId: educatorId,
+      isOpen: this.component.request.isOpen,
+    };
+    this.service.GetAvailableCourseSlots(req).subscribe((resp) => {
       if (resp.data !== 0) {
         console.log('geldi');
         this.component.confirm(

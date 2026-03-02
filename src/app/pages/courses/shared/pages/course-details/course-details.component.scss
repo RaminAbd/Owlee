@@ -75,6 +75,14 @@
             font-weight: 700;
             line-height: normal;
             gap: 5px;
+            .total{
+              color: #90928D;
+              font-family: Inter;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 16px; /* 133.333% */
+            }
           }
         }
       }
@@ -151,6 +159,11 @@
           font-style: normal;
           font-weight: 500;
           line-height: 128.932%; /* 18.05px */
+        }
+        .icon{
+          width: 20px;
+          display: flex;
+          justify-content: center;
         }
       }
       .statistics {

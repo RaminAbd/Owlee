@@ -62,6 +62,10 @@ export class LanguageService {
 
   getByKey(key: string) {
     const currentLanguageData = this.getCurrentLanguageData();
-    return currentLanguageData ? currentLanguageData[key] : key;
+    return currentLanguageData
+      ? currentLanguageData[key]
+        ? currentLanguageData[key]
+        : key
+      : key;
   }
 }

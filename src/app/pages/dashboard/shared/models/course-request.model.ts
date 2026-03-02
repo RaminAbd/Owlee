@@ -21,4 +21,7 @@ export class CourseRequestModel {
   status: any;
   adminRejectionComment: string;
   implementationType: any;
+  categoryId: any;
+  category: any;
+
 }

@@ -13,6 +13,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { CourseAdComponent } from '../../components/course-ad/course-ad.component';
 import {LanguageService} from '../../../../../core/services/language.service';
 import {DropdownModule} from 'primeng/dropdown';
+import {CategoriesResponseModel} from '../../../../categories/shared/models/categories-response.model';
 
 @Component({
   selector: 'app-courses-upsert',
@@ -45,7 +46,7 @@ export class CoursesUpsertComponent implements OnDestroy {
   startDate: any;
   lastDay: any;
   privacyAccepted: boolean = false;
-
+  categories:CategoriesResponseModel[]=[]
   implementationTypes: any[] = [
     { name: this.language.getByKey('Online'), value: 1 },
     { name: this.language.getByKey('Offline'), value: 2 },
@@ -54,10 +55,12 @@ export class CoursesUpsertComponent implements OnDestroy {
   constructor() {
     this.service.component = this;
     this.service.getKnownLangs();
+    this.service.getCategories();
 
     this.langSubscribtion = this.service.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.service.getKnownLangs();
+        this.service.getCategories();
       },
     );
   }

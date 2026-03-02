@@ -4,7 +4,8 @@ import { CourseDetailsComponent } from './course-details.component';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../../../../core/services/storage.service';
 import { RatingsApiService } from '../../../../student-dashboard/shared/services/ratings.api.service';
-import {CoursesResponseModel} from '../../../../admin-courses/shared/models/courses-response.model';
+import { CoursesResponseModel } from '../../../../admin-courses/shared/models/courses-response.model';
+import { LanguageService } from '../../../../../core/services/language.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class CourseDetailsService {
   private translate: TranslateService = inject(TranslateService);
   private storage: StorageService = inject(StorageService);
   private ratingsService: RatingsApiService = inject(RatingsApiService);
+  private lang: LanguageService = inject(LanguageService);
   component: CourseDetailsComponent;
   constructor() {}
 
@@ -61,7 +63,25 @@ export class CourseDetailsService {
         () => 'collapsed',
       );
       console.log(this.component.response);
+
+      this.component.response.implementationTypeName =
+        this.getImplementationType();
+
+
+      const commission = 5;
+      this.component.response.newPrice =
+        +(this.component.response.price * (1 + commission / 100)).toFixed(2);
     });
+  }
+  getImplementationType() {
+    switch (this.component.response.implementationType) {
+      case 1:
+        return this.lang.getByKey('Online');
+      case 2:
+        return this.lang.getByKey('Offline');
+      case 3:
+        return this.lang.getByKey('Hybrid');
+    }
   }
 
   buy() {
@@ -85,14 +105,13 @@ export class CourseDetailsService {
     window.location.href = url;
   }
 
-
   addToFavorite() {
     const req = {
       courseId: this.component.response.id,
-      studentId:localStorage.getItem('userId') as string
-    }
+      studentId: localStorage.getItem('userId') as string,
+    };
     this.service.AddToFavorite(req).subscribe((resp) => {
-      this.getCourse()
-    })
+      this.getCourse();
+    });
   }
 }

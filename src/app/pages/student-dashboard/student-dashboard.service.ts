@@ -6,6 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {ApplicationMessageCenterService} from '../../core/services/ApplicationMessageCenter.service';
 import {StudentDashboardComponent} from './student-dashboard.component';
+import {CategoriesApiService} from '../categories/shared/services/categories.api.service';
+import {LanguageService} from '../../core/services/language.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,8 @@ export class StudentDashboardService {
   private message: ApplicationMessageCenterService = inject(
     ApplicationMessageCenterService,
   );
+  public categoriesService: CategoriesApiService = inject(CategoriesApiService);
+  private lang: LanguageService = inject(LanguageService);
   constructor() {}
 
   getDashboard() {
@@ -31,5 +35,22 @@ export class StudentDashboardService {
       this.component.response = resp.data;
       this.component.filteredList = structuredClone(resp.data.courses);
     });
+  }
+
+
+  getCategories() {
+    this.categoriesService
+      .GetAllByLang(
+        this.categoriesService.serviceUrl,
+        this.translate.currentLang,
+      )
+      .subscribe((resp) => {
+        this.component.categories = resp.data;
+        this.component.categories.unshift({
+          name: this.lang.getByKey('All'),
+          id: 'all',
+        });
+        console.log(this.component.categories);
+      });
   }
 }

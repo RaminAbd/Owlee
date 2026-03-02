@@ -676,6 +676,7 @@
   border-radius: 16px;
   border: 1px solid #E3E3E2;
   background: #FFF;
+
   .left{
     display: flex;
     align-items: center;
@@ -735,6 +736,13 @@
     font-weight: 400;
     line-height: 20px; /* 142.857% */
     letter-spacing: -0.15px;
+  }
+
+  &.disabled{
+    opacity: .6;
+    button{
+      cursor: not-allowed;
+    }
   }
 
 }
