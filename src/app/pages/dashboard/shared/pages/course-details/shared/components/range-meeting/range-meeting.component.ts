@@ -117,8 +117,18 @@ export class RangeMeetingComponent {
   ];
   deletedItems: { item: any; index: number }[] = [];
   colors:any[]=[
-    {name:this.language.getByKey('Blue'), value:'#c6e7ff'},
-    {name:this.language.getByKey('Red'), value:'#F47DCA'},
+    { name: this.language.getByKey('Red'), value: '#EF4444' },
+    { name: this.language.getByKey('Pink'), value: '#EC4899' },
+    { name: this.language.getByKey('Purple'), value: '#A855F7' },
+    { name: this.language.getByKey('Deep Purple'), value: '#6366F1' },
+    { name: this.language.getByKey('Blue'), value: '#3B82F6' },
+    { name: this.language.getByKey('Light Blue'), value: '#0EA5E9' },
+    { name: this.language.getByKey('Cyan'), value: '#06B6D4' },
+    { name: this.language.getByKey('Teal'), value: '#14B8A6' },
+    { name: this.language.getByKey('Green'), value: '#22C55E' },
+    { name: this.language.getByKey('Yellow'), value: '#EAB308' },
+    { name: this.language.getByKey('Orange'), value: '#F97316' },
+    { name: this.language.getByKey('Grey'), value: '#6B7280' }
   ]
   constructor(
     public config: DynamicDialogConfig,
