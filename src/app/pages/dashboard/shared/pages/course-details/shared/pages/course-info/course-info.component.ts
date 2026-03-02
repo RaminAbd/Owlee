@@ -86,4 +86,10 @@ export class CourseInfoComponent  implements OnDestroy{
   sendForConfirmation() {
     this.service.sendToAdmin()
   }
+
+  confirmCancel() {
+    this.confirm('Are you sure you want to cancel this course?', () => {
+      this.service.cancel();
+    });
+  }
 }

@@ -45,8 +45,8 @@
           {{ 'Your course has been submitted and is awaiting admin approval. You will be notified once it has been reviewed.' | translate }}
         </p>
       </div>
+      <button (click)="confirmCancel()">Cancel course</button>
     </div>
-
     <div class="status rejected" *ngIf="request.isOpen && request.status === 2">
       <div class="heading">
         <p>{{ "Course status" | translate }}</p>
@@ -73,8 +73,21 @@
       </div>
       <button (click)="sendForConfirmation()">Resubmit Course</button>
     </div>
-
-
+    <div class="status pending" *ngIf="request.isOpen && request.status === 3">
+      <div class="heading">
+        <p>{{ "Course status" | translate }}</p>
+        <div class="st">
+          <span></span>
+          {{ "Pending" | translate }}
+        </div>
+      </div>
+      <div class="description">
+        <p>
+          {{'Your course has been approved and is currently in pending status. It will begin on the scheduled start date.' | translate}}
+        </p>
+      </div>
+      <button (click)="confirmCancel()">Cancel course</button>
+    </div>
     <div class="status active" *ngIf="request.isOpen && request.status === 4">
       <div class="heading">
         <p>{{ "Course status" | translate }}</p>
@@ -88,6 +101,7 @@
           {{ 'Your course is live and available to students. Monitor your progress and engage with your learners.' | translate }}
         </p>
       </div>
+      <button (click)="confirmCancel()">Cancel course</button>
     </div>
     <div class="status completed" *ngIf="request.isOpen && request.status === 5">
       <div class="heading">

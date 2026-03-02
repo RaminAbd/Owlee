@@ -276,6 +276,24 @@
             }
           }
         }
+        button{
+          background: #FB2C36;
+        }
+      }
+      &.pending {
+        .heading {
+          .st {
+            background: #FEF9C2;
+            color: #A65F00;
+
+            span {
+              background: #A65F00;
+            }
+          }
+        }
+        button{
+          background: #FB2C36;
+        }
       }
       &.active {
         .heading {
@@ -287,6 +305,9 @@
               background: #009245;
             }
           }
+        }
+        button{
+          background: #FB2C36;
         }
       }
       &.completed {

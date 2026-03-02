@@ -119,4 +119,16 @@ export class CourseInfoService {
       }
     });
   }
+
+  cancel() {
+    const req ={
+      courseId: this.component.id,
+      reason:''
+    }
+    this.service.Cancel(req).subscribe((resp) => {
+      if (resp.succeeded) {
+        this.getCourse();
+      }
+    })
+  }
 }

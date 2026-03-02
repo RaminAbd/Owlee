@@ -68,6 +68,10 @@ export class CoursesApiService extends BaseCrudApiService {
     return this.post(this.serviceUrl + 'SendToAdmin', req);
   }
 
+  Cancel(req: any) {
+    return this.post(this.serviceUrl + 'Cancel', req);
+  }
+
   Accept(req: any) {
     return this.post(this.serviceUrl + 'Accept', req);
   }
