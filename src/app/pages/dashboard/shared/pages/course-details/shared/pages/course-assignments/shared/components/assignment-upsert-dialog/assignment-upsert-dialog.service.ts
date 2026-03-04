@@ -36,32 +36,24 @@ export class AssignmentUpsertDialogService {
       'userId',
     ) as string;
 
-    if (this.component.fromDate) {
-      const res2 = new Date(this.component.fromDate);
+    if (this.component.fromDate && this.component.fromTime) {
+      const date = new Date(this.component.fromDate);
+      const time = new Date(this.component.fromTime);
 
-      if (this.component.fromTime) {
-        res2.setHours(
-          this.component.fromTime.getHours() + 4,
-          this.component.fromTime.getMinutes(),
-          0,
-          0,
-        );
-      }
-      this.component.request.availableFrom = res2.toISOString();
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.availableFrom = date.toISOString();
     }
 
-    if (this.component.date) {
-      const res1 = new Date(this.component.date);
+    if (this.component.date && this.component.time) {
+      const date = new Date(this.component.date);
+      const time = new Date(this.component.time);
 
-      if (this.component.time) {
-        res1.setHours(
-          this.component.time.getHours() + 4,
-          this.component.time.getMinutes(),
-          0,
-          0,
-        );
-      }
-      this.component.request.availableTo = res1.toISOString();
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.availableTo = date.toISOString();
     }
   }
 

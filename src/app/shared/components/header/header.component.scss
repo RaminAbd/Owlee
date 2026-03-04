@@ -118,16 +118,16 @@ nav {
       display: flex;
       align-items: center;
 
-      &.active {
-        background: var(--primary-color);
-        p {
-          color: #fff !important;
-        }
-
-        path {
-          stroke: #fff !important;
-        }
-      }
+      //&.active {
+      //  background: var(--primary-color);
+      //  p {
+      //    color: #fff !important;
+      //  }
+      //
+      //  path {
+      //    stroke: #fff !important;
+      //  }
+      //}
     }
   }
 }

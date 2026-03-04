@@ -21,7 +21,12 @@ export class MeetingUpsertService {
       .subscribe((resp) => {
         this.component.request = resp.data;
 
-        this.component.date = new Date(new Date(resp.data.date).getTime() - 4 * 60 * 60 * 1000);
+        this.component.date = new Date(
+          new Date(resp.data.date).getTime() - 4 * 60 * 60 * 1000,
+        );
+        this.component.time = new Date(
+          new Date(resp.data.date).getTime() - 4 * 60 * 60 * 1000,
+        );
         this.component.request.subtopics = resp.data.subtopics.map(
           (x: any) => x.id,
         );
@@ -29,9 +34,13 @@ export class MeetingUpsertService {
   }
 
   save() {
-    this.component.request.date = new Date(
-      new Date(this.component.date).getTime() + 4 * 60 * 60 * 1000,
-    ).toISOString();
+    if (this.component.date && this.component.time) {
+      const date = new Date(this.component.date);
+      const time = new Date(this.component.time);
+      date.setHours(time.getHours() + 4, time.getMinutes(), 0, 0);
+      this.component.request.date = date.toISOString();
+    }
+
     if (this.isValid())
       this.component.request.id === 'create' ? this.create() : this.update();
     else this.message.showTranslatedWarningMessage('Fields are not valid');

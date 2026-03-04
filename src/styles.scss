@@ -676,3 +676,36 @@ p-datepicker {
     height: 300px;
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before, .mat-mdc-form-field{
+  border: none !important;
+  background: none !important;
+  width: 100% !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled), .mdc-text-field--outlined .mat-mdc-form-field-infix, .mdc-text-field--no-label .mat-mdc-form-field-infix{
+  background: none !important;
+  padding: 0 !important;
+}
+.mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before{
+  height: 0 !important;
+}
+.mat-mdc-form-field-infix{
+  width: 100% !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled):hover{
+  background: none !important;
+}
+.mat-timepicker-panel{
+  background: #fff !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after{
+  border: none !important;
+}
+.mat-mdc-form-field-focus-overlay{
+  background:none !important
+}
+.cdk-overlay-container {
+  z-index: 10000 !important;
+}

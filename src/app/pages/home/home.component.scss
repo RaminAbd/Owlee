@@ -382,6 +382,10 @@
         flex-wrap: wrap;
         max-width: 1292px;
         width: 100%;
+        @media (max-width: 769px) {
+          flex-direction: column;
+          align-items: center;
+        }
         .item {
           cursor: pointer;
           flex: 1;
@@ -397,6 +401,7 @@
           position: relative;
           @media (max-width: 480px) {
             width: 100%;
+            max-width:100%;
           }
           &.add {
             gap: 32px;

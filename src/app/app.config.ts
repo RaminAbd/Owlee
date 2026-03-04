@@ -1,7 +1,7 @@
 import {
   APP_INITIALIZER,
   ApplicationConfig,
-  importProvidersFrom,
+  importProvidersFrom, LOCALE_ID,
   provideZoneChangeDetection,
 } from '@angular/core';
 import {provideRouter, RouterModule} from '@angular/router';
@@ -25,6 +25,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { RefreshTokenInterceptor } from './core/interceptors/refresh-token.interceptor';
 import {AnimationLoader, provideLottieOptions} from 'ngx-lottie';
 import player from 'lottie-web';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 export function playerFactory() {
   return player;
@@ -39,13 +40,18 @@ export function initializeApp(
   return () => languageService.setLangs().toPromise();
 }
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-
+    provideNativeDateAdapter(),
+    { provide: LOCALE_ID, useValue: 'en-GB' },
+    // provideDateFnsAdapter(),
+    // provideLuxonDateAdapter(),
+    // provideMomentDateAdapter(),
     provideLottieOptions({ player: () => player }),
     ConfirmationService,
     MessageService,
@@ -87,6 +93,6 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: RefreshTokenInterceptor,
       multi: true,
-    },
+    }, provideAnimationsAsync(),
   ],
 };

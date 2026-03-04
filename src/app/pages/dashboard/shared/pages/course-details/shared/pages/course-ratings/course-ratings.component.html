@@ -7,7 +7,7 @@
     <div class="total">
       <h4>{{ request.rating }}</h4>
       <p-rating [(ngModel)]="request.rating" [disabled]="true" />
-      <p>{{ total }} {{ "ratings" | translate }}</p>
+      <p>{{ total }} {{ "Ratings" | translate }}</p>
     </div>
     <div class="items">
       <div class="item" *ngFor="let item of ratings">
@@ -34,7 +34,7 @@
           <div class="filled" [ngStyle]="{ width: item.percentage + '%'}"></div>
         </div>
         <div class="nums">
-          <p><span>{{ item.count }}</span> {{ "students" | translate }}</p>
+          <p><span>{{ item.count }}</span> {{ "Students" | translate }}</p>
         </div>
       </div>
     </div>

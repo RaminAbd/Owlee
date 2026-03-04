@@ -15,17 +15,26 @@ import {DropdownModule} from 'primeng/dropdown';
 import {TopicRequestModel} from '../../../../dashboard/shared/models/topic-request.model';
 import {SubtopicModel} from '../../../../dashboard/shared/models/subtopic.model';
 import {LanguageService} from '../../../../../core/services/language.service';
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatTimepicker, MatTimepickerInput, MatTimepickerToggle} from "@angular/material/timepicker";
+import {NearestTime} from '../../../../../core/extensions/get-nearest-time';
 
 @Component({
   selector: 'app-calendar-meeting-edit',
-  imports: [
-    DropdownModule,
-    FormsModule,
-    TranslatePipe,
-    DatePickerModule,
-    MultiSelect,
-    NgIf,
-  ],
+    imports: [
+        DropdownModule,
+        FormsModule,
+        TranslatePipe,
+        DatePickerModule,
+        MultiSelect,
+        NgIf,
+        MatFormField,
+        MatInput,
+        MatTimepicker,
+        MatTimepickerInput,
+        MatTimepickerToggle,
+    ],
   templateUrl: './calendar-meeting-edit.component.html',
   styleUrl: './calendar-meeting-edit.component.scss'
 })
@@ -36,6 +45,7 @@ export class CalendarMeetingEditComponent {
   id: string;
   isSubmitted = false;
   date: any;
+  time: any;
   courses: DashboardCourseModel[] = [];
   topics: TopicRequestModel[] = [];
   subTopics: SubtopicModel[] = [];
@@ -63,7 +73,9 @@ export class CalendarMeetingEditComponent {
     this.courses = config.data.courses;
     this.service.getMeeting();
   }
-
+  startDateSelected() {
+    this.time = NearestTime.getTime(new Date());
+  }
   save() {
     this.loading = true;
     this.service.save()

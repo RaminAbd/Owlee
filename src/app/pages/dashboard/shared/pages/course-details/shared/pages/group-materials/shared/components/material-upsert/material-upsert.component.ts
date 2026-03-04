@@ -16,19 +16,28 @@ import { CourseRequestModel } from '../../../../../../../../models/course-reques
 import {
   ApplicationMessageCenterService
 } from '../../../../../../../../../../../core/services/ApplicationMessageCenter.service';
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatTimepicker, MatTimepickerInput, MatTimepickerToggle} from "@angular/material/timepicker";
+import {NearestTime} from '../../../../../../../../../../../core/extensions/get-nearest-time';
 
 @Component({
   selector: 'app-material-upsert',
-  imports: [
-    DropdownModule,
-    ReactiveFormsModule,
-    TranslatePipe,
-    FormsModule,
-    NgStyle,
-    Checkbox,
-    NgIf,
-    DatePicker,
-  ],
+    imports: [
+        DropdownModule,
+        ReactiveFormsModule,
+        TranslatePipe,
+        FormsModule,
+        NgStyle,
+        Checkbox,
+        NgIf,
+        DatePicker,
+        MatFormField,
+        MatInput,
+        MatTimepicker,
+        MatTimepickerInput,
+        MatTimepickerToggle,
+    ],
   templateUrl: './material-upsert.component.html',
   styleUrl: './material-upsert.component.scss',
 })
@@ -42,7 +51,9 @@ export class MaterialUpsertComponent implements OnDestroy {
   size: SizeRequestModel = new SizeRequestModel();
   enableSelection: boolean = false;
   startDate: any;
+  startTime: any;
   endDate: any;
+  endTime: any;
   courseId: string;
   loading: boolean = false;
   course: CourseRequestModel = new CourseRequestModel();
@@ -131,6 +142,15 @@ export class MaterialUpsertComponent implements OnDestroy {
   upgradePlan(){
     this.service.upgradePlan()
   }
+
+  startDateSelected() {
+    this.startTime = NearestTime.getTime(new Date());
+  }
+
+  endDateSelected() {
+    this.endTime = NearestTime.getTime(new Date());
+  }
+
 
   ngOnDestroy() {
     this.langSubscribtion.unsubscribe();

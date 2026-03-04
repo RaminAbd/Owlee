@@ -203,6 +203,9 @@
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
+  @media (max-width: 769px) {
+    flex-direction: column;
+  }
   .input-item {
     width: 100%;
     display: flex;

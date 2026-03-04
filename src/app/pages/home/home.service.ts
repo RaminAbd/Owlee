@@ -6,7 +6,7 @@ import { ApplicationMessageCenterService } from '../../core/services/Application
 import { FaqsApiService } from '../admin-faqs/shared/services/faqs.api.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { CoursesApiService } from '../admin-courses/shared/services/courses.api.service';
-import {CoursesResponseModel} from '../admin-courses/shared/models/courses-response.model';
+import { CoursesResponseModel } from '../admin-courses/shared/models/courses-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,12 @@ export class HomeService {
       .GetOpenCourses(this.translate.currentLang)
       .subscribe((resp) => {
         console.log(resp.data);
+        const commission = 5;
         this.component.courses = resp.data.splice(0, 4);
+        this.component.courses = this.component.courses.map((course) => ({
+          ...course,
+          newPrice: +(course.price * (1 + commission / 100)).toFixed(2),
+        }));
       });
   }
 
@@ -77,10 +82,10 @@ export class HomeService {
   addToFavorite(item: CoursesResponseModel) {
     const req = {
       courseId: item.id,
-      studentId:localStorage.getItem('userId') as string
-    }
+      studentId: localStorage.getItem('userId') as string,
+    };
     this.coursesService.AddToFavorite(req).subscribe((resp) => {
-      this.getAllCourses()
-    })
+      this.getAllCourses();
+    });
   }
 }

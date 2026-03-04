@@ -32,6 +32,11 @@ export class FavoriteCoursesService {
       .GetFavoriteCourses(this.translate.currentLang)
       .subscribe((resp) => {
         console.log(resp.data);
+        const commission = 5;
+        resp.data = resp.data.map((course:any) => ({
+          ...course,
+          newPrice: +(course.price * (1 + commission / 100)).toFixed(2),
+        }));
         this.component.courses = resp.data;
       });
   }

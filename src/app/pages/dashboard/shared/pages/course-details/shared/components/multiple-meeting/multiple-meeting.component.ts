@@ -11,10 +11,24 @@ import { FormatDate } from '../../../../../../../../core/extensions/format-date'
 import { SubtopicModel } from '../../../../../models/subtopic.model';
 import {LanguageService} from '../../../../../../../../core/services/language.service';
 import {DropdownModule} from 'primeng/dropdown';
-
+import {NearestTime} from '../../../../../../../../core/extensions/get-nearest-time';
+import {
+  MatTimepicker,
+  MatTimepickerInput,
+  MatTimepickerModule,
+  MatTimepickerToggle,
+} from '@angular/material/timepicker';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import {provideNativeDateAdapter} from '@angular/material/core';
 @Component({
   selector: 'app-multiple-meeting',
-  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf, DropdownModule],
+  imports: [DatePicker, MultiSelect, TranslatePipe, FormsModule, NgForOf, NgIf, DropdownModule,    MatFormField,
+    MatTimepickerInput,
+    MatTimepickerToggle,
+    MatTimepicker,
+    MatInput,],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './multiple-meeting.component.html',
   styleUrl: './multiple-meeting.component.scss',
 })
@@ -23,6 +37,7 @@ export class MultipleMeetingComponent {
   private language: LanguageService = inject(LanguageService);
   request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
   date: any;
+  time: any;
   dates: any[] = [];
   isSubmitted = false;
   subtopics: SubtopicModel[] = [];
@@ -65,20 +80,25 @@ export class MultipleMeetingComponent {
   }
 
   addMeeting() {
-    if (this.date) {
+    if (this.date && this.time) {
+      const date = new Date(this.date);
+      const date2 = new Date(this.date);
+      const time = new Date(this.time);
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+      date2.setHours(time.getHours(), time.getMinutes(), 0, 0);
+      console.log(date.toISOString());
       if (this.duration > 0) {
         let item = {
-          showDate: this.formatDate(this.date),
+          showDate: this.formatDate(date2),
           subtopics: this.selectedTopics,
-          date: new Date(
-            new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
-          ).toISOString(),
+          date: date.toISOString(),
           duration: this.duration,
           color:this.color ? this.color : '#c6e7ff'
         };
         this.request.meetings.push(item);
         this.selectedTopics = [];
         this.date = undefined;
+        this.time = undefined;
       } else {
         this.service.message.showTranslatedWarningMessage(
           "Duration can't be 0",
@@ -103,5 +123,9 @@ export class MultipleMeetingComponent {
   }
   deleteMeeting(i: any) {
     this.request.meetings.splice(i, 1);
+  }
+
+  startDateSelected() {
+    this.time = NearestTime.getTime(new Date());
   }
 }

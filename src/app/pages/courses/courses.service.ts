@@ -31,9 +31,15 @@ export class CoursesService {
     this.coursesService
       .GetOpenCourses(this.translate.currentLang)
       .subscribe((resp) => {
-        console.log(resp.data);
+
+        const commission = 5;
+        resp.data = resp.data.map((course:any) => ({
+          ...course,
+          newPrice: +(course.price * (1 + commission / 100)).toFixed(2),
+        }));
         this.component.courses = structuredClone(resp.data);
         this.component.filteredList = structuredClone(resp.data);
+        console.log(resp.data);
       });
   }
 

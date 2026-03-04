@@ -70,7 +70,7 @@
             />
           </div>
         </div>
-        <button class="join" routerLink="auth">
+        <button class="join" routerLink="/student-sign-up">
           {{ "Join us" | translate }}
         </button>
       </div>
@@ -199,7 +199,7 @@
               <p>{{ item.name }}</p>
             </div>
             <div class="price-info">
-              <p class="price">${{ item.price }}</p>
+              <p class="price">{{ item.newPrice }}Gel</p>
               <span
                 >{{ "Starts" | translate }}
                 {{ item.startDate | date: "dd/MM/yyyy" }}</span

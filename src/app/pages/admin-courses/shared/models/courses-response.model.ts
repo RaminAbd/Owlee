@@ -15,4 +15,5 @@ export class CoursesResponseModel {
   lastSubscriptionDate:any;
     isFavorite: boolean;
   categoryId: string;
+  newPrice: number;
 }

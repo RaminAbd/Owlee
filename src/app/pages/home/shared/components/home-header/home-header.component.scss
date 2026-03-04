@@ -125,16 +125,16 @@ nav {
       display: flex;
       align-items: center;
 
-      &.active {
-        background: var(--primary-color);
-        p {
-          color: #fff !important;
-        }
-
-        path {
-          stroke: #fff !important;
-        }
-      }
+      //&.active {
+      //  background: var(--primary-color);
+      //  p {
+      //    color: #fff !important;
+      //  }
+      //
+      //  path {
+      //    stroke: #fff !important;
+      //  }
+      //}
     }
   }
 }
@@ -334,6 +334,9 @@ nav,
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
   }
 }
 .hidden {

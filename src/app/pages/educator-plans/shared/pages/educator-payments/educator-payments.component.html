@@ -49,7 +49,7 @@
           </div>
           <div class="col btn">
             <button *ngIf="!item.paid" [disabled]="item.loading" (click)="confirm(item)">
-              {{'Mark paid'}}
+              {{'Mark paid' | translate}}
             </button>
             <p *ngIf="item.paid">{{'Paid' | translate}}</p>
           </div>

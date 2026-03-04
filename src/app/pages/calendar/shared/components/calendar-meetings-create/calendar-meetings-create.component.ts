@@ -16,6 +16,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { GroupRequestModel } from '../../../../dashboard/shared/models/group-request.model';
 import { TopicRequestModel } from '../../../../dashboard/shared/models/topic-request.model';
 import {LanguageService} from '../../../../../core/services/language.service';
+import {MatFormField} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatTimepicker, MatTimepickerInput, MatTimepickerToggle} from '@angular/material/timepicker';
+import {NearestTime} from '../../../../../core/extensions/get-nearest-time';
 
 @Component({
   selector: 'app-calendar-meetings-create',
@@ -27,6 +31,11 @@ import {LanguageService} from '../../../../../core/services/language.service';
     FormsModule,
     DropdownModule,
     NgIf,
+    MatFormField,
+    MatInput,
+    MatTimepicker,
+    MatTimepickerInput,
+    MatTimepickerToggle,
   ],
   templateUrl: './calendar-meetings-create.component.html',
   styleUrl: './calendar-meetings-create.component.scss',
@@ -38,6 +47,7 @@ export class CalendarMeetingsCreateComponent {
   private language:LanguageService = inject(LanguageService)
   request: MultipleMeetingRequestModel = new MultipleMeetingRequestModel();
   date: any;
+  time: any;
   dates: any[] = [];
   isSubmitted = false;
   selectedTopics: string[] = [];
@@ -86,15 +96,18 @@ export class CalendarMeetingsCreateComponent {
   }
 
   addMeeting() {
-    if (this.date) {
+    if (this.date && this.time) {
+      const date = new Date(this.date);
+      const date2 = new Date(this.date);
+      const time = new Date(this.time);
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+      date2.setHours(time.getHours(), time.getMinutes(), 0, 0);
       if (this.duration > 0) {
         if (this.request.groupId) {
           let item = {
-            showDate: this.formatDate(this.date),
+            showDate: this.formatDate(date2),
             subtopics: this.selectedTopics,
-            date: new Date(
-              new Date(this.date).getTime() + 4 * 60 * 60 * 1000,
-            ).toISOString(),
+            date: date.toISOString(),
             duration: this.duration,
             color:this.color ? this.color : '#c6e7ff'
 
@@ -102,6 +115,7 @@ export class CalendarMeetingsCreateComponent {
           this.request.meetings.push(item);
           this.selectedTopics = [];
           this.date = undefined;
+          this.time = undefined;
         } else {
           this.service.message.showTranslatedWarningMessage(
             'Group field is required!',
@@ -133,6 +147,9 @@ export class CalendarMeetingsCreateComponent {
     this.request.meetings.splice(i, 1);
   }
 
+  startDateSelected() {
+    this.time = NearestTime.getTime(new Date());
+  }
   courseChanged() {
     this.service.getGroups();
     this.service.getAllTopics();

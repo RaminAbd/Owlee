@@ -11,10 +11,18 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
 import { CalendarMeetingEditComponent } from '../../../../calendar/shared/components/calendar-meeting-edit/calendar-meeting-edit.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CourseAdComponent } from '../../components/course-ad/course-ad.component';
-import {LanguageService} from '../../../../../core/services/language.service';
-import {DropdownModule} from 'primeng/dropdown';
-import {CategoriesResponseModel} from '../../../../categories/shared/models/categories-response.model';
-
+import { LanguageService } from '../../../../../core/services/language.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { CategoriesResponseModel } from '../../../../categories/shared/models/categories-response.model';
+import {
+  MatTimepicker,
+  MatTimepickerInput,
+  MatTimepickerModule,
+  MatTimepickerToggle,
+} from '@angular/material/timepicker';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { NearestTime } from '../../../../../core/extensions/get-nearest-time';
 @Component({
   selector: 'app-courses-upsert',
   imports: [
@@ -27,6 +35,11 @@ import {CategoriesResponseModel} from '../../../../categories/shared/models/cate
     ToggleSwitch,
     RouterLink,
     DropdownModule,
+    MatFormField,
+    MatTimepickerInput,
+    MatTimepickerToggle,
+    MatTimepicker,
+    MatInput,
   ],
   templateUrl: './courses-upsert.component.html',
   styleUrl: './courses-upsert.component.scss',
@@ -43,10 +56,13 @@ export class CoursesUpsertComponent implements OnDestroy {
   isSubmitted = false;
   langSubscribtion: any;
   endDate: any;
+  endTime: any;
   startDate: any;
+  startTime: any;
   lastDay: any;
+  lastTime: any;
   privacyAccepted: boolean = false;
-  categories:CategoriesResponseModel[]=[]
+  categories: CategoriesResponseModel[] = [];
   implementationTypes: any[] = [
     { name: this.language.getByKey('Online'), value: 1 },
     { name: this.language.getByKey('Offline'), value: 2 },
@@ -92,14 +108,11 @@ export class CoursesUpsertComponent implements OnDestroy {
 
   save() {
     this.isSubmitted = true;
-    if (this.request.implementationType === 2) {
-      this.showAd();
-
-    } else {
-      if (this.privacyAccepted) {
-        this.service.save();
-      }
+    if (this.privacyAccepted) {
+      this.service.save();
     }
+
+
   }
 
   ngOnDestroy() {
@@ -115,7 +128,7 @@ export class CoursesUpsertComponent implements OnDestroy {
     this.request.learningPoints.push(item);
   }
 
-  private showAd() {
+  showAd() {
     const ref = this.dialogService.open(CourseAdComponent, {
       width: '500px',
       height: '420px',
@@ -124,10 +137,19 @@ export class CoursesUpsertComponent implements OnDestroy {
       },
     });
     ref.onClose.subscribe((e: any) => {
-      if (e) {
-        // this.service.getAllMeetings();
-      }
       this.service.save();
     });
+  }
+
+  startDateSelected() {
+    this.startTime = NearestTime.getTime(new Date());
+  }
+
+  endDateSelected() {
+    this.endTime = NearestTime.getTime(new Date());
+  }
+
+  lastDateSelected() {
+    this.lastTime = NearestTime.getTime(new Date());
   }
 }

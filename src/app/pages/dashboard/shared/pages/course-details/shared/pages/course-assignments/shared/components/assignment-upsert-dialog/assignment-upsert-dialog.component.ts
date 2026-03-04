@@ -12,6 +12,14 @@ import { MultiSelect } from 'primeng/multiselect';
 import { NgForOf, NgIf } from '@angular/common';
 import { DatePicker } from 'primeng/datepicker';
 import { FileModel } from '../../../../../../../../../../../core/models/File.model';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import {
+  MatTimepicker,
+  MatTimepickerInput,
+  MatTimepickerToggle,
+} from '@angular/material/timepicker';
+import { NearestTime } from '../../../../../../../../../../../core/extensions/get-nearest-time';
 
 @Component({
   selector: 'app-assignment-upsert-dialog',
@@ -23,6 +31,11 @@ import { FileModel } from '../../../../../../../../../../../core/models/File.mod
     NgForOf,
     DatePicker,
     NgIf,
+    MatFormField,
+    MatInput,
+    MatTimepicker,
+    MatTimepickerInput,
+    MatTimepickerToggle,
   ],
   templateUrl: './assignment-upsert-dialog.component.html',
   styleUrl: './assignment-upsert-dialog.component.scss',
@@ -31,10 +44,11 @@ export class AssignmentUpsertDialogComponent {
   private translate: TranslateService = inject(TranslateService);
   request: AssignmentsRequestModel = new AssignmentsRequestModel();
   groups: GroupsResponseModel[] = [];
-  fromDate: any = new Date();
-  fromTime: any = new Date();
+  fromDate: any;
+  fromTime: any;
   date: any;
   time: any;
+
   loading: boolean = false;
   constructor(
     public config: DynamicDialogConfig,
@@ -44,13 +58,13 @@ export class AssignmentUpsertDialogComponent {
     this.service.component = this;
     this.request = config.data.request;
     console.log(config.data);
-    if(this.request.id){
-      this.fromDate = new Date(this.request.availableFrom)
-      this.fromTime = new Date(this.request.availableFrom)
+    if (this.request.id) {
+      this.fromDate = new Date(this.request.availableFrom);
+      this.fromTime = new Date(this.request.availableFrom);
 
-      this.date = new Date(this.request.availableTo)
-      this.time = new Date(this.request.availableTo)
-    }else{
+      this.date = new Date(this.request.availableTo);
+      this.time = new Date(this.request.availableTo);
+    } else {
       this.groups = config.data.groups;
       this.request.courseId = config.data.courseId;
     }
@@ -92,6 +106,14 @@ export class AssignmentUpsertDialogComponent {
   removeFile(item: FileModel, i: number) {
     item.fileLoading = true;
     this.service.removeFile(item, i);
+  }
+
+  startDateSelected() {
+    this.fromTime = NearestTime.getTime(new Date());
+  }
+
+  endDateSelected() {
+    this.time = NearestTime.getTime(new Date());
   }
 
   save() {

@@ -8,8 +8,14 @@
     display: flex;
     gap: 16px;
     width: 100%;
-    @media (max-width: 769px) {
-      flex-direction: column;
+    flex-direction: column;
+    .row{
+      width: 100%;
+      display: flex;
+      gap:16px;
+      @media (max-width: 769px) {
+        flex-direction: column;
+      }
     }
     .input-item {
       display: flex;

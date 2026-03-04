@@ -3,7 +3,7 @@
     <div class="heading">
       <h4>{{ "Certificates earned" | translate }}</h4>
       <div class="search">
-        <p>{{ certificates.length + (" contents" | translate) }}</p>
+        <p>{{ certificates.length + " "+("contents" | translate) }}</p>
         <div class="search-block">
           <i class="pi pi-search"></i>
           <input
@@ -33,7 +33,7 @@
                 item.courseId
               }}"
             >
-              See course
+              {{ 'See course' | translate }}
             </button>
             <button class="download" (click)="printCertificate(item)">
               <svg
@@ -59,7 +59,7 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              Download
+              {{ 'Download' | translate }}
             </button>
           </div>
         </div>

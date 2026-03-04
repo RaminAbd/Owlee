@@ -10,6 +10,10 @@ import { SubtopicModel } from '../../../../../models/subtopic.model';
 import { MultiSelect } from 'primeng/multiselect';
 import {NgIf} from "@angular/common";
 import {LanguageService} from '../../../../../../../../core/services/language.service';
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatTimepicker, MatTimepickerInput, MatTimepickerToggle} from "@angular/material/timepicker";
+import {NearestTime} from '../../../../../../../../core/extensions/get-nearest-time';
 @Component({
   selector: 'app-meeting-upsert',
     imports: [
@@ -19,6 +23,11 @@ import {LanguageService} from '../../../../../../../../core/services/language.se
         DatePickerModule,
         MultiSelect,
         NgIf,
+        MatFormField,
+        MatInput,
+        MatTimepicker,
+        MatTimepickerInput,
+        MatTimepickerToggle,
     ],
   templateUrl: './meeting-upsert.component.html',
   styleUrl: './meeting-upsert.component.scss',
@@ -29,6 +38,7 @@ export class MeetingUpsertComponent {
   request: MeetingRequestModel = new MeetingRequestModel();
   id: string;
   date: any;
+  time: any;
   subtopics: SubtopicModel[] = [];
   isSubmitted = false;
   colors: any[] = [
@@ -59,5 +69,9 @@ export class MeetingUpsertComponent {
   save() {
     this.isSubmitted = true;
     this.service.save();
+  }
+
+  startDateSelected() {
+    this.time = NearestTime.getTime(new Date());
   }
 }

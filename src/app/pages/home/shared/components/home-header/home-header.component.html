@@ -166,7 +166,12 @@
         </span>
       </div>
     </div>
-    <div class="auth">
+    <div class="auth" *ngIf="userId">
+      <button class="signIn" (click)="signin()">
+        {{ "Dashboard" | translate }}
+      </button>
+    </div>
+    <div class="auth" *ngIf="!userId">
       <button class="signUp" [routerLink]="'/student-sign-up'">
         {{ "Sign up" | translate }}
       </button>

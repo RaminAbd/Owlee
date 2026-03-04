@@ -29,7 +29,7 @@
           {{ 'Your course is currently in draft mode.Complete all required sections and submit it for admin review.' | translate }}
         </p>
       </div>
-      <button (click)="sendForConfirmation()">Send for Confirmation</button>
+      <button (click)="sendForConfirmation()">{{ 'Send for Confirmation' | translate }}</button>
     </div>
 
     <div class="status waiting" *ngIf="request.isOpen && request.status === 1">
@@ -45,7 +45,7 @@
           {{ 'Your course has been submitted and is awaiting admin approval. You will be notified once it has been reviewed.' | translate }}
         </p>
       </div>
-      <button (click)="confirmCancel()">Cancel course</button>
+      <button (click)="confirmCancel()">{{ 'Cancel course' | translate }}</button>
     </div>
     <div class="status rejected" *ngIf="request.isOpen && request.status === 2">
       <div class="heading">
@@ -71,7 +71,7 @@
           <p>{{request.adminRejectionComment}}</p>
         </div>
       </div>
-      <button (click)="sendForConfirmation()">Resubmit Course</button>
+      <button (click)="sendForConfirmation()">{{ 'Resubmit Course' | translate }}</button>
     </div>
     <div class="status pending" *ngIf="request.isOpen && request.status === 3">
       <div class="heading">
@@ -86,7 +86,7 @@
           {{'Your course has been approved and is currently in pending status. It will begin on the scheduled start date.' | translate}}
         </p>
       </div>
-      <button (click)="confirmCancel()">Cancel course</button>
+      <button (click)="confirmCancel()">{{ 'Cancel course' | translate }}</button>
     </div>
     <div class="status active" *ngIf="request.isOpen && request.status === 4">
       <div class="heading">
@@ -101,7 +101,7 @@
           {{ 'Your course is live and available to students. Monitor your progress and engage with your learners.' | translate }}
         </p>
       </div>
-      <button (click)="confirmCancel()">Cancel course</button>
+      <button (click)="confirmCancel()">{{ 'Cancel course' | translate }}</button>
     </div>
     <div class="status completed" *ngIf="request.isOpen && request.status === 5">
       <div class="heading">

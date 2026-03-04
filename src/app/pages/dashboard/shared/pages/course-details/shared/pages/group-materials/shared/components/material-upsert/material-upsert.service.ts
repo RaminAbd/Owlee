@@ -79,11 +79,34 @@ export class MaterialUpsertService {
     });
   }
   build() {
-    if (this.component.startDate)
-      this.component.request.availableFrom =
-        this.component.startDate.toISOString();
-    if (this.component.endDate)
-      this.component.request.availableTo = this.component.endDate.toISOString();
+    // if (this.component.startDate)
+    //   this.component.request.availableFrom =
+    //     this.component.startDate.toISOString();
+    //
+    // if (this.component.endDate)
+    //   this.component.request.availableTo = this.component.endDate.toISOString();
+    //
+
+    if (this.component.startDate && this.component.startTime) {
+      const date = new Date(this.component.startDate);
+      const time = new Date(this.component.startTime);
+
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.availableFrom = date.toISOString();
+    }
+
+    if (this.component.endDate && this.component.endTime) {
+      const date = new Date(this.component.endDate);
+      const time = new Date(this.component.endTime);
+
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.availableTo = date.toISOString();
+    }
+
     if (!this.component.request.id) {
       this.buildCreateRequest();
     } else {

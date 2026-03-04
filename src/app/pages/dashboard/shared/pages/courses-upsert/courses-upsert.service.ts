@@ -40,12 +40,18 @@ export class CoursesUpsertService {
       .GetByIdByLang(this.service.serviceUrl, req)
       .subscribe((resp) => {
         this.component.request = resp.data;
-        if (resp.data.startDate)
+        if (resp.data.startDate) {
           this.component.startDate = new Date(resp.data.startDate);
-        if (resp.data.endDate)
+          this.component.startTime = new Date(resp.data.startDate);
+        }
+        if (resp.data.endDate) {
           this.component.endDate = new Date(resp.data.endDate);
-        if (resp.data.lastSubscriptionDate)
+          this.component.endTime = new Date(resp.data.endDate);
+        }
+        if (resp.data.lastSubscriptionDate) {
           this.component.lastDay = new Date(resp.data.lastSubscriptionDate);
+          this.component.lastTime = new Date(resp.data.lastSubscriptionDate);
+        }
       });
   }
 
@@ -97,17 +103,46 @@ export class CoursesUpsertService {
     ) {
       this.message.showTranslatedWarningMessage('Fill all fields');
     } else {
-      this.component.id === 'create' ? this.checkSlots() : this.update();
+      console.log(this.component.request);
+      if (this.component.request.implementationType === 2) {
+        this.component.showAd();
+      } else {
+        this.component.id === 'create' ? this.checkSlots() : this.update();
+      }
+
     }
   }
   buildRequest() {
-    if (this.component.startDate)
-      this.component.request.startDate = this.component.startDate.toISOString();
-    if (this.component.endDate)
-      this.component.request.endDate = this.component.endDate.toISOString();
-    if (this.component.lastDay)
-      this.component.request.lastSubscriptionDate =
-        this.component.lastDay.toISOString();
+    if (this.component.startDate && this.component.startTime) {
+      const date = new Date(this.component.startDate);
+      const time = new Date(this.component.startTime);
+
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.startDate = date.toISOString();
+    }
+
+    if (this.component.endDate && this.component.endTime) {
+      const date = new Date(this.component.endDate);
+      const time = new Date(this.component.endTime);
+
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.endDate = date.toISOString();
+    }
+
+    if (this.component.lastDay && this.component.lastTime) {
+      const date = new Date(this.component.lastDay);
+      const time = new Date(this.component.lastTime);
+
+      // Set hours & minutes from time into date
+      date.setHours(time.getHours()+4, time.getMinutes(), 0, 0);
+
+      this.component.request.lastSubscriptionDate = date.toISOString();
+    }
+
     this.component.request.learningPoints =
       this.component.request.learningPoints.filter((x) => x.value);
   }

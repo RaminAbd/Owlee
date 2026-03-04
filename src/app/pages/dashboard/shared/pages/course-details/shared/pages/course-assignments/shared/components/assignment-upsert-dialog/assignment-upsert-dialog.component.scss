@@ -58,6 +58,11 @@
   border-radius: 12px !important;
   height: 48px !important;
 }
+::ng-deep  {
+  .p-inputtext{
+    background: none !important;
+  }
+}
 .file-input {
   label.file-label {
     display: flex;

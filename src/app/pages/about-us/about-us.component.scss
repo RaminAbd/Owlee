@@ -3,11 +3,17 @@
     padding: 55px 50px 0;
     display: flex;
     justify-content: center;
-
+    @media (max-width: 769px) {
+      padding: 10px 20px 0;
+      flex-direction: column;
+    }
     .inner{
       max-width: 1200px;
       display: flex;
       gap: 74px;
+      @media (max-width: 769px) {
+        flex-direction: column;
+      }
     }
     .left {
       display: flex;
