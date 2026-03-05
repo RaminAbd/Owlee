@@ -77,6 +77,10 @@
         display: flex;
         align-items: center;
         gap: 16px;
+        @media (max-width: 769px) {
+          width: 100%;
+          flex-direction: column;
+        }
         button {
           display: flex;
           padding: 13px 24px;
@@ -93,6 +97,9 @@
           flex: 1;
           &:first-child {
             flex: 3;
+          }
+          @media (max-width: 769px) {
+            width: 100%;
           }
         }
       }

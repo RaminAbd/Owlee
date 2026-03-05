@@ -10,6 +10,9 @@
     border-radius: 16px;
     border: 1px solid #5a4bea;
     position: relative;
+    @media (max-width: 769px) {
+      width: 100%;
+    }
     .icon {
       border-radius: 3px;
       background: #3b3199;
@@ -49,8 +52,15 @@
       align-items: flex-start;
       gap: 97px;
       align-self: stretch;
+      @media (max-width: 769px) {
+        flex-direction: column;
+        gap:40px
+      }
       .col {
         flex: 1;
+        @media (max-width: 769px) {
+          width: 100%;
+        }
       }
       .col.left {
         display: flex;

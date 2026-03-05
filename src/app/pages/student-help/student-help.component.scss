@@ -1,5 +1,8 @@
 .wrapper{
   padding: 24px 81px;
+  @media (max-width: 769px) {
+    padding: 16px;
+  }
   .cnt{
     max-width: 800px;
     .tabs{

@@ -186,6 +186,9 @@
         align-items: flex-start;
         gap: 8.4px;
         margin-top: 25px;
+        @media (max-width: 769px) {
+          align-items: center;
+        }
         label{
           margin-bottom: 6px;
           color: #101828;

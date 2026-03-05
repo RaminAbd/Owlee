@@ -5,6 +5,9 @@
   gap: 30px;
   padding-top: 10px;
   z-index: 1;
+  @media (max-width: 769px) {
+    padding: 16px;
+  }
   .back {
     display: flex;
     gap: 20px;
@@ -112,6 +115,11 @@
           gap: 7px;
           @media (max-width: 769px) {
             min-width: 130px;
+          }
+          p{
+            @media (max-width: 769px) {
+              word-break: break-word;
+            }
           }
         }
         .name {

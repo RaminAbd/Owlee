@@ -122,6 +122,9 @@
           &.dets{
             justify-content: flex-start;
             gap: 29px;
+            @media (max-width: 769px) {
+              flex-direction: column;
+            }
             .group-info{
               display: flex;
               align-items: center;

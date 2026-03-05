@@ -58,6 +58,9 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      @media (max-width: 769px) {
+        width: 100%;
+      }
     }
     .skip {
       color: #90928d;
@@ -77,10 +80,18 @@
     margin: 15px 0;
     .p-rating{
       gap:25px;
+      @media (max-width: 769px) {
+        gap:15px;
+
+      }
     }
     .p-rating-icon{
       width: 62px;
       height: 62px;
+      @media (max-width: 769px) {
+        width: 40px;
+        height: 40px;
+      }
     }
     .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-option:hover .p-rating-icon{
       color: #EDCA1D;

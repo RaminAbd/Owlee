@@ -85,6 +85,7 @@
       width: 100%;
       @media (max-width: 769px) {
         margin-top: 0;
+        flex-direction: column;
       }
       .item {
         cursor: pointer;
