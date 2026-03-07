@@ -42,11 +42,11 @@
       </div>
       <div class="price">
         <span class="total" *ngIf="selectedPackageType === 2 && item.name !=='Free'">
-          {{ item.annualPrice ? (item.annualPrice * 12).toFixed(2) : 0 }} Gel
+          {{ item.annualPrice ? (item.annualPrice * 12).toFixed(2) : 0 }} GEL
         </span>
         <p>
           {{ selectedPackageType === 1 ? item.price : item.annualPrice }}
-          <span>Gel</span>
+          <span>GEL</span>
         </p>
         <span>{{'per month' | translate}}</span>
       </div>

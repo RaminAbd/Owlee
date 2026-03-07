@@ -389,7 +389,7 @@
         .item {
           cursor: pointer;
           flex: 1;
-          height: 280px;
+          height: 290px;
           border-radius: 16px;
           background: #f6f6f6;
           display: flex;
@@ -474,6 +474,8 @@
               justify-content: space-between;
               align-items: flex-start;
               align-self: stretch;
+              flex-direction: column;
+              gap:10px;
               p{
                 color: #13170C;
                 font-family: Inter;

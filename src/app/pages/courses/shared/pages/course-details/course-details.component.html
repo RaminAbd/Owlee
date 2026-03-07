@@ -359,7 +359,7 @@
         </p>
       </div>
       <div class="price">
-        <p>{{ response.newPrice }} Gel</p>
+        <p>{{ response.newPrice }} GEL <span>/ {{'per month' | translate}}</span> </p>
       </div>
       <button (click)="reserve()" [disabled]="loading">
         {{ "Reserve your spot" | translate }}
