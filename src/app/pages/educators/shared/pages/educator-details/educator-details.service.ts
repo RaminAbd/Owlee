@@ -282,6 +282,14 @@ export class EducatorDetailsService {
         ((this.component.subscription.openFileStorage) /
           this.component.subscription.openMaxFileStorage) *
         100;
+
+      if(this.component.subscription.adminSale > 0){
+        this.component.subscription.newPrice =
+          (this.component.subscription.price -
+            (this.component.subscription.price *
+              this.component.subscription.adminSale) /
+            100).toFixed(1) ;
+      }
     });
   }
 

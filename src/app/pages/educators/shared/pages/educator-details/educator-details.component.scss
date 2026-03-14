@@ -672,6 +672,17 @@ button {
             font-weight: 600;
             line-height: 54px; /* 150% */
             letter-spacing: 0.369px;
+            .old{
+              color: #99A1AF;
+              text-align: center;
+              font-family: Inter;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 28px; /* 155.556% */
+              letter-spacing: -0.439px;
+              text-decoration-line: line-through;
+            }
             span{
               color: #656668;
               font-family: Inter;

@@ -17,8 +17,8 @@
         <div class="price">
           <label>{{ "Current Price" | translate }}</label>
           <p>
-            <span class="old">{{subscription.price}}₾</span>
-            {{ subscription.newPrice}}₾
+            <span class="old" *ngIf="subscription.adminSale > 0">{{subscription.price}}₾</span>
+            {{ subscription.adminSale > 0 ? subscription.newPrice : subscription.price}}₾
             <span>/ {{ "month" | translate }}</span>
           </p>
         </div>

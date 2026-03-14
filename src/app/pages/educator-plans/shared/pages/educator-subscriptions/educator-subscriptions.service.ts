@@ -30,11 +30,13 @@ export class EducatorSubscriptionsService {
           (this.component.subscription.openFileStorage /
             this.component.subscription.openMaxFileStorage) *
           100;
-        this.component.subscription.newPrice =
-          (this.component.subscription.price -
-          (this.component.subscription.price *
-            this.component.subscription.adminSale) /
-            100).toFixed(1) ;
+        if(this.component.subscription.adminSale > 0){
+          this.component.subscription.newPrice =
+            (this.component.subscription.price -
+              (this.component.subscription.price *
+                this.component.subscription.adminSale) /
+              100).toFixed(1) ;
+        }
       });
   }
 
