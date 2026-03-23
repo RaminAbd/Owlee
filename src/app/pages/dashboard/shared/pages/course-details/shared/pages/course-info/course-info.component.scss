@@ -1,11 +1,13 @@
-
 .course-info {
   display: flex;
+  @media (max-width: 1360px) {
+    gap: 30px;
+  }
   @media (max-width: 1024px) {
     flex-direction: column;
     gap: 20px;
   }
-  .left{
+  .left {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -20,6 +22,9 @@
       cursor: pointer;
       width: 720px;
       position: relative;
+      @media (max-width: 1360px) {
+        width: auto;
+      }
       @media (max-width: 769px) {
         width: 100%;
       }
@@ -45,9 +50,19 @@
         max-height: 185px;
         border-radius: 8px;
         object-fit: cover;
-        @media (max-width: 769px) {
-          width: 100%;
+        @media (max-width: 1260px) {
+          width: 500px;
         }
+        @media (max-width: 1160px) {
+          width: 400px;
+        }
+        @media (max-width: 1024px) {
+          width: 600px !important;
+        }
+        @media (max-width: 769px) {
+          width: 100% !important;
+        }
+
       }
       .actions {
         display: flex;
@@ -66,13 +81,14 @@
           background-color: #f6f6f6;
           padding: 6px 8px;
           cursor: pointer;
-          .icon{
+          .icon {
             width: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
           }
-          p, i {
+          p,
+          i {
             font-weight: 500;
             font-size: 14px;
             color: #656668;
@@ -108,6 +124,12 @@
     }
     .description {
       width: 600px;
+      @media (max-width: 1260px) {
+        width: 500px;
+      }
+      @media (max-width: 1160px) {
+        width: 400px;
+      }
       @media (max-width: 769px) {
         width: 100%;
       }
@@ -119,7 +141,7 @@
       }
     }
   }
-  .right{
+  .right {
     display: flex;
     width: 380px;
     flex-direction: column;
@@ -128,7 +150,7 @@
     @media (max-width: 1024px) {
       width: 100%;
     }
-    .status{
+    .status {
       display: flex;
       padding: 24.667px;
       flex-direction: column;
@@ -137,9 +159,9 @@
       flex-shrink: 0;
       align-self: stretch;
       border-radius: 16px;
-      border: 0.667px solid #E0E0DF;
-      background: #FFF;
-      .heading{
+      border: 0.667px solid #e0e0df;
+      background: #fff;
+      .heading {
         display: flex;
         height: 28px;
         padding-right: 0;
@@ -148,49 +170,48 @@
         flex-shrink: 0;
         align-self: stretch;
         width: 100%;
-      p{
-        color: #13170C;
-        font-family: Inter;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 27px; /* 150% */
-        letter-spacing: -0.439px;
-      }
-        .st{
+        p {
+          color: #13170c;
+          font-family: Inter;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 27px; /* 150% */
+          letter-spacing: -0.439px;
+        }
+        .st {
           display: flex;
           padding: 6.667px 12.24px 5.333px 12px;
           justify-content: center;
           align-items: center;
           gap: 8px;
           border-radius: 22369600px;
-          background: #F3F4F6;
+          background: #f3f4f6;
           color: #364153;
           font-family: Inter;
           font-size: 12px;
           font-style: normal;
           font-weight: 600;
           line-height: 16px; /* 133.333% */
-          span{
+          span {
             width: 8px;
             height: 8px;
             border-radius: 22369600px;
-            background: #6A7282;
+            background: #6a7282;
           }
-
         }
       }
-      .description{
+      .description {
         display: flex;
-        padding: 16px ;
+        padding: 16px;
         flex-direction: column;
         align-items: flex-start;
         flex-shrink: 0;
         align-self: stretch;
         border-radius: 14px;
-        background: #F6F6F6;
-        p{
-          color: #13170C;
+        background: #f6f6f6;
+        p {
+          color: #13170c;
           font-family: Inter;
           font-size: 14px;
           font-style: normal;
@@ -199,15 +220,15 @@
           letter-spacing: -0.15px;
         }
       }
-      button{
+      button {
         width: 100%;
         display: flex;
-        padding: 13px ;
+        padding: 13px;
         justify-content: center;
         align-items: center;
         border-radius: 14px;
         background: #009245;
-        color: #FFF;
+        color: #fff;
         text-align: center;
         font-family: Inter;
         font-size: 14px;
@@ -216,36 +237,36 @@
         line-height: 20px; /* 142.857% */
         letter-spacing: -0.15px;
       }
-      &.rejected{
-        .heading{
-          .st{
-            background: #FFE2E2;
-            color: #C10007;
-            span{
-              background: #FB2C36;
+      &.rejected {
+        .heading {
+          .st {
+            background: #ffe2e2;
+            color: #c10007;
+            span {
+              background: #fb2c36;
             }
           }
         }
-        .reason{
+        .reason {
           display: flex;
           padding: 16.667px;
           justify-content: center;
           gap: 8px;
           align-self: stretch;
           border-radius: 14px;
-          border: 0.667px solid #FFC9C9;
-          background: #FEF2F2;
-          svg{
+          border: 0.667px solid #ffc9c9;
+          background: #fef2f2;
+          svg {
             min-width: 20px;
           }
-          .info{
+          .info {
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 8px;
             align-self: stretch;
-            h4{
-              color: #82181A;
+            h4 {
+              color: #82181a;
               font-family: Inter;
               font-size: 14px;
               font-style: normal;
@@ -253,8 +274,8 @@
               line-height: 20px; /* 142.857% */
               letter-spacing: -0.15px;
             }
-            p{
-              color: #9F0712;
+            p {
+              color: #9f0712;
               font-family: Inter;
               font-size: 14px;
               font-style: normal;
@@ -268,37 +289,37 @@
       &.waiting {
         .heading {
           .st {
-            background: #FEF9C2;
-            color: #A65F00;
+            background: #fef9c2;
+            color: #a65f00;
 
             span {
-              background: #A65F00;
+              background: #a65f00;
             }
           }
         }
-        button{
-          background: #FB2C36;
+        button {
+          background: #fb2c36;
         }
       }
       &.pending {
         .heading {
           .st {
-            background: #FEF9C2;
-            color: #A65F00;
+            background: #fef9c2;
+            color: #a65f00;
 
             span {
-              background: #A65F00;
+              background: #a65f00;
             }
           }
         }
-        button{
-          background: #FB2C36;
+        button {
+          background: #fb2c36;
         }
       }
       &.active {
         .heading {
           .st {
-            background: #DCFCE7;
+            background: #dcfce7;
             color: #009245;
 
             span {
@@ -306,24 +327,24 @@
             }
           }
         }
-        button{
-          background: #FB2C36;
+        button {
+          background: #fb2c36;
         }
       }
       &.completed {
         .heading {
           .st {
-            background: #DBEAFE;
-            color: #1447E6;
+            background: #dbeafe;
+            color: #1447e6;
 
             span {
-              background: #1447E6;
+              background: #1447e6;
             }
           }
         }
       }
     }
-    .actions{
+    .actions {
       display: flex;
       padding: 24.667px;
       flex-direction: column;
@@ -332,11 +353,11 @@
       flex-shrink: 0;
       align-self: stretch;
       border-radius: 16px;
-      border: 0.667px solid #E0E0DF;
-      background: #FFF;
-      .heading{
-        p{
-          color: #13170C;
+      border: 0.667px solid #e0e0df;
+      background: #fff;
+      .heading {
+        p {
+          color: #13170c;
           font-family: Inter;
           font-size: 16px;
           font-style: normal;
@@ -345,22 +366,22 @@
           letter-spacing: -0.312px;
         }
       }
-      .btns{
+      .btns {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
         flex-shrink: 0;
         align-self: stretch;
-        button{
+        button {
           display: flex;
           width: 330.667px;
-          padding: 13px  16px;
+          padding: 13px 16px;
           align-items: flex-start;
           gap: 12px;
           border-radius: 14px;
-          background: #3B3199;
-          color: #FFF;
+          background: #3b3199;
+          color: #fff;
           text-align: center;
           font-family: Inter;
           font-size: 14px;
@@ -371,13 +392,13 @@
           @media (max-width: 1024px) {
             width: 100%;
           }
-          &.duplicate{
-            background: #F6F6F6;
-            color: #13170C;
+          &.duplicate {
+            background: #f6f6f6;
+            color: #13170c;
           }
-          &.delete{
-            background: #FEF2F2;
-            color: #E7000B;
+          &.delete {
+            background: #fef2f2;
+            color: #e7000b;
           }
         }
       }
@@ -389,35 +410,34 @@
   .p-dialog .p-dialog-content {
     background: transparent !important;
   }
-  .confirm-content{
+  .confirm-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    i{
+    i {
       font-size: 60px;
       color: orange;
     }
-    p{
+    p {
       width: 70%;
       text-align: center;
       color: orange;
       margin-bottom: 21px !important;
     }
   }
-  .p-dialog-footer{
-    .p-button{
+  .p-dialog-footer {
+    .p-button {
       padding: 0px 20px !important;
       height: 40px;
-      background: #F6F6F6 !important;
+      background: #f6f6f6 !important;
       border: none !important;
       color: #656668 !important;
-      &.p-confirmdialog-accept-button{
+      &.p-confirmdialog-accept-button {
         background: var(--primary-color) !important;
         border: none !important;
         color: #fff !important;
       }
     }
   }
-
 }

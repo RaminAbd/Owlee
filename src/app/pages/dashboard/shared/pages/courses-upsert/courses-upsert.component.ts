@@ -108,11 +108,13 @@ export class CoursesUpsertComponent implements OnDestroy {
 
   save() {
     this.isSubmitted = true;
-    if (this.privacyAccepted) {
+    if (this.request.isOpen) {
+      if (this.privacyAccepted) {
+        this.service.save();
+      }
+    } else {
       this.service.save();
     }
-
-
   }
 
   ngOnDestroy() {

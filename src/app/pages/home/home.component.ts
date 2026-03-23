@@ -70,6 +70,7 @@ export class HomeComponent implements OnDestroy, AfterViewInit  {
     this.userSignedIn = !!(st && st.role === 'Student');
     this.service.subscribeToLangEvent();
     this.service.getAllPackages();
+    this.service.getAllFAQs();
     this.service.getAllCourses();
   }
 

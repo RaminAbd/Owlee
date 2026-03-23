@@ -136,7 +136,7 @@
         <p>{{ "Course actions" | translate }}</p>
       </div>
       <div class="btns">
-        <button class="edit" (click)="edit()">
+        <button class="edit" (click)="edit()" *ngIf="request.status !== 6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

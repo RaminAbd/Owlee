@@ -95,12 +95,12 @@ export class EducatorChildrenRoutes {
     {
       path: 'students',
       component: EducatorStudentsComponent,
-      data: { title: 'Dashboard' },
+      data: { title: 'Students' },
     },
     {
       path: 'students/:id',
       component: MemberDetailsComponent,
-      data: { title: 'Dashboard' },
+      data: { title: 'Students' },
     },
     {
       path: 'calendar',
@@ -117,17 +117,17 @@ export class EducatorChildrenRoutes {
     {
       path: 'help',
       component: LecturerHelpComponent,
-      data: { title: 'Help' },
+      data: { title: 'Get help' },
       children: [
         {
           path: 'tutorials',
           component: LecturerTutorialsComponent,
-          data: { title: 'Help' },
+          data: { title: 'Get help' },
         },
         {
           path: 'faqs',
           component: LecturerFaqsComponent,
-          data: { title: 'Help' },
+          data: { title: 'Get help' },
         },
         { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
       ],
@@ -136,22 +136,22 @@ export class EducatorChildrenRoutes {
     {
       path: 'plans',
       component: EducatorPlansComponent,
-      data: { title: 'Plans' },
+      data: { title: 'Plans & Billing' },
       children: [
         {
           path: 'subscriptions',
           component: EducatorSubscriptionsComponent,
-          data: { title: 'Plans' },
+          data: { title: 'Plans & Billing' },
         },
         {
           path: 'packages',
           component: EducatorPackagesComponent,
-          data: { title: 'Plans' },
+          data: { title: 'Plans & Billing' },
         },
         {
           path: 'payments',
           component: EducatorPaymentsComponent,
-          data: { title: 'Plans' },
+          data: { title: 'Plans & Billing' },
         },
         { path: '', redirectTo: 'subscriptions', pathMatch: 'full' },
       ],

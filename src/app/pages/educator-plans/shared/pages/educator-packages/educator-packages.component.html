@@ -31,7 +31,7 @@
         <p>{{ "Current plan" | translate }}</p>
       </div>
       <div class="name">
-        <p>{{ item.name }}</p>
+        <p>{{ item.name | translate}}</p>
       </div>
       <div class="price">
         <span class="total" *ngIf="selectedPackageType === 2 && item.name !=='Free'">
@@ -62,7 +62,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <p>{{ item.courseAmount }} {{ "Courses" | translate }}</p>
+          <p>{{ item.courseAmount }} {{ "Subs. Courses" | translate }}</p>
         </div>
         <div class="f-item">
           <svg
@@ -80,7 +80,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <p>{{ item.maxCapacity }} {{ "Students" | translate }}</p>
+          <p>{{ item.maxCapacity }} {{ "Subs. Students" | translate }}</p>
         </div>
         <div class="f-item">
           <svg
@@ -98,7 +98,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <p>{{ item.peoplePerGroup }} GB {{ "storage" | translate }}</p>
+          <p>{{ item.fileStorage }} GB {{ "storage" | translate }}</p>
         </div>
       </div>
       <div class="features" *ngIf="item.name !=='Free'">
@@ -119,7 +119,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <p>{{ item.openCourseAmount }} {{ "Courses" | translate }}</p>
+          <p>{{ item.openCourseAmount }} {{ "Subs. Courses" | translate }}</p>
         </div>
         <div class="f-item">
           <svg
@@ -137,7 +137,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <p>{{ item.openMaxCapacity }} {{ "Students" | translate }}</p>
+          <p>{{ item.openMaxCapacity }} {{ "Subs. Students" | translate }}</p>
         </div>
         <div class="f-item">
           <svg

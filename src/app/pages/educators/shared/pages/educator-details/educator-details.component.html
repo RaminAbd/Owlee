@@ -462,11 +462,11 @@
             <p>{{ selectedPackage.name }}</p>
           </div>
           <div class="date">
-            <p>{{ "Next payment" | translate }}</p>
+            <p style="text-transform: none">{{ "Next payment" | translate }}</p>
             <span>{{ subscription.expireDate | date: "dd/MM/yyyy" }}</span>
           </div>
           <div class="price">
-            <label>{{ "Current Price" | translate }}</label>
+            <label style="text-transform: none">{{ "Current Price" | translate }}</label>
             <p>
               <span class="old" *ngIf="subscription.adminSale > 0">{{subscription.price}}₾</span>
               {{ subscription.adminSale > 0 ? subscription.newPrice : subscription.price}}₾
