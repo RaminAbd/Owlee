@@ -18,9 +18,8 @@ import { AdminTutorialsComponent } from '../../../../pages/admin-tutorials/admin
 import { TutorialsUpsertComponent } from '../../../../pages/admin-tutorials/shared/pages/tutorials-upsert/tutorials-upsert.component';
 import { ConfirmationCoursesComponent } from '../../../../pages/confirmation-courses/confirmation-courses.component';
 import { CategoriesComponent } from '../../../../pages/categories/categories.component';
-import {
-  CategoriesUpsertComponent
-} from '../../../../pages/categories/shared/pages/categories-upsert/categories-upsert.component';
+import { CategoriesUpsertComponent } from '../../../../pages/categories/shared/pages/categories-upsert/categories-upsert.component';
+import { AdminPaymentsComponent } from '../../../../pages/admin-payments/admin-payments.component';
 
 export class AdminChildrenRoutes {
   static children: Route[] = [
@@ -112,6 +111,11 @@ export class AdminChildrenRoutes {
       path: 'tutorials/:id',
       component: TutorialsUpsertComponent,
       data: { title: 'Tutorials' },
+    },
+    {
+      path: 'payments',
+      component: AdminPaymentsComponent,
+      data: { title: 'Payments' },
     },
     { path: '', redirectTo: 'courses', pathMatch: 'full' },
     { path: '**', redirectTo: 'courses', pathMatch: 'full' },
