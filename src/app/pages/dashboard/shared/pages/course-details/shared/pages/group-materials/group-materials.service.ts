@@ -9,6 +9,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { TranslateService } from '@ngx-translate/core';
 import { GroupMaterialsComponent } from './group-materials.component';
 import { CoursesApiService } from '../../../../../../../admin-courses/shared/services/courses.api.service';
+import {FileModel} from '../../../../../../../../core/models/File.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,12 +42,22 @@ export class GroupMaterialsService {
       lang: this.translate.currentLang,
     };
     this.topicsService.GetAllByCourse(req).subscribe((resp) => {
+
       this.component.topics = resp.data;
-      this.component.topics.forEach((x) => (x.subTopic = new SubtopicModel()));
+      this.component.topics.forEach((x) => {
+        x.subTopic = new SubtopicModel()
+        x.subtopics.forEach(subTopic => {
+          subTopic.files.forEach(subTopicFile => {
+            if(!subTopicFile.file) subTopicFile.file = new FileModel()
+          })
+        })
+      });
       this.component.expanderStates = Array.from(
         { length: this.component.topics.length },
         () => 'expanded',
       );
+      console.log(this.component.topics, 'topics');
+
     });
   }
 
